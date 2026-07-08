@@ -42,7 +42,7 @@ module weight_loader
                     next_state = LOAD_FIFO;
                     fifo_we = 1;
                 end else begin
-                    else next_state = IDLE
+                    next_state = IDLE;
                 end
             end 
             LOAD_FIFO: begin

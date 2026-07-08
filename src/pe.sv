@@ -2,7 +2,7 @@ module PE(
     input logic clk,
     input logic rst_n,
     input logic preload,
-    input logic [3:0] compute_en, //will pipeline this signal in
+    input logic compute_en, //will pipeline this signal in
     input logic drain,
     input logic [7:0] a,  //zero pad_areg whenever not using it to clean it
     input logic [7:0] b,  //only care about this on preload
@@ -11,11 +11,11 @@ module PE(
     input logic [31:0] accum_in,
     input logic accum_in_valid,
     output logic [31:0] down_out, //only care about this during drain and preload
-    output logic [7:0] right_out, //care about this during compute really
+    output logic [7:0] right_out //care about this during compute really
 );
 
     logic [7:0] a_reg,b_reg;
-    logic [15:0] product_reg,
+    logic [15:0] product_reg;
     logic [31:0] accum_reg;
 
     always_ff @(posedge clk, negedge rst_n) begin
@@ -25,7 +25,7 @@ module PE(
             product_reg <= 0;
             accum_reg <= 0;
         end else begin
-            if(clr || tile_dones) begin
+            if(clr || tile_done) begin
                 a_reg <= 0;
                 if(tile_done) begin
                     b_reg <= 0;
