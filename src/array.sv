@@ -7,6 +7,7 @@ module PE_array(
     input logic tile_done,
     input logic drain_state,
     input logic [3:0][7:0] weight_array,
+    input logic activation_valid,
     input logic [3:0][7:0] activation_array,
     output logic [3:0][32:0] product_array,
     output logic output_valid
@@ -51,27 +52,41 @@ module PE_array(
     //     act-3 ->  x -> x -> x -> x 
     //
 
+    logic [3:0][7:0] val_act_in;
+    always_ff @(posedge clk, negedge rst_n) begin
+        if(!rst_n) begin
+            val_act_in[0] <= 0;
+            val_act_in[1] <= 0;
+            val_act_in[2] <= 0;
+            val_act_in[3] <= 0;
+        end else begin
+            val_act_in[0] <= activation_array[0];
+            val_act_in[1] <= activation_array[1];
+            val_act_in[2] <= activation_array[2];
+            val_act_in[3] <= activation_array[3];
+        end
+    end
     
     //Row 0
-    PE pe_0_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(activation_array[0]), .b(weight_array[0]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[0]), .right_out(pe_right_out[0]));
+    PE pe_0_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[0]), .b(weight_array[0]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[0]), .right_out(pe_right_out[0]));
     PE pe_0_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[0]), .b(weight_array[1]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[1]), .right_out(pe_right_out[1]));
     PE pe_0_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[1]), .b(weight_array[2]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[2]), .right_out(pe_right_out[2]));
     PE pe_0_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[2]), .b(weight_array[3]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[3]), .right_out(pe_right_out[3]));
 
     //Row 1
-    PE pe_1_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(activation_array[1]), .b(pe_down_out[0]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[0]), .accum_in_valid(v_en_1), .down_out(pe_down_out[4]), .right_out(pe_right_out[4]));
+    PE pe_1_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[1]), .b(pe_down_out[0]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[0]), .accum_in_valid(v_en_1), .down_out(pe_down_out[4]), .right_out(pe_right_out[4]));
     PE pe_1_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[4]), .b(pe_down_out[1]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[1]), .accum_in_valid(v_en_1), .down_out(pe_down_out[5]), .right_out(pe_right_out[5]));
     PE pe_1_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[5]), .b(pe_down_out[2]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[2]), .accum_in_valid(v_en_1), .down_out(pe_down_out[6]), .right_out(pe_right_out[6]));
     PE pe_1_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[6]), .b(pe_down_out[3]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[3]), .accum_in_valid(v_en_1), .down_out(pe_down_out[7]), .right_out(pe_right_out[7]));
 
     //Row 2
-    PE pe_2_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(activation_array[2]), .b(pe_down_out[4]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[4]), .accum_in_valid(v_en_1), .down_out(pe_down_out[8]), .right_out(pe_right_out[8]));
+    PE pe_2_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[2]), .b(pe_down_out[4]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[4]), .accum_in_valid(v_en_1), .down_out(pe_down_out[8]), .right_out(pe_right_out[8]));
     PE pe_2_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[8]), .b(pe_down_out[5]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[5]), .accum_in_valid(v_en_1), .down_out(pe_down_out[9]), .right_out(pe_right_out[9]));
     PE pe_2_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[9]), .b(pe_down_out[6]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[6]), .accum_in_valid(v_en_1), .down_out(pe_down_out[10]), .right_out(pe_right_out[10]));
     PE pe_2_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[10]), .b(pe_down_out[7]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[7]), .accum_in_valid(v_en_1), .down_out(pe_down_out[11]), .right_out(pe_right_out[11]));
 
     //Row 3
-    PE pe_3_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(activation_array[3]), .b(pe_down_out[8]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[8]), .accum_in_valid(v_en_1), .down_out(pe_down_out[12]), .right_out(pe_right_out[12]));
+    PE pe_3_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[3]), .b(pe_down_out[8]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[8]), .accum_in_valid(v_en_1), .down_out(pe_down_out[12]), .right_out(pe_right_out[12]));
     PE pe_3_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[12]), .b(pe_down_out[9]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[9]), .accum_in_valid(v_en_1), .down_out(pe_down_out[13]), .right_out(pe_right_out[13]));
     PE pe_3_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[13]), .b(pe_down_out[10]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[10]), .accum_in_valid(v_en_1), .down_out(pe_down_out[14]), .right_out(pe_right_out[14]));
     PE pe_3_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[14]), .b(pe_down_out[11]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[11]), .accum_in_valid(v_en_1), .down_out(pe_down_out[15]), .right_out(pe_right_out[15]));
