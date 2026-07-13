@@ -176,7 +176,6 @@ module vertical_en_fsm(
     output logic en_3
 );
 
- logic en_0, en_1, en_2, en_3;
     typedef enum logic [4:0] {IDLE, S0, S1, S2, S3} state_t;
     state_t current_state, next_state;
 
@@ -198,8 +197,8 @@ module vertical_en_fsm(
         case(current_state)
             IDLE: begin
                 if(!compute_state_start) next_state = IDLE;
-                else next_state = S0
-            end 
+                else next_state = S0;
+            end
             S0: begin
                 next_state = S1;
             end
