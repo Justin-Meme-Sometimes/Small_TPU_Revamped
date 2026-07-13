@@ -14,6 +14,7 @@ module weight_loader
     input logic load_fifo_state,
     input logic preload_state,
     input logic tiles_complete,
+    input logic read_data_valid,
     output logic fifo_full,
     output logic fifo_empty,
     output logic data_valid,
@@ -47,7 +48,9 @@ module weight_loader
             end 
             LOAD_FIFO: begin
                 if(!fifo_full && load_fifo_state) begin
-                    fifo_we = 1;
+                    if(read_data_valid) begin
+                        fifo_we = 1;
+                    end
                     next_state  = LOAD_FIFO;
                 end else begin
                     next_state = PRELOAD;

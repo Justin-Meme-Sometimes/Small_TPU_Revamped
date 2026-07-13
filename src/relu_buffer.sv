@@ -1,4 +1,4 @@
-module act_func_buffer(
+module relu_buffer(
     input logic clk,
     input logic rst_n,
     input logic drain_state,
@@ -37,9 +37,6 @@ module act_func_buffer(
             end
         end
     end
-
-
-
 
 
 endmodule
