@@ -100,7 +100,7 @@ module bank_fsm(
         active = 0;
         first_pass = 0;
         clr = 0;
-        bank_swtich = 0;
+        bank_switch = 0;
         case(current_state)
             IDLE: begin
                 if(start && a_or_b) begin
@@ -156,7 +156,7 @@ module bank_fsm(
                 if(compute_state || drain_state && !full) begin
                     we = 1;
                     next_state = COMPUTE;
-                    bank_swtich = 1;
+                    bank_switch = 1;
                 end
             end
             DONE: begin
@@ -223,6 +223,6 @@ module i_buffer(
                 end
             end
         end
-
+    end
 
 endmodule

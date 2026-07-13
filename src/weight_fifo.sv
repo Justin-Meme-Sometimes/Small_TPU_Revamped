@@ -9,7 +9,7 @@ module weight_loader
     (
     input logic clk,
     input logic rst_n,
-    input logic [ROW_SIZE-1][VW-1:0] read_data,
+    input logic [ROW_SIZE-1:0][VW-1:0] read_data,
     input logic start_load_fifo_state,
     input logic load_fifo_state,
     input logic preload_state,
@@ -18,7 +18,7 @@ module weight_loader
     output logic fifo_full,
     output logic fifo_empty,
     output logic data_valid,
-    output logic [ROW_SIZE-1][VW-1:0] data_out);
+    output logic [ROW_SIZE-1:0][VW-1:0] data_out);
 
     logic fifo_re, fifo_we;
     typedef enum logic [4:0] {IDLE, LOAD_FIFO, PRELOAD} state_t;
@@ -68,7 +68,7 @@ module weight_loader
         endcase
     end
 
-    FIFO weight_fifo(.clk(clk), .reset_n(rst_n), .we(fifo_we), .re(fifo_re), .data_in(read_data), .data_out(data_out),
+    FIFO weight_fifo(.clock(clk), .reset_n(rst_n), .we(fifo_we), .re(fifo_re), .data_in(read_data), .data_out(data_out),
                     .full(fifo_full), .empty(fifo_empty));
 
 endmodule
