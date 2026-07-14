@@ -51,45 +51,104 @@ module tpu_top (
         end
     end
 
+    logic prefill_en, prefill_clr, preload_en, preload_clr, compute_en, compute_clr, drain_en, drain_clr, func_en, func_clr, tile_en, tile_clr;
+    logic [7:0] prefill_count, preload_count, compute_count, drain_count, funcs_count, tile_count;
+    logic prefill_max, preload_max, compute_max, drain_max, funcs_max, tiles_max;
+    
+    counter PREFILL_COUNTER (.clk(clk), .rst_n(rst_n), .en(prefill_en), .clr(prefill_clr), .out(prefill_count));
+    counter PRELOAD_COUNTER (.clk(clk), .rst_n(rst_n), .en(preload_en), .clr(preload_clr), .out(preload_count));
+    counter COMPUTE_COUNTER (.clk(clk), .rst_n(rst_n), .en(compute_en), .clr(compute_clr), .out(compute_count));
+    counter DRAIN_COUNTER   (.clk(clk), .rst_n(rst_n), .en(drain_en),   .clr(drain_clr),   .out(drain_count));
+    counter FUNCS_COUNTER   (.clk(clk), .rst_n(rst_n), .en(func_en),    .clr(func_clr),    .out(funcs_count));
+    counter TILES_COMPLETE_COUNTER   (.clk(clk), .rst_n(rst_n), .en(tile_done), .clr(tile_clr), .out(tile_count));
 
+    assign prefill_max = (prefill_count == 8'd16);
+    assign preload_max = (preload_count == 8'd4);
+    assign compute_max = (compute_count == 8'd7);
+    assign drain_max = (drain_count == 8'd4);
+    assign funcs_max = (funcs_count == 8'd3);
+    assign tiles_max = (tile_count == 8'd8);
+
+
+    assign tiles_complete = tile_max;
 
     //S0 isn't enabled first row, S1 enabled 2nd row, S2 enabled 3rd row
     always_comb begin
         next_state = current_state;
+        prefill_clr = 0;
+        preload_clr = 0;
+        compute_clr = 0;
+        drain_clr = 0;
+        func_clr = 0;
+        prefill_en = 0;
+        preload_en = 0;
+        compute_en = 0;
+        drain_en = 0;
+        func_en = 0;
+        preload_state = 0;
+        compute_state = 0;
+        drain_state = 0;
+        accum_state = 0;
+        tile_done = 0;
         case(current_state)
             IDLE: begin
                 if(!compute_state_start) next_state = IDLE;
                 else next_state = S0
             end 
             PREFILL: begin
-                next_state = PRELOAD;
+                if(prefill_max) begin
+                    next_state = PRELOAD;
+                end else begin
+                    prefill_en = 1;
+                    next_state = PREFILL;
+                end
             end
             PRELOAD: begin
-                next_state = COMPUTE;
-                en_1 = 1;
+                if(preload_max) begin
+                    next_state = COMPUTE;
+                end else begin
+                    next_state = PRELOAD;
+                    preload_en = 1;
+                    prefill_clr = 1;
+                end
+                preload_state = 1;
             end
             COMPUTE: begin
-                next_state = DRAIN;
-                en_2 = 1;
+                if(compute_max) begin
+                    next_state = DRAIN;
+                    tile_done = 1;
+                end else begin
+                    next_state = COMPUTE;
+                    compute_en = 1;
+                    preload_clr = 1;
+                end
+                compute_state = 1;
             end
             DRAIN: begin
-                if(tile_done) begin
-                    next_state = IDLE;
+                if(drain_max) begin
+                    next_state = FUNCS;
                 end else begin
-                    next_state = S3;
+                    next_state = DRAIN;
+                    drain_en = 1;
+                    compute_clr = 1;
                 end
-                en_3 = 1;
+                drain_state = 1;
             end
             FUNCS: begin
-                if(funcs_done) begin
-                   next_state = DONE;
+                if(func_max && !tile_complete) begin
+                    next_state = PRELOAD;
+                end else if(func_max && tile_complete) begin
+                    next_state = IDLE;
                 end else begin
-                   next_state = FUNCS;
-                end 
+                    next_state = DRAIN;
+                    funcs_en = 1;
+                    dain_clr = 1;
+                end
                 accum_state = 1;
             end
             DONE: begin
                 next_state = IDLE;
+                tile_clr = 1;
             end
         endcase
     end
@@ -176,5 +235,26 @@ module tpu_top (
         .weight_bank_out_valid(weight_bank_out_valid),  //this also goes into weight fifo
         .activation_bank_out(activation_bank_out), //this goes into double buffer for activation
         .activation_bank_out_valid(activation_bank_out_valid)); //this also goes into double buffer for activation
+
+endmodule
+
+module counter 
+(input logic clk,
+ input logic rst_n,
+ input logic en,
+ input logic clr,
+ output logic [7:0] out);
+
+ always_ff @(posedge clk, negedge rst_n) begin
+    if(!rst_n)begin
+        out <= '0;
+    end else begin
+        if(clr)begin
+            out <= '0;
+        end else if (en) begin
+            out <= out + 1'd1;
+        end
+    end
+ end
 
 endmodule
