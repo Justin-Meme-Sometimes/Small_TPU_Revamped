@@ -819,7 +819,7 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_array.sv", 
                                        183);
-    __Vtask_tb_array__DOT__check__33__cond = (0U == 
+    __Vtask_tb_array__DOT__check__33__cond = (0U != 
                                               ((((2U 
                                                   ^ (IData)(
                                                             (((QData)((IData)(
@@ -849,7 +849,7 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                                   (0x7fff8U 
                                                    & (vlSelf->tb_array__DOT__arr_dut__DOT__pe_down_out[7U] 
                                                       >> 0xdU)))));
-    __Vtask_tb_array__DOT__check__33__name = std::string{"KNOWN GAP: drain_state cannot win while h_en is still high (compute_en has priority in PE.sv) - product_array still frozen"};
+    __Vtask_tb_array__DOT__check__33__name = std::string{"GAP: drain_state should win while h_en is still high (compute_en currently has priority in PE.sv) - product_array should not stay frozen"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__33__cond) {
         VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_array__DOT__check__33__name));
@@ -868,7 +868,7 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                        "tb/tb_array.sv", 
                                        183);
     vlSelf->tb_array__DOT__arr_tile_done = 0U;
-    __Vtask_tb_array__DOT__check__35__cond = (0U == 
+    __Vtask_tb_array__DOT__check__35__cond = (0U != 
                                               ((((2U 
                                                   ^ (IData)(
                                                             (((QData)((IData)(
@@ -898,7 +898,7 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                                   (0x7fff8U 
                                                    & (vlSelf->tb_array__DOT__arr_dut__DOT__pe_down_out[7U] 
                                                       >> 0xdU)))));
-    __Vtask_tb_array__DOT__check__35__name = std::string{"KNOWN GAP: tile_done clears accum_reg the same cycle h_en is still high, so by the time h_en finally drops there is nothing left to drain - product_array is STILL the stale preload value"};
+    __Vtask_tb_array__DOT__check__35__name = std::string{"GAP: tile_done should not clear accum_reg while h_en is still high leaving nothing to drain - product_array should not still be the stale preload value"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__35__cond) {
         VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_array__DOT__check__35__name));

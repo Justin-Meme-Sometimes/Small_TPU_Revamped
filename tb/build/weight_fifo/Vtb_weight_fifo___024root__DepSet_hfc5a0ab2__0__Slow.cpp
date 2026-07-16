@@ -23,6 +23,8 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___eval_static__TOP(Vtb_weight_fifo__
     vlSelf->tb_weight_fifo__DOT__errors = 0U;
     vlSelf->tb_weight_fifo__DOT__checks = 0U;
     vlSelf->tb_weight_fifo__DOT__clk = 0U;
+    vlSelf->tb_weight_fifo__DOT__fifo_test_done = 0U;
+    vlSelf->tb_weight_fifo__DOT__wl_test_done = 0U;
     vlSelf->tb_weight_fifo__DOT__clk2 = 0U;
     vlSelf->tb_weight_fifo__DOT__wl_errors = 0U;
     vlSelf->tb_weight_fifo__DOT__wl_checks = 0U;
@@ -208,6 +210,9 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___dump_triggers__act(Vtb_weight_fifo
     if ((0x20ULL & vlSelf->__VactTriggered.word(0U))) {
         VL_DBG_MSGF("         'act' region trigger index 5 is active: @(posedge tb_weight_fifo.clk2)\n");
     }
+    if ((0x40ULL & vlSelf->__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 6 is active: @([changed] (tb_weight_fifo.fifo_test_done & tb_weight_fifo.wl_test_done))\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -238,6 +243,9 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___dump_triggers__nba(Vtb_weight_fifo
     if ((0x20ULL & vlSelf->__VnbaTriggered.word(0U))) {
         VL_DBG_MSGF("         'nba' region trigger index 5 is active: @(posedge tb_weight_fifo.clk2)\n");
     }
+    if ((0x40ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 6 is active: @([changed] (tb_weight_fifo.fifo_test_done & tb_weight_fifo.wl_test_done))\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -259,6 +267,8 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___ctor_var_reset(Vtb_weight_fifo___0
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         VL_RAND_RESET_W(96, vlSelf->tb_weight_fifo__DOT__wr_word[__Vi0]);
     }
+    vlSelf->tb_weight_fifo__DOT__fifo_test_done = VL_RAND_RESET_I(1);
+    vlSelf->tb_weight_fifo__DOT__wl_test_done = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__clk2 = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = VL_RAND_RESET_I(1);
     VL_RAND_RESET_W(768, vlSelf->tb_weight_fifo__DOT__read_data);
@@ -272,6 +282,7 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___ctor_var_reset(Vtb_weight_fifo___0
     vlSelf->tb_weight_fifo__DOT__data_valid = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__wl_errors = 0;
     vlSelf->tb_weight_fifo__DOT__wl_checks = 0;
+    VL_RAND_RESET_W(768, vlSelf->tb_weight_fifo__DOT__sent_word);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         VL_RAND_RESET_W(96, vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__Q[__Vi0]);
     }
@@ -293,4 +304,6 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___ctor_var_reset(Vtb_weight_fifo___0
     vlSelf->__Vtrigprevexpr___TOP__tb_weight_fifo__DOT__reset_n__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_weight_fifo__DOT__clk2__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_weight_fifo__DOT__rst_n2__0 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr_h9cca9006__0 = VL_RAND_RESET_I(1);
+    vlSelf->__VactDidInit = 0;
 }

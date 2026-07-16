@@ -118,10 +118,11 @@ VL_INLINE_OPT VlCoroutine Vtb_requant___024root___eval_initial__TOP__Vtiming__0(
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_requant.sv", 
                                        56);
-    __Vtask_tb_requant__DOT__check__4__cond = (IData)(
-                                                      (0x80808080U 
-                                                       == vlSelf->tb_requant__DOT__out));
-    __Vtask_tb_requant__DOT__check__4__name = std::string{"KNOWN BUG: first active cycle saturates every lane to -128 (unsigned huge-number comparison, not per-lane)"};
+    __Vtask_tb_requant__DOT__check__4__cond = (1U & 
+                                               (~ (IData)(
+                                                          (0x80808080U 
+                                                           == vlSelf->tb_requant__DOT__out))));
+    __Vtask_tb_requant__DOT__check__4__name = std::string{"BUG: first active cycle should NOT saturate every lane to -128 (unsigned huge-number comparison, not per-lane)"};
     vlSelf->tb_requant__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_requant__DOT__checks);
     if (__Vtask_tb_requant__DOT__check__4__cond) {
@@ -150,10 +151,11 @@ VL_INLINE_OPT VlCoroutine Vtb_requant___024root___eval_initial__TOP__Vtiming__0(
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_requant.sv", 
                                        56);
-    __Vtask_tb_requant__DOT__check__7__cond = (IData)(
-                                                      (0x7f7f7f7fU 
-                                                       == vlSelf->tb_requant__DOT__out));
-    __Vtask_tb_requant__DOT__check__7__name = std::string{"KNOWN BUG: second active cycle - every lane now stuck at 127"};
+    __Vtask_tb_requant__DOT__check__7__cond = (1U & 
+                                               (~ (IData)(
+                                                          (0x7f7f7f7fU 
+                                                           == vlSelf->tb_requant__DOT__out))));
+    __Vtask_tb_requant__DOT__check__7__name = std::string{"BUG: second active cycle should NOT have every lane stuck at 127"};
     vlSelf->tb_requant__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_requant__DOT__checks);
     if (__Vtask_tb_requant__DOT__check__7__cond) {
@@ -173,10 +175,11 @@ VL_INLINE_OPT VlCoroutine Vtb_requant___024root___eval_initial__TOP__Vtiming__0(
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_requant.sv", 
                                        56);
-    __Vtask_tb_requant__DOT__check__9__cond = (IData)(
-                                                      (0x7f7f7f7fU 
-                                                       == vlSelf->tb_requant__DOT__out));
-    __Vtask_tb_requant__DOT__check__9__name = std::string{"KNOWN BUG: changing con/ins has no effect - still stuck at 127"};
+    __Vtask_tb_requant__DOT__check__9__cond = (1U & 
+                                               (~ (IData)(
+                                                          (0x7f7f7f7fU 
+                                                           == vlSelf->tb_requant__DOT__out))));
+    __Vtask_tb_requant__DOT__check__9__name = std::string{"BUG: changing con/ins should have an effect, not stay stuck at 127"};
     vlSelf->tb_requant__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_requant__DOT__checks);
     if (__Vtask_tb_requant__DOT__check__9__cond) {

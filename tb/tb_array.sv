@@ -225,17 +225,17 @@ module tb_array;
         arr_drain = 1;
         arr_step("");
         arr_step("");
-        check({"KNOWN GAP: drain_state cannot win while h_en is still high ",
-               "(compute_en has priority in PE.sv) - product_array still frozen"},
-              arr_product == {33'd2, 33'd2, 33'd2, 33'd2});
+        check({"GAP: drain_state should win while h_en is still high ",
+               "(compute_en currently has priority in PE.sv) - product_array should not stay frozen"},
+              arr_product != {33'd2, 33'd2, 33'd2, 33'd2});
 
         arr_tile_done = 1;
         arr_step("");
         arr_tile_done = 0;
-        check({"KNOWN GAP: tile_done clears accum_reg the same cycle h_en is ",
-               "still high, so by the time h_en finally drops there is nothing ",
-               "left to drain - product_array is STILL the stale preload value"},
-              arr_product == {33'd2, 33'd2, 33'd2, 33'd2});
+        check({"GAP: tile_done should not clear accum_reg while h_en is ",
+               "still high leaving nothing to drain - product_array should ",
+               "not still be the stale preload value"},
+              arr_product != {33'd2, 33'd2, 33'd2, 33'd2});
         arr_drain = 0;
 
         $display("PE_array done\n");

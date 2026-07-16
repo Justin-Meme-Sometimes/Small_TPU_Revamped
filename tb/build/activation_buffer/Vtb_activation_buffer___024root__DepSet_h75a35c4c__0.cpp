@@ -191,9 +191,9 @@ VL_INLINE_OPT VlCoroutine Vtb_activation_buffer___024root___eval_initial__TOP__V
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_activation_buffer__DOT__check__7__name));
     }
     __Vtask_tb_activation_buffer__DOT__check__8__cond 
-        = (0U == (0xfU & vlSelf->tb_activation_buffer__DOT__ib_re_out[0U]));
+        = (0U != (0xfU & vlSelf->tb_activation_buffer__DOT__ib_re_out[0U]));
     __Vtask_tb_activation_buffer__DOT__check__8__name = 
-        std::string{"KNOWN BUG: re_out[0] reads an unwritten slot (buff[4]), not the first written byte 0xa - documents the off-by-one"};
+        std::string{"BUG: re_out[0] should not read an unwritten slot (buff[4]), it should return the first written byte 0xa - off-by-one"};
     vlSelf->tb_activation_buffer__DOT__checks = ((IData)(1U) 
                                                  + vlSelf->tb_activation_buffer__DOT__checks);
     if (__Vtask_tb_activation_buffer__DOT__check__8__cond) {
@@ -246,9 +246,9 @@ VL_INLINE_OPT VlCoroutine Vtb_activation_buffer___024root___eval_initial__TOP__V
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_activation_buffer__DOT__check__11__name));
     }
     __Vtask_tb_activation_buffer__DOT__check__12__cond 
-        = (0xaU != (0xfU & vlSelf->tb_activation_buffer__DOT__ib_re_out[0U]));
+        = (0xaU == (0xfU & vlSelf->tb_activation_buffer__DOT__ib_re_out[0U]));
     __Vtask_tb_activation_buffer__DOT__check__12__name = 
-        std::string{"KNOWN BUG: we_in[0] (0xa) is never returned by any read this cycle"};
+        std::string{"BUG: we_in[0] (0xa) should be returned by a read this cycle"};
     vlSelf->tb_activation_buffer__DOT__checks = ((IData)(1U) 
                                                  + vlSelf->tb_activation_buffer__DOT__checks);
     if (__Vtask_tb_activation_buffer__DOT__check__12__cond) {
@@ -403,10 +403,10 @@ VL_INLINE_OPT VlCoroutine Vtb_activation_buffer___024root___eval_initial__TOP__V
                                        "tb/tb_activation_buffer.sv", 
                                        131);
     __Vtask_tb_activation_buffer__DOT__check__24__cond 
-        = (1U & ((~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_we)) 
-                 & (~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_first_pass))));
+        = (1U & (~ ((~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_we)) 
+                    & (~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_first_pass)))));
     __Vtask_tb_activation_buffer__DOT__check__24__name = 
-        std::string{"KNOWN BUG: PRELOAD's guard is the always-false '!PRELOAD' (enum value, not a real signal), so it falls straight through: we/first_pass are NOT asserted in PRELOAD"};
+        std::string{"BUG: PRELOAD's guard is the always-false '!PRELOAD' (enum value, not a real signal), so it wrongly falls straight through instead of asserting we/first_pass in PRELOAD"};
     vlSelf->tb_activation_buffer__DOT__checks = ((IData)(1U) 
                                                  + vlSelf->tb_activation_buffer__DOT__checks);
     if (__Vtask_tb_activation_buffer__DOT__check__24__cond) {

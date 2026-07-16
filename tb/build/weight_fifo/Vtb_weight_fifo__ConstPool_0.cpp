@@ -4,11 +4,14 @@
 
 #include "verilated.h"
 
-extern const VlWide<24>/*767:0*/ Vtb_weight_fifo__ConstPool__CONST_hd9d0fe6c_0 = {{
-    0x12345678, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0xface0000,
+extern const VlWide<16>/*511:0*/ Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0 = {{
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000
+}};
+
+extern const VlWide<8>/*255:0*/ Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0 = {{
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000
 }};

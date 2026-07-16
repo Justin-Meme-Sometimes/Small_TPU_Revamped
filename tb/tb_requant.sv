@@ -65,23 +65,23 @@ module tb_requant;
         valid = 1; drain_state = 1; con = 0;
         ins[0] = 32'sd5; ins[1] = 32'sd200; ins[2] = -32'sd5; ins[3] = 32'sd0;
         step();
-        check({"KNOWN BUG: first active cycle saturates every lane to -128 ",
+        check({"BUG: first active cycle should NOT saturate every lane to -128 ",
                "(unsigned huge-number comparison, not per-lane)"},
-              $signed(out[0]) == -8'sd128 && $signed(out[1]) == -8'sd128 &&
-              $signed(out[2]) == -8'sd128 && $signed(out[3]) == -8'sd128);
+              !($signed(out[0]) == -8'sd128 && $signed(out[1]) == -8'sd128 &&
+                $signed(out[2]) == -8'sd128 && $signed(out[3]) == -8'sd128));
         check("out_valid asserted", out_valid == 1'b1);
 
         step();
-        check("KNOWN BUG: second active cycle - every lane now stuck at 127",
-              out[0] == 8'd127 && out[1] == 8'd127 && out[2] == 8'd127 && out[3] == 8'd127);
+        check("BUG: second active cycle should NOT have every lane stuck at 127",
+              !(out[0] == 8'd127 && out[1] == 8'd127 && out[2] == 8'd127 && out[3] == 8'd127));
 
         // Change con and ins entirely; the whole-vector comparison keeps
         // every lane pinned at 127 regardless of actual data.
         con = 2;
         ins[0] = 32'sd400; // would be 100 after >>2 if requant worked per-lane
         step();
-        check("KNOWN BUG: changing con/ins has no effect - still stuck at 127",
-              out[0] == 8'd127 && out[1] == 8'd127 && out[2] == 8'd127 && out[3] == 8'd127);
+        check("BUG: changing con/ins should have an effect, not stay stuck at 127",
+              !(out[0] == 8'd127 && out[1] == 8'd127 && out[2] == 8'd127 && out[3] == 8'd127));
 
         // valid deasserted still forces shift_buffer[i]<=0 per lane, but
         // does NOT touch out (out is only written inside the valid&&(...)

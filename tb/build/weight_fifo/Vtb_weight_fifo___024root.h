@@ -23,6 +23,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_weight_fifo___024root final : public Veri
     CData/*0:0*/ tb_weight_fifo__DOT__re;
     CData/*0:0*/ tb_weight_fifo__DOT__full;
     CData/*0:0*/ tb_weight_fifo__DOT__empty;
+    CData/*0:0*/ tb_weight_fifo__DOT__fifo_test_done;
+    CData/*0:0*/ tb_weight_fifo__DOT__wl_test_done;
     CData/*0:0*/ tb_weight_fifo__DOT__start_load_fifo_state;
     CData/*0:0*/ tb_weight_fifo__DOT__load_fifo_state;
     CData/*0:0*/ tb_weight_fifo__DOT__preload_state;
@@ -46,6 +48,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_weight_fifo___024root final : public Veri
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_weight_fifo__DOT__reset_n__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_weight_fifo__DOT__clk2__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_weight_fifo__DOT__rst_n2__0;
+    CData/*0:0*/ __Vtrigprevexpr_h9cca9006__0;
+    CData/*0:0*/ __VactDidInit;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ tb_weight_fifo__DOT__errors;
     IData/*31:0*/ tb_weight_fifo__DOT__checks;
@@ -54,6 +58,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_weight_fifo___024root final : public Veri
     VlWide<24>/*767:0*/ tb_weight_fifo__DOT__read_data;
     IData/*31:0*/ tb_weight_fifo__DOT__wl_errors;
     IData/*31:0*/ tb_weight_fifo__DOT__wl_checks;
+    VlWide<24>/*767:0*/ tb_weight_fifo__DOT__sent_word;
     VlWide<3>/*95:0*/ tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<VlWide<3>/*95:0*/, 4> tb_weight_fifo__DOT__wr_word;
@@ -63,9 +68,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_weight_fifo___024root final : public Veri
     VlTriggerScheduler __VtrigSched_h5107d62b__0;
     VlTriggerScheduler __VtrigSched_h5107d6ee__0;
     VlTriggerScheduler __VtrigSched_hb5160297__0;
+    VlTriggerScheduler __VtrigSched_h087dc694__0;
     VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<6> __VactTriggered;
-    VlTriggerVec<6> __VnbaTriggered;
+    VlTriggerVec<7> __VactTriggered;
+    VlTriggerVec<7> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtb_weight_fifo__Syms* const vlSymsp;

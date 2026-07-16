@@ -79,14 +79,14 @@ module tb_activation_buffer;
         ib_step();
         ib_re = 0;
         check("re_valid asserted after read", ib_re_valid == 1'b1);
-        check({"KNOWN BUG: re_out[0] reads an unwritten slot (buff[4]), ",
-               "not the first written byte 0xa - documents the off-by-one"},
-              ib_re_out[0] == 4'h0);
+        check({"BUG: re_out[0] should not read an unwritten slot (buff[4]), ",
+               "it should return the first written byte 0xa - off-by-one"},
+              ib_re_out[0] != 4'h0);
         check("re_out[1] recovers we_in[3] (0xd)", ib_re_out[1] == 4'hd);
         check("re_out[2] recovers we_in[2] (0xc)", ib_re_out[2] == 4'hc);
         check("re_out[3] recovers we_in[1] (0xb)", ib_re_out[3] == 4'hb);
-        check("KNOWN BUG: we_in[0] (0xa) is never returned by any read this cycle",
-              ib_re_out[0] != 4'ha);
+        check("BUG: we_in[0] (0xa) should be returned by a read this cycle",
+              ib_re_out[0] == 4'ha);
         check("after read: back to empty", ib_empty == 1'b1);
 
         // clr behavior
@@ -144,10 +144,10 @@ module tb_activation_buffer;
 
         bf_full = 1; // signal PREFILL's buffer is full -> should move to PRELOAD
         bf_step();
-        check({"KNOWN BUG: PRELOAD's guard is the always-false '!PRELOAD' ",
-               "(enum value, not a real signal), so it falls straight through: ",
-               "we/first_pass are NOT asserted in PRELOAD"},
-              bf_we == 1'b0 && bf_first_pass == 1'b0);
+        check({"BUG: PRELOAD's guard is the always-false '!PRELOAD' ",
+               "(enum value, not a real signal), so it wrongly falls straight ",
+               "through instead of asserting we/first_pass in PRELOAD"},
+              !(bf_we == 1'b0 && bf_first_pass == 1'b0));
 
         bf_step();
         check("PRELOAD unconditionally advances to COMPUTE the very next cycle",
