@@ -21,15 +21,12 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_requant___024root final : public Verilate
     CData/*0:0*/ tb_requant__DOT__drain_state;
     CData/*0:0*/ tb_requant__DOT__accum_state;
     CData/*0:0*/ tb_requant__DOT__out_valid;
-    IData/*31:0*/ tb_requant__DOT__out;
-    VlWide<4>/*127:0*/ tb_requant__DOT__dut__DOT__shift_buffer;
+    IData/*31:0*/ tb_requant__DOT____Vcellout__dut__out;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_requant__DOT__clk__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_requant__DOT__rst_n__0;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ tb_requant__DOT__errors;
     IData/*31:0*/ tb_requant__DOT__checks;
-    VlWide<4>/*127:0*/ tb_requant__DOT__ins;
-    IData/*31:0*/ tb_requant__DOT__con;
     IData/*31:0*/ __VactIterCount;
     VlDelayScheduler __VdlySched;
     VlTriggerScheduler __VtrigSched_h71ed53e8__0;

@@ -449,7 +449,9 @@ VL_INLINE_OPT void Vtb_pe___024root___nba_sequent__TOP__0(Vtb_pe___024root* vlSe
     if (vlSelf->tb_pe__DOT__rst_n) {
         if (((IData)(vlSelf->tb_pe__DOT__clr) | (IData)(vlSelf->tb_pe__DOT__tile_done))) {
             __Vdly__tb_pe__DOT__dut__DOT__product_reg = 0U;
-            __Vdly__tb_pe__DOT__dut__DOT__accum_reg = 0U;
+            if ((1U & (~ (IData)(vlSelf->tb_pe__DOT__compute_en)))) {
+                __Vdly__tb_pe__DOT__dut__DOT__accum_reg = 0U;
+            }
             if (vlSelf->tb_pe__DOT__tile_done) {
                 vlSelf->tb_pe__DOT__dut__DOT__b_reg = 0U;
             }
@@ -459,6 +461,13 @@ VL_INLINE_OPT void Vtb_pe___024root___nba_sequent__TOP__0(Vtb_pe___024root* vlSe
                 vlSelf->tb_pe__DOT__down_out = vlSelf->tb_pe__DOT__dut__DOT__b_reg;
                 vlSelf->tb_pe__DOT__dut__DOT__b_reg 
                     = vlSelf->tb_pe__DOT__b;
+            } else if (vlSelf->tb_pe__DOT__drain) {
+                if (vlSelf->tb_pe__DOT__accum_in_valid) {
+                    __Vdly__tb_pe__DOT__dut__DOT__accum_reg 
+                        = vlSelf->tb_pe__DOT__accum_in;
+                } else {
+                    vlSelf->tb_pe__DOT__down_out = vlSelf->tb_pe__DOT__dut__DOT__accum_reg;
+                }
             } else if (vlSelf->tb_pe__DOT__compute_en) {
                 __Vdly__tb_pe__DOT__dut__DOT__product_reg 
                     = (0xffffU & (((IData)(vlSelf->tb_pe__DOT__dut__DOT__a_reg) 
@@ -468,18 +477,13 @@ VL_INLINE_OPT void Vtb_pe___024root___nba_sequent__TOP__0(Vtb_pe___024root* vlSe
                     = (vlSelf->tb_pe__DOT__dut__DOT__accum_reg 
                        + (IData)(vlSelf->tb_pe__DOT__dut__DOT__product_reg));
                 vlSelf->tb_pe__DOT__right_out = vlSelf->tb_pe__DOT__dut__DOT__a_reg;
-            } else if (vlSelf->tb_pe__DOT__drain) {
-                if (vlSelf->tb_pe__DOT__accum_in_valid) {
-                    __Vdly__tb_pe__DOT__dut__DOT__accum_reg 
-                        = vlSelf->tb_pe__DOT__accum_in;
-                } else {
-                    vlSelf->tb_pe__DOT__down_out = vlSelf->tb_pe__DOT__dut__DOT__accum_reg;
-                }
             }
             if ((1U & (~ (IData)(vlSelf->tb_pe__DOT__preload)))) {
-                if (vlSelf->tb_pe__DOT__compute_en) {
-                    vlSelf->tb_pe__DOT__dut__DOT__a_reg 
-                        = vlSelf->tb_pe__DOT__a;
+                if ((1U & (~ (IData)(vlSelf->tb_pe__DOT__drain)))) {
+                    if (vlSelf->tb_pe__DOT__compute_en) {
+                        vlSelf->tb_pe__DOT__dut__DOT__a_reg 
+                            = vlSelf->tb_pe__DOT__a;
+                    }
                 }
             }
         }

@@ -125,7 +125,7 @@ module bank_fsm(
                 end
             end
             PRELOAD: begin
-                if(!PRELOAD) begin
+                if(!preload_state) begin
                     next_state = PRELOAD;
                     we = 1;
                     first_pass = 1;

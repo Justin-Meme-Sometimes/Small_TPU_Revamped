@@ -105,7 +105,6 @@ VL_ATTR_COLD void Vtb_activation_buffer___024root___stl_sequent__TOP__0(Vtb_acti
         = (0xffU == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count));
     vlSelf->tb_activation_buffer__DOT__act_dut__DOT__buff_b_empty 
         = (0U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count));
-    vlSelf->tb_activation_buffer__DOT__bf_first_pass = 0U;
     vlSelf->tb_activation_buffer__DOT__bf_active = 0U;
     vlSelf->tb_activation_buffer__DOT__bf_re = 0U;
     if ((0U != (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
@@ -133,6 +132,7 @@ VL_ATTR_COLD void Vtb_activation_buffer___024root___stl_sequent__TOP__0(Vtb_acti
     }
     vlSelf->tb_activation_buffer__DOT__act_dut__DOT__re_a = 0U;
     vlSelf->tb_activation_buffer__DOT__act_dut__DOT__re_b = 0U;
+    vlSelf->tb_activation_buffer__DOT__bf_first_pass = 0U;
     vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_a = 0U;
     vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_b = 0U;
     vlSelf->tb_activation_buffer__DOT__bf_we = 0U;
@@ -154,23 +154,26 @@ VL_ATTR_COLD void Vtb_activation_buffer___024root___stl_sequent__TOP__0(Vtb_acti
         vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__next_state 
             = ((0xffU == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count))
                 ? 2U : 1U);
+    } else if ((2U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
+        if ((1U & (~ (IData)(vlSelf->tb_activation_buffer__DOT__act_preload_state)))) {
+            vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_b = 1U;
+        }
+        vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__next_state 
+            = ((IData)(vlSelf->tb_activation_buffer__DOT__act_preload_state)
+                ? 3U : 2U);
     } else {
-        if ((2U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
-            if ((3U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
-                if ((4U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
-                    if ((5U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
-                        if (((IData)(vlSelf->tb_activation_buffer__DOT__act_compute_state) 
-                             | ((IData)(vlSelf->tb_activation_buffer__DOT__act_drain_state) 
-                                & (0xffU != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count))))) {
-                            vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_b = 1U;
-                        }
+        if ((3U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
+            if ((4U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
+                if ((5U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
+                    if (((IData)(vlSelf->tb_activation_buffer__DOT__act_compute_state) 
+                         | ((IData)(vlSelf->tb_activation_buffer__DOT__act_drain_state) 
+                            & (0xffU != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count))))) {
+                        vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_b = 1U;
                     }
                 }
             }
         }
-        if ((2U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
-            vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__next_state = 3U;
-        } else if ((3U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
+        if ((3U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__B__DOT__current_state))) {
             if (((0U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count)) 
                  & ((IData)(vlSelf->tb_activation_buffer__DOT__act_compute_state) 
                     | (IData)(vlSelf->tb_activation_buffer__DOT__act_drain_state)))) {
@@ -219,23 +222,27 @@ VL_ATTR_COLD void Vtb_activation_buffer___024root___stl_sequent__TOP__0(Vtb_acti
         vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__next_state 
             = ((IData)(vlSelf->tb_activation_buffer__DOT__bf_full)
                 ? 2U : 1U);
+    } else if ((2U == (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
+        if ((1U & (~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_preload_state)))) {
+            vlSelf->tb_activation_buffer__DOT__bf_first_pass = 1U;
+            vlSelf->tb_activation_buffer__DOT__bf_we = 1U;
+        }
+        vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__next_state 
+            = ((IData)(vlSelf->tb_activation_buffer__DOT__bf_preload_state)
+                ? 3U : 2U);
     } else {
-        if ((2U != (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
-            if ((3U != (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
-                if ((4U != (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
-                    if ((5U == (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
-                        if (((IData)(vlSelf->tb_activation_buffer__DOT__bf_compute_state) 
-                             | ((IData)(vlSelf->tb_activation_buffer__DOT__bf_drain_state) 
-                                & (~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_full))))) {
-                            vlSelf->tb_activation_buffer__DOT__bf_we = 1U;
-                        }
+        if ((3U != (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
+            if ((4U != (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
+                if ((5U == (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
+                    if (((IData)(vlSelf->tb_activation_buffer__DOT__bf_compute_state) 
+                         | ((IData)(vlSelf->tb_activation_buffer__DOT__bf_drain_state) 
+                            & (~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_full))))) {
+                        vlSelf->tb_activation_buffer__DOT__bf_we = 1U;
                     }
                 }
             }
         }
-        if ((2U == (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
-            vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__next_state = 3U;
-        } else if ((3U == (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
+        if ((3U == (IData)(vlSelf->tb_activation_buffer__DOT__bf_dut__DOT__current_state))) {
             if (((~ (IData)(vlSelf->tb_activation_buffer__DOT__bf_empty)) 
                  & ((IData)(vlSelf->tb_activation_buffer__DOT__bf_compute_state) 
                     | (IData)(vlSelf->tb_activation_buffer__DOT__bf_drain_state)))) {
@@ -302,23 +309,27 @@ VL_ATTR_COLD void Vtb_activation_buffer___024root___stl_sequent__TOP__0(Vtb_acti
         vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__next_state 
             = ((0xffU == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_A__DOT__curr_count))
                 ? 2U : 1U);
+    } else if ((2U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
+        if ((1U & (~ (IData)(vlSelf->tb_activation_buffer__DOT__act_preload_state)))) {
+            vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_a = 1U;
+            tb_activation_buffer__DOT__act_dut__DOT__first_pass_a = 1U;
+        }
+        vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__next_state 
+            = ((IData)(vlSelf->tb_activation_buffer__DOT__act_preload_state)
+                ? 3U : 2U);
     } else {
-        if ((2U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
-            if ((3U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
-                if ((4U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
-                    if ((5U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
-                        if (((IData)(vlSelf->tb_activation_buffer__DOT__act_compute_state) 
-                             | ((IData)(vlSelf->tb_activation_buffer__DOT__act_drain_state) 
-                                & (0xffU != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_A__DOT__curr_count))))) {
-                            vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_a = 1U;
-                        }
+        if ((3U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
+            if ((4U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
+                if ((5U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
+                    if (((IData)(vlSelf->tb_activation_buffer__DOT__act_compute_state) 
+                         | ((IData)(vlSelf->tb_activation_buffer__DOT__act_drain_state) 
+                            & (0xffU != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_A__DOT__curr_count))))) {
+                        vlSelf->tb_activation_buffer__DOT__act_dut__DOT__we_a = 1U;
                     }
                 }
             }
         }
-        if ((2U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
-            vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__next_state = 3U;
-        } else if ((3U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
+        if ((3U == (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__A__DOT__current_state))) {
             if (((0U != (IData)(vlSelf->tb_activation_buffer__DOT__act_dut__DOT__BUFF_A__DOT__curr_count)) 
                  & ((IData)(vlSelf->tb_activation_buffer__DOT__act_compute_state) 
                     | (IData)(vlSelf->tb_activation_buffer__DOT__act_drain_state)))) {
@@ -543,6 +554,7 @@ VL_ATTR_COLD void Vtb_activation_buffer___024root___ctor_var_reset(Vtb_activatio
     vlSelf->tb_activation_buffer__DOT__bf_a_or_b = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__bf_start = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__bf_compute_state = VL_RAND_RESET_I(1);
+    vlSelf->tb_activation_buffer__DOT__bf_preload_state = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__bf_drain_state = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__bf_tiles_complete = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__bf_full = VL_RAND_RESET_I(1);
@@ -555,6 +567,7 @@ VL_ATTR_COLD void Vtb_activation_buffer___024root___ctor_var_reset(Vtb_activatio
     vlSelf->tb_activation_buffer__DOT__act_rst_n = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__act_start = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__act_compute_state = VL_RAND_RESET_I(1);
+    vlSelf->tb_activation_buffer__DOT__act_preload_state = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__act_drain_state = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__act_tiles_complete = VL_RAND_RESET_I(1);
     vlSelf->tb_activation_buffer__DOT__act_DMA_in_valid = VL_RAND_RESET_I(1);

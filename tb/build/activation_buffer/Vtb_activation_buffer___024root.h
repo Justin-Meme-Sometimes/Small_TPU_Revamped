@@ -33,6 +33,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_activation_buffer___024root final : publi
         CData/*0:0*/ tb_activation_buffer__DOT__bf_a_or_b;
         CData/*0:0*/ tb_activation_buffer__DOT__bf_start;
         CData/*0:0*/ tb_activation_buffer__DOT__bf_compute_state;
+        CData/*0:0*/ tb_activation_buffer__DOT__bf_preload_state;
         CData/*0:0*/ tb_activation_buffer__DOT__bf_drain_state;
         CData/*0:0*/ tb_activation_buffer__DOT__bf_tiles_complete;
         CData/*0:0*/ tb_activation_buffer__DOT__bf_full;
@@ -44,6 +45,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_activation_buffer___024root final : publi
         CData/*0:0*/ tb_activation_buffer__DOT__bf_clr;
         CData/*0:0*/ tb_activation_buffer__DOT__act_start;
         CData/*0:0*/ tb_activation_buffer__DOT__act_compute_state;
+        CData/*0:0*/ tb_activation_buffer__DOT__act_preload_state;
         CData/*0:0*/ tb_activation_buffer__DOT__act_drain_state;
         CData/*0:0*/ tb_activation_buffer__DOT__act_tiles_complete;
         CData/*0:0*/ tb_activation_buffer__DOT__act_DMA_in_valid;
@@ -79,10 +81,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_activation_buffer___024root final : publi
         VlWide<64>/*2047:0*/ tb_activation_buffer__DOT__act_dut__DOT__BUFF_A__DOT__buff;
         CData/*7:0*/ tb_activation_buffer__DOT__act_dut__DOT__BUFF_A__DOT__curr_count;
         VlWide<64>/*2047:0*/ tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__buff;
-        CData/*7:0*/ tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count;
-        CData/*0:0*/ __VstlFirstIteration;
     };
     struct {
+        CData/*7:0*/ tb_activation_buffer__DOT__act_dut__DOT__BUFF_B__DOT__curr_count;
+        CData/*0:0*/ __VstlFirstIteration;
         CData/*0:0*/ __Vtrigprevexpr___TOP__tb_activation_buffer__DOT__clk__0;
         CData/*0:0*/ __Vtrigprevexpr___TOP__tb_activation_buffer__DOT__ib_rst_n__0;
         CData/*0:0*/ __Vtrigprevexpr___TOP__tb_activation_buffer__DOT__bf_rst_n__0;

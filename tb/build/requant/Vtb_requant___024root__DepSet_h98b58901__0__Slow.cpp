@@ -92,10 +92,7 @@ VL_ATTR_COLD void Vtb_requant___024root___ctor_var_reset(Vtb_requant___024root* 
     vlSelf->tb_requant__DOT__drain_state = VL_RAND_RESET_I(1);
     vlSelf->tb_requant__DOT__accum_state = VL_RAND_RESET_I(1);
     vlSelf->tb_requant__DOT__out_valid = VL_RAND_RESET_I(1);
-    VL_RAND_RESET_W(128, vlSelf->tb_requant__DOT__ins);
-    vlSelf->tb_requant__DOT__con = VL_RAND_RESET_I(32);
-    vlSelf->tb_requant__DOT__out = VL_RAND_RESET_I(32);
-    VL_RAND_RESET_W(128, vlSelf->tb_requant__DOT__dut__DOT__shift_buffer);
+    vlSelf->tb_requant__DOT____Vcellout__dut__out = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigprevexpr___TOP__tb_requant__DOT__clk__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_requant__DOT__rst_n__0 = VL_RAND_RESET_I(1);
 }
