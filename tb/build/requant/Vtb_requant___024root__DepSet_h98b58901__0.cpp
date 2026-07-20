@@ -210,9 +210,9 @@ VL_INLINE_OPT VlCoroutine Vtb_requant___024root___eval_initial__TOP__Vtiming__0(
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_requant__DOT__check__11__name));
     }
     __Vtask_tb_requant__DOT__check__12__cond = (IData)(
-                                                       (0x7f7f7f7fU 
+                                                       (0U 
                                                         == vlSelf->tb_requant__DOT____Vcellout__dut__out));
-    __Vtask_tb_requant__DOT__check__12__name = std::string{"valid=0: out is NOT cleared (only shift_buffer resets, out holds)"};
+    __Vtask_tb_requant__DOT__check__12__name = std::string{"valid=0: out is cleared to zero"};
     vlSelf->tb_requant__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_requant__DOT__checks);
     if (__Vtask_tb_requant__DOT__check__12__cond) {
@@ -222,10 +222,16 @@ VL_INLINE_OPT VlCoroutine Vtb_requant___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_requant__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_requant__DOT__check__12__name));
     }
-    VL_WRITEF("==== SUMMARY ====\nrequant: %0d/%0d checks passed\n",
-              32,(vlSelf->tb_requant__DOT__checks - vlSelf->tb_requant__DOT__errors),
+    VL_WRITEF("out[0] = %0#\nout[1] = %0#\nout[2] = %0#\nout[3] = %0#\n==== SUMMARY ====\nrequant: %0d/%0d checks passed\n",
+              8,(0xffU & vlSelf->tb_requant__DOT____Vcellout__dut__out),
+              8,(0xffU & (vlSelf->tb_requant__DOT____Vcellout__dut__out 
+                          >> 8U)),8,(0xffU & (vlSelf->tb_requant__DOT____Vcellout__dut__out 
+                                              >> 0x10U)),
+              8,(vlSelf->tb_requant__DOT____Vcellout__dut__out 
+                 >> 0x18U),32,(vlSelf->tb_requant__DOT__checks 
+                               - vlSelf->tb_requant__DOT__errors),
               32,vlSelf->tb_requant__DOT__checks);
-    VL_FINISH_MT("tb/tb_requant.sv", 98, "");
+    VL_FINISH_MT("tb/tb_requant.sv", 102, "");
 }
 
 VL_INLINE_OPT VlCoroutine Vtb_requant___024root___eval_initial__TOP__Vtiming__1(Vtb_requant___024root* vlSelf) {

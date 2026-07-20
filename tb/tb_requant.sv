@@ -83,15 +83,19 @@ module tb_requant;
         check("BUG: changing con/ins should have an effect, not stay stuck at 127",
               !(out[0] == 8'd127 && out[1] == 8'd127 && out[2] == 8'd127 && out[3] == 8'd127));
 
-        // valid deasserted still forces shift_buffer[i]<=0 per lane, but
-        // does NOT touch out (out is only written inside the valid&&(...)
-        // branch, so it holds its last value here - another asymmetry vs.
-        // relu_buffer, which explicitly zeroes out when valid drops).
-        valid = 0;
+        // valid deasserted forces shift_buffer[i]<=0 per lane AND clears out
+        // (the else branch explicitly zeroes out[i], unlike the header
+        // comment used to claim).
+        valid <= 0;
         step();
         check("valid=0: out_valid drops", out_valid == 1'b0);
-        check("valid=0: out is NOT cleared (only shift_buffer resets, out holds)",
-              out[0] == 8'd127 && out[1] == 8'd127 && out[2] == 8'd127 && out[3] == 8'd127);
+        check("valid=0: out is cleared to zero",
+              out[0] == 8'd0 && out[1] == 8'd0 && out[2] == 8'd0 && out[3] == 8'd0);
+
+        $display("out[0] = %0d", out[0]);
+        $display("out[1] = %0d", out[1]);
+        $display("out[2] = %0d", out[2]);
+        $display("out[3] = %0d", out[3]);
 
         $display("==== SUMMARY ====");
         $display("requant: %0d/%0d checks passed", checks - errors, checks);
