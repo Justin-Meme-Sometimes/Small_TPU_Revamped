@@ -62,13 +62,20 @@ module tb_requant;
         check("reset: out all zero", out == 32'h0);
         check("reset: out_valid low", out_valid == 1'b0);
 
-        valid = 1; drain_state = 1; con = 0;
+        valid <= 1; drain_state <= 1; con <= 1;
         ins[0] = 32'sd5; ins[1] = 32'sd200; ins[2] = -32'sd5; ins[3] = 32'sd0;
+        step();
         step();
         check({"BUG: first active cycle should NOT saturate every lane to -128 ",
                "(unsigned huge-number comparison, not per-lane)"},
               !($signed(out[0]) == -8'sd128 && $signed(out[1]) == -8'sd128 &&
                 $signed(out[2]) == -8'sd128 && $signed(out[3]) == -8'sd128));
+        
+        $display("out[0] = %0d", out[0]);
+        $display("out[1] = %0d", out[1]);
+        $display("out[2] = %0d", out[2]);
+        $display("out[3] = %0d", out[3]);
+
         check("out_valid asserted", out_valid == 1'b1);
 
         step();
