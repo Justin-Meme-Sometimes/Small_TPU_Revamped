@@ -30,7 +30,6 @@ VM_CLASSES_FAST += \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \
-	Vtb_activation_buffer__ConstPool_0 \
 	Vtb_activation_buffer___024root__Slow \
 	Vtb_activation_buffer___024root__DepSet_h556af3ed__0__Slow \
 	Vtb_activation_buffer___024root__DepSet_h75a35c4c__0__Slow \

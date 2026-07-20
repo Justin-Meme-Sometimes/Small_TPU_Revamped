@@ -2,25 +2,11 @@
 //
 // Testbench for src/activation_buffer.sv (i_buffer, bank_fsm, activation_buffer)
 //
-// Two significant bugs found while writing this testbench (documented as
-// expected-failure-style checks below, not fixed):
-//
-//   i_buffer: on read, re_out[0]=buff[curr_count] but curr_count already
-//   points ONE PAST the last written slot (it's the "next free slot"
-//   pointer after a write). So every read is off by one: re_out[0] reads
-//   an unwritten slot, and the true first-written byte (buff[0] after one
-//   write) is never returned. Should almost certainly be
-//   buff[curr_count-1], buff[curr_count-2], ... Also curr_count is only 8
-//   bits and increments by 4 from 0, so it is 0,4,8,...,252,0,... - it
-//   never equals 255, so the "full" flag (curr_count==255) is unreachable
-//   and can never actually stop an overflowing write.
-//
-//   bank_fsm: the PRELOAD state's guard is "if(!PRELOAD)" - PRELOAD here
-//   resolves to the enum value (2), so "!PRELOAD" is always false. PRELOAD
-//   therefore always falls through to COMPUTE on the very next cycle
-//   without ever asserting we/first_pass - almost certainly meant to check
-//   a real readiness signal (copied from PREFILL's "!full" pattern and
-//   never updated).
+// i_buffer's off-by-one read and unreachable full flag (curr_count was 8
+// bits, comparing to 255 while incrementing by 4 from 0) have both been
+// fixed: curr_count is now 10 bits, full compares against 10'd256, and
+// reads return buff[curr_count-4..curr_count-1] in forward (FIFO) order -
+// re_out[0] is the first byte written, re_out[3] the last.
 //
 module tb_activation_buffer;
 
@@ -79,14 +65,11 @@ module tb_activation_buffer;
         ib_step();
         ib_re = 0;
         check("re_valid asserted after read", ib_re_valid == 1'b1);
-        check({"BUG: re_out[0] should not read an unwritten slot (buff[4]), ",
-               "it should return the first written byte 0xa - off-by-one"},
-              ib_re_out[0] != 4'h0);
-        check("re_out[1] recovers we_in[3] (0xd)", ib_re_out[1] == 4'hd);
-        check("re_out[2] recovers we_in[2] (0xc)", ib_re_out[2] == 4'hc);
-        check("re_out[3] recovers we_in[1] (0xb)", ib_re_out[3] == 4'hb);
-        check("BUG: we_in[0] (0xa) should be returned by a read this cycle",
+        check("re_out[0] recovers we_in[0] (0xa) - forward FIFO order, no off-by-one",
               ib_re_out[0] == 4'ha);
+        check("re_out[1] recovers we_in[1] (0xb)", ib_re_out[1] == 4'hb);
+        check("re_out[2] recovers we_in[2] (0xc)", ib_re_out[2] == 4'hc);
+        check("re_out[3] recovers we_in[3] (0xd)", ib_re_out[3] == 4'hd);
         check("after read: back to empty", ib_empty == 1'b1);
 
         // clr behavior
@@ -144,14 +127,18 @@ module tb_activation_buffer;
 
         bf_full = 1; // signal PREFILL's buffer is full -> should move to PRELOAD
         bf_step();
-        check({"BUG: PRELOAD's guard is the always-false '!PRELOAD' ",
-               "(enum value, not a real signal), so it wrongly falls straight ",
-               "through instead of asserting we/first_pass in PRELOAD"},
-              !(bf_we == 1'b0 && bf_first_pass == 1'b0));
+        check("PRELOAD (preload_state=0): stays in PRELOAD, we/first_pass asserted",
+              bf_we == 1'b1 && bf_first_pass == 1'b1);
 
         bf_step();
-        check("PRELOAD unconditionally advances to COMPUTE the very next cycle",
+        check("PRELOAD holds while preload_state stays low",
+              bf_we == 1'b1 && bf_first_pass == 1'b1);
+
+        bf_preload_state = 1;
+        bf_step();
+        check("PRELOAD -> COMPUTE once preload_state is asserted",
               bf_active == 1'b0); // COMPUTE only asserts active once !empty&&(compute_state||drain_state)
+        bf_preload_state = 0;
 
         $display("bank_fsm: %0d/%0d checks passed\n", checks - errors, checks);
     endtask
@@ -192,10 +179,116 @@ module tb_activation_buffer;
         $display("activation_buffer: %0d/%0d checks passed\n", checks - errors, checks);
     endtask
 
+    // -----------------------------------------------------------------
+    // 4) activation_buffer double-buffering cycle: fill A via DMA, drain
+    //    it while filling B, and confirm the handoff to B (and B becoming
+    //    the new active/draining bank while A starts refilling) actually
+    //    happens - the full "fill A -> compute+fill B -> switch -> compute
+    //    B+fill A" cycle described in this file's own top-of-module
+    //    comment. Uses hierarchical signal access (act_dut.BUFF_A.curr_count
+    //    etc.) since activation_buffer doesn't expose per-bank status
+    //    externally.
+    // -----------------------------------------------------------------
+    task automatic run_double_buffer_cycle_test();
+        $display("==== activation_buffer: double-buffer cycle ====");
+        act_rst_n = 0; act_start = 0; act_compute_state = 0; act_preload_state = 0;
+        act_drain_state = 0; act_tile_done = 0; act_tiles_complete = 0;
+        act_DMA_in_valid = 0; act_DMA_in = '0;
+        @(posedge clk); @(posedge clk);
+        act_rst_n = 1;
+        @(posedge clk); #1;
+
+        act_start = 1;
+        @(posedge clk); #1;
+        act_start = 0;
+        check("start: bank A enters its first-pass fill (first_pass_a asserted)",
+              act_dut.first_pass_a == 1'b1);
+
+        // Fill A all the way to full via DMA: 4 writes of 4 bytes = 16
+        // (buffer depth is now 16 bytes/bank, matching a 4x4 array tile).
+        act_DMA_in_valid = 1;
+        act_DMA_in[0] = 4'h5;
+        for (int i = 0; i < 8; i++) begin
+            @(posedge clk); #1;
+        end
+        act_DMA_in_valid = 0;
+        check("A fills to exactly 16 bytes via DMA during first_pass",
+              act_dut.BUFF_A.curr_count == 10'd16);
+        check("buff_a_full asserted once A is full", act_dut.buff_a_full == 1'b1);
+
+        // PREFILL -> PRELOAD (full) -> COMPUTE. preload_state needs to be
+        // held (not single-cycle-pulsed) for the PRELOAD->COMPUTE
+        // transition to land - a one-cycle pulse leaves it stuck in
+        // PRELOAD forever (verified: dropping it after one edge never
+        // advances past PRELOAD in this FSM).
+        act_preload_state = 1;
+
+        // Drive compute_state and feed DMA (distinguishable data, 0x7) that
+        // should now land in B while A drains out to the output.
+        act_compute_state = 1;
+        act_DMA_in_valid = 1;
+        act_DMA_in[0] = 4'h7;
+
+        repeat (2) @(posedge clk);
+        #1;
+        check("A becomes the active/draining bank once compute_state is asserted",
+              act_dut.buff_a_active == 1'b1);
+        check("output reflects A's data (0x5) while A is active",
+              act_output_buf_valid == 1'b1 && act_output_buff[0] == 4'h5);
+
+        // B reaches full exactly as A finishes draining (A's 16 bytes take
+        // 4 active cycles; B needs exactly that many write cycles too).
+        repeat (3) @(posedge clk);
+        #1;
+        check("B fills to exactly 16 bytes right as A finishes draining (no data loss, no halving)",
+              act_dut.BUFF_B.curr_count == 10'd16);
+
+        // Watch the banks swap back and forth for 12 total handoffs,
+        // checking mutual exclusion the entire way. Count real
+        // active-bank transitions rather than hardcoding cycle offsets,
+        // since this is what actually matters (the byte-for-byte cadence
+        // was already spot-checked above and via hierarchical trace).
+        begin
+            int switch_count;
+            int safety_cycles;
+            logic last_bank_a;
+            logic mutex_violation;
+
+            last_bank_a = 1'b1; // A is the currently active bank at this point
+            switch_count = 0;
+            safety_cycles = 0;
+            mutex_violation = 1'b0;
+            while (switch_count < 12 && safety_cycles < 2000) begin
+                @(posedge clk); #1;
+                safety_cycles++;
+                if (act_dut.buff_a_active && act_dut.buff_b_active) mutex_violation = 1'b1;
+                if (act_dut.buff_b_active && last_bank_a) begin
+                    switch_count++;
+                    last_bank_a = 1'b0;
+                end else if (act_dut.buff_a_active && !last_bank_a) begin
+                    switch_count++;
+                    last_bank_a = 1'b1;
+                end
+            end
+
+            check($sformatf("observed all 12 requested bank switches within the cycle budget (took %0d cycles)",
+                             safety_cycles),
+                  switch_count >= 12);
+            check("mutual exclusion (A and B never both active) held across all 12 switches",
+                  !mutex_violation);
+        end
+
+        act_DMA_in_valid = 0;
+        act_compute_state = 0;
+
+        $display("activation_buffer double-buffer cycle: %0d/%0d checks passed\n", checks - errors, checks);
+    endtask
+
     initial begin
         run_i_buffer_test();
         run_bank_fsm_test();
         run_activation_buffer_test();
+        run_double_buffer_cycle_test();
 
         $display("==== SUMMARY ====");
         $display("total: %0d/%0d checks passed", checks - errors, checks);

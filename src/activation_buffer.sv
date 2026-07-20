@@ -27,8 +27,8 @@ logic [31:0][3:0] write_in_a, re_out_a;
 logic we_b, re_b, clr_b, re_valid_b, we_valid_b, buff_b_empty, buff_b_full, buff_b_active, first_pass_b;
 logic [31:0][3:0] write_in_b, re_out_b;
 
-bank_fsm A (.clk(clk), .rst_n(rst_n), .we(we_a), .re(re_a), .a_or_b(1), .start(start), .compute_state(compute_state), .preload_state(preload_state), .drain_state(drain_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_a_full), .empty(buff_a_empty), .bank_switch(buff_a_bs), .active(buff_a_active),  .first_pass(first_pass_a), .clr(clr_a));
-bank_fsm B (.clk(clk), .rst_n(rst_n), .we(we_b), .re(re_b), .a_or_b(0), .start(start), .compute_state(compute_state), .preload_state(preload_state), .drain_state(drain_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_b_full), .empty(buff_b_empty), .bank_switch(buff_b_bs), .active(buff_b_active),  .first_pass(first_pass_b), .clr(clr_b));
+bank_fsm A (.clk(clk), .rst_n(rst_n), .we(we_a), .re(re_a), .a_or_b(1), .start(start), .compute_state(compute_state), .preload_state(preload_state), .drain_state(drain_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_a_full), .empty(buff_a_empty), .bank_switch(buff_a_bs), .active(buff_a_active), .other_bank_active(buff_b_active),  .first_pass(first_pass_a), .clr(clr_a));
+bank_fsm B (.clk(clk), .rst_n(rst_n), .we(we_b), .re(re_b), .a_or_b(0), .start(start), .compute_state(compute_state), .preload_state(preload_state), .drain_state(drain_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_b_full), .empty(buff_b_empty), .bank_switch(buff_b_bs), .active(buff_b_active), .other_bank_active(buff_a_active),  .first_pass(first_pass_b), .clr(clr_b));
 
 i_buffer BUFF_A (.clk(clk), .rst_n(rst_n), .we(we_a), .re(re_a), .a_or_b(1), .clr(clr_a), .re_out(re_out_a), .re_valid(re_valid_a), .we_in(write_in_a), .we_valid(we_valid_a), .empty(buff_a_empty), .full(buff_a_full));
 i_buffer BUFF_B (.clk(clk), .rst_n(rst_n), .we(we_b), .re(re_b), .a_or_b(0), .clr(clr_b), .re_out(re_out_b), .re_valid(re_valid_b), .we_in(write_in_b), .we_valid(we_valid_b), .empty(buff_b_empty), .full(buff_b_full));
@@ -40,7 +40,17 @@ always_comb begin
     write_in_b = 0;
     output_buf_valid = 0;
     output_buff = 0;
-    if(buff_a_active || first_pass_a) begin
+    if(first_pass_a) begin
+        if(re_valid_a) begin
+            output_buff = 0;
+            output_buf_valid = 0;
+        end
+        if(DMA_in_valid) begin
+            write_in_a = DMA_in;
+            we_valid_a = 1;
+        end
+    end
+    if(buff_a_active) begin
         if(re_valid_a) begin
             output_buff = re_out_a;
             output_buf_valid = re_valid_a;
@@ -75,6 +85,7 @@ module bank_fsm(
     input logic tiles_complete,
     input logic full,
     input logic empty,
+    input logic other_bank_active,
     output logic bank_switch,
     output logic first_pass,
     output logic active,
@@ -82,7 +93,7 @@ module bank_fsm(
     output logic re,
     output logic clr);
 
-    typedef enum logic [4:0] {IDLE, PREFILL, PRELOAD, COMPUTE, WAIT_INACTIVE, FILL_INACTIVE, DONE} state_t;
+    typedef enum logic [5:0] {IDLE, PREFILL, PRELOAD, COMPUTE, WAIT_INACTIVE, FILL_INACTIVE, BUBBLE, DONE} state_t;
     state_t current_state, next_state;
 
     always_ff @(posedge clk, negedge rst_n) begin
@@ -90,6 +101,16 @@ module bank_fsm(
             current_state <= 0;
         end else begin
             current_state <=  next_state;
+        end
+    end
+    
+    logic o_bank_reg;
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if(!rst_n) begin
+            o_bank_reg <= 0;
+        end else begin
+            o_bank_reg <= other_bank_active;
         end
     end
 
@@ -134,11 +155,11 @@ module bank_fsm(
                 end
             end
             COMPUTE : begin
-                if(!empty && (compute_state || drain_state)) begin
+                if(!empty && (compute_state || drain_state) && !o_bank_reg) begin
                     next_state = COMPUTE;
                     re = 1;
                     active = 1; //only 1 bank should be active at a time
-                end else if (!tiles_complete) begin
+                end else if (!tiles_complete && o_bank_reg && !active) begin
                     bank_switch = 1;
                     next_state = FILL_INACTIVE;
                 end else if(tiles_complete) begin
@@ -153,11 +174,18 @@ module bank_fsm(
                 end
             end
             FILL_INACTIVE: begin
-                if(compute_state || drain_state && !full) begin
-                    we = 1;
-                    next_state = COMPUTE;
+                if((compute_state || drain_state) && full) begin
+                    next_state = BUBBLE;
                     bank_switch = 1;
+                    active = 1;
+                end else if(!full)begin
+                    next_state = FILL_INACTIVE;
                 end
+                we=1;
+            end
+            BUBBLE: begin
+                next_state = COMPUTE;
+                active = 1;
             end
             DONE: begin
                 clr = 1; //clear banks
@@ -185,10 +213,10 @@ module i_buffer(
     output logic [31:0][3:0] re_out,
     output logic re_valid);
 
-    logic [255:0][7:0] buff;
-    logic [7:0] curr_count;
+    logic [15:0][7:0] buff;
+    logic [9:0] curr_count;
 
-    assign full = curr_count == 8'd255;
+    assign full = curr_count == 10'd16;
     assign empty = curr_count == 8'd0;
 
     always_ff @(posedge clk, negedge rst_n) begin
@@ -212,10 +240,10 @@ module i_buffer(
             end
             else if(re) begin //curr_count gets to 255 after filling activation buffer then empties
                 if(!empty) begin
-                    re_out[0] <= buff[curr_count];
-                    re_out[1] <= buff[curr_count-1];
+                    re_out[0] <= buff[curr_count-4];
+                    re_out[1] <= buff[curr_count-3];
                     re_out[2] <= buff[curr_count-2];
-                    re_out[3] <= buff[curr_count-3];
+                    re_out[3] <= buff[curr_count-1];
                     re_valid <= 1;
                     curr_count <= curr_count - 4;
                 end else begin
