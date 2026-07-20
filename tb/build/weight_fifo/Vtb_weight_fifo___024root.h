@@ -25,6 +25,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_weight_fifo___024root final : public Veri
     CData/*0:0*/ tb_weight_fifo__DOT__empty;
     CData/*0:0*/ tb_weight_fifo__DOT__fifo_test_done;
     CData/*0:0*/ tb_weight_fifo__DOT__wl_test_done;
+    IData/*31:0*/ tb_weight_fifo__DOT__read_data;
     CData/*0:0*/ tb_weight_fifo__DOT__start_load_fifo_state;
     CData/*0:0*/ tb_weight_fifo__DOT__load_fifo_state;
     CData/*0:0*/ tb_weight_fifo__DOT__preload_state;
@@ -33,6 +34,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_weight_fifo___024root final : public Veri
     CData/*0:0*/ tb_weight_fifo__DOT__fifo_full;
     CData/*0:0*/ tb_weight_fifo__DOT__fifo_empty;
     CData/*0:0*/ tb_weight_fifo__DOT__data_valid;
+    IData/*31:0*/ tb_weight_fifo__DOT__wl_data_out;
     CData/*1:0*/ tb_weight_fifo__DOT__dut_fifo__DOT__putPtr;
     CData/*1:0*/ tb_weight_fifo__DOT__dut_fifo__DOT__getPtr;
     CData/*3:0*/ tb_weight_fifo__DOT__dut_fifo__DOT__count;
@@ -55,15 +57,12 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_weight_fifo___024root final : public Veri
     IData/*31:0*/ tb_weight_fifo__DOT__checks;
     VlWide<3>/*95:0*/ tb_weight_fifo__DOT__data_in;
     VlWide<3>/*95:0*/ tb_weight_fifo__DOT__data_out;
-    VlWide<24>/*767:0*/ tb_weight_fifo__DOT__read_data;
     IData/*31:0*/ tb_weight_fifo__DOT__wl_errors;
     IData/*31:0*/ tb_weight_fifo__DOT__wl_checks;
-    VlWide<24>/*767:0*/ tb_weight_fifo__DOT__sent_word;
-    VlWide<3>/*95:0*/ tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<VlWide<3>/*95:0*/, 4> tb_weight_fifo__DOT__wr_word;
     VlUnpacked<VlWide<3>/*95:0*/, 4> tb_weight_fifo__DOT__dut_fifo__DOT__Q;
-    VlUnpacked<VlWide<3>/*95:0*/, 4> tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q;
+    VlUnpacked<IData/*31:0*/, 32> tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q;
     VlDelayScheduler __VdlySched;
     VlTriggerScheduler __VtrigSched_h5107d62b__0;
     VlTriggerScheduler __VtrigSched_h5107d6ee__0;

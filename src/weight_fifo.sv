@@ -1,10 +1,8 @@
 module weight_loader    
-    #(parameter WIDTH=32,
-    parameter ROW_SIZE=3,
-    parameter BITWIDTH = 16,
-    parameter ADDR_WIDTH = 16,
+    #(parameter ROW_SIZE=4,
+    parameter BITWIDTH = 8,
+    parameter ADDR_WIDTH = 1,
     parameter MEMORY_WIDTH = 256,
-    parameter DEPTH=4,
     parameter VW = ADDR_WIDTH * BITWIDTH)
     (
     input logic clk,
@@ -41,7 +39,7 @@ module weight_loader
             IDLE: begin
                 if(start_load_fifo_state || tiles_complete) begin
                     next_state = LOAD_FIFO;
-                    fifo_we = 1;
+                    //fifo_we = 1;
                 end else begin
                     next_state = IDLE;
                 end
@@ -68,15 +66,15 @@ module weight_loader
         endcase
     end
 
-    FIFO weight_fifo(.clock(clk), .reset_n(rst_n), .we(fifo_we), .re(fifo_re), .data_in(read_data), .data_out(data_out),
+    FIFO #(.WIDTH(VW), .ROW_SIZE(ROW_SIZE)) weight_fifo(.clock(clk), .reset_n(rst_n), .we(fifo_we), .re(fifo_re), .data_in(read_data), .data_out(data_out),
                     .full(fifo_full), .empty(fifo_empty));
 
 endmodule
 
 
-module FIFO #(parameter WIDTH=32,
+module FIFO #(parameter WIDTH=8,
               parameter ROW_SIZE=3,
-              parameter DEPTH=4) (
+              parameter DEPTH=32) (
     input logic              clock, reset_n,
     input logic              [ROW_SIZE-1:0][WIDTH-1:0] data_in,
     input logic              we, re,

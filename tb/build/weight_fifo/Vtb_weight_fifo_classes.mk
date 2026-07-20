@@ -30,7 +30,6 @@ VM_CLASSES_FAST += \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \
-	Vtb_weight_fifo__ConstPool_0 \
 	Vtb_weight_fifo___024root__Slow \
 	Vtb_weight_fifo___024root__DepSet_hf19ddc73__0__Slow \
 	Vtb_weight_fifo___024root__DepSet_hfc5a0ab2__0__Slow \

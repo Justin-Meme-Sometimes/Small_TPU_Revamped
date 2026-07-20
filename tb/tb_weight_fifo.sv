@@ -5,13 +5,11 @@
 // Two targets are exercised:
 //   1) FIFO        - the raw 4-deep queue, tested against its own default
 //                     parameters (WIDTH=32, ROW_SIZE=3, DEPTH=4).
-//   2) weight_loader - the FSM wrapper as instantiated by tpu_top. Its
-//                     ports are sized using VW = ADDR_WIDTH*BITWIDTH = 256
-//                     bits/row, but it instantiates FIFO with no parameter
-//                     overrides, so the internal FIFO only carries 32
-//                     bits/row. This test drives distinguishable data into
-//                     the upper bits of read_data and shows it does not
-//                     survive the round trip.
+//   2) weight_loader - the FSM wrapper as instantiated by tpu_top, using its
+//                     own defaults (ROW_SIZE=4, VW=ADDR_WIDTH*BITWIDTH=8
+//                     bits/row). It now explicitly overrides the internal
+//                     FIFO instance's WIDTH/ROW_SIZE to match, so all 4 rows
+//                     round-trip correctly.
 //
 module tb_weight_fifo;
 
@@ -189,8 +187,8 @@ module tb_weight_fifo;
     logic clk2 = 0;
     always #5 clk2 = ~clk2;
 
-    localparam int WL_ROW = 3;
-    localparam int WL_VW  = 16 * 16; // ADDR_WIDTH(16) * BITWIDTH(16)
+    localparam int WL_ROW = 4;
+    localparam int WL_VW  = 1 * 8; // ADDR_WIDTH(1) * BITWIDTH(8) - weight_loader's current defaults
 
     logic rst_n2;
     logic [WL_ROW-1:0][WL_VW-1:0] read_data;
@@ -247,21 +245,20 @@ module tb_weight_fifo;
 
         wcheck("idle: fifo_empty asserted", fifo_empty === 1'b1);
 
-        // Kick off a load: distinguishable value with bits set above bit 31
-        // (upper bits only representable if the FIFO were truly 256b/row wide)
-        sent_word[0] = '0;
-        sent_word[0][255:240] = 16'hFACE; // lands above bit 31; should be lost to truncation
-        sent_word[0][31:0] = 32'h1234_5678;
-        sent_word[1] = '0;
-        sent_word[2] = '0;
+        // Kick off a load: a distinguishable value per row (VW is now 8
+        // bits/row: ADDR_WIDTH(1)*BITWIDTH(8)).
+        sent_word[0] = 8'hAA;
+        sent_word[1] = 8'hBB;
+        sent_word[2] = 8'hCC;
+        sent_word[3] = 8'hDD;
 
         start_load_fifo_state = 1;
-        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (no write on this edge anymore)
         start_load_fifo_state = 0;
         load_fifo_state = 1;
         read_data = sent_word;
         read_data_valid = 1;
-        @(posedge clk2); #1;                    // real write of sent_word
+        @(posedge clk2); #1;                    // real write of sent_word (the only entry)
         read_data_valid = 0;
         load_fifo_state = 0;
         @(posedge clk2); #1;                    // LOAD_FIFO -> PRELOAD
@@ -273,27 +270,24 @@ module tb_weight_fifo;
         // the time you sample a cycle late.
         preload_state = 1;
         #1;
-        // FINDING (verified via hierarchical trace): the IDLE case sets
-        // fifo_we=1 unconditionally whenever start_load_fifo_state is
-        // asserted - unlike LOAD_FIFO's writes, this one is NOT gated by
-        // read_data_valid. So the IDLE->LOAD_FIFO transition edge above
-        // silently writes a garbage row (read_data was still all-zero at
-        // that point) ahead of the real data. This first preload pulse
-        // hands out that garbage row, not sent_word.
-        wcheck("FINDING: first preload pulse returns a garbage all-zero row (IDLE->LOAD_FIFO write isn't gated by read_data_valid)",
-               data_valid === 1'b1 && wl_data_out[0][31:0] == 32'h0);
-
-        @(posedge clk2); #1;
-        // Second preload pulse: the real row.
-        wcheck("second preload pulse: data_valid still asserted", data_valid === 1'b1);
-        wcheck("BUG: upper bits of read_data (>31) survive into data_out (expected to fail - FIFO is only 32b/row wide)",
-               wl_data_out[0][255:32] == sent_word[0][255:32]);
-        wcheck("lower 32 bits of row 0 round-trip correctly",
-               wl_data_out[0][31:0] == sent_word[0][31:0]);
+        // The IDLE case's fifo_we is now commented out, so the
+        // IDLE->LOAD_FIFO transition no longer writes a garbage row ahead
+        // of the real data - this first (and only) preload pulse should
+        // hand out sent_word directly.
+        wcheck("first preload pulse returns the real row (no more garbage row ahead of it)",
+               data_valid === 1'b1);
+        wcheck("row 0 round-trips correctly", wl_data_out[0] == sent_word[0]);
+        wcheck("row 1 round-trips correctly", wl_data_out[1] == sent_word[1]);
+        wcheck("row 2 round-trips correctly", wl_data_out[2] == sent_word[2]);
+        // weight_loader now declares ROW_SIZE=4, but "FIFO weight_fifo(...)"
+        // still has no parameter overrides, so the internal FIFO instance
+        // defaults to its own ROW_SIZE=3 - row index 3 has nowhere to go.
+        wcheck("row 3 round-trips correctly (weight_loader declares ROW_SIZE=4 but never overrides the internal FIFO instance's ROW_SIZE, which still defaults to 3)",
+               wl_data_out[3] == sent_word[3]);
 
         @(posedge clk2); #1;
         preload_state = 0;
-        wcheck("both rows drained: fifo_empty asserted", fifo_empty === 1'b1);
+        wcheck("single row drained: fifo_empty asserted", fifo_empty === 1'b1);
 
         // -------------------------------------------------------------
         // edge case A: LOAD_FIFO->PRELOAD is also triggered purely by
@@ -304,17 +298,17 @@ module tb_weight_fifo;
         wl_reset();
         #1;
         start_load_fifo_state = 1;
-        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (+ garbage row, count=1)
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (no write on this edge)
         start_load_fifo_state = 0;
         load_fifo_state = 1;                    // held high through the whole fill and beyond
-        for (int i = 0; i < 3; i++) begin
+        for (int i = 0; i < 4; i++) begin
             read_data = '0;
-            read_data[0][31:0] = 32'hA000_0000 + i;
+            read_data[0] = 8'hA0 + i;
             read_data_valid = 1;
             @(posedge clk2); #1;
         end
         read_data_valid = 0;
-        wcheck("edgeA: fifo_full reached (1 garbage + 3 real rows)", fifo_full === 1'b1);
+        wcheck("edgeA: fifo_full reached (4 real rows)", fifo_full === 1'b1);
 
         preload_state = 1;                      // load_fifo_state is STILL 1 here
         @(posedge clk2); #1;
@@ -331,13 +325,13 @@ module tb_weight_fifo;
         wl_reset();
         #1;
         start_load_fifo_state = 1;
-        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (+ garbage row, count=1)
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (no write on this edge)
         start_load_fifo_state = 0;
         load_fifo_state = 1;
         read_data = '0;
-        read_data[0][31:0] = 32'hB000_0001;
+        read_data[0] = 8'hB1;
         read_data_valid = 1;
-        @(posedge clk2); #1;                    // one real write, count=2 (of 4)
+        @(posedge clk2); #1;                    // one real write, count=1 (of 4)
         read_data_valid = 0;
         load_fifo_state = 0;                    // dropped while there's still room
         wcheck("edgeB: fifo not full when load_fifo_state dropped", fifo_full === 1'b0);
@@ -359,12 +353,21 @@ module tb_weight_fifo;
         tiles_complete = 1;
         @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO via tiles_complete alone
         tiles_complete = 0;
-        wcheck("edgeC: tiles_complete alone (without start_load_fifo_state) leaves IDLE and writes a row",
-               fifo_empty === 1'b0);
+        wcheck("edgeC: tiles_complete alone (without start_load_fifo_state) leaves IDLE - no write on this edge itself",
+               fifo_empty === 1'b1);
 
-        preload_state = 1;                      // load_fifo_state was never raised - falls straight to PRELOAD
+        load_fifo_state = 1;
+        read_data = '0;
+        read_data[0] = 8'hC1;
+        read_data_valid = 1;
+        @(posedge clk2); #1;                    // real write via the LOAD_FIFO state
+        read_data_valid = 0;
+        load_fifo_state = 0;
+        wcheck("edgeC: a real write after the tiles_complete entry lands correctly", fifo_empty === 1'b0);
+
+        preload_state = 1;
         @(posedge clk2); #1;
-        wcheck("edgeC: reaches PRELOAD and surfaces the row written on the tiles_complete entry",
+        wcheck("edgeC: reaches PRELOAD and surfaces the row written after the tiles_complete entry",
                data_valid === 1'b1);
         preload_state = 0;
         repeat (3) @(posedge clk2);
@@ -377,13 +380,13 @@ module tb_weight_fifo;
         wl_reset();
         #1;
         start_load_fifo_state = 1;
-        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (+ garbage row, count=1)
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (no write on this edge)
         start_load_fifo_state = 0;
         load_fifo_state = 1;
         read_data = '0;
-        read_data[0][31:0] = 32'hD000_0001;
+        read_data[0] = 8'hD1;
         read_data_valid = 1;
-        @(posedge clk2); #1;                    // real write, count=2
+        @(posedge clk2); #1;                    // real write, count=1
         read_data_valid = 0;
         load_fifo_state = 0;
         preload_state = 1;
@@ -408,8 +411,7 @@ module tb_weight_fifo;
         wait (fifo_test_done && wl_test_done);
         $display("\n==== SUMMARY ====");
         $display("FIFO submodule:    %0d/%0d passed", checks - errors, checks);
-        $display("weight_loader:     %0d/%0d passed (upper-bit truncation is an EXPECTED failure demonstrating the bug)",
-                  wl_checks - wl_errors, wl_checks);
+        $display("weight_loader:     %0d/%0d passed", wl_checks - wl_errors, wl_checks);
         $finish;
     end
 

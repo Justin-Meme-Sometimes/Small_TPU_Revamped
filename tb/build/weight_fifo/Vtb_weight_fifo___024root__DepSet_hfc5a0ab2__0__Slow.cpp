@@ -57,7 +57,7 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___eval_settle(Vtb_weight_fifo___024r
 #ifdef VL_DEBUG
             Vtb_weight_fifo___024root___dump_triggers__stl(vlSelf);
 #endif
-            VL_FATAL_MT("tb/tb_weight_fifo.sv", 16, "", "Settle region did not converge.");
+            VL_FATAL_MT("tb/tb_weight_fifo.sv", 14, "", "Settle region did not converge.");
         }
         __VstlIterCount = ((IData)(1U) + __VstlIterCount);
         __VstlContinue = 0U;
@@ -105,6 +105,12 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___stl_sequent__TOP__0(Vtb_weight_fif
     }
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_re = 0U;
     vlSelf->tb_weight_fifo__DOT__data_valid = 0U;
+    if ((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count))) {
+        vlSelf->tb_weight_fifo__DOT__wl_data_out = 
+            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
+            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr];
+    }
+    vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 0U;
     if ((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
         if ((1U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
             if ((2U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
@@ -115,39 +121,27 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___stl_sequent__TOP__0(Vtb_weight_fif
                 }
             }
         }
-    }
-    if ((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count))) {
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[0U] 
-            = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
-            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr][0U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[1U] 
-            = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
-            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr][1U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[2U] 
-            = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
-            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr][2U];
+        if ((1U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
+            if (((4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
+                 & (IData)(vlSelf->tb_weight_fifo__DOT__load_fifo_state))) {
+                if (vlSelf->tb_weight_fifo__DOT__read_data_valid) {
+                    vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 1U;
+                }
+            }
+        }
     }
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
         = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state;
-    vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 0U;
     if ((0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
-        if (((IData)(vlSelf->tb_weight_fifo__DOT__start_load_fifo_state) 
-             | (IData)(vlSelf->tb_weight_fifo__DOT__tiles_complete))) {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 1U;
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 1U;
-        } else {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 0U;
-        }
+        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
+            = (((IData)(vlSelf->tb_weight_fifo__DOT__start_load_fifo_state) 
+                | (IData)(vlSelf->tb_weight_fifo__DOT__tiles_complete))
+                ? 1U : 0U);
     } else if ((1U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
-        if (((4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
-             & (IData)(vlSelf->tb_weight_fifo__DOT__load_fifo_state))) {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 1U;
-            if (vlSelf->tb_weight_fifo__DOT__read_data_valid) {
-                vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 1U;
-            }
-        } else {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 2U;
-        }
+        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
+            = (((4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
+                & (IData)(vlSelf->tb_weight_fifo__DOT__load_fifo_state))
+                ? 1U : 2U);
     } else if ((2U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
         vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
             = (((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
@@ -271,7 +265,7 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___ctor_var_reset(Vtb_weight_fifo___0
     vlSelf->tb_weight_fifo__DOT__wl_test_done = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__clk2 = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = VL_RAND_RESET_I(1);
-    VL_RAND_RESET_W(768, vlSelf->tb_weight_fifo__DOT__read_data);
+    vlSelf->tb_weight_fifo__DOT__read_data = VL_RAND_RESET_I(32);
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__preload_state = VL_RAND_RESET_I(1);
@@ -280,9 +274,9 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___ctor_var_reset(Vtb_weight_fifo___0
     vlSelf->tb_weight_fifo__DOT__fifo_full = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__fifo_empty = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__data_valid = VL_RAND_RESET_I(1);
+    vlSelf->tb_weight_fifo__DOT__wl_data_out = VL_RAND_RESET_I(32);
     vlSelf->tb_weight_fifo__DOT__wl_errors = 0;
     vlSelf->tb_weight_fifo__DOT__wl_checks = 0;
-    VL_RAND_RESET_W(768, vlSelf->tb_weight_fifo__DOT__sent_word);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         VL_RAND_RESET_W(96, vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__Q[__Vi0]);
     }
@@ -293,9 +287,8 @@ VL_ATTR_COLD void Vtb_weight_fifo___024root___ctor_var_reset(Vtb_weight_fifo___0
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = VL_RAND_RESET_I(1);
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state = VL_RAND_RESET_I(5);
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = VL_RAND_RESET_I(5);
-    VL_RAND_RESET_W(96, vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out);
-    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
-        VL_RAND_RESET_W(96, vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vi0]);
+    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
+        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__putPtr = VL_RAND_RESET_I(2);
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr = VL_RAND_RESET_I(2);

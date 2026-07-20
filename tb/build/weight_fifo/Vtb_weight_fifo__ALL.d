@@ -9,8 +9,7 @@ Vtb_weight_fifo__ALL.o: Vtb_weight_fifo__ALL.cpp Vtb_weight_fifo.cpp \
  /usr/share/verilator/include/verilated.h \
  Vtb_weight_fifo___024root__DepSet_hf19ddc73__0.cpp \
  Vtb_weight_fifo___024root__DepSet_hfc5a0ab2__0.cpp \
- Vtb_weight_fifo__main.cpp Vtb_weight_fifo__ConstPool_0.cpp \
- Vtb_weight_fifo___024root__Slow.cpp \
+ Vtb_weight_fifo__main.cpp Vtb_weight_fifo___024root__Slow.cpp \
  Vtb_weight_fifo___024root__DepSet_hf19ddc73__0__Slow.cpp \
  Vtb_weight_fifo___024root__DepSet_hfc5a0ab2__0__Slow.cpp \
  Vtb_weight_fifo__Syms.cpp

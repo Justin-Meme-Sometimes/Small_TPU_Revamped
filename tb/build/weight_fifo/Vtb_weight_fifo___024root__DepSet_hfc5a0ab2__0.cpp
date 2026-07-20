@@ -107,18 +107,18 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       54);
+                                                       52);
     co_await vlSelf->__VtrigSched_h5107d62b__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       54);
+                                                       52);
     vlSelf->tb_weight_fifo__DOT__reset_n = 1U;
     co_await vlSelf->__VtrigSched_h5107d62b__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       56);
+                                                       54);
     __Vtask_tb_weight_fifo__DOT__check__1__cond = (0U 
                                                    == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
     __Vtask_tb_weight_fifo__DOT__check__1__name = std::string{"after reset: empty asserted"};
@@ -150,7 +150,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       75);
+                                                       73);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [0U][0U];
@@ -165,7 +165,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       75);
+                                                       73);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [1U][0U];
@@ -180,7 +180,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       75);
+                                                       73);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [2U][0U];
@@ -195,7 +195,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       75);
+                                                       73);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [3U][0U];
@@ -207,7 +207,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       78);
+                                                       76);
     vlSelf->tb_weight_fifo__DOT__we = 0U;
     __Vtask_tb_weight_fifo__DOT__check__3__cond = (4U 
                                                    == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -237,14 +237,14 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       84);
+                                                       82);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = 0xdeadbeefU;
     co_await vlSelf->__VtrigSched_h5107d6ee__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       86);
+                                                       84);
     vlSelf->tb_weight_fifo__DOT__we = 0U;
     __Vtask_tb_weight_fifo__DOT__check__5__cond = (4U 
                                                    == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -262,11 +262,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       92);
+                                                       90);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       94);
+                                       92);
     __Vtask_tb_weight_fifo__DOT__check__6__cond = (0U 
                                                    == 
                                                    (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
@@ -295,11 +295,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       92);
+                                                       90);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       94);
+                                       92);
     __Vtask_tb_weight_fifo__DOT__check__6__cond = (0U 
                                                    == 
                                                    (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
@@ -328,11 +328,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       92);
+                                                       90);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       94);
+                                       92);
     __Vtask_tb_weight_fifo__DOT__check__6__cond = (0U 
                                                    == 
                                                    (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
@@ -361,11 +361,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       92);
+                                                       90);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       94);
+                                       92);
     __Vtask_tb_weight_fifo__DOT__check__6__cond = (0U 
                                                    == 
                                                    (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
@@ -394,7 +394,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       98);
+                                                       96);
     vlSelf->tb_weight_fifo__DOT__re = 0U;
     __Vtask_tb_weight_fifo__DOT__check__7__cond = (0U 
                                                    == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -412,18 +412,18 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       104);
+                                                       102);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VtrigSched_h5107d6ee__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       106);
+                                                       104);
     co_await vlSelf->__VtrigSched_h5107d6ee__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       107);
+                                                       105);
     vlSelf->tb_weight_fifo__DOT__re = 0U;
     __Vtask_tb_weight_fifo__DOT__check__8__cond = (0U 
                                                    == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -453,7 +453,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       114);
+                                                       112);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
@@ -466,7 +466,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       116);
+                                                       114);
     vlSelf->tb_weight_fifo__DOT__we = 0U;
     vlSelf->tb_weight_fifo__DOT__re = 0U;
     __Vtask_tb_weight_fifo__DOT__check__10__cond = 
@@ -485,7 +485,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
     }
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       119);
+                                       117);
     __Vtask_tb_weight_fifo__DOT__check__11__cond = 
         (0U == (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
                   ^ vlSelf->tb_weight_fifo__DOT__wr_word
@@ -509,13 +509,13 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       122);
+                                                       120);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VtrigSched_h5107d6ee__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       124);
+                                                       122);
     vlSelf->tb_weight_fifo__DOT__re = 0U;
     __Vtask_tb_weight_fifo__DOT__check__12__cond = 
         (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -534,7 +534,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       129);
+                                                       127);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [0U][0U];
@@ -546,7 +546,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       131);
+                                                       129);
     vlSelf->tb_weight_fifo__DOT__we = 0U;
     __Vtask_tb_weight_fifo__DOT__check__13__cond = 
         ((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count)) 
@@ -566,7 +566,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       135);
+                                                       133);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
@@ -579,7 +579,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       137);
+                                                       135);
     vlSelf->tb_weight_fifo__DOT__we = 0U;
     vlSelf->tb_weight_fifo__DOT__re = 0U;
     __Vtask_tb_weight_fifo__DOT__check__14__cond = 
@@ -600,11 +600,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       147);
+                                                       145);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       149);
+                                       147);
     __Vtask_tb_weight_fifo__DOT__check__15__cond = 
         (0U == (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
                   ^ vlSelf->tb_weight_fifo__DOT__wr_word
@@ -628,7 +628,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       152);
+                                                       150);
     vlSelf->tb_weight_fifo__DOT__re = 0U;
     __Vtask_tb_weight_fifo__DOT__check__16__cond = 
         (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -650,7 +650,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       164);
+                                                       162);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [0U][0U];
@@ -665,7 +665,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       164);
+                                                       162);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [1U][0U];
@@ -680,7 +680,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       164);
+                                                       162);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [2U][0U];
@@ -695,7 +695,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       164);
+                                                       162);
     vlSelf->tb_weight_fifo__DOT__we = 1U;
     vlSelf->tb_weight_fifo__DOT__data_in[0U] = vlSelf->tb_weight_fifo__DOT__wr_word
         [3U][0U];
@@ -707,7 +707,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       167);
+                                                       165);
     vlSelf->tb_weight_fifo__DOT__we = 0U;
     __Vtask_tb_weight_fifo__DOT__check__17__cond = 
         (4U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -726,11 +726,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       172);
+                                                       170);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       174);
+                                       172);
     __Vtask_tb_weight_fifo__DOT__check__18__cond = 
         (0U == (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
                   ^ vlSelf->tb_weight_fifo__DOT__wr_word
@@ -754,11 +754,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       172);
+                                                       170);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       174);
+                                       172);
     __Vtask_tb_weight_fifo__DOT__check__18__cond = 
         (0U == (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
                   ^ vlSelf->tb_weight_fifo__DOT__wr_word
@@ -782,11 +782,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       172);
+                                                       170);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       174);
+                                       172);
     __Vtask_tb_weight_fifo__DOT__check__18__cond = 
         (0U == (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
                   ^ vlSelf->tb_weight_fifo__DOT__wr_word
@@ -810,11 +810,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       172);
+                                                       170);
     vlSelf->tb_weight_fifo__DOT__re = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       174);
+                                       172);
     __Vtask_tb_weight_fifo__DOT__check__18__cond = 
         (0U == (((vlSelf->tb_weight_fifo__DOT__data_out[0U] 
                   ^ vlSelf->tb_weight_fifo__DOT__wr_word
@@ -838,7 +838,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       178);
+                                                       176);
     vlSelf->tb_weight_fifo__DOT__re = 0U;
     __Vtask_tb_weight_fifo__DOT__check__19__cond = 
         (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_fifo__DOT__count));
@@ -860,15 +860,13 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
     vlSelf->tb_weight_fifo__DOT__fifo_test_done = 1U;
 }
 
-extern const VlWide<24>/*767:0*/ Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0;
-extern const VlWide<8>/*255:0*/ Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0;
-extern const VlWide<16>/*511:0*/ Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0;
-
 VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming__1(Vtb_weight_fifo___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtb_weight_fifo__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming__1\n"); );
     // Init
+    IData/*31:0*/ tb_weight_fifo__DOT__sent_word;
+    tb_weight_fifo__DOT__sent_word = 0;
     std::string __Vtask_tb_weight_fifo__DOT__wcheck__20__name;
     CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__20__cond;
     __Vtask_tb_weight_fifo__DOT__wcheck__20__cond = 0;
@@ -887,39 +885,45 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
     std::string __Vtask_tb_weight_fifo__DOT__wcheck__25__name;
     CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__25__cond;
     __Vtask_tb_weight_fifo__DOT__wcheck__25__cond = 0;
-    std::string __Vtask_tb_weight_fifo__DOT__wcheck__27__name;
-    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__27__cond;
-    __Vtask_tb_weight_fifo__DOT__wcheck__27__cond = 0;
+    std::string __Vtask_tb_weight_fifo__DOT__wcheck__26__name;
+    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__26__cond;
+    __Vtask_tb_weight_fifo__DOT__wcheck__26__cond = 0;
     std::string __Vtask_tb_weight_fifo__DOT__wcheck__28__name;
     CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__28__cond;
     __Vtask_tb_weight_fifo__DOT__wcheck__28__cond = 0;
-    std::string __Vtask_tb_weight_fifo__DOT__wcheck__30__name;
-    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__30__cond;
-    __Vtask_tb_weight_fifo__DOT__wcheck__30__cond = 0;
+    std::string __Vtask_tb_weight_fifo__DOT__wcheck__29__name;
+    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__29__cond;
+    __Vtask_tb_weight_fifo__DOT__wcheck__29__cond = 0;
     std::string __Vtask_tb_weight_fifo__DOT__wcheck__31__name;
     CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__31__cond;
     __Vtask_tb_weight_fifo__DOT__wcheck__31__cond = 0;
-    std::string __Vtask_tb_weight_fifo__DOT__wcheck__33__name;
-    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__33__cond;
-    __Vtask_tb_weight_fifo__DOT__wcheck__33__cond = 0;
+    std::string __Vtask_tb_weight_fifo__DOT__wcheck__32__name;
+    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__32__cond;
+    __Vtask_tb_weight_fifo__DOT__wcheck__32__cond = 0;
     std::string __Vtask_tb_weight_fifo__DOT__wcheck__34__name;
     CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__34__cond;
     __Vtask_tb_weight_fifo__DOT__wcheck__34__cond = 0;
     std::string __Vtask_tb_weight_fifo__DOT__wcheck__35__name;
     CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__35__cond;
     __Vtask_tb_weight_fifo__DOT__wcheck__35__cond = 0;
+    std::string __Vtask_tb_weight_fifo__DOT__wcheck__36__name;
+    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__36__cond;
+    __Vtask_tb_weight_fifo__DOT__wcheck__36__cond = 0;
     std::string __Vtask_tb_weight_fifo__DOT__wcheck__37__name;
     CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__37__cond;
     __Vtask_tb_weight_fifo__DOT__wcheck__37__cond = 0;
-    std::string __Vtask_tb_weight_fifo__DOT__wcheck__38__name;
-    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__38__cond;
-    __Vtask_tb_weight_fifo__DOT__wcheck__38__cond = 0;
+    std::string __Vtask_tb_weight_fifo__DOT__wcheck__39__name;
+    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__39__cond;
+    __Vtask_tb_weight_fifo__DOT__wcheck__39__cond = 0;
+    std::string __Vtask_tb_weight_fifo__DOT__wcheck__40__name;
+    CData/*0:0*/ __Vtask_tb_weight_fifo__DOT__wcheck__40__cond;
+    __Vtask_tb_weight_fifo__DOT__wcheck__40__cond = 0;
     // Body
     co_await vlSelf->__VtrigSched_h5107d6ee__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(negedge tb_weight_fifo.clk)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       239);
+                                                       237);
     VL_WRITEF("\n==== weight_loader wrapper ====\n");
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 0U;
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
@@ -927,63 +931,26 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
     vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
     vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       243);
+                                                       241);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       243);
+                                                       241);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       245);
+                                                       243);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       246);
+                                       244);
     __Vtask_tb_weight_fifo__DOT__wcheck__20__cond = 
         (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
     __Vtask_tb_weight_fifo__DOT__wcheck__20__name = 
@@ -997,98 +964,30 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__20__name));
     }
-    vlSelf->tb_weight_fifo__DOT__sent_word[0U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[0U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[1U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[1U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[2U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[2U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[3U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[3U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[4U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[4U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[5U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[5U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[6U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[6U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[7U] = Vtb_weight_fifo__ConstPool__CONST_h9e67c271_0[7U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[7U] = (0xface0000U 
-                                                  | (0xffffU 
-                                                     & vlSelf->tb_weight_fifo__DOT__sent_word[7U]));
-    vlSelf->tb_weight_fifo__DOT__sent_word[0U] = 0x12345678U;
-    vlSelf->tb_weight_fifo__DOT__sent_word[8U] = Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[0U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[9U] = Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[1U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[2U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[3U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[4U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[5U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[6U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[7U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[8U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[9U];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__sent_word[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_h93e1b771_0[0xfU];
+    tb_weight_fifo__DOT__sent_word = 0xddccbbaaU;
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       259);
+                                                       256);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       259);
+                                       256);
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 1U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = vlSelf->tb_weight_fifo__DOT__sent_word[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = vlSelf->tb_weight_fifo__DOT__sent_word[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = vlSelf->tb_weight_fifo__DOT__sent_word[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = vlSelf->tb_weight_fifo__DOT__sent_word[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = vlSelf->tb_weight_fifo__DOT__sent_word[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = vlSelf->tb_weight_fifo__DOT__sent_word[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = vlSelf->tb_weight_fifo__DOT__sent_word[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = vlSelf->tb_weight_fifo__DOT__sent_word[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = vlSelf->tb_weight_fifo__DOT__sent_word[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = vlSelf->tb_weight_fifo__DOT__sent_word[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        vlSelf->tb_weight_fifo__DOT__sent_word[0x17U];
+    vlSelf->tb_weight_fifo__DOT__read_data = tb_weight_fifo__DOT__sent_word;
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       261);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       261);
+    vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
+    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
@@ -1097,25 +996,13 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
                                        264);
-    vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
-    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       267);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       267);
     vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       275);
-    __Vtask_tb_weight_fifo__DOT__wcheck__21__cond = 
-        ((IData)(vlSelf->tb_weight_fifo__DOT__data_valid) 
-         & (0U == vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[0U]));
+                                       272);
+    __Vtask_tb_weight_fifo__DOT__wcheck__21__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
     __Vtask_tb_weight_fifo__DOT__wcheck__21__name = 
-        std::string{"FINDING: first preload pulse returns a garbage all-zero row (IDLE->LOAD_FIFO write isn't gated by read_data_valid)"};
+        std::string{"first preload pulse returns the real row (no more garbage row ahead of it)"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__21__cond) {
@@ -1125,17 +1012,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__21__name));
     }
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       286);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       286);
-    __Vtask_tb_weight_fifo__DOT__wcheck__22__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
+    __Vtask_tb_weight_fifo__DOT__wcheck__22__cond = 
+        ((0xffU & vlSelf->tb_weight_fifo__DOT__wl_data_out) 
+         == (0xffU & tb_weight_fifo__DOT__sent_word));
     __Vtask_tb_weight_fifo__DOT__wcheck__22__name = 
-        std::string{"second preload pulse: data_valid still asserted"};
+        std::string{"row 0 round-trips correctly"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__22__cond) {
@@ -1146,17 +1027,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__22__name));
     }
     __Vtask_tb_weight_fifo__DOT__wcheck__23__cond = 
-        (0U == (((((((vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[1U] 
-                      ^ vlSelf->tb_weight_fifo__DOT__sent_word[1U]) 
-                     | (vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[2U] 
-                        ^ vlSelf->tb_weight_fifo__DOT__sent_word[2U])) 
-                    | vlSelf->tb_weight_fifo__DOT__sent_word[3U]) 
-                   | vlSelf->tb_weight_fifo__DOT__sent_word[4U]) 
-                  | vlSelf->tb_weight_fifo__DOT__sent_word[5U]) 
-                 | vlSelf->tb_weight_fifo__DOT__sent_word[6U]) 
-                | vlSelf->tb_weight_fifo__DOT__sent_word[7U]));
+        ((0xffU & (vlSelf->tb_weight_fifo__DOT__wl_data_out 
+                   >> 8U)) == (0xffU & (tb_weight_fifo__DOT__sent_word 
+                                        >> 8U)));
     __Vtask_tb_weight_fifo__DOT__wcheck__23__name = 
-        std::string{"BUG: upper bits of read_data (>31) survive into data_out (expected to fail - FIFO is only 32b/row wide)"};
+        std::string{"row 1 round-trips correctly"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__23__cond) {
@@ -1167,10 +1042,11 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__23__name));
     }
     __Vtask_tb_weight_fifo__DOT__wcheck__24__cond = 
-        (vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[0U] 
-         == vlSelf->tb_weight_fifo__DOT__sent_word[0U]);
+        ((0xffU & (vlSelf->tb_weight_fifo__DOT__wl_data_out 
+                   >> 0x10U)) == (0xffU & (tb_weight_fifo__DOT__sent_word 
+                                           >> 0x10U)));
     __Vtask_tb_weight_fifo__DOT__wcheck__24__name = 
-        std::string{"lower 32 bits of row 0 round-trip correctly"};
+        std::string{"row 2 round-trips correctly"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__24__cond) {
@@ -1180,19 +1056,12 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__24__name));
     }
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       294);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       294);
-    vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
     __Vtask_tb_weight_fifo__DOT__wcheck__25__cond = 
-        (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
+        ((vlSelf->tb_weight_fifo__DOT__wl_data_out 
+          >> 0x18U) == (tb_weight_fifo__DOT__sent_word 
+                        >> 0x18U));
     __Vtask_tb_weight_fifo__DOT__wcheck__25__name = 
-        std::string{"both rows drained: fifo_empty asserted"};
+        std::string{"row 3 round-trips correctly (weight_loader declares ROW_SIZE=4 but never overrides the internal FIFO instance's ROW_SIZE, which still defaults to 3)"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__25__cond) {
@@ -1202,6 +1071,28 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__25__name));
     }
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       288);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       288);
+    vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
+    __Vtask_tb_weight_fifo__DOT__wcheck__26__cond = 
+        (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
+    __Vtask_tb_weight_fifo__DOT__wcheck__26__name = 
+        std::string{"single row drained: fifo_empty asserted"};
+    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
+                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
+    if (__Vtask_tb_weight_fifo__DOT__wcheck__26__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__26__name));
+    } else {
+        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
+                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__26__name));
+    }
     VL_WRITEF("==== weight_loader edge cases ====\n");
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 0U;
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
@@ -1209,244 +1100,94 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
     vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
     vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       233);
+                                                       231);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       233);
+                                                       231);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       235);
+                                                       233);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       305);
+                                       299);
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       307);
+                                                       301);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       307);
+                                       301);
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 1U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = 0xa0000000U;
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = (0xa0U 
+                                              | (0xffffff00U 
+                                                 & vlSelf->tb_weight_fifo__DOT__read_data));
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       314);
+                                                       308);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       314);
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = 0xa0000001U;
+                                       308);
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = (0xa1U 
+                                              | (0xffffff00U 
+                                                 & vlSelf->tb_weight_fifo__DOT__read_data));
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       314);
+                                                       308);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       314);
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = 0xa0000002U;
+                                       308);
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = (0xa2U 
+                                              | (0xffffff00U 
+                                                 & vlSelf->tb_weight_fifo__DOT__read_data));
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       314);
+                                                       308);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       314);
+                                       308);
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = (0xa3U 
+                                              | (0xffffff00U 
+                                                 & vlSelf->tb_weight_fifo__DOT__read_data));
+    vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       308);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       308);
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
-    __Vtask_tb_weight_fifo__DOT__wcheck__27__cond = 
+    __Vtask_tb_weight_fifo__DOT__wcheck__28__cond = 
         (4U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
-    __Vtask_tb_weight_fifo__DOT__wcheck__27__name = 
-        std::string{"edgeA: fifo_full reached (1 garbage + 3 real rows)"};
-    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
-                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
-    if (__Vtask_tb_weight_fifo__DOT__wcheck__27__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__27__name));
-    } else {
-        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
-                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__27__name));
-    }
-    vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       320);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       320);
-    __Vtask_tb_weight_fifo__DOT__wcheck__28__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
     __Vtask_tb_weight_fifo__DOT__wcheck__28__name = 
-        std::string{"edgeA: FSM left LOAD_FIFO for PRELOAD purely from fifo_full (load_fifo_state never dropped)"};
+        std::string{"edgeA: fifo_full reached (4 real rows)"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__28__cond) {
@@ -1456,92 +1197,91 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__28__name));
     }
+    vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       314);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       314);
+    __Vtask_tb_weight_fifo__DOT__wcheck__29__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
+    __Vtask_tb_weight_fifo__DOT__wcheck__29__name = 
+        std::string{"edgeA: FSM left LOAD_FIFO for PRELOAD purely from fifo_full (load_fifo_state never dropped)"};
+    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
+                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
+    if (__Vtask_tb_weight_fifo__DOT__wcheck__29__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__29__name));
+    } else {
+        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
+                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__29__name));
+    }
     vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       325);
+                                                       319);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       325);
+                                                       319);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       325);
+                                                       319);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       325);
+                                                       319);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 0U;
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
     vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
     vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       233);
+                                                       231);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       233);
+                                                       231);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       235);
+                                                       233);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       332);
+                                       326);
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       328);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       328);
+    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
+    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 1U;
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = (0xb1U 
+                                              | (0xffffff00U 
+                                                 & vlSelf->tb_weight_fifo__DOT__read_data));
+    vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
@@ -1550,83 +1290,12 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
                                        334);
-    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
-    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 1U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = 0xb0000001U;
-    vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       340);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       340);
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
-    __Vtask_tb_weight_fifo__DOT__wcheck__30__cond = 
+    __Vtask_tb_weight_fifo__DOT__wcheck__31__cond = 
         (4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
-    __Vtask_tb_weight_fifo__DOT__wcheck__30__name = 
-        std::string{"edgeB: fifo not full when load_fifo_state dropped"};
-    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
-                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
-    if (__Vtask_tb_weight_fifo__DOT__wcheck__30__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__30__name));
-    } else {
-        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
-                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__30__name));
-    }
-    vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       346);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       346);
-    __Vtask_tb_weight_fifo__DOT__wcheck__31__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
     __Vtask_tb_weight_fifo__DOT__wcheck__31__name = 
-        std::string{"edgeB: FSM left LOAD_FIFO for PRELOAD once load_fifo_state dropped, even though fifo wasn't full"};
+        std::string{"edgeB: fifo not full when load_fifo_state dropped"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__31__cond) {
@@ -1636,112 +1305,73 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__31__name));
     }
+    vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       340);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       340);
+    __Vtask_tb_weight_fifo__DOT__wcheck__32__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
+    __Vtask_tb_weight_fifo__DOT__wcheck__32__name = 
+        std::string{"edgeB: FSM left LOAD_FIFO for PRELOAD once load_fifo_state dropped, even though fifo wasn't full"};
+    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
+                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
+    if (__Vtask_tb_weight_fifo__DOT__wcheck__32__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__32__name));
+    } else {
+        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
+                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__32__name));
+    }
     vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       350);
+                                                       344);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       350);
+                                                       344);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       350);
+                                                       344);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 0U;
     vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
     vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
     vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       233);
+                                                       231);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       233);
+                                                       231);
     vlSelf->tb_weight_fifo__DOT__rst_n2 = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       235);
+                                                       233);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       357);
-    __Vtask_tb_weight_fifo__DOT__wcheck__33__cond = 
-        (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
-    __Vtask_tb_weight_fifo__DOT__wcheck__33__name = 
-        std::string{"edgeC: idle before tiles_complete"};
-    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
-                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
-    if (__Vtask_tb_weight_fifo__DOT__wcheck__33__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__33__name));
-    } else {
-        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
-                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__33__name));
-    }
-    vlSelf->tb_weight_fifo__DOT__tiles_complete = 1U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       360);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       360);
-    vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
+                                       351);
     __Vtask_tb_weight_fifo__DOT__wcheck__34__cond = 
-        (0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
+        (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
     __Vtask_tb_weight_fifo__DOT__wcheck__34__name = 
-        std::string{"edgeC: tiles_complete alone (without start_load_fifo_state) leaves IDLE and writes a row"};
+        std::string{"edgeC: idle before tiles_complete"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__34__cond) {
@@ -1751,18 +1381,20 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__34__name));
     }
-    vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
+    vlSelf->tb_weight_fifo__DOT__tiles_complete = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       366);
+                                                       354);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       366);
-    __Vtask_tb_weight_fifo__DOT__wcheck__35__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
+                                       354);
+    vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
+    __Vtask_tb_weight_fifo__DOT__wcheck__35__cond = 
+        (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
     __Vtask_tb_weight_fifo__DOT__wcheck__35__name = 
-        std::string{"edgeC: reaches PRELOAD and surfaces the row written on the tiles_complete entry"};
+        std::string{"edgeC: tiles_complete alone (without start_load_fifo_state) leaves IDLE - no write on this edge itself"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__35__cond) {
@@ -1772,158 +1404,47 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__35__name));
     }
-    vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       370);
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       370);
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       370);
-    vlSelf->tb_weight_fifo__DOT__rst_n2 = 0U;
-    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
-    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
-    vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
-    vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
-    vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       233);
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       233);
-    vlSelf->tb_weight_fifo__DOT__rst_n2 = 1U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       235);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       378);
-    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 1U;
-    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
-                                                       nullptr, 
-                                                       "@(posedge tb_weight_fifo.clk2)", 
-                                                       "tb/tb_weight_fifo.sv", 
-                                                       380);
-    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
-                                       "tb/tb_weight_fifo.sv", 
-                                       380);
-    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 1U;
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0U];
-    vlSelf->tb_weight_fifo__DOT__read_data[1U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[1U];
-    vlSelf->tb_weight_fifo__DOT__read_data[2U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[2U];
-    vlSelf->tb_weight_fifo__DOT__read_data[3U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[3U];
-    vlSelf->tb_weight_fifo__DOT__read_data[4U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[4U];
-    vlSelf->tb_weight_fifo__DOT__read_data[5U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[5U];
-    vlSelf->tb_weight_fifo__DOT__read_data[6U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[6U];
-    vlSelf->tb_weight_fifo__DOT__read_data[7U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[7U];
-    vlSelf->tb_weight_fifo__DOT__read_data[8U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[8U];
-    vlSelf->tb_weight_fifo__DOT__read_data[9U] = Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[9U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xaU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xaU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xbU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xbU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xcU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xcU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xdU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xdU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xeU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xeU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0xfU] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0xfU];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x10U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x10U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x11U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x11U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x12U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x12U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x13U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x13U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x14U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x14U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x15U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x15U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x16U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x16U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0x17U] = 
-        Vtb_weight_fifo__ConstPool__CONST_hda9269f3_0[0x17U];
-    vlSelf->tb_weight_fifo__DOT__read_data[0U] = 0xd0000001U;
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = (0xc1U 
+                                              | (0xffffff00U 
+                                                 & vlSelf->tb_weight_fifo__DOT__read_data));
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       386);
+                                                       363);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       386);
+                                       363);
     vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
     vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
+    __Vtask_tb_weight_fifo__DOT__wcheck__36__cond = 
+        (0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
+    __Vtask_tb_weight_fifo__DOT__wcheck__36__name = 
+        std::string{"edgeC: a real write after the tiles_complete entry lands correctly"};
+    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
+                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
+    if (__Vtask_tb_weight_fifo__DOT__wcheck__36__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__36__name));
+    } else {
+        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
+                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__36__name));
+    }
     vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       390);
+                                                       369);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       390);
+                                       369);
     __Vtask_tb_weight_fifo__DOT__wcheck__37__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
     __Vtask_tb_weight_fifo__DOT__wcheck__37__name = 
-        std::string{"edgeD: entered PRELOAD, first pulse valid"};
+        std::string{"edgeC: reaches PRELOAD and surfaces the row written after the tiles_complete entry"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
     if (__Vtask_tb_weight_fifo__DOT__wcheck__37__cond) {
@@ -1938,64 +1459,153 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       394);
+                                                       373);
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       373);
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       373);
+    vlSelf->tb_weight_fifo__DOT__rst_n2 = 0U;
+    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
+    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
+    vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
+    vlSelf->tb_weight_fifo__DOT__tiles_complete = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       231);
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       231);
+    vlSelf->tb_weight_fifo__DOT__rst_n2 = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       233);
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_weight_fifo.sv", 
-                                       394);
-    __Vtask_tb_weight_fifo__DOT__wcheck__38__cond = 
-        (1U & (~ (IData)(vlSelf->tb_weight_fifo__DOT__data_valid)));
-    __Vtask_tb_weight_fifo__DOT__wcheck__38__name = 
-        std::string{"edgeD: dropping preload_state while fifo non-empty returns to IDLE immediately (data_valid drops)"};
+                                       381);
+    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       383);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       383);
+    vlSelf->tb_weight_fifo__DOT__start_load_fifo_state = 0U;
+    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 1U;
+    vlSelf->tb_weight_fifo__DOT__read_data = 0U;
+    vlSelf->tb_weight_fifo__DOT__read_data = (0xd1U 
+                                              | (0xffffff00U 
+                                                 & vlSelf->tb_weight_fifo__DOT__read_data));
+    vlSelf->tb_weight_fifo__DOT__read_data_valid = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       389);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       389);
+    vlSelf->tb_weight_fifo__DOT__read_data_valid = 0U;
+    vlSelf->tb_weight_fifo__DOT__load_fifo_state = 0U;
+    vlSelf->tb_weight_fifo__DOT__preload_state = 1U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       393);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       393);
+    __Vtask_tb_weight_fifo__DOT__wcheck__39__cond = vlSelf->tb_weight_fifo__DOT__data_valid;
+    __Vtask_tb_weight_fifo__DOT__wcheck__39__name = 
+        std::string{"edgeD: entered PRELOAD, first pulse valid"};
     vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
                                               + vlSelf->tb_weight_fifo__DOT__wl_checks);
-    if (__Vtask_tb_weight_fifo__DOT__wcheck__38__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__38__name));
+    if (__Vtask_tb_weight_fifo__DOT__wcheck__39__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__39__name));
     } else {
         vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
                                                   + vlSelf->tb_weight_fifo__DOT__wl_errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__38__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__39__name));
+    }
+    vlSelf->tb_weight_fifo__DOT__preload_state = 0U;
+    co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
+                                                       nullptr, 
+                                                       "@(posedge tb_weight_fifo.clk2)", 
+                                                       "tb/tb_weight_fifo.sv", 
+                                                       397);
+    co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
+                                       "tb/tb_weight_fifo.sv", 
+                                       397);
+    __Vtask_tb_weight_fifo__DOT__wcheck__40__cond = 
+        (1U & (~ (IData)(vlSelf->tb_weight_fifo__DOT__data_valid)));
+    __Vtask_tb_weight_fifo__DOT__wcheck__40__name = 
+        std::string{"edgeD: dropping preload_state while fifo non-empty returns to IDLE immediately (data_valid drops)"};
+    vlSelf->tb_weight_fifo__DOT__wl_checks = ((IData)(1U) 
+                                              + vlSelf->tb_weight_fifo__DOT__wl_checks);
+    if (__Vtask_tb_weight_fifo__DOT__wcheck__40__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__40__name));
+    } else {
+        vlSelf->tb_weight_fifo__DOT__wl_errors = ((IData)(1U) 
+                                                  + vlSelf->tb_weight_fifo__DOT__wl_errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_weight_fifo__DOT__wcheck__40__name));
     }
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       397);
+                                                       400);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       397);
+                                                       400);
     VL_WRITEF("==== weight_loader edge cases done ====\n\n");
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       401);
+                                                       404);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       401);
+                                                       404);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       401);
+                                                       404);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       401);
+                                                       404);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       401);
+                                                       404);
     co_await vlSelf->__VtrigSched_hb5160297__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_weight_fifo.clk2)", 
                                                        "tb/tb_weight_fifo.sv", 
-                                                       401);
+                                                       404);
     VL_WRITEF("==== weight_loader wrapper done: %0d/%0d checks passed ====\n\n",
               32,(vlSelf->tb_weight_fifo__DOT__wl_checks 
                   - vlSelf->tb_weight_fifo__DOT__wl_errors),
@@ -2014,16 +1624,16 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
                                                            nullptr, 
                                                            "@([changed] (tb_weight_fifo.fifo_test_done & tb_weight_fifo.wl_test_done))", 
                                                            "tb/tb_weight_fifo.sv", 
-                                                           408);
+                                                           411);
     }
-    VL_WRITEF("\n==== SUMMARY ====\nFIFO submodule:    %0d/%0d passed\nweight_loader:     %0d/%0d passed (upper-bit truncation is an EXPECTED failure demonstrating the bug)\n",
+    VL_WRITEF("\n==== SUMMARY ====\nFIFO submodule:    %0d/%0d passed\nweight_loader:     %0d/%0d passed\n",
               32,(vlSelf->tb_weight_fifo__DOT__checks 
                   - vlSelf->tb_weight_fifo__DOT__errors),
               32,vlSelf->tb_weight_fifo__DOT__checks,
               32,(vlSelf->tb_weight_fifo__DOT__wl_checks 
                   - vlSelf->tb_weight_fifo__DOT__wl_errors),
               32,vlSelf->tb_weight_fifo__DOT__wl_checks);
-    VL_FINISH_MT("tb/tb_weight_fifo.sv", 413, "");
+    VL_FINISH_MT("tb/tb_weight_fifo.sv", 415, "");
 }
 
 VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming__3(Vtb_weight_fifo___024root* vlSelf) {
@@ -2035,7 +1645,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
         co_await vlSelf->__VdlySched.delay(0x1388ULL, 
                                            nullptr, 
                                            "tb/tb_weight_fifo.sv", 
-                                           190);
+                                           188);
         vlSelf->tb_weight_fifo__DOT__clk2 = (1U & (~ (IData)(vlSelf->tb_weight_fifo__DOT__clk2)));
     }
 }
@@ -2049,7 +1659,7 @@ VL_INLINE_OPT VlCoroutine Vtb_weight_fifo___024root___eval_initial__TOP__Vtiming
         co_await vlSelf->__VdlySched.delay(0x1388ULL, 
                                            nullptr, 
                                            "tb/tb_weight_fifo.sv", 
-                                           37);
+                                           35);
         vlSelf->tb_weight_fifo__DOT__clk = (1U & (~ (IData)(vlSelf->tb_weight_fifo__DOT__clk)));
     }
 }
@@ -2061,6 +1671,7 @@ VL_INLINE_OPT void Vtb_weight_fifo___024root___act_comb__TOP__0(Vtb_weight_fifo_
     // Body
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_re = 0U;
     vlSelf->tb_weight_fifo__DOT__data_valid = 0U;
+    vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 0U;
     if ((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
         if ((1U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
             if ((2U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
@@ -2071,28 +1682,27 @@ VL_INLINE_OPT void Vtb_weight_fifo___024root___act_comb__TOP__0(Vtb_weight_fifo_
                 }
             }
         }
+        if ((1U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
+            if (((4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
+                 & (IData)(vlSelf->tb_weight_fifo__DOT__load_fifo_state))) {
+                if (vlSelf->tb_weight_fifo__DOT__read_data_valid) {
+                    vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 1U;
+                }
+            }
+        }
     }
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
         = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state;
-    vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 0U;
     if ((0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
-        if (((IData)(vlSelf->tb_weight_fifo__DOT__start_load_fifo_state) 
-             | (IData)(vlSelf->tb_weight_fifo__DOT__tiles_complete))) {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 1U;
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 1U;
-        } else {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 0U;
-        }
+        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
+            = (((IData)(vlSelf->tb_weight_fifo__DOT__start_load_fifo_state) 
+                | (IData)(vlSelf->tb_weight_fifo__DOT__tiles_complete))
+                ? 1U : 0U);
     } else if ((1U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
-        if (((4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
-             & (IData)(vlSelf->tb_weight_fifo__DOT__load_fifo_state))) {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 1U;
-            if (vlSelf->tb_weight_fifo__DOT__read_data_valid) {
-                vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we = 1U;
-            }
-        } else {
-            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state = 2U;
-        }
+        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
+            = (((4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
+                & (IData)(vlSelf->tb_weight_fifo__DOT__load_fifo_state))
+                ? 1U : 2U);
     } else if ((2U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__current_state))) {
         vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__next_state 
             = (((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)) 
@@ -2252,16 +1862,16 @@ VL_INLINE_OPT void Vtb_weight_fifo___024root___nba_sequent__TOP__1(Vtb_weight_fi
     __Vdly__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr = 0;
     CData/*1:0*/ __Vdly__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__putPtr;
     __Vdly__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__putPtr = 0;
-    CData/*1:0*/ __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0;
+    CData/*4:0*/ __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0;
     __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0 = 0;
-    VlWide<3>/*95:0*/ __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0;
-    VL_ZERO_W(96, __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0);
+    IData/*31:0*/ __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0;
+    __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0 = 0;
     CData/*0:0*/ __Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0;
     __Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0 = 0;
-    CData/*1:0*/ __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1;
+    CData/*4:0*/ __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1;
     __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1 = 0;
-    VlWide<3>/*95:0*/ __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1;
-    VL_ZERO_W(96, __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1);
+    IData/*31:0*/ __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1;
+    __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1 = 0;
     CData/*0:0*/ __Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1;
     __Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1 = 0;
     // Body
@@ -2284,12 +1894,8 @@ VL_INLINE_OPT void Vtb_weight_fifo___024root___nba_sequent__TOP__1(Vtb_weight_fi
          & (4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)))) {
         __Vdly__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr 
             = (3U & ((IData)(1U) + (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr)));
-        __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0[0U] 
-            = vlSelf->tb_weight_fifo__DOT__read_data[0U];
-        __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0[1U] 
-            = vlSelf->tb_weight_fifo__DOT__read_data[1U];
-        __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0[2U] 
-            = vlSelf->tb_weight_fifo__DOT__read_data[2U];
+        __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0 
+            = vlSelf->tb_weight_fifo__DOT__read_data;
         __Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0 = 1U;
         __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0 
             = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__putPtr;
@@ -2305,12 +1911,8 @@ VL_INLINE_OPT void Vtb_weight_fifo___024root___nba_sequent__TOP__1(Vtb_weight_fi
                       & (0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)))))) {
             if (((IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__fifo_we) 
                  & (4U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count)))) {
-                __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1[0U] 
-                    = vlSelf->tb_weight_fifo__DOT__read_data[0U];
-                __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1[1U] 
-                    = vlSelf->tb_weight_fifo__DOT__read_data[1U];
-                __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1[2U] 
-                    = vlSelf->tb_weight_fifo__DOT__read_data[2U];
+                __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1 
+                    = vlSelf->tb_weight_fifo__DOT__read_data;
                 __Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1 = 1U;
                 __Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1 
                     = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__putPtr;
@@ -2343,35 +1945,21 @@ VL_INLINE_OPT void Vtb_weight_fifo___024root___nba_sequent__TOP__1(Vtb_weight_fi
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__putPtr 
         = __Vdly__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__putPtr;
     if (__Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0) {
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0][0U] 
-            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0[0U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0][1U] 
-            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0[1U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0][2U] 
-            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0[2U];
+        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0] 
+            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v0;
     }
     if (__Vdlyvset__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1) {
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1][0U] 
-            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1[0U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1][1U] 
-            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1[1U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1][2U] 
-            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1[2U];
+        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q[__Vdlyvdim0__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1] 
+            = __Vdlyvval__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q__v1;
     }
     vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count 
         = __Vdly__tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count;
     vlSelf->tb_weight_fifo__DOT__fifo_empty = (0U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
     vlSelf->tb_weight_fifo__DOT__fifo_full = (4U == (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count));
     if ((0U != (IData)(vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__count))) {
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[0U] 
-            = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
-            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr][0U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[1U] 
-            = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
-            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr][1U];
-        vlSelf->tb_weight_fifo__DOT__dut_wl__DOT____Vcellout__weight_fifo__data_out[2U] 
-            = vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
-            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr][2U];
+        vlSelf->tb_weight_fifo__DOT__wl_data_out = 
+            vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__Q
+            [vlSelf->tb_weight_fifo__DOT__dut_wl__DOT__weight_fifo__DOT__getPtr];
     }
 }
 
@@ -2491,7 +2079,7 @@ void Vtb_weight_fifo___024root___eval(Vtb_weight_fifo___024root* vlSelf) {
 #ifdef VL_DEBUG
             Vtb_weight_fifo___024root___dump_triggers__nba(vlSelf);
 #endif
-            VL_FATAL_MT("tb/tb_weight_fifo.sv", 16, "", "NBA region did not converge.");
+            VL_FATAL_MT("tb/tb_weight_fifo.sv", 14, "", "NBA region did not converge.");
         }
         __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
         __VnbaContinue = 0U;
@@ -2502,7 +2090,7 @@ void Vtb_weight_fifo___024root___eval(Vtb_weight_fifo___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtb_weight_fifo___024root___dump_triggers__act(vlSelf);
 #endif
-                VL_FATAL_MT("tb/tb_weight_fifo.sv", 16, "", "Active region did not converge.");
+                VL_FATAL_MT("tb/tb_weight_fifo.sv", 14, "", "Active region did not converge.");
             }
             vlSelf->__VactIterCount = ((IData)(1U) 
                                        + vlSelf->__VactIterCount);
