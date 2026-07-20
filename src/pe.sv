@@ -31,9 +31,10 @@ module PE(
                     b_reg <= 0;
                 end
                 product_reg <= 0;
-                if(!compute_en) begin
+                if(!compute_en && !drain) begin
                     accum_reg <= 0;
                 end
+                down_out <= 0;
             end
             else if(preload) begin
                 b_reg <= b;
@@ -51,6 +52,7 @@ module PE(
                 right_out <= a_reg;
                 product_reg <= (a_reg * b_reg) + product_reg;
                 accum_reg <= accum_reg + product_reg;
+                down_out  <= '0;
             end
         end
     end

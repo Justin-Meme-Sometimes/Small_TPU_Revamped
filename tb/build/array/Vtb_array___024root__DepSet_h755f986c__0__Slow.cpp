@@ -79,13 +79,13 @@ VL_ATTR_COLD void Vtb_array___024root___dump_triggers__stl(Vtb_array___024root* 
 #endif  // VL_DEBUG
 
 extern const VlUnpacked<CData/*4:0*/, 128> Vtb_array__ConstPool__TABLE_h73872590_0;
-extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_hb598fdfd_0;
-extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_h2fe71d6b_0;
 extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_h95214b9c_0;
 extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_he5d58018_0;
 extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_h26d33955_0;
 extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_hfc07e341_0;
 extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_h25f53c5b_0;
+extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_hb598fdfd_0;
+extern const VlUnpacked<CData/*0:0*/, 128> Vtb_array__ConstPool__TABLE_h2fe71d6b_0;
 
 VL_ATTR_COLD void Vtb_array___024root___stl_sequent__TOP__0(Vtb_array___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -102,15 +102,6 @@ VL_ATTR_COLD void Vtb_array___024root___stl_sequent__TOP__0(Vtb_array___024root*
     __Vtableidx4 = 0;
     // Body
     vlSelf->tb_array__DOT__arr_output_valid = vlSelf->tb_array__DOT__arr_drain;
-    __Vtableidx4 = (((IData)(vlSelf->tb_array__DOT__arr_tile_done) 
-                     << 6U) | (((IData)(vlSelf->tb_array__DOT__arr_compute_start) 
-                                << 5U) | (IData)(vlSelf->tb_array__DOT__arr_dut__DOT__v_fsm_1__DOT__current_state)));
-    vlSelf->tb_array__DOT__arr_dut__DOT__v_fsm_1__DOT__next_state 
-        = Vtb_array__ConstPool__TABLE_h73872590_0[__Vtableidx4];
-    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_1 = Vtb_array__ConstPool__TABLE_hb598fdfd_0
-        [__Vtableidx4];
-    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_0 = Vtb_array__ConstPool__TABLE_h2fe71d6b_0
-        [__Vtableidx4];
     vlSelf->tb_array__DOT__arr_dut__DOT__pe_down_out[0U] 
         = ((vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_0_1__down_out 
             << 0x10U) | (0xffffU & vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_0_0__down_out));
@@ -247,6 +238,19 @@ VL_ATTR_COLD void Vtb_array___024root___stl_sequent__TOP__0(Vtb_array___024root*
         [__Vtableidx3];
     vlSelf->tb_array__DOT__arr_dut__DOT__h_en_0 = Vtb_array__ConstPool__TABLE_hfc07e341_0
         [__Vtableidx3];
+    __Vtableidx4 = (((IData)(vlSelf->tb_array__DOT__arr_tile_done) 
+                     << 6U) | (((IData)(vlSelf->tb_array__DOT__arr_compute_start) 
+                                << 5U) | (IData)(vlSelf->tb_array__DOT__arr_dut__DOT__v_fsm_1__DOT__current_state)));
+    vlSelf->tb_array__DOT__arr_dut__DOT__v_fsm_1__DOT__next_state 
+        = Vtb_array__ConstPool__TABLE_h73872590_0[__Vtableidx4];
+    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_3 = Vtb_array__ConstPool__TABLE_h95214b9c_0
+        [__Vtableidx4];
+    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_2 = Vtb_array__ConstPool__TABLE_h25f53c5b_0
+        [__Vtableidx4];
+    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_1 = Vtb_array__ConstPool__TABLE_hb598fdfd_0
+        [__Vtableidx4];
+    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_0 = Vtb_array__ConstPool__TABLE_h2fe71d6b_0
+        [__Vtableidx4];
 }
 
 VL_ATTR_COLD void Vtb_array___024root___eval_stl(Vtb_array___024root* vlSelf) {
@@ -360,6 +364,7 @@ VL_ATTR_COLD void Vtb_array___024root___ctor_var_reset(Vtb_array___024root* vlSe
     vlSelf->tb_array__DOT__arr_drain = VL_RAND_RESET_I(1);
     vlSelf->tb_array__DOT__arr_weight = VL_RAND_RESET_I(32);
     vlSelf->tb_array__DOT__arr_activation = VL_RAND_RESET_I(32);
+    vlSelf->tb_array__DOT__arr_activation_valid = VL_RAND_RESET_I(1);
     vlSelf->tb_array__DOT__arr_output_valid = VL_RAND_RESET_I(1);
     vlSelf->tb_array__DOT__h_dut__DOT__current_state = VL_RAND_RESET_I(5);
     vlSelf->tb_array__DOT__h_dut__DOT__next_state = VL_RAND_RESET_I(5);
@@ -371,6 +376,8 @@ VL_ATTR_COLD void Vtb_array___024root___ctor_var_reset(Vtb_array___024root* vlSe
     vlSelf->tb_array__DOT__arr_dut__DOT__h_en_3 = VL_RAND_RESET_I(1);
     vlSelf->tb_array__DOT__arr_dut__DOT__v_en_0 = VL_RAND_RESET_I(1);
     vlSelf->tb_array__DOT__arr_dut__DOT__v_en_1 = VL_RAND_RESET_I(1);
+    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_2 = VL_RAND_RESET_I(1);
+    vlSelf->tb_array__DOT__arr_dut__DOT__v_en_3 = VL_RAND_RESET_I(1);
     VL_RAND_RESET_W(512, vlSelf->tb_array__DOT__arr_dut__DOT__pe_down_out);
     VL_RAND_RESET_W(512, vlSelf->tb_array__DOT__arr_dut__DOT__pe_right_out);
     vlSelf->tb_array__DOT__arr_dut__DOT__val_act_in = VL_RAND_RESET_I(32);

@@ -99,6 +99,32 @@ module tb_weight_fifo;
         re = 0;
         check("after draining 4 entries: empty asserted", empty === 1'b1);
 
+        // read while empty must be a safe no-op: guarded by !empty in the
+        // FIFO's re branch, so count/getPtr must not move.
+        @(negedge clk);
+        re = 1;
+        @(negedge clk);
+        @(negedge clk);
+        re = 0;
+        check("read while empty is a no-op: still empty", empty === 1'b1);
+        check("read while empty is a no-op: not full", full === 1'b0);
+
+        // simultaneous we&&re while empty: the we&&re branch requires
+        // !empty, so this falls through to the we-only branch (plain write).
+        @(negedge clk);
+        we = 1; re = 1; data_in = wr_word[2];
+        @(negedge clk);
+        we = 0; re = 0;
+        check("we&&re while empty performs a plain write, not a no-op", !empty && !full);
+        #1;
+        check("we&&re-while-empty write is readable back correctly", data_out === wr_word[2]);
+
+        @(negedge clk);
+        re = 1;
+        @(negedge clk);
+        re = 0;
+        check("after draining the we&&re-while-empty entry: empty again", empty === 1'b1);
+
         // simultaneous we&&re once fifo has at least one entry
         @(negedge clk);
         we = 1; data_in = wr_word[0];
@@ -112,6 +138,46 @@ module tb_weight_fifo;
         we = 0; re = 0;
         check("simultaneous we&&re: fifo neither grows nor shrinks (still non-empty/non-full)",
               !empty && !full);
+
+        // we&&re&&!empty writes data_in at putPtr AND advances getPtr past
+        // the old front in the same cycle - it doesn't queue behind the
+        // existing entry, it silently evicts it. Confirm that's really what
+        // comes back out (NOTE, not a bug: this is how a true dual-port
+        // "replace" cycle behaves here).
+        @(negedge clk);
+        re = 1;
+        #1;
+        check("NOTE: we&&re evicted the old front - draining now returns wr_word[1], not wr_word[0]",
+              data_out === wr_word[1]);
+        @(negedge clk);
+        re = 0;
+        check("after draining that entry: fifo empty again", empty === 1'b1);
+
+        // second full fill/drain pass: exercises the 2-bit putPtr/getPtr
+        // wrapping around a second time, from a non-zero starting phase
+        // (unlike the very first pass, which started from freshly-reset
+        // pointers).
+        for (int i = 0; i < 4; i++) begin
+            wr_word[i][0] = 32'hD000_0000 + i;
+            wr_word[i][1] = 32'hE000_0000 + i;
+            wr_word[i][2] = 32'hF000_0000 + i;
+            @(negedge clk);
+            we = 1; data_in = wr_word[i];
+        end
+        @(negedge clk);
+        we = 0;
+        check("second fill pass: full asserted", full === 1'b1);
+
+        for (int i = 0; i < 4; i++) begin
+            @(negedge clk);
+            re = 1;
+            #1;
+            check($sformatf("second pass pop %0d returns row written %0dst (pointer wraparound holds)", i, i),
+                  data_out === wr_word[i]);
+        end
+        @(negedge clk);
+        re = 0;
+        check("second pass: empty again after draining", empty === 1'b1);
 
         $display("==== FIFO submodule done: %0d/%0d checks passed ====\n", checks-errors, checks);
         fifo_test_done = 1;
@@ -161,6 +227,14 @@ module tb_weight_fifo;
 
     logic [WL_ROW-1:0][WL_VW-1:0] sent_word;
 
+    task automatic wl_reset();
+        rst_n2 = 0; start_load_fifo_state = 0; load_fifo_state = 0;
+        preload_state = 0; tiles_complete = 0; read_data_valid = 0; read_data = '0;
+        @(posedge clk2); @(posedge clk2);
+        rst_n2 = 1;
+        @(posedge clk2);
+    endtask
+
     initial begin
         @(negedge clk); // let FIFO tb settle first, purely cosmetic ordering in log
         $display("\n==== weight_loader wrapper ====");
@@ -169,6 +243,7 @@ module tb_weight_fifo;
         @(posedge clk2); @(posedge clk2);
         rst_n2 = 1;
         @(posedge clk2);
+        #1;
 
         wcheck("idle: fifo_empty asserted", fifo_empty === 1'b1);
 
@@ -181,27 +256,147 @@ module tb_weight_fifo;
         sent_word[2] = '0;
 
         start_load_fifo_state = 1;
-        @(posedge clk2);
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO
         start_load_fifo_state = 0;
         load_fifo_state = 1;
         read_data = sent_word;
         read_data_valid = 1;
-        @(posedge clk2);
+        @(posedge clk2); #1;                    // real write of sent_word
         read_data_valid = 0;
         load_fifo_state = 0;
-        @(posedge clk2);
+        @(posedge clk2); #1;                    // LOAD_FIFO -> PRELOAD
+
+        // Sample data_valid/data_out the same way the FIFO submodule test
+        // above does (right when the condition is set, *before* the next
+        // edge) - the FIFO's getPtr advances via NBA at the same edge as
+        // the read, so data_out has already moved on to the NEXT row by
+        // the time you sample a cycle late.
+        preload_state = 1;
+        #1;
+        // FINDING (verified via hierarchical trace): the IDLE case sets
+        // fifo_we=1 unconditionally whenever start_load_fifo_state is
+        // asserted - unlike LOAD_FIFO's writes, this one is NOT gated by
+        // read_data_valid. So the IDLE->LOAD_FIFO transition edge above
+        // silently writes a garbage row (read_data was still all-zero at
+        // that point) ahead of the real data. This first preload pulse
+        // hands out that garbage row, not sent_word.
+        wcheck("FINDING: first preload pulse returns a garbage all-zero row (IDLE->LOAD_FIFO write isn't gated by read_data_valid)",
+               data_valid === 1'b1 && wl_data_out[0][31:0] == 32'h0);
+
+        @(posedge clk2); #1;
+        // Second preload pulse: the real row.
+        wcheck("second preload pulse: data_valid still asserted", data_valid === 1'b1);
+        wcheck("BUG: upper bits of read_data (>31) survive into data_out (expected to fail - FIFO is only 32b/row wide)",
+               wl_data_out[0][255:32] == sent_word[0][255:32]);
+        wcheck("lower 32 bits of row 0 round-trip correctly",
+               wl_data_out[0][31:0] == sent_word[0][31:0]);
+
+        @(posedge clk2); #1;
+        preload_state = 0;
+        wcheck("both rows drained: fifo_empty asserted", fifo_empty === 1'b1);
+
+        // -------------------------------------------------------------
+        // edge case A: LOAD_FIFO->PRELOAD is also triggered purely by
+        // fifo_full, independent of load_fifo_state. Fill to exactly 4
+        // entries and deliberately never drop load_fifo_state.
+        // -------------------------------------------------------------
+        $display("==== weight_loader edge cases ====");
+        wl_reset();
+        #1;
+        start_load_fifo_state = 1;
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (+ garbage row, count=1)
+        start_load_fifo_state = 0;
+        load_fifo_state = 1;                    // held high through the whole fill and beyond
+        for (int i = 0; i < 3; i++) begin
+            read_data = '0;
+            read_data[0][31:0] = 32'hA000_0000 + i;
+            read_data_valid = 1;
+            @(posedge clk2); #1;
+        end
+        read_data_valid = 0;
+        wcheck("edgeA: fifo_full reached (1 garbage + 3 real rows)", fifo_full === 1'b1);
+
+        preload_state = 1;                      // load_fifo_state is STILL 1 here
+        @(posedge clk2); #1;
+        wcheck("edgeA: FSM left LOAD_FIFO for PRELOAD purely from fifo_full (load_fifo_state never dropped)",
+               data_valid === 1'b1);
+        preload_state = 0;
+        load_fifo_state = 0;
+        repeat (4) @(posedge clk2);
+
+        // -------------------------------------------------------------
+        // edge case B: LOAD_FIFO->PRELOAD also triggers when load_fifo_state
+        // drops early, even though the fifo isn't full yet.
+        // -------------------------------------------------------------
+        wl_reset();
+        #1;
+        start_load_fifo_state = 1;
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (+ garbage row, count=1)
+        start_load_fifo_state = 0;
+        load_fifo_state = 1;
+        read_data = '0;
+        read_data[0][31:0] = 32'hB000_0001;
+        read_data_valid = 1;
+        @(posedge clk2); #1;                    // one real write, count=2 (of 4)
+        read_data_valid = 0;
+        load_fifo_state = 0;                    // dropped while there's still room
+        wcheck("edgeB: fifo not full when load_fifo_state dropped", fifo_full === 1'b0);
 
         preload_state = 1;
-        @(posedge clk2);
+        @(posedge clk2); #1;
+        wcheck("edgeB: FSM left LOAD_FIFO for PRELOAD once load_fifo_state dropped, even though fifo wasn't full",
+               data_valid === 1'b1);
+        preload_state = 0;
+        repeat (3) @(posedge clk2);
+
+        // -------------------------------------------------------------
+        // edge case C: tiles_complete is an alternate IDLE->LOAD_FIFO entry
+        // path, independent of start_load_fifo_state.
+        // -------------------------------------------------------------
+        wl_reset();
         #1;
-        if (data_valid) begin
-            wcheck("BUG: upper bits of read_data (>31) survive into data_out (expected to fail)",
-                   wl_data_out[0][255:32] == sent_word[0][255:32]);
-            wcheck("lower 32 bits of row 0 round-trip correctly",
-                   wl_data_out[0][31:0] == sent_word[0][31:0]);
-        end else begin
-            $display("[INFO] data_valid not asserted on first preload cycle, check timing manually");
-        end
+        wcheck("edgeC: idle before tiles_complete", fifo_empty === 1'b1);
+        tiles_complete = 1;
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO via tiles_complete alone
+        tiles_complete = 0;
+        wcheck("edgeC: tiles_complete alone (without start_load_fifo_state) leaves IDLE and writes a row",
+               fifo_empty === 1'b0);
+
+        preload_state = 1;                      // load_fifo_state was never raised - falls straight to PRELOAD
+        @(posedge clk2); #1;
+        wcheck("edgeC: reaches PRELOAD and surfaces the row written on the tiles_complete entry",
+               data_valid === 1'b1);
+        preload_state = 0;
+        repeat (3) @(posedge clk2);
+
+        // -------------------------------------------------------------
+        // edge case D: dropping preload_state mid-PRELOAD (fifo still
+        // non-empty) returns to IDLE immediately rather than continuing
+        // to drain or getting stuck.
+        // -------------------------------------------------------------
+        wl_reset();
+        #1;
+        start_load_fifo_state = 1;
+        @(posedge clk2); #1;                    // IDLE -> LOAD_FIFO (+ garbage row, count=1)
+        start_load_fifo_state = 0;
+        load_fifo_state = 1;
+        read_data = '0;
+        read_data[0][31:0] = 32'hD000_0001;
+        read_data_valid = 1;
+        @(posedge clk2); #1;                    // real write, count=2
+        read_data_valid = 0;
+        load_fifo_state = 0;
+        preload_state = 1;
+        @(posedge clk2); #1;                    // LOAD_FIFO -> PRELOAD, first pulse
+        wcheck("edgeD: entered PRELOAD, first pulse valid", data_valid === 1'b1);
+
+        preload_state = 0;                      // drop while fifo still has 1 entry left
+        @(posedge clk2); #1;
+        wcheck("edgeD: dropping preload_state while fifo non-empty returns to IDLE immediately (data_valid drops)",
+               data_valid === 1'b0);
+        repeat (2) @(posedge clk2);
+
+        $display("==== weight_loader edge cases done ====\n");
 
         repeat (6) @(posedge clk2);
         $display("==== weight_loader wrapper done: %0d/%0d checks passed ====\n",

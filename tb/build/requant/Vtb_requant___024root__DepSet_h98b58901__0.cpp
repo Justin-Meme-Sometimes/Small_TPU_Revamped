@@ -274,207 +274,129 @@ VL_INLINE_OPT void Vtb_requant___024root___nba_sequent__TOP__0(Vtb_requant___024
     if (false && vlSelf) {}  // Prevent unused
     Vtb_requant__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_requant___024root___nba_sequent__TOP__0\n"); );
-    // Init
-    VlWide<4>/*127:0*/ __Vdly__tb_requant__DOT__dut__DOT__shift_buffer;
-    VL_ZERO_W(128, __Vdly__tb_requant__DOT__dut__DOT__shift_buffer);
     // Body
-    __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-        = vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U];
-    __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[1U] 
-        = vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[1U];
-    __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[2U] 
-        = vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[2U];
-    __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[3U] 
-        = vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[3U];
     vlSelf->tb_requant__DOT__out_valid = ((IData)(vlSelf->tb_requant__DOT__rst_n) 
-                                          && ((IData)(vlSelf->tb_requant__DOT__valid) 
-                                              & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
-                                                 | (IData)(vlSelf->tb_requant__DOT__accum_state))));
-    if (vlSelf->tb_requant__DOT__rst_n) {
-        if (((IData)(vlSelf->tb_requant__DOT__valid) 
-             & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
-                | (IData)(vlSelf->tb_requant__DOT__accum_state)))) {
-            if (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
-                                                    (0xfU 
-                                                     & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U])))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x7fU | (0xffffff00U & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else if (VL_LIKELY(VL_GTS_III(32, 0xffffff80U, 
-                                            VL_EXTENDS_II(32,4, 
+                                          && (((IData)(vlSelf->tb_requant__DOT__valid) 
+                                               & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                                                  | (IData)(vlSelf->tb_requant__DOT__accum_state))) 
+                                              && (IData)(vlSelf->tb_requant__DOT__valid)));
+    vlSelf->tb_requant__DOT____Vcellout__dut__out = 
+        ((0xffffff00U & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
+         | ((IData)(vlSelf->tb_requant__DOT__rst_n)
+             ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                 & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                    | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                 ? (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
+                                                        (0xfU 
+                                                         & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U])))
+                     ? 0x7fU : (VL_GTS_III(32, 0xffffff80U, 
+                                           VL_EXTENDS_II(32,4, 
+                                                         (0xfU 
+                                                          & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U])))
+                                 ? 0x80U : (0xffU & 
+                                            VL_EXTENDS_II(8,4, 
                                                           (0xfU 
-                                                           & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U]))))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x80U | (0xffffff00U & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else {
-                VL_WRITEF("shift_buffer[x] = %0d\n",
-                          4,(0xfU & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U]));
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = ((0xffffff00U & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
-                       | (0xffU & VL_EXTENDS_II(8,4, 
-                                                (0xfU 
-                                                 & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U]))));
-            }
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = ((0xfffffff0U & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
-                   | (0xfU & VL_SHIFTR_III(4,32,32, 
-                                           vlSelf->tb_requant__DOT__ins[0U], vlSelf->tb_requant__DOT__con)));
-        } else {
-            vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                = (0xffffff00U & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = (0xfffffff0U & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-        }
-    } else {
-        vlSelf->tb_requant__DOT____Vcellout__dut__out 
-            = (0xffffff00U & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-        __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-            = (0xfffffff0U & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-    }
-    if (vlSelf->tb_requant__DOT__rst_n) {
-        if (((IData)(vlSelf->tb_requant__DOT__valid) 
-             & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
-                | (IData)(vlSelf->tb_requant__DOT__accum_state)))) {
-            if (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
-                                                    (0xfU 
-                                                     & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                        >> 4U))))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x7f00U | (0xffff00ffU & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else if (VL_LIKELY(VL_GTS_III(32, 0xffffff80U, 
+                                                           & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U])))))
+                 : 0U) : 0U));
+    vlSelf->tb_requant__DOT____Vcellout__dut__out = 
+        ((0xffff00ffU & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
+         | (((IData)(vlSelf->tb_requant__DOT__rst_n)
+              ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                  & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                     | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                  ? (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
+                                                         (0xfU 
+                                                          & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+                                                             >> 4U))))
+                      ? 0x7fU : (VL_GTS_III(32, 0xffffff80U, 
                                             VL_EXTENDS_II(32,4, 
                                                           (0xfU 
                                                            & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                              >> 4U)))))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x8000U | (0xffff00ffU & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else {
-                VL_WRITEF("shift_buffer[x] = %0d\n",
-                          4,(0xfU & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                     >> 4U)));
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = ((0xffff00ffU & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
-                       | (0xff00U & (VL_EXTENDS_II(8,4, 
-                                                   (0xfU 
-                                                    & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                       >> 4U))) 
-                                     << 8U)));
-            }
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = ((0xffffff0fU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
-                   | (0xf0U & (VL_SHIFTR_III(4,32,32, 
-                                             vlSelf->tb_requant__DOT__ins[1U], vlSelf->tb_requant__DOT__con) 
-                               << 4U)));
-        } else {
-            vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                = (0xffff00ffU & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = (0xffffff0fU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-        }
-    } else {
-        vlSelf->tb_requant__DOT____Vcellout__dut__out 
-            = (0xffff00ffU & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-        __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-            = (0xffffff0fU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-    }
-    if (vlSelf->tb_requant__DOT__rst_n) {
-        if (((IData)(vlSelf->tb_requant__DOT__valid) 
-             & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
-                | (IData)(vlSelf->tb_requant__DOT__accum_state)))) {
-            if (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
-                                                    (0xfU 
-                                                     & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                        >> 8U))))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x7f0000U | (0xff00ffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else if (VL_LIKELY(VL_GTS_III(32, 0xffffff80U, 
+                                                              >> 4U))))
+                                  ? 0x80U : (0xffU 
+                                             & VL_EXTENDS_II(8,4, 
+                                                             (0xfU 
+                                                              & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+                                                                 >> 4U))))))
+                  : 0U) : 0U) << 8U));
+    vlSelf->tb_requant__DOT____Vcellout__dut__out = 
+        ((0xff00ffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
+         | (((IData)(vlSelf->tb_requant__DOT__rst_n)
+              ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                  & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                     | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                  ? (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
+                                                         (0xfU 
+                                                          & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+                                                             >> 8U))))
+                      ? 0x7fU : (VL_GTS_III(32, 0xffffff80U, 
                                             VL_EXTENDS_II(32,4, 
                                                           (0xfU 
                                                            & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                              >> 8U)))))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x800000U | (0xff00ffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else {
-                VL_WRITEF("shift_buffer[x] = %0d\n",
-                          4,(0xfU & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                     >> 8U)));
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = ((0xff00ffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
-                       | (0xff0000U & (VL_EXTENDS_II(8,4, 
-                                                     (0xfU 
-                                                      & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                         >> 8U))) 
-                                       << 0x10U)));
-            }
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = ((0xfffff0ffU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
-                   | (0xf00U & (VL_SHIFTR_III(4,32,32, 
-                                              vlSelf->tb_requant__DOT__ins[2U], vlSelf->tb_requant__DOT__con) 
-                                << 8U)));
-        } else {
-            vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                = (0xff00ffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = (0xfffff0ffU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-        }
-    } else {
-        vlSelf->tb_requant__DOT____Vcellout__dut__out 
-            = (0xff00ffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-        __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-            = (0xfffff0ffU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-    }
-    if (vlSelf->tb_requant__DOT__rst_n) {
-        if (((IData)(vlSelf->tb_requant__DOT__valid) 
-             & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
-                | (IData)(vlSelf->tb_requant__DOT__accum_state)))) {
-            if (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
-                                                    (0xfU 
-                                                     & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                        >> 0xcU))))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x7f000000U | (0xffffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else if (VL_LIKELY(VL_GTS_III(32, 0xffffff80U, 
+                                                              >> 8U))))
+                                  ? 0x80U : (0xffU 
+                                             & VL_EXTENDS_II(8,4, 
+                                                             (0xfU 
+                                                              & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+                                                                 >> 8U))))))
+                  : 0U) : 0U) << 0x10U));
+    vlSelf->tb_requant__DOT____Vcellout__dut__out = 
+        ((0xffffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
+         | (((IData)(vlSelf->tb_requant__DOT__rst_n)
+              ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                  & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                     | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                  ? (VL_LTS_III(32, 0x7fU, VL_EXTENDS_II(32,4, 
+                                                         (0xfU 
+                                                          & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+                                                             >> 0xcU))))
+                      ? 0x7fU : (VL_GTS_III(32, 0xffffff80U, 
                                             VL_EXTENDS_II(32,4, 
                                                           (0xfU 
                                                            & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                              >> 0xcU)))))) {
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = (0x80000000U | (0xffffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out));
-            } else {
-                VL_WRITEF("shift_buffer[x] = %0d\n",
-                          4,(0xfU & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                     >> 0xcU)));
-                vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                    = ((0xffffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out) 
-                       | (VL_EXTENDS_II(8,4, (0xfU 
-                                              & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                                                 >> 0xcU))) 
-                          << 0x18U));
-            }
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = ((0xffff0fffU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
-                   | (0xf000U & (VL_SHIFTR_III(4,32,32, 
-                                               vlSelf->tb_requant__DOT__ins[3U], vlSelf->tb_requant__DOT__con) 
-                                 << 0xcU)));
-        } else {
-            vlSelf->tb_requant__DOT____Vcellout__dut__out 
-                = (0xffffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-            __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-                = (0xffff0fffU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-        }
-    } else {
-        vlSelf->tb_requant__DOT____Vcellout__dut__out 
-            = (0xffffffU & vlSelf->tb_requant__DOT____Vcellout__dut__out);
-        __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-            = (0xffff0fffU & __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U]);
-    }
+                                                              >> 0xcU))))
+                                  ? 0x80U : (0xffU 
+                                             & VL_EXTENDS_II(8,4, 
+                                                             (0xfU 
+                                                              & (vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+                                                                 >> 0xcU))))))
+                  : 0U) : 0U) << 0x18U));
     vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
-        = __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[0U];
-    vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[1U] 
-        = __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[1U];
-    vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[2U] 
-        = __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[2U];
-    vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[3U] 
-        = __Vdly__tb_requant__DOT__dut__DOT__shift_buffer[3U];
+        = ((0xfffffff0U & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
+           | ((IData)(vlSelf->tb_requant__DOT__rst_n)
+               ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                   & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                      | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                   ? (0xfU & VL_SHIFTR_III(4,32,32, 
+                                           vlSelf->tb_requant__DOT__ins[0U], vlSelf->tb_requant__DOT__con))
+                   : 0U) : 0U));
+    vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+        = ((0xffffff0fU & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
+           | (((IData)(vlSelf->tb_requant__DOT__rst_n)
+                ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                    & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                       | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                    ? (0xfU & VL_SHIFTR_III(4,32,32, 
+                                            vlSelf->tb_requant__DOT__ins[1U], vlSelf->tb_requant__DOT__con))
+                    : 0U) : 0U) << 4U));
+    vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+        = ((0xfffff0ffU & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
+           | (((IData)(vlSelf->tb_requant__DOT__rst_n)
+                ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                    & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                       | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                    ? (0xfU & VL_SHIFTR_III(4,32,32, 
+                                            vlSelf->tb_requant__DOT__ins[2U], vlSelf->tb_requant__DOT__con))
+                    : 0U) : 0U) << 8U));
+    vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U] 
+        = ((0xffff0fffU & vlSelf->tb_requant__DOT__dut__DOT__shift_buffer[0U]) 
+           | (((IData)(vlSelf->tb_requant__DOT__rst_n)
+                ? (((IData)(vlSelf->tb_requant__DOT__valid) 
+                    & ((IData)(vlSelf->tb_requant__DOT__drain_state) 
+                       | (IData)(vlSelf->tb_requant__DOT__accum_state)))
+                    ? (0xfU & VL_SHIFTR_III(4,32,32, 
+                                            vlSelf->tb_requant__DOT__ins[3U], vlSelf->tb_requant__DOT__con))
+                    : 0U) : 0U) << 0xcU));
 }
 
 void Vtb_requant___024root___eval_nba(Vtb_requant___024root* vlSelf) {
