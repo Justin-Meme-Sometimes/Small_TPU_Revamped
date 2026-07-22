@@ -122,6 +122,7 @@ module tpu_top (
                     next_state = PRELOAD;
                     preload_en = 1;
                     prefill_clr = 1;
+                    func_clr = 1;
                 end
                 preload_state = 1;
             end

@@ -40,20 +40,34 @@ module DMA (
         end
     end
 
+    // Deterministic per-(tile, column) "hash" instead of a plain linear
+    // walk, so a run of many tiles looks like a sequence of distinct random
+    // matrices rather than the same shape drifting by 1 each time. Kept as
+    // a plain function (not $random) so a testbench can independently
+    // recompute the exact expected value from tile_idx alone - see
+    // tb_tpu_top.sv's mirrored weight_lane/act_lane functions.
+    function automatic logic [7:0] weight_lane(input logic [7:0] idx, input logic [1:0] col);
+        weight_lane = (idx * 8'd41) + 8'd10 + (col * 8'd15);
+    endfunction
+
+    function automatic logic [3:0] act_lane(input logic [7:0] idx, input logic [1:0] col);
+        act_lane = (idx[3:0] * 4'd7) + 4'd1 + (col * 4'd3);
+    endfunction
+
     assign weight_bank_out_valid = 1'b1;
-    assign weight_bank_out[0] = 8'd10 + tile_idx;
-    assign weight_bank_out[1] = 8'd20 + tile_idx;
-    assign weight_bank_out[2] = 8'd30 + tile_idx;
-    assign weight_bank_out[3] = 8'd40 + tile_idx;
+    assign weight_bank_out[0] = weight_lane(tile_idx, 2'd0);
+    assign weight_bank_out[1] = weight_lane(tile_idx, 2'd1);
+    assign weight_bank_out[2] = weight_lane(tile_idx, 2'd2);
+    assign weight_bank_out[3] = weight_lane(tile_idx, 2'd3);
 
     // activation_buffer's i_buffer only ever consumes elements [0:3] of a
     // write; [4:31] are padding to satisfy the port width and are never
     // read downstream.
     assign activation_bank_out_valid = 1'b1;
-    assign activation_bank_out[0] = 4'd1 + tile_idx[3:0];
-    assign activation_bank_out[1] = 4'd2 + tile_idx[3:0];
-    assign activation_bank_out[2] = 4'd3 + tile_idx[3:0];
-    assign activation_bank_out[3] = 4'd4 + tile_idx[3:0];
+    assign activation_bank_out[0] = act_lane(tile_idx, 2'd0);
+    assign activation_bank_out[1] = act_lane(tile_idx, 2'd1);
+    assign activation_bank_out[2] = act_lane(tile_idx, 2'd2);
+    assign activation_bank_out[3] = act_lane(tile_idx, 2'd3);
 
     genvar gi;
     generate

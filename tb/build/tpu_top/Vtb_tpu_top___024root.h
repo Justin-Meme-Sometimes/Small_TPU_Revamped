@@ -27,6 +27,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__weight_bank_out;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__drain_state;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__tile_done;
+        VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__activation_bank_out;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__systolic_act_in_valid;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__relu_out_valid;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__accum_state;
@@ -42,6 +43,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__drain_en;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__drain_clr;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__func_en;
+        CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__func_clr;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__tile_clr;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__prefill_count;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__preload_count;
@@ -79,10 +81,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_b_active;
         VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_b;
         VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__re_out_b;
-        CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__current_state;
-        CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__next_state;
     };
     struct {
+        CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__current_state;
+        CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__next_state;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__o_bank_reg;
         CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__B__DOT__current_state;
         CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__B__DOT__next_state;
@@ -145,10 +147,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_0__DOT__a_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_0__DOT__b_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_1__DOT__a_reg;
-        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_1__DOT__b_reg;
-        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_2__DOT__a_reg;
     };
     struct {
+        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_1__DOT__b_reg;
+        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_2__DOT__a_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_2__DOT__b_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__a_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__b_reg;
@@ -211,10 +213,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_0__DOT__accum_reg;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_1__DOT__accum_reg;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_2__DOT__accum_reg;
-        IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__accum_reg;
-        IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count;
     };
     struct {
+        IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__accum_reg;
+        IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count;
         VlWide<4>/*114:0*/ __VdfgTmp_hfccefdc9__0;
         IData/*31:0*/ __VactIterCount;
         VlUnpacked<IData/*31:0*/, 32> tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__Q;

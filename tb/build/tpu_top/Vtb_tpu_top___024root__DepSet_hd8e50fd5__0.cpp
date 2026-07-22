@@ -5,6 +5,7 @@
 #include "Vtb_tpu_top__pch.h"
 #include "Vtb_tpu_top___024root.h"
 
+VL_ATTR_COLD void Vtb_tpu_top___024root___eval_initial__TOP(Vtb_tpu_top___024root* vlSelf);
 VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(Vtb_tpu_top___024root* vlSelf);
 VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__1(Vtb_tpu_top___024root* vlSelf);
 
@@ -13,6 +14,7 @@ void Vtb_tpu_top___024root___eval_initial(Vtb_tpu_top___024root* vlSelf) {
     Vtb_tpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_tpu_top___024root___eval_initial\n"); );
     // Body
+    Vtb_tpu_top___024root___eval_initial__TOP(vlSelf);
     Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(vlSelf);
     Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__1(vlSelf);
     vlSelf->__Vtrigprevexpr___TOP__tb_tpu_top__DOT__clk__0 
@@ -26,8 +28,14 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
     Vtb_tpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0\n"); );
     // Init
-    IData/*31:0*/ tb_tpu_top__DOT__unnamedblk1__DOT__n;
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = 0;
+    IData/*31:0*/ tb_tpu_top__DOT__last_group_row;
+    tb_tpu_top__DOT__last_group_row = 0;
+    IData/*31:0*/ tb_tpu_top__DOT__unnamedblk2__DOT__n;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = 0;
+    IData/*31:0*/ tb_tpu_top__DOT__unnamedblk2__DOT__group1_row;
+    tb_tpu_top__DOT__unnamedblk2__DOT__group1_row = 0;
+    IData/*31:0*/ tb_tpu_top__DOT__unnamedblk2__DOT__unnamedblk5__DOT__trial;
+    tb_tpu_top__DOT__unnamedblk2__DOT__unnamedblk5__DOT__trial = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__1__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__1__cond;
     __Vtask_tb_tpu_top__DOT__check__1__cond = 0;
@@ -70,45 +78,46 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
     std::string __Vtask_tb_tpu_top__DOT__check__15__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__15__cond;
     __Vtask_tb_tpu_top__DOT__check__15__cond = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__16__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__16__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__16__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__16__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__16__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__16__cycles_taken = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__18__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__18__cond;
-    __Vtask_tb_tpu_top__DOT__check__18__cond = 0;
+    VlWide<5>/*131:0*/ __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout;
+    VL_ZERO_W(132, __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout);
+    IData/*31:0*/ __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row;
+    __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__17__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__17__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__17__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__17__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__17__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__17__cycles_taken = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__19__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__19__cond;
     __Vtask_tb_tpu_top__DOT__check__19__cond = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__20__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__20__cond;
     __Vtask_tb_tpu_top__DOT__check__20__cond = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__21__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__21__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__21__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__21__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__21__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__21__cycles_taken = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__23__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__23__cond;
-    __Vtask_tb_tpu_top__DOT__check__23__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__21__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__21__cond;
+    __Vtask_tb_tpu_top__DOT__check__21__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__22__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__22__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__22__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__22__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__22__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__22__cycles_taken = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__24__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__24__cond;
     __Vtask_tb_tpu_top__DOT__check__24__cond = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__25__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__25__cond;
     __Vtask_tb_tpu_top__DOT__check__25__cond = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__26__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__26__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__26__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__26__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__26__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__26__cycles_taken = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__28__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__28__cond;
-    __Vtask_tb_tpu_top__DOT__check__28__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__26__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__26__cond;
+    __Vtask_tb_tpu_top__DOT__check__26__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__27__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__27__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__27__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__27__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__27__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__27__cycles_taken = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__29__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__29__cond;
     __Vtask_tb_tpu_top__DOT__check__29__cond = 0;
@@ -118,93 +127,178 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
     std::string __Vtask_tb_tpu_top__DOT__check__31__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__31__cond;
     __Vtask_tb_tpu_top__DOT__check__31__cond = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__32__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__34__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__36__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__38__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__40__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__40__cond;
-    __Vtask_tb_tpu_top__DOT__check__40__cond = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__41__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__41__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__41__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__41__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__41__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__41__cycles_taken = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__43__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__43__cond;
-    __Vtask_tb_tpu_top__DOT__check__43__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__32__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__32__cond;
+    __Vtask_tb_tpu_top__DOT__check__32__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__33__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__35__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__37__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__39__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__41__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__41__cond;
+    __Vtask_tb_tpu_top__DOT__check__41__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__42__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__42__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__42__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__42__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__42__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__42__cycles_taken = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__44__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__44__cond;
     __Vtask_tb_tpu_top__DOT__check__44__cond = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__46__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__46__cond;
-    __Vtask_tb_tpu_top__DOT__check__46__cond = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__47__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__47__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__47__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__47__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__47__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__47__cycles_taken = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__49__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__51__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__53__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__53__cond;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__54__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__56__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0;
-    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__58__target;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__58__target = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__58__max_cycles;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__58__max_cycles = 0;
-    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__58__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__58__cycles_taken = 0;
-    std::string __Vtask_tb_tpu_top__DOT__check__60__name;
-    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__60__cond;
-    __Vtask_tb_tpu_top__DOT__check__60__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__45__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__45__cond;
+    __Vtask_tb_tpu_top__DOT__check__45__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__47__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__47__cond;
+    __Vtask_tb_tpu_top__DOT__check__47__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__48__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__48__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__48__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__48__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__48__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__48__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__50__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__52__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__54__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__54__cond;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__55__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__57__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__59__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__59__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__59__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__59__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__59__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__59__cycles_taken = 0;
     std::string __Vtask_tb_tpu_top__DOT__check__61__name;
     CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__61__cond;
     __Vtask_tb_tpu_top__DOT__check__61__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__62__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__62__cond;
+    __Vtask_tb_tpu_top__DOT__check__62__cond = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num;
+    __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials;
+    __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow;
+    __Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__run_random_group_test__63__cap_before;
+    __Vtask_tb_tpu_top__DOT__run_random_group_test__63__cap_before = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__65__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__65__cond;
+    __Vtask_tb_tpu_top__DOT__check__65__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__66__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__66__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__66__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__66__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__66__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__66__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__68__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__68__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__68__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__68__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__68__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__68__cycles_taken = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__70__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__70__cond;
+    __Vtask_tb_tpu_top__DOT__check__70__cond = 0;
+    VlWide<5>/*131:0*/ __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout;
+    VL_ZERO_W(132, __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout);
+    IData/*31:0*/ __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row;
+    __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row = 0;
+    VlWide<5>/*131:0*/ __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout;
+    VL_ZERO_W(132, __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout);
+    IData/*31:0*/ __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row;
+    __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__73__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__73__cond;
+    __Vtask_tb_tpu_top__DOT__check__73__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__74__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__76__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__78__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__80__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__80__cond;
+    __Vtask_tb_tpu_top__DOT__check__80__cond = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__81__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0;
+    CData/*4:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__83__target;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__83__target = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__83__max_cycles;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__83__max_cycles = 0;
+    IData/*31:0*/ __Vtask_tb_tpu_top__DOT__wait_for_state__83__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__83__cycles_taken = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__85__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__85__cond;
+    __Vtask_tb_tpu_top__DOT__check__85__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__86__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__86__cond;
+    __Vtask_tb_tpu_top__DOT__check__86__cond = 0;
+    std::string __Vtask_tb_tpu_top__DOT__check__87__name;
+    CData/*0:0*/ __Vtask_tb_tpu_top__DOT__check__87__cond;
+    __Vtask_tb_tpu_top__DOT__check__87__cond = 0;
+    VlWide<5>/*159:0*/ __Vtemp_25;
+    VlWide<5>/*159:0*/ __Vtemp_156;
+    VlWide<5>/*159:0*/ __Vtemp_159;
     // Body
     vlSelf->tb_tpu_top__DOT__rst_n = 0U;
     vlSelf->tb_tpu_top__DOT__start = 0U;
@@ -283,6 +377,7 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__5__name));
     }
+    tb_tpu_top__DOT__unnamedblk2__DOT__group1_row = vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out;
     __Vtask_tb_tpu_top__DOT__wait_for_state__6__max_cycles = 0x28U;
     __Vtask_tb_tpu_top__DOT__wait_for_state__6__target = 2U;
     __Vtask_tb_tpu_top__DOT__wait_for_state__6__cycles_taken = 0U;
@@ -301,11 +396,11 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
         __Vtask_tb_tpu_top__DOT__wait_for_state__6__cycles_taken 
             = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__6__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__6__cycles_taken;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__6__cycles_taken;
     __Vtask_tb_tpu_top__DOT__check__8__cond = (2U == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
     __Vtask_tb_tpu_top__DOT__check__8__name = VL_SFORMATF_NX("reached PRELOAD within budget (took %0d cycles)",
                                                              32,
-                                                             tb_tpu_top__DOT__unnamedblk1__DOT__n) ;
+                                                             tb_tpu_top__DOT__unnamedblk2__DOT__n) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__8__cond) {
@@ -358,12 +453,12 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
         __Vtask_tb_tpu_top__DOT__wait_for_state__11__cycles_taken 
             = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__11__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__11__cycles_taken;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__11__cycles_taken;
     __Vtask_tb_tpu_top__DOT__check__13__cond = (3U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
     __Vtask_tb_tpu_top__DOT__check__13__name = VL_SFORMATF_NX("reached COMPUTE within budget (took %0d cycles)",
                                                               32,
-                                                              tb_tpu_top__DOT__unnamedblk1__DOT__n) ;
+                                                              tb_tpu_top__DOT__unnamedblk2__DOT__n) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__13__cond) {
@@ -403,21 +498,95 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
               33,(0x1ffffffffULL & ((QData)((IData)(
                                                     vlSelf->__VdfgTmp_hfccefdc9__0[3U])) 
                                     >> 3U)));
-    __Vtask_tb_tpu_top__DOT__check__15__cond = (0U 
-                                                == 
-                                                ((((0xaU 
-                                                    ^ 
-                                                    vlSelf->__VdfgTmp_hfccefdc9__0[0U]) 
-                                                   | (0x28U 
-                                                      ^ 
-                                                      vlSelf->__VdfgTmp_hfccefdc9__0[1U])) 
-                                                  | (0x78U 
-                                                     ^ 
-                                                     vlSelf->__VdfgTmp_hfccefdc9__0[2U])) 
-                                                 | (0x140U 
-                                                    ^ 
-                                                    vlSelf->__VdfgTmp_hfccefdc9__0[3U])));
-    __Vtask_tb_tpu_top__DOT__check__15__name = std::string{"preload_max=8 gives PE_array's down_out chain enough cycles to carry the DMA's weight row (10,20,30,40) all the way to row 3 before COMPUTE starts"};
+    __Vtemp_25[0U] = vlSelf->__VdfgTmp_hfccefdc9__0[0U];
+    __Vtemp_25[1U] = vlSelf->__VdfgTmp_hfccefdc9__0[1U];
+    __Vtemp_25[2U] = vlSelf->__VdfgTmp_hfccefdc9__0[2U];
+    __Vtemp_25[3U] = vlSelf->__VdfgTmp_hfccefdc9__0[3U];
+    __Vtemp_25[4U] = 0U;
+    __Vtask_tb_tpu_top__DOT__check__15__cond = VL_EQ_W(5, __Vtemp_25, 
+                                                       ([&]() {
+                __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                    = tb_tpu_top__DOT__unnamedblk2__DOT__group1_row;
+                __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[0U] 
+                    = (IData)((QData)((IData)((0xffU 
+                                               & __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row))));
+                __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[1U] 
+                    = (((IData)((QData)((IData)((0xffU 
+                                                 & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                    >> 8U))))) 
+                        << 1U) | (IData)(((QData)((IData)(
+                                                          (0xffU 
+                                                           & __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row))) 
+                                          >> 0x20U)));
+                __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[2U] 
+                    = ((0xfffffffcU & __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[2U]) 
+                       | (((IData)((QData)((IData)(
+                                                   (0xffU 
+                                                    & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                       >> 8U))))) 
+                           >> 0x1fU) | ((IData)(((QData)((IData)(
+                                                                 (0xffU 
+                                                                  & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                                     >> 8U)))) 
+                                                 >> 0x20U)) 
+                                        << 1U)));
+                __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[2U] 
+                    = ((3U & __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[2U]) 
+                       | ((IData)((QData)((IData)((0xffU 
+                                                   & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                      >> 0x10U))))) 
+                          << 2U));
+                __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[3U] 
+                    = (((IData)((QData)((IData)((0xffU 
+                                                 & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                    >> 0x10U))))) 
+                        >> 0x1eU) | (((IData)((QData)((IData)(
+                                                              (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                               >> 0x18U)))) 
+                                      << 3U) | ((IData)(
+                                                        ((QData)((IData)(
+                                                                         (0xffU 
+                                                                          & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                                             >> 0x10U)))) 
+                                                         >> 0x20U)) 
+                                                << 2U)));
+                __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout[4U] 
+                    = (0xfU & (((3U & ((IData)((QData)((IData)(
+                                                               (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                                >> 0x18U)))) 
+                                       >> 0x1dU)) | 
+                                ((IData)(((QData)((IData)(
+                                                          (0xffU 
+                                                           & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                              >> 0x10U)))) 
+                                          >> 0x20U)) 
+                                 >> 0x1eU)) | ((4U 
+                                                & ((IData)((QData)((IData)(
+                                                                           (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                                            >> 0x18U)))) 
+                                                   >> 0x1dU)) 
+                                               | ((IData)(
+                                                          ((QData)((IData)(
+                                                                           (__Vfunc_tb_tpu_top__DOT__pack_weight_row__16__row 
+                                                                            >> 0x18U))) 
+                                                           >> 0x20U)) 
+                                                  << 3U))));
+            }(), __Vfunc_tb_tpu_top__DOT__pack_weight_row__16__Vfuncout));
+    __Vtask_tb_tpu_top__DOT__check__15__name = VL_SFORMATF_NX("preload_max=8 gives PE_array's down_out chain enough cycles to carry the DMA's weight row (%0#,%0#,%0#,%0#) all the way to row 3 before COMPUTE starts",
+                                                              8,
+                                                              (0xffU 
+                                                               & tb_tpu_top__DOT__unnamedblk2__DOT__group1_row),
+                                                              8,
+                                                              (0xffU 
+                                                               & (tb_tpu_top__DOT__unnamedblk2__DOT__group1_row 
+                                                                  >> 8U)),
+                                                              8,
+                                                              (0xffU 
+                                                               & (tb_tpu_top__DOT__unnamedblk2__DOT__group1_row 
+                                                                  >> 0x10U)),
+                                                              8,
+                                                              (tb_tpu_top__DOT__unnamedblk2__DOT__group1_row 
+                                                               >> 0x18U)) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__15__cond) {
@@ -428,12 +597,12 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__15__name));
     }
     VL_WRITEF("==== tpu_top: tile 1 - COMPUTE -> DRAIN ====\n");
-    __Vtask_tb_tpu_top__DOT__wait_for_state__16__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__16__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__16__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__17__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__17__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__17__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__16__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__16__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__16__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__17__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__17__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__17__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -443,27 +612,15 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__16__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__16__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__17__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__17__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__16__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__18__cond = (4U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__17__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__19__cond = (4U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__18__name = VL_SFORMATF_NX("reached DRAIN within budget (took %0d cycles)",
+    __Vtask_tb_tpu_top__DOT__check__19__name = VL_SFORMATF_NX("reached DRAIN within budget (took %0d cycles)",
                                                               32,
-                                                              tb_tpu_top__DOT__unnamedblk1__DOT__n) ;
-    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
-                                       + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__18__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__18__name));
-    } else {
-        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
-                                           + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__18__name));
-    }
-    __Vtask_tb_tpu_top__DOT__check__19__cond = (7U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__compute_count));
-    __Vtask_tb_tpu_top__DOT__check__19__name = std::string{"COMPUTE ran the full 7 cycles (compute_count saturated)"};
+                                                              tb_tpu_top__DOT__unnamedblk2__DOT__n) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__19__cond) {
@@ -473,9 +630,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__19__name));
     }
-    __Vtask_tb_tpu_top__DOT__check__20__cond = (1U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__20__name = std::string{"tile_done pulsed on the COMPUTE->DRAIN edge (tile_count advanced to 1)"};
+    __Vtask_tb_tpu_top__DOT__check__20__cond = (7U 
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__compute_count));
+    __Vtask_tb_tpu_top__DOT__check__20__name = std::string{"COMPUTE ran the full 7 cycles (compute_count saturated)"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__20__cond) {
@@ -485,13 +642,25 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__20__name));
     }
+    __Vtask_tb_tpu_top__DOT__check__21__cond = (1U 
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
+    __Vtask_tb_tpu_top__DOT__check__21__name = std::string{"tile_done pulsed on the COMPUTE->DRAIN edge (tile_count advanced to 1)"};
+    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                       + vlSelf->tb_tpu_top__DOT__checks);
+    if (__Vtask_tb_tpu_top__DOT__check__21__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__21__name));
+    } else {
+        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__21__name));
+    }
     VL_WRITEF("==== tpu_top: tile 1 - DRAIN -> FUNCS ====\n");
-    __Vtask_tb_tpu_top__DOT__wait_for_state__21__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__21__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__21__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__22__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__22__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__22__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__21__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__21__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__21__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__22__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__22__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__22__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -501,27 +670,15 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__21__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__21__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__22__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__22__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__21__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__23__cond = (5U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__22__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__24__cond = (5U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__23__name = VL_SFORMATF_NX("reached FUNCS within budget (took %0d cycles)",
+    __Vtask_tb_tpu_top__DOT__check__24__name = VL_SFORMATF_NX("reached FUNCS within budget (took %0d cycles)",
                                                               32,
-                                                              tb_tpu_top__DOT__unnamedblk1__DOT__n) ;
-    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
-                                       + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__23__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__23__name));
-    } else {
-        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
-                                           + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__23__name));
-    }
-    __Vtask_tb_tpu_top__DOT__check__24__cond = (4U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__drain_count));
-    __Vtask_tb_tpu_top__DOT__check__24__name = std::string{"DRAIN ran the full 4 cycles (drain_count saturated)"};
+                                                              tb_tpu_top__DOT__unnamedblk2__DOT__n) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__24__cond) {
@@ -531,9 +688,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__24__name));
     }
-    __Vtask_tb_tpu_top__DOT__check__25__cond = (0U 
-                                                < vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count);
-    __Vtask_tb_tpu_top__DOT__check__25__name = std::string{"requant_out_valid pulsed at some point in tile 1's drain/funcs window"};
+    __Vtask_tb_tpu_top__DOT__check__25__cond = (4U 
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__drain_count));
+    __Vtask_tb_tpu_top__DOT__check__25__name = std::string{"DRAIN ran the full 4 cycles (drain_count saturated)"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__25__cond) {
@@ -543,13 +700,25 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__25__name));
     }
+    __Vtask_tb_tpu_top__DOT__check__26__cond = (0U 
+                                                < vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count);
+    __Vtask_tb_tpu_top__DOT__check__26__name = std::string{"requant_out_valid pulsed at some point in tile 1's drain/funcs window"};
+    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                       + vlSelf->tb_tpu_top__DOT__checks);
+    if (__Vtask_tb_tpu_top__DOT__check__26__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__26__name));
+    } else {
+        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__26__name));
+    }
     VL_WRITEF("==== tpu_top: tile 1 - FUNCS -> back to PRELOAD (tile 1 of 8, not yet tile_complete) ====\n");
-    __Vtask_tb_tpu_top__DOT__wait_for_state__26__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__26__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__26__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__27__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__27__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__27__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__26__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__26__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__26__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__27__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__27__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__27__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -559,27 +728,15 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__26__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__26__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__27__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__27__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__26__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__28__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__27__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__29__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__28__name = VL_SFORMATF_NX("FUNCS looped back to PRELOAD for tile 2/8 (took %0d cycles)",
+    __Vtask_tb_tpu_top__DOT__check__29__name = VL_SFORMATF_NX("FUNCS looped back to PRELOAD for tile 2/8 (took %0d cycles)",
                                                               32,
-                                                              tb_tpu_top__DOT__unnamedblk1__DOT__n) ;
-    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
-                                       + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__28__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__28__name));
-    } else {
-        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
-                                           + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__28__name));
-    }
-    __Vtask_tb_tpu_top__DOT__check__29__cond = (3U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__funcs_count));
-    __Vtask_tb_tpu_top__DOT__check__29__name = std::string{"FUNCS ran the full 3 cycles (funcs_count saturated)"};
+                                                              tb_tpu_top__DOT__unnamedblk2__DOT__n) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__29__cond) {
@@ -589,9 +746,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__29__name));
     }
-    __Vtask_tb_tpu_top__DOT__check__30__cond = (0U 
-                                                < vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count);
-    __Vtask_tb_tpu_top__DOT__check__30__name = std::string{"DMA captured at least one requant result from tile 1's drain/funcs window"};
+    __Vtask_tb_tpu_top__DOT__check__30__cond = (3U 
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__funcs_count));
+    __Vtask_tb_tpu_top__DOT__check__30__name = std::string{"FUNCS ran the full 3 cycles (funcs_count saturated)"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__30__cond) {
@@ -601,10 +758,9 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__30__name));
     }
-    VL_WRITEF("==== tpu_top: DMA weight pattern changed for tile 2 (tile_idx bumped on preload_state's rising edge) ====\n");
-    __Vtask_tb_tpu_top__DOT__check__31__cond = (1U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx));
-    __Vtask_tb_tpu_top__DOT__check__31__name = std::string{"dummy DMA presents a different weight row for tile 2 (tile_idx advanced)"};
+    __Vtask_tb_tpu_top__DOT__check__31__cond = (0U 
+                                                < vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count);
+    __Vtask_tb_tpu_top__DOT__check__31__name = std::string{"DMA captured at least one requant result from tile 1's drain/funcs window"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__31__cond) {
@@ -614,13 +770,26 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__31__name));
     }
+    VL_WRITEF("==== tpu_top: DMA weight pattern changed for tile 2 (tile_idx bumped on preload_state's rising edge) ====\n");
+    __Vtask_tb_tpu_top__DOT__check__32__cond = (1U 
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx));
+    __Vtask_tb_tpu_top__DOT__check__32__name = std::string{"dummy DMA presents a different weight row for tile 2 (tile_idx advanced)"};
+    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                       + vlSelf->tb_tpu_top__DOT__checks);
+    if (__Vtask_tb_tpu_top__DOT__check__32__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__32__name));
+    } else {
+        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__32__name));
+    }
     VL_WRITEF("==== tpu_top: running tiles 2-8 to reach tiles_complete ====\n");
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__32__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__33__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -630,16 +799,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__34__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__35__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -649,16 +818,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__36__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__37__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -668,16 +837,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__38__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__39__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -687,28 +856,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__40__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__41__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__40__name = std::string{"tile 2/8: FUNCS looped back to PRELOAD"};
+    __Vtask_tb_tpu_top__DOT__check__41__name = std::string{"tile 2/8: FUNCS looped back to PRELOAD"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__40__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+    if (__Vtask_tb_tpu_top__DOT__check__41__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__32__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__33__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -718,16 +887,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__34__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__35__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -737,16 +906,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__36__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__37__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -756,16 +925,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__38__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__39__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -775,28 +944,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__40__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__41__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__40__name = std::string{"tile 3/8: FUNCS looped back to PRELOAD"};
+    __Vtask_tb_tpu_top__DOT__check__41__name = std::string{"tile 3/8: FUNCS looped back to PRELOAD"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__40__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+    if (__Vtask_tb_tpu_top__DOT__check__41__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__32__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__33__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -806,16 +975,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__34__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__35__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -825,16 +994,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__36__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__37__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -844,16 +1013,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__38__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__39__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -863,28 +1032,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__40__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__41__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__40__name = std::string{"tile 4/8: FUNCS looped back to PRELOAD"};
+    __Vtask_tb_tpu_top__DOT__check__41__name = std::string{"tile 4/8: FUNCS looped back to PRELOAD"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__40__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+    if (__Vtask_tb_tpu_top__DOT__check__41__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__32__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__33__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -894,16 +1063,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__34__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__35__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -913,16 +1082,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__36__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__37__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -932,16 +1101,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__38__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__39__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -951,28 +1120,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__40__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__41__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__40__name = std::string{"tile 5/8: FUNCS looped back to PRELOAD"};
+    __Vtask_tb_tpu_top__DOT__check__41__name = std::string{"tile 5/8: FUNCS looped back to PRELOAD"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__40__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+    if (__Vtask_tb_tpu_top__DOT__check__41__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__32__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__33__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -982,16 +1151,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__34__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__35__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1001,16 +1170,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__36__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__37__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1020,16 +1189,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__38__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__39__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1039,28 +1208,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__40__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__41__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__40__name = std::string{"tile 6/8: FUNCS looped back to PRELOAD"};
+    __Vtask_tb_tpu_top__DOT__check__41__name = std::string{"tile 6/8: FUNCS looped back to PRELOAD"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__40__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+    if (__Vtask_tb_tpu_top__DOT__check__41__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__32__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__33__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1070,16 +1239,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__34__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__35__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1089,16 +1258,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__36__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__37__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1108,16 +1277,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__38__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__38__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__39__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__39__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1127,28 +1296,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__38__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__40__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__39__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__41__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__40__name = std::string{"tile 7/8: FUNCS looped back to PRELOAD"};
+    __Vtask_tb_tpu_top__DOT__check__41__name = std::string{"tile 7/8: FUNCS looped back to PRELOAD"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__40__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+    if (__Vtask_tb_tpu_top__DOT__check__41__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__40__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__41__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__32__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__32__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__33__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__33__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1158,16 +1327,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__32__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__33__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__34__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__34__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__35__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__35__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1177,16 +1346,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__34__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__35__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__36__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__36__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__37__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__37__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1196,16 +1365,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__36__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__41__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__41__target = 0U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__41__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__37__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__42__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__42__target = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__42__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__41__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__41__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__41__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__42__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__42__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__42__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1215,27 +1384,15 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__41__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__41__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__42__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__42__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__41__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__43__cond = (0U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__43__name = VL_SFORMATF_NX("after 8 tiles: FUNCS saw tile_complete and returned to IDLE (took %0d cycles)",
-                                                              32,
-                                                              tb_tpu_top__DOT__unnamedblk1__DOT__n) ;
-    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
-                                       + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__43__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__43__name));
-    } else {
-        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
-                                           + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__43__name));
-    }
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__42__cycles_taken;
     __Vtask_tb_tpu_top__DOT__check__44__cond = (0U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__44__name = std::string{"DONE's tile_clr reset tile_count back to 0 on the way to IDLE"};
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
+    __Vtask_tb_tpu_top__DOT__check__44__name = VL_SFORMATF_NX("after 8 tiles: FUNCS saw tile_complete and returned to IDLE (took %0d cycles)",
+                                                              32,
+                                                              tb_tpu_top__DOT__unnamedblk2__DOT__n) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__44__cond) {
@@ -1244,6 +1401,18 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__44__name));
+    }
+    __Vtask_tb_tpu_top__DOT__check__45__cond = (0U 
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
+    __Vtask_tb_tpu_top__DOT__check__45__name = std::string{"DONE's tile_clr reset tile_count back to 0 on the way to IDLE"};
+    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                       + vlSelf->tb_tpu_top__DOT__checks);
+    if (__Vtask_tb_tpu_top__DOT__check__45__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__45__name));
+    } else {
+        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__45__name));
     }
     VL_WRITEF("[INFO] total requant results captured by dummy DMA across tile group 1: %0#\n==== tpu_top: tile group 2 (does a fresh 8-tile group actually complete?) ====\n",
               32,vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count);
@@ -1257,24 +1426,25 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                        "tb/tb_tpu_top.sv", 
                                        58);
     vlSelf->tb_tpu_top__DOT__start = 0U;
-    __Vtask_tb_tpu_top__DOT__check__46__cond = (1U 
+    __Vtask_tb_tpu_top__DOT__check__47__cond = (1U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__46__name = std::string{"group 2: start pulse moves IDLE -> PREFILL"};
+    __Vtask_tb_tpu_top__DOT__check__47__name = std::string{"group 2: start pulse moves IDLE -> PREFILL"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__46__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__46__name));
+    if (__Vtask_tb_tpu_top__DOT__check__47__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__47__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__46__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__47__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__47__max_cycles = 0x28U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__47__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__47__cycles_taken = 0U;
+    tb_tpu_top__DOT__last_group_row = vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__48__max_cycles = 0x28U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__48__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__48__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__47__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__47__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__47__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__48__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__48__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__48__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1284,16 +1454,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__47__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__47__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__48__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__48__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__47__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__48__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1303,16 +1473,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1322,28 +1492,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (1U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (1U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 1: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 1: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1353,16 +1523,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__56__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__57__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1372,16 +1542,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1391,16 +1561,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1410,28 +1580,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (2U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (2U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 2: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 2: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1441,16 +1611,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__56__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__57__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1460,16 +1630,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1479,16 +1649,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1498,28 +1668,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (3U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (3U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 3: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 3: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1529,16 +1699,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__56__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__57__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1548,16 +1718,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1567,16 +1737,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1586,28 +1756,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (4U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (4U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 4: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 4: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1617,16 +1787,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__56__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__57__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1636,16 +1806,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1655,16 +1825,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1674,28 +1844,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (5U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (5U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 5: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 5: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1705,16 +1875,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__56__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__57__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1724,16 +1894,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1743,16 +1913,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1762,28 +1932,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (6U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (6U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 6: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 6: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1793,16 +1963,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__56__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__57__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1812,16 +1982,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1831,16 +2001,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1850,28 +2020,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (7U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (7U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 7: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 7: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1881,16 +2051,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__target = 2U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__target = 2U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__56__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__56__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__57__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__57__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1900,16 +2070,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__56__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__target = 3U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__57__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__target = 3U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__49__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__49__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__50__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__50__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1919,16 +2089,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__49__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__target = 4U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__50__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__target = 4U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__51__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__51__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__52__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__52__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1938,28 +2108,28 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__51__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__53__cond = (8U 
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__52__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__check__54__cond = (8U 
                                                 == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__53__name = std::string{"group 2 tile 8: tile_count advanced correctly"};
+    __Vtask_tb_tpu_top__DOT__check__54__name = std::string{"group 2 tile 8: tile_count advanced correctly"};
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__53__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+    if (__Vtask_tb_tpu_top__DOT__check__54__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     } else {
         vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
                                            + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__53__name));
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__54__name));
     }
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__target = 5U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__target = 5U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__54__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__54__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__55__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__55__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1969,16 +2139,16 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__54__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__58__max_cycles = 0x14U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__58__target = 0U;
-    __Vtask_tb_tpu_top__DOT__wait_for_state__58__cycles_taken = 0U;
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__55__cycles_taken;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__59__max_cycles = 0x14U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__59__target = 0U;
+    __Vtask_tb_tpu_top__DOT__wait_for_state__59__cycles_taken = 0U;
     while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
-             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__58__target)) 
-            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__58__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__58__max_cycles))) {
+             != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__59__target)) 
+            & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__59__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__59__max_cycles))) {
         co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
                                                            nullptr, 
                                                            "@(posedge tb_tpu_top.clk)", 
@@ -1988,27 +2158,15 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            nullptr, 
                                            "tb/tb_tpu_top.sv", 
                                            58);
-        __Vtask_tb_tpu_top__DOT__wait_for_state__58__cycles_taken 
-            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__58__cycles_taken);
+        __Vtask_tb_tpu_top__DOT__wait_for_state__59__cycles_taken 
+            = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__59__cycles_taken);
     }
-    tb_tpu_top__DOT__unnamedblk1__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__58__cycles_taken;
-    __Vtask_tb_tpu_top__DOT__check__60__cond = (0U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
-    __Vtask_tb_tpu_top__DOT__check__60__name = VL_SFORMATF_NX("group 2 also reached tiles_complete and returned to IDLE (took %0d cycles)",
-                                                              32,
-                                                              tb_tpu_top__DOT__unnamedblk1__DOT__n) ;
-    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
-                                       + vlSelf->tb_tpu_top__DOT__checks);
-    if (__Vtask_tb_tpu_top__DOT__check__60__cond) {
-        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__60__name));
-    } else {
-        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
-                                           + vlSelf->tb_tpu_top__DOT__errors);
-        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__60__name));
-    }
+    tb_tpu_top__DOT__unnamedblk2__DOT__n = __Vtask_tb_tpu_top__DOT__wait_for_state__59__cycles_taken;
     __Vtask_tb_tpu_top__DOT__check__61__cond = (0U 
-                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
-    __Vtask_tb_tpu_top__DOT__check__61__name = std::string{"group 2: tile_count cleared back to 0 again"};
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
+    __Vtask_tb_tpu_top__DOT__check__61__name = VL_SFORMATF_NX("group 2 also reached tiles_complete and returned to IDLE (took %0d cycles)",
+                                                              32,
+                                                              tb_tpu_top__DOT__unnamedblk2__DOT__n) ;
     vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
                                        + vlSelf->tb_tpu_top__DOT__checks);
     if (__Vtask_tb_tpu_top__DOT__check__61__cond) {
@@ -2018,10 +2176,1044 @@ VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__0(
                                            + vlSelf->tb_tpu_top__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__61__name));
     }
+    __Vtask_tb_tpu_top__DOT__check__62__cond = (0U 
+                                                == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
+    __Vtask_tb_tpu_top__DOT__check__62__name = std::string{"group 2: tile_count cleared back to 0 again"};
+    vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                       + vlSelf->tb_tpu_top__DOT__checks);
+    if (__Vtask_tb_tpu_top__DOT__check__62__cond) {
+        VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__62__name));
+    } else {
+        vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__errors);
+        VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__62__name));
+    }
+    VL_WRITEF("==== tpu_top: 20 randomized full-chip tile-group tests ====\n");
+    tb_tpu_top__DOT__unnamedblk2__DOT__unnamedblk5__DOT__trial = 1U;
+    while (VL_GTES_III(32, 0x14U, tb_tpu_top__DOT__unnamedblk2__DOT__unnamedblk5__DOT__trial)) {
+        __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials = 0x14U;
+        __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num 
+            = tb_tpu_top__DOT__unnamedblk2__DOT__unnamedblk5__DOT__trial;
+        vlSelf->tb_tpu_top__DOT__start = 1U;
+        co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                           nullptr, 
+                                                           "@(posedge tb_tpu_top.clk)", 
+                                                           "tb/tb_tpu_top.sv", 
+                                                           58);
+        co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                           nullptr, 
+                                           "tb/tb_tpu_top.sv", 
+                                           58);
+        vlSelf->tb_tpu_top__DOT__start = 0U;
+        __Vtask_tb_tpu_top__DOT__check__65__cond = 
+            (1U == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
+        __Vtask_tb_tpu_top__DOT__check__65__name = VL_SFORMATF_NX("random matrix %0d/%0d: start pulse moves IDLE -> PREFILL",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__65__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__65__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__65__name));
+        }
+        __Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow 
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__66__max_cycles = 0x28U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__66__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__66__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__66__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__66__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__66__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__66__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__66__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__68__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__68__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__68__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__68__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__68__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__68__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__68__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__68__cycles_taken);
+        }
+        __Vtemp_156[0U] = vlSelf->__VdfgTmp_hfccefdc9__0[0U];
+        __Vtemp_156[1U] = vlSelf->__VdfgTmp_hfccefdc9__0[1U];
+        __Vtemp_156[2U] = vlSelf->__VdfgTmp_hfccefdc9__0[2U];
+        __Vtemp_156[3U] = vlSelf->__VdfgTmp_hfccefdc9__0[3U];
+        __Vtemp_156[4U] = 0U;
+        __Vtemp_159[0U] = vlSelf->__VdfgTmp_hfccefdc9__0[0U];
+        __Vtemp_159[1U] = vlSelf->__VdfgTmp_hfccefdc9__0[1U];
+        __Vtemp_159[2U] = vlSelf->__VdfgTmp_hfccefdc9__0[2U];
+        __Vtemp_159[3U] = vlSelf->__VdfgTmp_hfccefdc9__0[3U];
+        __Vtemp_159[4U] = 0U;
+        __Vtask_tb_tpu_top__DOT__check__70__cond = 
+            (VL_EQ_W(5, __Vtemp_156, ([&]() {
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                            = __Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow;
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[0U] 
+                            = (IData)((QData)((IData)(
+                                                      (0xffU 
+                                                       & __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row))));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[1U] 
+                            = (((IData)((QData)((IData)(
+                                                        (0xffU 
+                                                         & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                            >> 8U))))) 
+                                << 1U) | (IData)(((QData)((IData)(
+                                                                  (0xffU 
+                                                                   & __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row))) 
+                                                  >> 0x20U)));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[2U] 
+                            = ((0xfffffffcU & __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[2U]) 
+                               | (((IData)((QData)((IData)(
+                                                           (0xffU 
+                                                            & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                               >> 8U))))) 
+                                   >> 0x1fU) | ((IData)(
+                                                        ((QData)((IData)(
+                                                                         (0xffU 
+                                                                          & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                                             >> 8U)))) 
+                                                         >> 0x20U)) 
+                                                << 1U)));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[2U] 
+                            = ((3U & __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[2U]) 
+                               | ((IData)((QData)((IData)(
+                                                          (0xffU 
+                                                           & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                              >> 0x10U))))) 
+                                  << 2U));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[3U] 
+                            = (((IData)((QData)((IData)(
+                                                        (0xffU 
+                                                         & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                            >> 0x10U))))) 
+                                >> 0x1eU) | (((IData)((QData)((IData)(
+                                                                      (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                                       >> 0x18U)))) 
+                                              << 3U) 
+                                             | ((IData)(
+                                                        ((QData)((IData)(
+                                                                         (0xffU 
+                                                                          & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                                             >> 0x10U)))) 
+                                                         >> 0x20U)) 
+                                                << 2U)));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout[4U] 
+                            = (0xfU & (((3U & ((IData)((QData)((IData)(
+                                                                       (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                                        >> 0x18U)))) 
+                                               >> 0x1dU)) 
+                                        | ((IData)(
+                                                   ((QData)((IData)(
+                                                                    (0xffU 
+                                                                     & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                                        >> 0x10U)))) 
+                                                    >> 0x20U)) 
+                                           >> 0x1eU)) 
+                                       | ((4U & ((IData)((QData)((IData)(
+                                                                         (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                                          >> 0x18U)))) 
+                                                 >> 0x1dU)) 
+                                          | ((IData)(
+                                                     ((QData)((IData)(
+                                                                      (__Vfunc_tb_tpu_top__DOT__pack_weight_row__71__row 
+                                                                       >> 0x18U))) 
+                                                      >> 0x20U)) 
+                                             << 3U))));
+                    }(), __Vfunc_tb_tpu_top__DOT__pack_weight_row__71__Vfuncout)) 
+             | VL_EQ_W(5, __Vtemp_159, ([&]() {
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                            = tb_tpu_top__DOT__last_group_row;
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[0U] 
+                            = (IData)((QData)((IData)(
+                                                      (0xffU 
+                                                       & __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row))));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[1U] 
+                            = (((IData)((QData)((IData)(
+                                                        (0xffU 
+                                                         & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                            >> 8U))))) 
+                                << 1U) | (IData)(((QData)((IData)(
+                                                                  (0xffU 
+                                                                   & __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row))) 
+                                                  >> 0x20U)));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[2U] 
+                            = ((0xfffffffcU & __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[2U]) 
+                               | (((IData)((QData)((IData)(
+                                                           (0xffU 
+                                                            & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                               >> 8U))))) 
+                                   >> 0x1fU) | ((IData)(
+                                                        ((QData)((IData)(
+                                                                         (0xffU 
+                                                                          & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                                             >> 8U)))) 
+                                                         >> 0x20U)) 
+                                                << 1U)));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[2U] 
+                            = ((3U & __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[2U]) 
+                               | ((IData)((QData)((IData)(
+                                                          (0xffU 
+                                                           & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                              >> 0x10U))))) 
+                                  << 2U));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[3U] 
+                            = (((IData)((QData)((IData)(
+                                                        (0xffU 
+                                                         & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                            >> 0x10U))))) 
+                                >> 0x1eU) | (((IData)((QData)((IData)(
+                                                                      (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                                       >> 0x18U)))) 
+                                              << 3U) 
+                                             | ((IData)(
+                                                        ((QData)((IData)(
+                                                                         (0xffU 
+                                                                          & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                                             >> 0x10U)))) 
+                                                         >> 0x20U)) 
+                                                << 2U)));
+                        __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout[4U] 
+                            = (0xfU & (((3U & ((IData)((QData)((IData)(
+                                                                       (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                                        >> 0x18U)))) 
+                                               >> 0x1dU)) 
+                                        | ((IData)(
+                                                   ((QData)((IData)(
+                                                                    (0xffU 
+                                                                     & (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                                        >> 0x10U)))) 
+                                                    >> 0x20U)) 
+                                           >> 0x1eU)) 
+                                       | ((4U & ((IData)((QData)((IData)(
+                                                                         (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                                          >> 0x18U)))) 
+                                                 >> 0x1dU)) 
+                                          | ((IData)(
+                                                     ((QData)((IData)(
+                                                                      (__Vfunc_tb_tpu_top__DOT__pack_weight_row__72__row 
+                                                                       >> 0x18U))) 
+                                                      >> 0x20U)) 
+                                             << 3U))));
+                    }(), __Vfunc_tb_tpu_top__DOT__pack_weight_row__72__Vfuncout)));
+        __Vtask_tb_tpu_top__DOT__check__70__name = VL_SFORMATF_NX("random matrix %0d/%0d (row=%0#,%0#,%0#,%0#, prev row=%0#,%0#,%0#,%0#): PE_array preloaded either this group's or the prior group's weight row bit-exact (see KNOWN GAP above)",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials,
+                                                                  8,
+                                                                  (0xffU 
+                                                                   & __Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow),
+                                                                  8,
+                                                                  (0xffU 
+                                                                   & (__Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow 
+                                                                      >> 8U)),
+                                                                  8,
+                                                                  (0xffU 
+                                                                   & (__Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow 
+                                                                      >> 0x10U)),
+                                                                  8,
+                                                                  (__Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow 
+                                                                   >> 0x18U),
+                                                                  8,
+                                                                  (0xffU 
+                                                                   & tb_tpu_top__DOT__last_group_row),
+                                                                  8,
+                                                                  (0xffU 
+                                                                   & (tb_tpu_top__DOT__last_group_row 
+                                                                      >> 8U)),
+                                                                  8,
+                                                                  (0xffU 
+                                                                   & (tb_tpu_top__DOT__last_group_row 
+                                                                      >> 0x10U)),
+                                                                  8,
+                                                                  (tb_tpu_top__DOT__last_group_row 
+                                                                   >> 0x18U)) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__70__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__70__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__70__name));
+        }
+        tb_tpu_top__DOT__last_group_row = __Vtask_tb_tpu_top__DOT__run_random_group_test__63__grow;
+        __Vtask_tb_tpu_top__DOT__check__73__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__73__name = VL_SFORMATF_NX("random matrix %0d/%0d: no X/Z in product_out after preload",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__73__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__73__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__73__name));
+        }
+        __Vtask_tb_tpu_top__DOT__run_random_group_test__63__cap_before 
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 1: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__81__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__74__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 2: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__81__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__74__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 3: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__81__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__74__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 4: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__81__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__74__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 5: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__81__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__74__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 6: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__81__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__74__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 7: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__target = 2U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__81__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__81__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__81__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__target = 3U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__74__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__74__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__74__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__target = 4U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__76__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__76__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__76__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__target = 5U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__78__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__78__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__78__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__80__cond = 1U;
+        __Vtask_tb_tpu_top__DOT__check__80__name = VL_SFORMATF_NX("random matrix %0d/%0d tile 8: no X/Z in requant_out",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__80__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__80__name));
+        }
+        __Vtask_tb_tpu_top__DOT__wait_for_state__83__max_cycles = 0x14U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__83__target = 0U;
+        __Vtask_tb_tpu_top__DOT__wait_for_state__83__cycles_taken = 0U;
+        while ((((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state) 
+                 != (IData)(__Vtask_tb_tpu_top__DOT__wait_for_state__83__target)) 
+                & VL_LTS_III(32, __Vtask_tb_tpu_top__DOT__wait_for_state__83__cycles_taken, __Vtask_tb_tpu_top__DOT__wait_for_state__83__max_cycles))) {
+            co_await vlSelf->__VtrigSched_hee1e3e53__0.trigger(0U, 
+                                                               nullptr, 
+                                                               "@(posedge tb_tpu_top.clk)", 
+                                                               "tb/tb_tpu_top.sv", 
+                                                               58);
+            co_await vlSelf->__VdlySched.delay(0x3e8ULL, 
+                                               nullptr, 
+                                               "tb/tb_tpu_top.sv", 
+                                               58);
+            __Vtask_tb_tpu_top__DOT__wait_for_state__83__cycles_taken 
+                = ((IData)(1U) + __Vtask_tb_tpu_top__DOT__wait_for_state__83__cycles_taken);
+        }
+        __Vtask_tb_tpu_top__DOT__check__85__cond = 
+            (0U == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state));
+        __Vtask_tb_tpu_top__DOT__check__85__name = VL_SFORMATF_NX("random matrix %0d/%0d: group completed all 8 tiles and returned to IDLE",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__85__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__85__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__85__name));
+        }
+        __Vtask_tb_tpu_top__DOT__check__86__cond = 
+            (0U == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count));
+        __Vtask_tb_tpu_top__DOT__check__86__name = VL_SFORMATF_NX("random matrix %0d/%0d: tile_count cleared back to 0",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__86__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__86__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__86__name));
+        }
+        __Vtask_tb_tpu_top__DOT__check__87__cond = 
+            (vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count 
+             > __Vtask_tb_tpu_top__DOT__run_random_group_test__63__cap_before);
+        __Vtask_tb_tpu_top__DOT__check__87__name = VL_SFORMATF_NX("random matrix %0d/%0d: DMA captured new requant results this group",
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__trial_num,
+                                                                  32,
+                                                                  __Vtask_tb_tpu_top__DOT__run_random_group_test__63__num_trials) ;
+        vlSelf->tb_tpu_top__DOT__checks = ((IData)(1U) 
+                                           + vlSelf->tb_tpu_top__DOT__checks);
+        if (__Vtask_tb_tpu_top__DOT__check__87__cond) {
+            VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__87__name));
+        } else {
+            vlSelf->tb_tpu_top__DOT__errors = ((IData)(1U) 
+                                               + vlSelf->tb_tpu_top__DOT__errors);
+            VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_tpu_top__DOT__check__87__name));
+        }
+        tb_tpu_top__DOT__unnamedblk2__DOT__unnamedblk5__DOT__trial 
+            = ((IData)(1U) + tb_tpu_top__DOT__unnamedblk2__DOT__unnamedblk5__DOT__trial);
+    }
     VL_WRITEF("==== SUMMARY ====\ntpu_top: %0d/%0d checks passed\n",
               32,(vlSelf->tb_tpu_top__DOT__checks - vlSelf->tb_tpu_top__DOT__errors),
               32,vlSelf->tb_tpu_top__DOT__checks);
-    VL_FINISH_MT("tb/tb_tpu_top.sv", 205, "");
+    VL_FINISH_MT("tb/tb_tpu_top.sv", 308, "");
 }
 
 VL_INLINE_OPT VlCoroutine Vtb_tpu_top___024root___eval_initial__TOP__Vtiming__1(Vtb_tpu_top___024root* vlSelf) {
@@ -2100,10 +3292,40 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
     // Init
     CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__compute_state;
     tb_tpu_top__DOT__dut__DOT__compute_state = 0;
-    VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__activation_bank_out;
-    VL_ZERO_W(128, tb_tpu_top__DOT__dut__DOT__activation_bank_out);
     CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__first_pass_a;
     tb_tpu_top__DOT__dut__DOT__a_buff__DOT__first_pass_a = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__idx = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__idx = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__idx = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__idx = 0;
+    CData/*3:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__idx = 0;
+    CData/*3:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__idx = 0;
+    CData/*3:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__idx = 0;
+    CData/*3:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__Vfuncout;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__Vfuncout = 0;
+    CData/*7:0*/ __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__idx = 0;
     CData/*6:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
     CData/*6:0*/ __Vtableidx2;
@@ -2116,6 +3338,8 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
     __Vdly__tb_tpu_top__DOT__dut__DOT__compute_count = 0;
     CData/*7:0*/ __Vdly__tb_tpu_top__DOT__dut__DOT__drain_count;
     __Vdly__tb_tpu_top__DOT__dut__DOT__drain_count = 0;
+    CData/*7:0*/ __Vdly__tb_tpu_top__DOT__dut__DOT__funcs_count;
+    __Vdly__tb_tpu_top__DOT__dut__DOT__funcs_count = 0;
     CData/*7:0*/ __Vdly__tb_tpu_top__DOT__dut__DOT__tile_count;
     __Vdly__tb_tpu_top__DOT__dut__DOT__tile_count = 0;
     CData/*3:0*/ __Vdly__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__count;
@@ -2211,18 +3435,18 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
     // Body
     __Vdly__tb_tpu_top__DOT__dut__DOT__prefill_count 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__prefill_count;
-    __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count 
-        = vlSelf->tb_tpu_top__DOT__dut__DOT__preload_count;
     __Vdly__tb_tpu_top__DOT__dut__DOT__drain_count 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__drain_count;
     __Vdly__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__getPtr 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__getPtr;
+    __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__preload_count;
     __Vdly__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__count 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__count;
+    __Vdly__tb_tpu_top__DOT__dut__DOT__funcs_count 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__funcs_count;
     __Vdly__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__putPtr 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__putPtr;
-    __Vdlyvset__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__Q__v0 = 0U;
-    __Vdlyvset__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__Q__v1 = 0U;
     __Vdly__tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__buff[0U] 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__buff[0U];
     __Vdly__tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__buff[1U] 
@@ -2233,6 +3457,8 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
         = vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__buff[3U];
     __Vdly__tb_tpu_top__DOT__dut__DOT__compute_count 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__compute_count;
+    __Vdlyvset__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__Q__v0 = 0U;
+    __Vdlyvset__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__Q__v1 = 0U;
     __Vdly__tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__curr_count 
         = vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__curr_count;
     __Vdly__tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_A__DOT__buff[0U] 
@@ -2317,20 +3543,22 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
             __Vdly__tb_tpu_top__DOT__dut__DOT__prefill_count 
                 = (0xffU & ((IData)(1U) + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__prefill_count)));
         }
-        if (vlSelf->tb_tpu_top__DOT__dut__DOT__preload_clr) {
-            __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count = 0U;
-        } else if (vlSelf->tb_tpu_top__DOT__dut__DOT__preload_en) {
-            __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count 
-                = (0xffU & ((IData)(1U) + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__preload_count)));
-        }
         if (vlSelf->tb_tpu_top__DOT__dut__DOT__drain_clr) {
             __Vdly__tb_tpu_top__DOT__dut__DOT__drain_count = 0U;
         } else if (vlSelf->tb_tpu_top__DOT__dut__DOT__drain_en) {
             __Vdly__tb_tpu_top__DOT__dut__DOT__drain_count 
                 = (0xffU & ((IData)(1U) + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__drain_count)));
         }
-        if (vlSelf->tb_tpu_top__DOT__dut__DOT__func_en) {
-            vlSelf->tb_tpu_top__DOT__dut__DOT__funcs_count 
+        if (vlSelf->tb_tpu_top__DOT__dut__DOT__preload_clr) {
+            __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count = 0U;
+        } else if (vlSelf->tb_tpu_top__DOT__dut__DOT__preload_en) {
+            __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count 
+                = (0xffU & ((IData)(1U) + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__preload_count)));
+        }
+        if (vlSelf->tb_tpu_top__DOT__dut__DOT__func_clr) {
+            __Vdly__tb_tpu_top__DOT__dut__DOT__funcs_count = 0U;
+        } else if (vlSelf->tb_tpu_top__DOT__dut__DOT__func_en) {
+            __Vdly__tb_tpu_top__DOT__dut__DOT__funcs_count 
                 = (0xffU & ((IData)(1U) + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__funcs_count)));
         }
         if (vlSelf->tb_tpu_top__DOT__dut__DOT__compute_clr) {
@@ -3153,9 +4381,9 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
         }
     } else {
         __Vdly__tb_tpu_top__DOT__dut__DOT__prefill_count = 0U;
-        __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count = 0U;
         __Vdly__tb_tpu_top__DOT__dut__DOT__drain_count = 0U;
-        vlSelf->tb_tpu_top__DOT__dut__DOT__funcs_count = 0U;
+        __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count = 0U;
+        __Vdly__tb_tpu_top__DOT__dut__DOT__funcs_count = 0U;
         __Vdly__tb_tpu_top__DOT__dut__DOT__compute_count = 0U;
         __Vdly__tb_tpu_top__DOT__dut__DOT__tile_count = 0U;
         vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count = 0U;
@@ -3303,12 +4531,16 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
            && (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_b_active));
     vlSelf->tb_tpu_top__DOT__dut__DOT__prefill_count 
         = __Vdly__tb_tpu_top__DOT__dut__DOT__prefill_count;
-    vlSelf->tb_tpu_top__DOT__dut__DOT__preload_count 
-        = __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count;
     vlSelf->tb_tpu_top__DOT__dut__DOT__drain_count 
         = __Vdly__tb_tpu_top__DOT__dut__DOT__drain_count;
     vlSelf->tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__getPtr 
         = __Vdly__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__getPtr;
+    vlSelf->tb_tpu_top__DOT__dut__DOT__preload_count 
+        = __Vdly__tb_tpu_top__DOT__dut__DOT__preload_count;
+    vlSelf->tb_tpu_top__DOT__dut__DOT__funcs_count 
+        = __Vdly__tb_tpu_top__DOT__dut__DOT__funcs_count;
+    vlSelf->tb_tpu_top__DOT__dut__DOT__compute_count 
+        = __Vdly__tb_tpu_top__DOT__dut__DOT__compute_count;
     vlSelf->tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__putPtr 
         = __Vdly__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__putPtr;
     if (__Vdlyvset__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__Q__v0) {
@@ -3321,8 +4553,6 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
     }
     vlSelf->tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__count 
         = __Vdly__tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__count;
-    vlSelf->tb_tpu_top__DOT__dut__DOT__compute_count 
-        = __Vdly__tb_tpu_top__DOT__dut__DOT__compute_count;
     vlSelf->tb_tpu_top__DOT__dut__DOT__tile_count = __Vdly__tb_tpu_top__DOT__dut__DOT__tile_count;
     vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__buff[0U] 
         = __Vdly__tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__buff[0U];
@@ -3424,29 +4654,76 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
                 & ((IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__drain_state) 
                    | (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__accum_state))) 
                && (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__relu_out_valid)));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__Vfuncout 
+        = (0xffU & ((IData)(0xaU) + ((IData)(0x29U) 
+                                     * (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__idx))));
     vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out 
-        = ((((IData)(0x28U) + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx)) 
-            << 0x18U) | ((0xff0000U & (((IData)(0x1eU) 
-                                        + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx)) 
-                                       << 0x10U)) | 
-                         ((0xff00U & (((IData)(0x14U) 
-                                       + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx)) 
-                                      << 8U)) | (0xffU 
-                                                 & ((IData)(0xaU) 
-                                                    + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx))))));
-    tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U] 
-        = ((0xf000U & (((IData)(4U) + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx)) 
-                       << 0xcU)) | ((0xf00U & (((IData)(3U) 
-                                                + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx)) 
-                                               << 8U)) 
-                                    | ((0xf0U & (((IData)(2U) 
-                                                  + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx)) 
-                                                 << 4U)) 
-                                       | (0xfU & ((IData)(1U) 
-                                                  + (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx))))));
-    tb_tpu_top__DOT__dut__DOT__activation_bank_out[1U] = 0U;
-    tb_tpu_top__DOT__dut__DOT__activation_bank_out[2U] = 0U;
-    tb_tpu_top__DOT__dut__DOT__activation_bank_out[3U] = 0U;
+        = ((0xffffff00U & vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out) 
+           | (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__88__Vfuncout));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__Vfuncout 
+        = (0xffU & ((IData)(0x19U) + ((IData)(0x29U) 
+                                      * (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__idx))));
+    vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out 
+        = ((0xffff00ffU & vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out) 
+           | ((IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__89__Vfuncout) 
+              << 8U));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__Vfuncout 
+        = (0xffU & ((IData)(0x28U) + ((IData)(0x29U) 
+                                      * (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__idx))));
+    vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out 
+        = ((0xff00ffffU & vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out) 
+           | ((IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__90__Vfuncout) 
+              << 0x10U));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__Vfuncout 
+        = (0xffU & ((IData)(0x37U) + ((IData)(0x29U) 
+                                      * (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__idx))));
+    vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out 
+        = ((0xffffffU & vlSelf->tb_tpu_top__DOT__dut__DOT__weight_bank_out) 
+           | ((IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__weight_lane__91__Vfuncout) 
+              << 0x18U));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__Vfuncout 
+        = (0xfU & ((IData)(1U) + ((IData)(7U) * (0xfU 
+                                                 & (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__idx)))));
+    vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U] 
+        = ((0xfffffff0U & vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U]) 
+           | (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__92__Vfuncout));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__Vfuncout 
+        = (0xfU & ((IData)(4U) + ((IData)(7U) * (0xfU 
+                                                 & (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__idx)))));
+    vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U] 
+        = ((0xffffff0fU & vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U]) 
+           | ((IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__93__Vfuncout) 
+              << 4U));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__Vfuncout 
+        = (0xfU & ((IData)(7U) + ((IData)(7U) * (0xfU 
+                                                 & (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__idx)))));
+    vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U] 
+        = ((0xfffff0ffU & vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U]) 
+           | ((IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__94__Vfuncout) 
+              << 8U));
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__idx 
+        = vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
+    __Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__Vfuncout 
+        = (0xfU & ((IData)(0xaU) + ((IData)(7U) * (0xfU 
+                                                   & (IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__idx)))));
+    vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U] 
+        = ((0xffff0fffU & vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U]) 
+           | ((IData)(__Vfunc_tb_tpu_top__DOT__dut__DOT__dma__DOT__act_lane__95__Vfuncout) 
+              << 0xcU));
     vlSelf->tb_tpu_top__DOT__dut__DOT__dma__DOT__preload_state_d 
         = ((IData)(vlSelf->tb_tpu_top__DOT__rst_n) 
            && (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__preload_state));
@@ -3461,10 +4738,11 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
     vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_a_empty 
         = (0U == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_A__DOT__curr_count));
     vlSelf->tb_tpu_top__DOT__dut__DOT__tile_clr = 0U;
+    vlSelf->tb_tpu_top__DOT__dut__DOT__func_clr = 0U;
+    vlSelf->tb_tpu_top__DOT__dut__DOT__prefill_en = 0U;
     vlSelf->tb_tpu_top__DOT__dut__DOT__prefill_clr = 0U;
     vlSelf->tb_tpu_top__DOT__dut__DOT__preload_clr = 0U;
     vlSelf->tb_tpu_top__DOT__dut__DOT__compute_clr = 0U;
-    vlSelf->tb_tpu_top__DOT__dut__DOT__prefill_en = 0U;
     vlSelf->tb_tpu_top__DOT__dut__DOT__preload_en = 0U;
     vlSelf->tb_tpu_top__DOT__dut__DOT__compute_en = 0U;
     vlSelf->tb_tpu_top__DOT__dut__DOT__drain_en = 0U;
@@ -3642,6 +4920,7 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
             }
             if ((2U == (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__current_state))) {
                 if ((8U != (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__preload_count))) {
+                    vlSelf->tb_tpu_top__DOT__dut__DOT__func_clr = 1U;
                     vlSelf->tb_tpu_top__DOT__dut__DOT__prefill_clr = 1U;
                     vlSelf->tb_tpu_top__DOT__dut__DOT__preload_en = 1U;
                 }
@@ -3975,24 +5254,24 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
     }
     if (tb_tpu_top__DOT__dut__DOT__a_buff__DOT__first_pass_a) {
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[0U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U];
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[1U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[1U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[1U];
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[2U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[2U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[2U];
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[3U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[3U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[3U];
     }
     if ((1U & (~ (IData)(vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_a_active)))) {
         if (vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_b_active) {
             vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[0U] 
-                = tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U];
+                = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U];
             vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[1U] 
-                = tb_tpu_top__DOT__dut__DOT__activation_bank_out[1U];
+                = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[1U];
             vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[2U] 
-                = tb_tpu_top__DOT__dut__DOT__activation_bank_out[2U];
+                = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[2U];
             vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_a[3U] 
-                = tb_tpu_top__DOT__dut__DOT__activation_bank_out[3U];
+                = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[3U];
         }
     }
     vlSelf->tb_tpu_top__DOT__dut__DOT__systolic_act_in_valid = 0U;
@@ -4017,13 +5296,13 @@ VL_INLINE_OPT void Vtb_tpu_top___024root___nba_sequent__TOP__0(Vtb_tpu_top___024
     if (vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_a_active) {
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__we_valid_b = 1U;
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_b[0U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[0U];
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_b[1U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[1U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[1U];
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_b[2U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[2U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[2U];
         vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_b[3U] 
-            = tb_tpu_top__DOT__dut__DOT__activation_bank_out[3U];
+            = vlSelf->tb_tpu_top__DOT__dut__DOT__activation_bank_out[3U];
         if (vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__re_valid_a) {
             vlSelf->tb_tpu_top__DOT__dut__DOT__systolic_act_in_valid 
                 = vlSelf->tb_tpu_top__DOT__dut__DOT__a_buff__DOT__re_valid_a;
