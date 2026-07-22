@@ -47,6 +47,14 @@ module tb_tpu_top;
         .tpu_in(tpu_in), .tpu_out(tpu_out), .op_code(op_code)
     );
 
+    // Waveform dump for viewing in GTKWave. A no-op unless this testbench
+    // is built with --trace-fst (or --trace for VCD) - run_all.sh doesn't
+    // pass that flag, so this has no effect/cost on the normal test suite.
+    initial begin
+        $dumpfile("tb_tpu_top.vcd");
+        $dumpvars(0, tb_tpu_top);
+    end
+
     task automatic reset_dut();
         rst_n = 0; start = 0; tpu_in = '0; op_code = '0;
         @(posedge clk); @(posedge clk);
