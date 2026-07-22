@@ -1,7 +1,9 @@
 module tpu_top (
     input logic clk,
     input logic rst_n,
-    input logic [31:0][3:0] tpu_in,
+    input logic start,
+    input logic [7:0][3:0] tpu_in,
+    output logic [7:0][3:0] tpu_out,
     input logic [31:0] op_code
 );
 
@@ -12,7 +14,7 @@ module tpu_top (
     logic weight_fifo_empty;
     logic weight_data_valid;
     logic [3:0][7:0] weight_data_out;
-    logic [7:0][3:0] weight_bank_out;
+    logic [3:0][7:0] weight_bank_out;
     logic weight_bank_out_valid;
 
     logic activation_buff_start;
@@ -20,7 +22,7 @@ module tpu_top (
     logic drain_state;
     logic tile_done;
     logic tile_complete;
-    logic [7:0][3:0] activation_bank_out;
+    logic [31:0][3:0] activation_bank_out;
     logic activation_bank_out_valid;
     logic [3:0][7:0] systolic_act_in;
     logic systolic_act_in_valid;
@@ -36,12 +38,21 @@ module tpu_top (
     logic accum_state;
     logic [3:0][7:0] requant_out;
     logic requant_out_valid;
-    logic [7:0][3:0] reqaunt_out;
     logic [2:0] dma_bank;
 
+    assign tpu_out = '0;
+    assign dma_bank = 3'd0;
 
     typedef enum logic [4:0] {IDLE, PREFILL, PRELOAD, COMPUTE, DRAIN, FUNCS, DONE} state_t;
     state_t current_state, next_state;
+
+    // Kick weight-fifo loading and activation prefill off together as soon as
+    // the top FSM enters PREFILL; both sub-FSMs self-pace off their own
+    // full/empty flags from there, so holding these high for the whole
+    // PREFILL window (instead of a single pulse) is harmless.
+    assign start_fifo_load = (current_state == PREFILL);
+    assign load_fifo = (current_state == PREFILL);
+    assign activation_buff_start = (current_state == PREFILL);
 
     always_ff @(posedge clk, negedge rst_n) begin
         if(!rst_n) begin
@@ -63,14 +74,14 @@ module tpu_top (
     counter TILES_COMPLETE_COUNTER   (.clk(clk), .rst_n(rst_n), .en(tile_done), .clr(tile_clr), .out(tile_count));
 
     assign prefill_max = (prefill_count == 8'd16);
-    assign preload_max = (preload_count == 8'd4);
+    assign preload_max = (preload_count == 8'd8);
     assign compute_max = (compute_count == 8'd7);
     assign drain_max = (drain_count == 8'd4);
     assign funcs_max = (funcs_count == 8'd3);
     assign tiles_max = (tile_count == 8'd8);
 
 
-    assign tiles_complete = tile_max;
+    assign tile_complete = tiles_max;
 
     //S0 isn't enabled first row, S1 enabled 2nd row, S2 enabled 3rd row
     always_comb begin
@@ -80,6 +91,7 @@ module tpu_top (
         compute_clr = 0;
         drain_clr = 0;
         func_clr = 0;
+        tile_clr = 0;
         prefill_en = 0;
         preload_en = 0;
         compute_en = 0;
@@ -92,9 +104,9 @@ module tpu_top (
         tile_done = 0;
         case(current_state)
             IDLE: begin
-                if(!compute_state_start) next_state = IDLE;
-                else next_state = S0
-            end 
+                if(!start) next_state = IDLE;
+                else next_state = PREFILL;
+            end
             PREFILL: begin
                 if(prefill_max) begin
                     next_state = PRELOAD;
@@ -135,14 +147,14 @@ module tpu_top (
                 drain_state = 1;
             end
             FUNCS: begin
-                if(func_max && !tile_complete) begin
+                if(funcs_max && !tile_complete) begin
                     next_state = PRELOAD;
-                end else if(func_max && tile_complete) begin
-                    next_state = IDLE;
+                end else if(funcs_max && tile_complete) begin
+                    next_state = DONE;
                 end else begin
-                    next_state = DRAIN;
-                    funcs_en = 1;
-                    dain_clr = 1;
+                    next_state = FUNCS;
+                    func_en = 1;
+                    drain_clr = 1;
                 end
                 accum_state = 1;
             end
@@ -208,7 +220,7 @@ module tpu_top (
         .ins(product_out),
         .valid(product_out_valid),
         .out_valid(relu_out_valid),
-        .out(relu_out),
+        .out(relu_out)
     );
 
     requant req (

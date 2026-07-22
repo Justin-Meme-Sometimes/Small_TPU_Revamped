@@ -15,6 +15,7 @@ declare -A TESTS=(
   [weight_fifo]="src/weight_fifo.sv"
   [relu_buffer]="src/relu_buffer.sv"
   [requant]="src/requant.sv"
+  [tpu_top]="src/tpu_top.sv src/DMA.sv src/weight_fifo.sv src/activation_buffer.sv src/array.sv src/pe.sv src/relu_buffer.sv src/requant.sv"
 )
 
 pass=0
