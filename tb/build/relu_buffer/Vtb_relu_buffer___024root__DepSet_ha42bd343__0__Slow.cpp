@@ -93,7 +93,7 @@ VL_ATTR_COLD void Vtb_relu_buffer___024root___ctor_var_reset(Vtb_relu_buffer___0
     vlSelf->tb_relu_buffer__DOT__valid = VL_RAND_RESET_I(1);
     vlSelf->tb_relu_buffer__DOT__out_valid = VL_RAND_RESET_I(1);
     VL_RAND_RESET_W(128, vlSelf->tb_relu_buffer__DOT__ins);
-    VL_RAND_RESET_W(128, vlSelf->tb_relu_buffer__DOT__out);
+    VL_RAND_RESET_W(128, vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out);
     vlSelf->__Vtrigprevexpr___TOP__tb_relu_buffer__DOT__clk__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_relu_buffer__DOT__rst_n__0 = VL_RAND_RESET_I(1);
 }

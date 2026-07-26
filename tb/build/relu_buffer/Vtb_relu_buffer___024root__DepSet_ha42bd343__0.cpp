@@ -109,7 +109,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
     __Vtask_tb_relu_buffer__DOT__check__1__cond = (0U 
                                                    == 
                                                    (0xffffU 
-                                                    & vlSelf->tb_relu_buffer__DOT__out[0U]));
+                                                    & vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U]));
     __Vtask_tb_relu_buffer__DOT__check__1__name = std::string{"reset: out[3:0] all zero"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
                                            + vlSelf->tb_relu_buffer__DOT__checks);
@@ -148,7 +148,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
     __Vtask_tb_relu_buffer__DOT__check__4__cond = (5U 
                                                    == 
                                                    (0xfU 
-                                                    & vlSelf->tb_relu_buffer__DOT__out[0U]));
+                                                    & vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U]));
     __Vtask_tb_relu_buffer__DOT__check__4__name = std::string{"drain: out[0]=5 (positive passes through)"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
                                            + vlSelf->tb_relu_buffer__DOT__checks);
@@ -162,7 +162,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
     __Vtask_tb_relu_buffer__DOT__check__5__cond = (0U 
                                                    == 
                                                    (0xfU 
-                                                    & (vlSelf->tb_relu_buffer__DOT__out[0U] 
+                                                    & (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
                                                        >> 4U)));
     __Vtask_tb_relu_buffer__DOT__check__5__name = std::string{"drain: out[1]=0 (negative relu'd)"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
@@ -177,7 +177,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
     __Vtask_tb_relu_buffer__DOT__check__6__cond = (0U 
                                                    == 
                                                    (0xfU 
-                                                    & (vlSelf->tb_relu_buffer__DOT__out[0U] 
+                                                    & (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
                                                        >> 8U)));
     __Vtask_tb_relu_buffer__DOT__check__6__name = std::string{"drain: out[2]=0 (zero passes through)"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
@@ -192,7 +192,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
     __Vtask_tb_relu_buffer__DOT__check__7__cond = (0U 
                                                    == 
                                                    (0xfU 
-                                                    & (vlSelf->tb_relu_buffer__DOT__out[0U] 
+                                                    & (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
                                                        >> 0xcU)));
     __Vtask_tb_relu_buffer__DOT__check__7__name = std::string{"drain: out[3]=0 (negative relu'd)"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
@@ -229,7 +229,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
                                        "tb/tb_relu_buffer.sv", 
                                        50);
     __Vtask_tb_relu_buffer__DOT__check__10__cond = 
-        (0U == (0xfU & vlSelf->tb_relu_buffer__DOT__out[0U]));
+        (0U == (0xfU & vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U]));
     __Vtask_tb_relu_buffer__DOT__check__10__name = 
         std::string{"accum: out[0]=0 (min negative relu'd)"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
@@ -242,7 +242,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_relu_buffer__DOT__check__10__name));
     }
     __Vtask_tb_relu_buffer__DOT__check__11__cond = 
-        (7U == (0xfU & (vlSelf->tb_relu_buffer__DOT__out[0U] 
+        (7U == (0xfU & (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
                         >> 4U)));
     __Vtask_tb_relu_buffer__DOT__check__11__name = 
         std::string{"accum: out[1]=7 (max positive passes through)"};
@@ -256,7 +256,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_relu_buffer__DOT__check__11__name));
     }
     __Vtask_tb_relu_buffer__DOT__check__12__cond = 
-        (2U == (0xfU & (vlSelf->tb_relu_buffer__DOT__out[0U] 
+        (2U == (0xfU & (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
                         >> 8U)));
     __Vtask_tb_relu_buffer__DOT__check__12__name = 
         std::string{"accum: out[2]=2"};
@@ -270,7 +270,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_relu_buffer__DOT__check__12__name));
     }
     __Vtask_tb_relu_buffer__DOT__check__13__cond = 
-        (0U == (0xfU & (vlSelf->tb_relu_buffer__DOT__out[0U] 
+        (0U == (0xfU & (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
                         >> 0xcU)));
     __Vtask_tb_relu_buffer__DOT__check__13__name = 
         std::string{"accum: out[3]=0 (negative relu'd)"};
@@ -310,7 +310,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
                                        "tb/tb_relu_buffer.sv", 
                                        50);
     __Vtask_tb_relu_buffer__DOT__check__16__cond = 
-        (0U == (0xffffU & vlSelf->tb_relu_buffer__DOT__out[0U]));
+        (0U == (0xffffU & vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U]));
     __Vtask_tb_relu_buffer__DOT__check__16__name = 
         std::string{"valid=0: out forced to 0 despite drain_state"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
@@ -349,7 +349,7 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
                                        "tb/tb_relu_buffer.sv", 
                                        50);
     __Vtask_tb_relu_buffer__DOT__check__19__cond = 
-        (0U == (0xffffU & vlSelf->tb_relu_buffer__DOT__out[0U]));
+        (0U == (0xffffU & vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U]));
     __Vtask_tb_relu_buffer__DOT__check__19__name = 
         std::string{"neither state active: out forced to 0"};
     vlSelf->tb_relu_buffer__DOT__checks = ((IData)(1U) 
@@ -375,15 +375,15 @@ VL_INLINE_OPT VlCoroutine Vtb_relu_buffer___024root___eval_initial__TOP__Vtiming
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_relu_buffer__DOT__check__20__name));
     }
     __Vtask_tb_relu_buffer__DOT__check__21__cond = 
-        (0U == (((((vlSelf->tb_relu_buffer__DOT__out[1U] 
-                    << 0x10U) | (vlSelf->tb_relu_buffer__DOT__out[0U] 
-                                 >> 0x10U)) | ((vlSelf->tb_relu_buffer__DOT__out[2U] 
+        (0U == (((((vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[1U] 
+                    << 0x10U) | (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
+                                 >> 0x10U)) | ((vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[2U] 
                                                 << 0x10U) 
-                                               | (vlSelf->tb_relu_buffer__DOT__out[1U] 
+                                               | (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[1U] 
                                                   >> 0x10U))) 
-                 | ((vlSelf->tb_relu_buffer__DOT__out[3U] 
-                     << 0x10U) | (vlSelf->tb_relu_buffer__DOT__out[2U] 
-                                  >> 0x10U))) | (vlSelf->tb_relu_buffer__DOT__out[3U] 
+                 | ((vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[3U] 
+                     << 0x10U) | (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[2U] 
+                                  >> 0x10U))) | (vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[3U] 
                                                  >> 0x10U)));
     __Vtask_tb_relu_buffer__DOT__check__21__name = 
         std::string{"out[4..31] permanently 0 (never assigned by the RTL)"};
@@ -432,95 +432,34 @@ VL_INLINE_OPT void Vtb_relu_buffer___024root___nba_sequent__TOP__0(Vtb_relu_buff
                                               && ((IData)(vlSelf->tb_relu_buffer__DOT__valid) 
                                                   & ((IData)(vlSelf->tb_relu_buffer__DOT__drain_state) 
                                                      | (IData)(vlSelf->tb_relu_buffer__DOT__accum_state))));
-    vlSelf->tb_relu_buffer__DOT__out[0U] = ((0xfffffff0U 
-                                             & vlSelf->tb_relu_buffer__DOT__out[0U]) 
-                                            | ((IData)(vlSelf->tb_relu_buffer__DOT__rst_n)
-                                                ? (
-                                                   ((IData)(vlSelf->tb_relu_buffer__DOT__valid) 
-                                                    & ((IData)(vlSelf->tb_relu_buffer__DOT__drain_state) 
-                                                       | (IData)(vlSelf->tb_relu_buffer__DOT__accum_state)))
-                                                    ? 
-                                                   (VL_GTS_III(32, 0U, 
-                                                               VL_EXTENDS_II(32,4, 
-                                                                             (0xfU 
-                                                                              & vlSelf->tb_relu_buffer__DOT__ins[0U])))
-                                                     ? 0U
-                                                     : 
-                                                    (0xfU 
-                                                     & VL_EXTENDS_II(32,4, 
-                                                                     (0xfU 
-                                                                      & vlSelf->tb_relu_buffer__DOT__ins[0U]))))
-                                                    : 0U)
-                                                : 0U));
-    vlSelf->tb_relu_buffer__DOT__out[0U] = ((0xffffff0fU 
-                                             & vlSelf->tb_relu_buffer__DOT__out[0U]) 
-                                            | (((IData)(vlSelf->tb_relu_buffer__DOT__rst_n)
-                                                 ? 
-                                                (((IData)(vlSelf->tb_relu_buffer__DOT__valid) 
-                                                  & ((IData)(vlSelf->tb_relu_buffer__DOT__drain_state) 
-                                                     | (IData)(vlSelf->tb_relu_buffer__DOT__accum_state)))
-                                                  ? 
-                                                 (VL_GTS_III(32, 0U, 
-                                                             VL_EXTENDS_II(32,4, 
-                                                                           (0xfU 
-                                                                            & (vlSelf->tb_relu_buffer__DOT__ins[0U] 
-                                                                               >> 4U))))
-                                                   ? 0U
-                                                   : 
-                                                  (0xfU 
-                                                   & VL_EXTENDS_II(32,4, 
-                                                                   (0xfU 
-                                                                    & (vlSelf->tb_relu_buffer__DOT__ins[0U] 
-                                                                       >> 4U)))))
-                                                  : 0U)
-                                                 : 0U) 
-                                               << 4U));
-    vlSelf->tb_relu_buffer__DOT__out[0U] = ((0xfffff0ffU 
-                                             & vlSelf->tb_relu_buffer__DOT__out[0U]) 
-                                            | (((IData)(vlSelf->tb_relu_buffer__DOT__rst_n)
-                                                 ? 
-                                                (((IData)(vlSelf->tb_relu_buffer__DOT__valid) 
-                                                  & ((IData)(vlSelf->tb_relu_buffer__DOT__drain_state) 
-                                                     | (IData)(vlSelf->tb_relu_buffer__DOT__accum_state)))
-                                                  ? 
-                                                 (VL_GTS_III(32, 0U, 
-                                                             VL_EXTENDS_II(32,4, 
-                                                                           (0xfU 
-                                                                            & (vlSelf->tb_relu_buffer__DOT__ins[0U] 
-                                                                               >> 8U))))
-                                                   ? 0U
-                                                   : 
-                                                  (0xfU 
-                                                   & VL_EXTENDS_II(32,4, 
-                                                                   (0xfU 
-                                                                    & (vlSelf->tb_relu_buffer__DOT__ins[0U] 
-                                                                       >> 8U)))))
-                                                  : 0U)
-                                                 : 0U) 
-                                               << 8U));
-    vlSelf->tb_relu_buffer__DOT__out[0U] = ((0xffff0fffU 
-                                             & vlSelf->tb_relu_buffer__DOT__out[0U]) 
-                                            | (((IData)(vlSelf->tb_relu_buffer__DOT__rst_n)
-                                                 ? 
-                                                (((IData)(vlSelf->tb_relu_buffer__DOT__valid) 
-                                                  & ((IData)(vlSelf->tb_relu_buffer__DOT__drain_state) 
-                                                     | (IData)(vlSelf->tb_relu_buffer__DOT__accum_state)))
-                                                  ? 
-                                                 (VL_GTS_III(32, 0U, 
-                                                             VL_EXTENDS_II(32,4, 
-                                                                           (0xfU 
-                                                                            & (vlSelf->tb_relu_buffer__DOT__ins[0U] 
-                                                                               >> 0xcU))))
-                                                   ? 0U
-                                                   : 
-                                                  (0xfU 
-                                                   & VL_EXTENDS_II(32,4, 
-                                                                   (0xfU 
-                                                                    & (vlSelf->tb_relu_buffer__DOT__ins[0U] 
-                                                                       >> 0xcU)))))
-                                                  : 0U)
-                                                 : 0U) 
-                                               << 0xcU));
+    if (vlSelf->tb_relu_buffer__DOT__rst_n) {
+        if (((IData)(vlSelf->tb_relu_buffer__DOT__valid) 
+             & ((IData)(vlSelf->tb_relu_buffer__DOT__drain_state) 
+                | (IData)(vlSelf->tb_relu_buffer__DOT__accum_state)))) {
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] 
+                = (VL_GTS_III(32, 0U, vlSelf->tb_relu_buffer__DOT__ins[0U])
+                    ? 0U : vlSelf->tb_relu_buffer__DOT__ins[0U]);
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[1U] 
+                = (VL_GTS_III(32, 0U, vlSelf->tb_relu_buffer__DOT__ins[1U])
+                    ? 0U : vlSelf->tb_relu_buffer__DOT__ins[1U]);
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[2U] 
+                = (VL_GTS_III(32, 0U, vlSelf->tb_relu_buffer__DOT__ins[2U])
+                    ? 0U : vlSelf->tb_relu_buffer__DOT__ins[2U]);
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[3U] 
+                = (VL_GTS_III(32, 0U, vlSelf->tb_relu_buffer__DOT__ins[3U])
+                    ? 0U : vlSelf->tb_relu_buffer__DOT__ins[3U]);
+        } else {
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] = 0U;
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[1U] = 0U;
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[2U] = 0U;
+            vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[3U] = 0U;
+        }
+    } else {
+        vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[0U] = 0U;
+        vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[1U] = 0U;
+        vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[2U] = 0U;
+        vlSelf->tb_relu_buffer__DOT____Vcellout__dut__out[3U] = 0U;
+    }
 }
 
 void Vtb_relu_buffer___024root___eval_nba(Vtb_relu_buffer___024root* vlSelf) {

@@ -58,19 +58,15 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_array___024root final : public VerilatedM
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_0_0__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_0_1__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_0_2__right_out;
-        CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_0_3__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_1_0__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_1_1__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_1_2__right_out;
-        CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_1_3__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_2_0__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_2_1__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_2_2__right_out;
-        CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_2_3__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__right_out;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__right_out;
-        CData/*7:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__right_out;
         CData/*4:0*/ tb_array__DOT__arr_dut__DOT__e_fsm_1__DOT__current_state;
         CData/*4:0*/ tb_array__DOT__arr_dut__DOT__e_fsm_1__DOT__next_state;
         CData/*4:0*/ tb_array__DOT__arr_dut__DOT__v_fsm_1__DOT__current_state;
@@ -81,12 +77,12 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_array___024root final : public VerilatedM
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_0_1__DOT__b_reg;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_0_2__DOT__a_reg;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_0_2__DOT__b_reg;
-    };
-    struct {
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_0_3__DOT__a_reg;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_0_3__DOT__b_reg;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_1_0__DOT__a_reg;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_1_0__DOT__b_reg;
+    };
+    struct {
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_1_1__DOT__a_reg;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_1_1__DOT__b_reg;
         CData/*7:0*/ tb_array__DOT__arr_dut__DOT__pe_1_2__DOT__a_reg;
@@ -115,8 +111,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_array___024root final : public VerilatedM
         CData/*0:0*/ __Vtrigprevexpr___TOP__tb_array__DOT__v_rst_n__0;
         CData/*0:0*/ __Vtrigprevexpr___TOP__tb_array__DOT__arr_rst_n__0;
         CData/*0:0*/ __VactContinue;
-        VlWide<16>/*511:0*/ tb_array__DOT__arr_dut__DOT__pe_down_out;
-        VlWide<16>/*511:0*/ tb_array__DOT__arr_dut__DOT__pe_right_out;
         SData/*15:0*/ tb_array__DOT__arr_dut__DOT__pe_0_0__DOT__product_reg;
         SData/*15:0*/ tb_array__DOT__arr_dut__DOT__pe_0_1__DOT__product_reg;
         SData/*15:0*/ tb_array__DOT__arr_dut__DOT__pe_0_2__DOT__product_reg;
@@ -147,14 +141,14 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_array___024root final : public VerilatedM
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_2_1__down_out;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_2_2__down_out;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_2_3__down_out;
-    };
-    struct {
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT__pe_0_0__DOT__accum_reg;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT__pe_0_1__DOT__accum_reg;
+    };
+    struct {
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT__pe_0_2__DOT__accum_reg;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT__pe_0_3__DOT__accum_reg;
         IData/*31:0*/ tb_array__DOT__arr_dut__DOT__pe_1_0__DOT__accum_reg;

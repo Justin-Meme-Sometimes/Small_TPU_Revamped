@@ -10,7 +10,9 @@ module DMA (
     output logic [3:0][7:0] weight_bank_out,
     output logic weight_bank_out_valid,
     output logic [31:0][3:0] activation_bank_out,
-    output logic activation_bank_out_valid);
+    output logic activation_bank_out_valid,
+    output logic [3:0][31:0] bias_bank_out,
+    output logic bias_bank_out_valid);
 
     // Dummy DMA stand-in: no backing memory, no bank arbitration, no
     // backpressure handling - just canned data with correctly-timed valid
@@ -54,11 +56,24 @@ module DMA (
         act_lane = (idx[3:0] * 4'd7) + 4'd1 + (col * 4'd3);
     endfunction
 
+    // Same idea as weight_lane, one 32-bit bias value per output-channel
+    // column, held steady for the whole tile - bias_add latches it during
+    // preload_state the same way weight_loader latches weight_bank_out.
+    function automatic logic [31:0] bias_lane(input logic [7:0] idx, input logic [1:0] col);
+        bias_lane = 32'(idx) * 32'd97 + 32'd23 + (32'(col) * 32'd29);
+    endfunction
+
     assign weight_bank_out_valid = 1'b1;
     assign weight_bank_out[0] = weight_lane(tile_idx, 2'd0);
     assign weight_bank_out[1] = weight_lane(tile_idx, 2'd1);
     assign weight_bank_out[2] = weight_lane(tile_idx, 2'd2);
     assign weight_bank_out[3] = weight_lane(tile_idx, 2'd3);
+
+    assign bias_bank_out_valid = 1'b1;
+    assign bias_bank_out[0] = bias_lane(tile_idx, 2'd0);
+    assign bias_bank_out[1] = bias_lane(tile_idx, 2'd1);
+    assign bias_bank_out[2] = bias_lane(tile_idx, 2'd2);
+    assign bias_bank_out[3] = bias_lane(tile_idx, 2'd3);
 
     // activation_buffer's i_buffer only ever consumes elements [0:3] of a
     // write; [4:31] are padding to satisfy the port width and are never

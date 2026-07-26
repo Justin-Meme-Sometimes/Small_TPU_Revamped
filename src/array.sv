@@ -9,14 +9,14 @@ module PE_array(
     input logic [3:0][7:0] weight_array,
     input logic activation_valid,
     input logic [3:0][7:0] activation_array,
-    output logic [3:0][32:0] product_array,
+    output logic [3:0][31:0] product_array,
     output logic output_valid
 );
     assign output_valid = drain_state;
     logic h_en_0, h_en_1, h_en_2, h_en_3;
     logic v_en_0, v_en_1, v_en_2, v_en_3;
-    logic [31:0][15:0] pe_down_out;
-    logic [31:0][15:0] pe_right_out;
+    logic [15:0][31:0] pe_down_out;
+    logic [15:0][7:0] pe_right_out;
     logic clr;
     
     assign clr = clr_state ? 1 : 0;

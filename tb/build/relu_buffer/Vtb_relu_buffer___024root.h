@@ -22,12 +22,12 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_relu_buffer___024root final : public Veri
     CData/*0:0*/ tb_relu_buffer__DOT__valid;
     CData/*0:0*/ tb_relu_buffer__DOT__out_valid;
     VlWide<4>/*127:0*/ tb_relu_buffer__DOT__ins;
-    VlWide<4>/*127:0*/ tb_relu_buffer__DOT__out;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_relu_buffer__DOT__clk__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_relu_buffer__DOT__rst_n__0;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ tb_relu_buffer__DOT__errors;
     IData/*31:0*/ tb_relu_buffer__DOT__checks;
+    VlWide<4>/*127:0*/ tb_relu_buffer__DOT____Vcellout__dut__out;
     IData/*31:0*/ __VactIterCount;
     VlDelayScheduler __VdlySched;
     VlTriggerScheduler __VtrigSched_hacf8ceba__0;

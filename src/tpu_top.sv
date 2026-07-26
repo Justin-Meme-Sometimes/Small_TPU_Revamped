@@ -30,9 +30,20 @@ module tpu_top (
     logic [3:0][32:0] product_out;
     logic product_out_valid;
 
+    logic [3:0][31:0] bias_in; //placeholder until DMA supplies real per-tile bias data
+    logic [3:0][31:0] product_for_bias;
+    logic [3:0][31:0] product_biased;
+    logic product_biased_valid;
+
+    assign bias_in = '0;
+    assign product_for_bias[0] = product_out[0][31:0];
+    assign product_for_bias[1] = product_out[1][31:0];
+    assign product_for_bias[2] = product_out[2][31:0];
+    assign product_for_bias[3] = product_out[3][31:0];
+
     logic relu_drain_state;
     logic relu_accum_state;
-    logic [31:0][3:0] relu_out;
+    logic [3:0][31:0] relu_out;
     logic relu_out_valid;
 
     logic accum_state;
@@ -183,6 +194,7 @@ module tpu_top (
 
     );
 
+
     activation_buffer a_buff (
         .clk(clk),
         .rst_n(rst_n),
@@ -213,22 +225,34 @@ module tpu_top (
         .product_array(product_out),
         .output_valid(product_out_valid));
 
+    bias_add b_add (
+        .clk(clk),
+        .rst_n(rst_n),
+        .preload_state(preload_state),
+        .drain_state(drain_state),
+        .valid(product_out_valid),
+        .bias_in(bias_in),
+        .product_in(product_for_bias),
+        .product_out(product_biased),
+        .out_valid(product_biased_valid)
+    );
+
     relu_buffer r_buffer (
         .clk(clk),
         .rst_n(rst_n),
         .drain_state(drain_state),
         .accum_state(accum_state),
-        .ins(product_out),
-        .valid(product_out_valid),
+        .ins(product_biased),
+        .valid(product_biased_valid),
         .out_valid(relu_out_valid),
         .out(relu_out)
     );
 
-    requant req (
+    requant req ( 
         .clk(clk),
         .rst_n(rst_n),
         .ins(relu_out),
-        .con(1'd1),
+        .con(1'd1), //change this
         .valid(relu_out_valid),
         .drain_state(drain_state),
         .accum_state(accum_state),
