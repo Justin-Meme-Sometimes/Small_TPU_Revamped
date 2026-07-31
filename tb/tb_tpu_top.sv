@@ -87,11 +87,11 @@ module tb_tpu_top;
     // src/DMA.sv's tile_idx formula, so this check stays valid regardless
     // of exactly which tile_idx value tpu_top's counters end up using for
     // a given group.
-    function automatic logic [3:0][32:0] pack_weight_row(input logic [3:0][7:0] row);
-        pack_weight_row[0] = 33'(row[0]);
-        pack_weight_row[1] = 33'(row[1]);
-        pack_weight_row[2] = 33'(row[2]);
-        pack_weight_row[3] = 33'(row[3]);
+    function automatic logic [3:0][31:0] pack_weight_row(input logic [3:0][7:0] row);
+        pack_weight_row[0] = 32'(row[0]);
+        pack_weight_row[1] = 32'(row[1]);
+        pack_weight_row[2] = 32'(row[2]);
+        pack_weight_row[3] = 32'(row[3]);
     endfunction
 
     // Tracks the previous group's sampled weight row. KNOWN GAP (confirmed

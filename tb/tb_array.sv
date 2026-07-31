@@ -253,8 +253,8 @@ module tb_array;
     logic arr_rst_n, arr_preload, arr_compute_start, arr_clr, arr_tile_done, arr_drain;
     logic [3:0][7:0] arr_weight, arr_activation;
     logic arr_activation_valid;
-    logic [3:0][32:0] arr_product;
-    logic [3:0][32:0] arr_drain_snapshot;
+    logic [3:0][31:0] arr_product;
+    logic [3:0][31:0] arr_drain_snapshot;
     logic arr_output_valid;
 
     PE_array arr_dut (
@@ -300,7 +300,7 @@ module tb_array;
         for (int i = 0; i < 8; i++) arr_step("");
         arr_preload = 0;
         check("preload propagated weight to product_array's row (row 3) via down_out",
-              arr_product == {33'd2, 33'd2, 33'd2, 33'd2});
+              arr_product == {32'd2, 32'd2, 32'd2, 32'd2});
 
         // Run compute: single-cycle compute_state_start pulse, then hold a
         // uniform activation while h_en_0..3 cascade on over the next few
@@ -339,7 +339,7 @@ module tb_array;
         arr_step("");
         arr_step("");
         check("drain-after-tile_done surfaces a real (non-frozen, non-zero) MAC result",
-              arr_product != {33'd2, 33'd2, 33'd2, 33'd2} && arr_product != '0);
+              arr_product != {32'd2, 32'd2, 32'd2, 32'd2} && arr_product != '0);
         arr_drain_snapshot = arr_product;
 
         // Holding drain for further cycles should keep reproducing the same
@@ -362,7 +362,7 @@ module tb_array;
     //    now differ (av=0 means a stays 0 the whole time -> a zero result;
     //    av=1 lets the real activation value flow through).
     // -----------------------------------------------------------------
-    task automatic run_pe_array_sequence(input logic av, output logic [3:0][32:0] result);
+    task automatic run_pe_array_sequence(input logic av, output logic [3:0][31:0] result);
         arr_reset();
         arr_activation_valid = av;
 
@@ -391,7 +391,7 @@ module tb_array;
     endtask
 
     task automatic run_pe_array_activation_valid_test();
-        logic [3:0][32:0] result_valid_low, result_valid_high;
+        logic [3:0][31:0] result_valid_low, result_valid_high;
         $display("==== PE_array: activation_valid gating check ====");
 
         run_pe_array_sequence(1'b0, result_valid_low);
@@ -425,10 +425,10 @@ module tb_array;
         for (int i = 0; i < 8; i++) arr_step("");
         arr_preload = 0;
 
-        check("column 0 preloaded correctly", arr_product[0] == 33'd10);
-        check("column 1 preloaded correctly", arr_product[1] == 33'd20);
-        check("column 2 preloaded correctly", arr_product[2] == 33'd30);
-        check("column 3 preloaded correctly", arr_product[3] == 33'd40);
+        check("column 0 preloaded correctly", arr_product[0] == 32'd10);
+        check("column 1 preloaded correctly", arr_product[1] == 32'd20);
+        check("column 2 preloaded correctly", arr_product[2] == 32'd30);
+        check("column 3 preloaded correctly", arr_product[3] == 32'd40);
 
         $display("PE_array per-column preload check done\n");
     endtask
@@ -448,7 +448,7 @@ module tb_array;
         arr_weight = {8'd2, 8'd2, 8'd2, 8'd2};
         for (int i = 0; i < 8; i++) arr_step("");
         arr_preload = 0;
-        check("tile 1: preload landed", arr_product == {33'd2, 33'd2, 33'd2, 33'd2});
+        check("tile 1: preload landed", arr_product == {32'd2, 32'd2, 32'd2, 32'd2});
 
         arr_tile_done = 1;
         arr_step("");
@@ -461,7 +461,7 @@ module tb_array;
         for (int i = 0; i < 8; i++) arr_step("");
         arr_preload = 0;
         check("tile 2: new weight preloaded cleanly after tile 1's tile_done",
-              arr_product == {33'd7, 33'd7, 33'd7, 33'd7});
+              arr_product == {32'd7, 32'd7, 32'd7, 32'd7});
 
         $display("PE_array back-to-back tile reuse check done\n");
     endtask
@@ -476,7 +476,7 @@ module tb_array;
     //    before anything is ever preloaded.
     // -----------------------------------------------------------------
     task automatic run_pe_array_reset_mid_preload_test();
-        logic [3:0][32:0] pre_reset_value;
+        logic [3:0][31:0] pre_reset_value;
         $display("==== PE_array: reset after a real value is loaded ====");
         arr_reset();
 
@@ -485,7 +485,7 @@ module tb_array;
         for (int i = 0; i < 8; i++) arr_step("");
         arr_preload = 0;
         pre_reset_value = arr_product;
-        check("pre-check: product_array holds the preloaded value", pre_reset_value == {33'd9, 33'd9, 33'd9, 33'd9});
+        check("pre-check: product_array holds the preloaded value", pre_reset_value == {32'd9, 32'd9, 32'd9, 32'd9});
 
         arr_rst_n = 0;
         arr_step("");

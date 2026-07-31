@@ -27,19 +27,14 @@ module tpu_top (
     logic [3:0][7:0] systolic_act_in;
     logic systolic_act_in_valid;
 
-    logic [3:0][32:0] product_out;
+    logic [3:0][31:0] product_out;
     logic product_out_valid;
 
     logic [3:0][31:0] bias_in; //placeholder until DMA supplies real per-tile bias data
-    logic [3:0][31:0] product_for_bias;
     logic [3:0][31:0] product_biased;
     logic product_biased_valid;
 
     assign bias_in = '0;
-    assign product_for_bias[0] = product_out[0][31:0];
-    assign product_for_bias[1] = product_out[1][31:0];
-    assign product_for_bias[2] = product_out[2][31:0];
-    assign product_for_bias[3] = product_out[3][31:0];
 
     logic relu_drain_state;
     logic relu_accum_state;
@@ -232,7 +227,7 @@ module tpu_top (
         .drain_state(drain_state),
         .valid(product_out_valid),
         .bias_in(bias_in),
-        .product_in(product_for_bias),
+        .product_in(product_out),
         .product_out(product_biased),
         .out_valid(product_biased_valid)
     );

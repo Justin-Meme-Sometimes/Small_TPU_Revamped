@@ -30,8 +30,8 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     Vtb_array__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_array___024root___eval_initial__TOP__Vtiming__0\n"); );
     // Init
-    VlWide<5>/*131:0*/ tb_array__DOT__arr_drain_snapshot;
-    VL_ZERO_W(132, tb_array__DOT__arr_drain_snapshot);
+    VlWide<4>/*127:0*/ tb_array__DOT__arr_drain_snapshot;
+    VL_ZERO_W(128, tb_array__DOT__arr_drain_snapshot);
     std::string __Vtask_tb_array__DOT__check__2__name;
     CData/*0:0*/ __Vtask_tb_array__DOT__check__2__cond;
     __Vtask_tb_array__DOT__check__2__cond = 0;
@@ -146,18 +146,18 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     std::string __Vtask_tb_array__DOT__check__59__name;
     CData/*0:0*/ __Vtask_tb_array__DOT__check__59__cond;
     __Vtask_tb_array__DOT__check__59__cond = 0;
-    VlWide<5>/*131:0*/ __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low;
-    VL_ZERO_W(132, __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low);
-    VlWide<5>/*131:0*/ __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high;
-    VL_ZERO_W(132, __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high);
+    VlWide<4>/*127:0*/ __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low;
+    VL_ZERO_W(128, __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low);
+    VlWide<4>/*127:0*/ __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high;
+    VL_ZERO_W(128, __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high);
     CData/*0:0*/ __Vtask_tb_array__DOT__run_pe_array_sequence__61__av;
     __Vtask_tb_array__DOT__run_pe_array_sequence__61__av = 0;
-    VlWide<5>/*131:0*/ __Vtask_tb_array__DOT__run_pe_array_sequence__61__result;
-    VL_ZERO_W(132, __Vtask_tb_array__DOT__run_pe_array_sequence__61__result);
+    VlWide<4>/*127:0*/ __Vtask_tb_array__DOT__run_pe_array_sequence__61__result;
+    VL_ZERO_W(128, __Vtask_tb_array__DOT__run_pe_array_sequence__61__result);
     CData/*0:0*/ __Vtask_tb_array__DOT__run_pe_array_sequence__70__av;
     __Vtask_tb_array__DOT__run_pe_array_sequence__70__av = 0;
-    VlWide<5>/*131:0*/ __Vtask_tb_array__DOT__run_pe_array_sequence__70__result;
-    VL_ZERO_W(132, __Vtask_tb_array__DOT__run_pe_array_sequence__70__result);
+    VlWide<4>/*127:0*/ __Vtask_tb_array__DOT__run_pe_array_sequence__70__result;
+    VL_ZERO_W(128, __Vtask_tb_array__DOT__run_pe_array_sequence__70__result);
     std::string __Vtask_tb_array__DOT__check__79__name;
     CData/*0:0*/ __Vtask_tb_array__DOT__check__79__cond;
     __Vtask_tb_array__DOT__check__79__cond = 0;
@@ -182,15 +182,15 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     std::string __Vtask_tb_array__DOT__check__94__name;
     CData/*0:0*/ __Vtask_tb_array__DOT__check__94__cond;
     __Vtask_tb_array__DOT__check__94__cond = 0;
-    VlWide<5>/*131:0*/ __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value;
-    VL_ZERO_W(132, __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value);
+    VlWide<4>/*127:0*/ __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value;
+    VL_ZERO_W(128, __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value);
     std::string __Vtask_tb_array__DOT__check__98__name;
     CData/*0:0*/ __Vtask_tb_array__DOT__check__98__cond;
     __Vtask_tb_array__DOT__check__98__cond = 0;
     std::string __Vtask_tb_array__DOT__check__100__name;
     CData/*0:0*/ __Vtask_tb_array__DOT__check__100__cond;
     __Vtask_tb_array__DOT__check__100__cond = 0;
-    VlWide<5>/*159:0*/ __Vtemp_144;
+    VlWide<4>/*127:0*/ __Vtemp_126;
     // Body
     vlSelf->tb_array__DOT__h_rst_n = 0U;
     vlSelf->tb_array__DOT__h_start = 0U;
@@ -1384,14 +1384,14 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     __Vtask_tb_array__DOT__check__49__cond = (0U == 
                                               ((((2U 
                                                   ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out) 
-                                                 | (4U 
+                                                 | (2U 
                                                     ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out)) 
-                                                | (8U 
+                                                | (2U 
                                                    ^ (IData)(
                                                              (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                << 0x20U) 
                                                               | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))))) 
-                                               | (0x10U 
+                                               | (2U 
                                                   ^ (IData)(
                                                             ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                << 0x20U) 
@@ -1525,14 +1525,14 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     __Vtask_tb_array__DOT__check__57__cond = ((0U != 
                                                ((((2U 
                                                    ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out) 
-                                                  | (4U 
+                                                  | (2U 
                                                      ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out)) 
-                                                 | (8U 
+                                                 | (2U 
                                                     ^ (IData)(
                                                               (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                 << 0x20U) 
                                                                | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))))) 
-                                                | (0x10U 
+                                                | (2U 
                                                    ^ (IData)(
                                                              ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                 << 0x20U) 
@@ -1571,7 +1571,6 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                                        << 0x20U) 
                                                       | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
                                                      >> 0x20U));
-    tb_array__DOT__arr_drain_snapshot[4U] = 0U;
     co_await vlSelf->__VtrigSched_h25dd34e8__0.trigger(0U, 
                                                        nullptr, 
                                                        "@(posedge tb_array.clk)", 
@@ -1581,26 +1580,25 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                        "tb/tb_array.sv", 
                                        279);
     __Vtask_tb_array__DOT__check__59__cond = (0U == 
-                                              (((((vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out 
-                                                   ^ 
-                                                   tb_array__DOT__arr_drain_snapshot[0U]) 
-                                                  | (vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out 
-                                                     ^ 
-                                                     tb_array__DOT__arr_drain_snapshot[1U])) 
-                                                 | ((IData)(
-                                                            (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                              << 0x20U) 
-                                                             | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))) 
+                                              ((((vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out 
+                                                  ^ 
+                                                  tb_array__DOT__arr_drain_snapshot[0U]) 
+                                                 | (vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out 
                                                     ^ 
-                                                    tb_array__DOT__arr_drain_snapshot[2U])) 
+                                                    tb_array__DOT__arr_drain_snapshot[1U])) 
                                                 | ((IData)(
-                                                           ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                              << 0x20U) 
-                                                             | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
-                                                            >> 0x20U)) 
+                                                           (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
+                                                             << 0x20U) 
+                                                            | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))) 
                                                    ^ 
-                                                   tb_array__DOT__arr_drain_snapshot[3U])) 
-                                               | tb_array__DOT__arr_drain_snapshot[4U]));
+                                                   tb_array__DOT__arr_drain_snapshot[2U])) 
+                                               | ((IData)(
+                                                          ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
+                                                             << 0x20U) 
+                                                            | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
+                                                           >> 0x20U)) 
+                                                  ^ 
+                                                  tb_array__DOT__arr_drain_snapshot[3U])));
     __Vtask_tb_array__DOT__check__59__name = std::string{"holding drain_state: product_array stays stable at the drained value"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__59__cond) {
@@ -1816,7 +1814,6 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
         = (IData)(((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                      << 0x20U) | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
                    >> 0x20U));
-    __Vtask_tb_array__DOT__run_pe_array_sequence__61__result[4U] = 0U;
     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[0U] 
         = __Vtask_tb_array__DOT__run_pe_array_sequence__61__result[0U];
     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[1U] 
@@ -1825,8 +1822,6 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
         = __Vtask_tb_array__DOT__run_pe_array_sequence__61__result[2U];
     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[3U] 
         = __Vtask_tb_array__DOT__run_pe_array_sequence__61__result[3U];
-    __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[4U] 
-        = __Vtask_tb_array__DOT__run_pe_array_sequence__61__result[4U];
     __Vtask_tb_array__DOT__run_pe_array_sequence__70__av = 1U;
     vlSelf->tb_array__DOT__arr_rst_n = 0U;
     vlSelf->tb_array__DOT__arr_preload = 0U;
@@ -2030,7 +2025,6 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
         = (IData)(((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                      << 0x20U) | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
                    >> 0x20U));
-    __Vtask_tb_array__DOT__run_pe_array_sequence__70__result[4U] = 0U;
     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[0U] 
         = __Vtask_tb_array__DOT__run_pe_array_sequence__70__result[0U];
     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[1U] 
@@ -2039,14 +2033,11 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
         = __Vtask_tb_array__DOT__run_pe_array_sequence__70__result[2U];
     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[3U] 
         = __Vtask_tb_array__DOT__run_pe_array_sequence__70__result[3U];
-    __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[4U] 
-        = __Vtask_tb_array__DOT__run_pe_array_sequence__70__result[4U];
     __Vtask_tb_array__DOT__check__79__cond = (0U == 
-                                              ((((__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[0U] 
-                                                  | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[1U]) 
-                                                 | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[2U]) 
-                                                | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[3U]) 
-                                               | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[4U]));
+                                              (((__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[0U] 
+                                                 | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[1U]) 
+                                                | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[2U]) 
+                                               | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[3U]));
     __Vtask_tb_array__DOT__check__79__name = std::string{"activation_valid=0 the whole time: val_act_in never latches, drained result is all zero"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__79__cond) {
@@ -2057,28 +2048,24 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_array__DOT__check__79__name));
     }
     __Vtask_tb_array__DOT__check__80__cond = ((0U != 
-                                               ((((__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[0U] 
-                                                   | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[1U]) 
-                                                  | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[2U]) 
-                                                 | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[3U]) 
-                                                | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[4U])) 
+                                               (((__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[0U] 
+                                                  | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[1U]) 
+                                                 | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[2U]) 
+                                                | __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[3U])) 
                                               & (0U 
                                                  != 
-                                                 (((((__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[0U] 
-                                                      ^ 
-                                                      __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[0U]) 
-                                                     | (__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[1U] 
-                                                        ^ 
-                                                        __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[1U])) 
-                                                    | (__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[2U] 
-                                                       ^ 
-                                                       __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[2U])) 
-                                                   | (__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[3U] 
-                                                      ^ 
-                                                      __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[3U])) 
-                                                  | (__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[4U] 
+                                                 ((((__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[0U] 
                                                      ^ 
-                                                     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[4U]))));
+                                                     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[0U]) 
+                                                    | (__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[1U] 
+                                                       ^ 
+                                                       __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[1U])) 
+                                                   | (__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[2U] 
+                                                      ^ 
+                                                      __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[2U])) 
+                                                  | (__Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_high[3U] 
+                                                     ^ 
+                                                     __Vtask_tb_array__DOT__run_pe_array_activation_valid_test__60__result_valid_low[3U]))));
     __Vtask_tb_array__DOT__check__80__name = std::string{"activation_valid=1 lets the real activation value flow through: drained result is non-zero and differs from the av=0 case"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__80__cond) {
@@ -2185,11 +2172,8 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                        "tb/tb_array.sv", 
                                        279);
     vlSelf->tb_array__DOT__arr_preload = 0U;
-    __Vtask_tb_array__DOT__check__84__cond = (0xaULL 
-                                              == (0x1ffffffffULL 
-                                                  & (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out)) 
-                                                      << 0x20U) 
-                                                     | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out)))));
+    __Vtask_tb_array__DOT__check__84__cond = (0xaU 
+                                              == vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out);
     __Vtask_tb_array__DOT__check__84__name = std::string{"column 0 preloaded correctly"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__84__cond) {
@@ -2199,15 +2183,8 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                          + vlSelf->tb_array__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_array__DOT__check__84__name));
     }
-    __Vtask_tb_array__DOT__check__85__cond = (0x14ULL 
-                                              == (0x1ffffffffULL 
-                                                  & (((QData)((IData)(
-                                                                      (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                                        << 0x20U) 
-                                                                       | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))))) 
-                                                      << 0x1fU) 
-                                                     | ((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out)) 
-                                                        >> 1U))));
+    __Vtask_tb_array__DOT__check__85__cond = (0x14U 
+                                              == vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out);
     __Vtask_tb_array__DOT__check__85__name = std::string{"column 1 preloaded correctly"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__85__cond) {
@@ -2217,19 +2194,8 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                          + vlSelf->tb_array__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_array__DOT__check__85__name));
     }
-    __Vtask_tb_array__DOT__check__86__cond = (0x1eULL 
-                                              == (0x1ffffffffULL 
-                                                  & (((QData)((IData)(
-                                                                      ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                                         << 0x20U) 
-                                                                        | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
-                                                                       >> 0x20U))) 
-                                                      << 0x1eU) 
-                                                     | ((QData)((IData)(
-                                                                        (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                                          << 0x20U) 
-                                                                         | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))))) 
-                                                        >> 2U))));
+    __Vtask_tb_array__DOT__check__86__cond = (0x1eU 
+                                              == vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out);
     __Vtask_tb_array__DOT__check__86__name = std::string{"column 2 preloaded correctly"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__86__cond) {
@@ -2239,14 +2205,8 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
                                          + vlSelf->tb_array__DOT__errors);
         VL_WRITEF("[FAIL] %@\n",-1,&(__Vtask_tb_array__DOT__check__86__name));
     }
-    __Vtask_tb_array__DOT__check__87__cond = (0x28ULL 
-                                              == (0x1ffffffffULL 
-                                                  & ((QData)((IData)(
-                                                                     ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                                        << 0x20U) 
-                                                                       | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
-                                                                      >> 0x20U))) 
-                                                     >> 3U)));
+    __Vtask_tb_array__DOT__check__87__cond = (0x28U 
+                                              == vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out);
     __Vtask_tb_array__DOT__check__87__name = std::string{"column 3 preloaded correctly"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__87__cond) {
@@ -2356,14 +2316,14 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     __Vtask_tb_array__DOT__check__91__cond = (0U == 
                                               ((((2U 
                                                   ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out) 
-                                                 | (4U 
+                                                 | (2U 
                                                     ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out)) 
-                                                | (8U 
+                                                | (2U 
                                                    ^ (IData)(
                                                              (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                << 0x20U) 
                                                               | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))))) 
-                                               | (0x10U 
+                                               | (2U 
                                                   ^ (IData)(
                                                             ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                << 0x20U) 
@@ -2458,14 +2418,14 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     __Vtask_tb_array__DOT__check__94__cond = (0U == 
                                               ((((7U 
                                                   ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out) 
-                                                 | (0xeU 
+                                                 | (7U 
                                                     ^ vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out)) 
-                                                | (0x1cU 
+                                                | (7U 
                                                    ^ (IData)(
                                                              (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                << 0x20U) 
                                                               | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))))) 
-                                               | (0x38U 
+                                               | (7U 
                                                   ^ (IData)(
                                                             ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                                                << 0x20U) 
@@ -2588,21 +2548,19 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
         = (IData)(((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                      << 0x20U) | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
                    >> 0x20U));
-    __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[4U] = 0U;
     __Vtask_tb_array__DOT__check__98__cond = (0U == 
-                                              (((((9U 
-                                                   ^ 
-                                                   __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[0U]) 
-                                                  | (0x12U 
-                                                     ^ 
-                                                     __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[1U])) 
-                                                 | (0x24U 
+                                              ((((9U 
+                                                  ^ 
+                                                  __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[0U]) 
+                                                 | (9U 
                                                     ^ 
-                                                    __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[2U])) 
-                                                | (0x48U 
+                                                    __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[1U])) 
+                                                | (9U 
                                                    ^ 
-                                                   __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[3U])) 
-                                               | __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[4U]));
+                                                   __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[2U])) 
+                                               | (9U 
+                                                  ^ 
+                                                  __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[3U])));
     __Vtask_tb_array__DOT__check__98__name = std::string{"pre-check: product_array holds the preloaded value"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__98__cond) {
@@ -2621,37 +2579,35 @@ VL_INLINE_OPT VlCoroutine Vtb_array___024root___eval_initial__TOP__Vtiming__0(Vt
     co_await vlSelf->__VdlySched.delay(0x3e8ULL, nullptr, 
                                        "tb/tb_array.sv", 
                                        279);
-    __Vtemp_144[0U] = vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out;
-    __Vtemp_144[1U] = vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out;
-    __Vtemp_144[2U] = (IData)((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
+    __Vtemp_126[0U] = vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out;
+    __Vtemp_126[1U] = vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out;
+    __Vtemp_126[2U] = (IData)((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                 << 0x20U) | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))));
-    __Vtemp_144[3U] = (IData)(((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
+    __Vtemp_126[3U] = (IData)(((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
                                  << 0x20U) | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
                                >> 0x20U));
-    __Vtemp_144[4U] = 0U;
     VL_WRITEF("[INFO] product_array after async reset (with a prior real value loaded): %x (pre-reset value was %x)\n",
-              132,__Vtemp_144.data(),132,__Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value.data());
+              128,__Vtemp_126.data(),128,__Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value.data());
     __Vtask_tb_array__DOT__check__100__cond = (0U == 
-                                               (((((vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out 
-                                                    ^ 
-                                                    __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[0U]) 
-                                                   | (vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out 
-                                                      ^ 
-                                                      __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[1U])) 
-                                                  | ((IData)(
-                                                             (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                               << 0x20U) 
-                                                              | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))) 
+                                               ((((vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_0__down_out 
+                                                   ^ 
+                                                   __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[0U]) 
+                                                  | (vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_1__down_out 
                                                      ^ 
-                                                     __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[2U])) 
+                                                     __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[1U])) 
                                                  | ((IData)(
-                                                            ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
-                                                               << 0x20U) 
-                                                              | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
-                                                             >> 0x20U)) 
+                                                            (((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
+                                                              << 0x20U) 
+                                                             | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out)))) 
                                                     ^ 
-                                                    __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[3U])) 
-                                                | __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[4U]));
+                                                    __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[2U])) 
+                                                | ((IData)(
+                                                           ((((QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_3__down_out)) 
+                                                              << 0x20U) 
+                                                             | (QData)((IData)(vlSelf->tb_array__DOT__arr_dut__DOT____Vcellout__pe_3_2__down_out))) 
+                                                            >> 0x20U)) 
+                                                   ^ 
+                                                   __Vtask_tb_array__DOT__run_pe_array_reset_mid_preload_test__95__pre_reset_value[3U])));
     __Vtask_tb_array__DOT__check__100__name = std::string{"NOTE: down_out is not in PE.sv's reset branch, so product_array is NOT forced to zero by rst_n once a real value has been preloaded"};
     vlSelf->tb_array__DOT__checks = ((IData)(1U) + vlSelf->tb_array__DOT__checks);
     if (__Vtask_tb_array__DOT__check__100__cond) {

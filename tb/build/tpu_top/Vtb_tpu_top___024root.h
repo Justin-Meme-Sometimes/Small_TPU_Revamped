@@ -29,6 +29,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__tile_done;
         VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__activation_bank_out;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__systolic_act_in_valid;
+        CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__product_biased_valid;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__relu_out_valid;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__accum_state;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__requant_out_valid;
@@ -80,9 +81,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_b_full;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__buff_b_active;
         VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__write_in_b;
-        VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__re_out_b;
     };
     struct {
+        VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__re_out_b;
         CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__current_state;
         CData/*5:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__next_state;
         CData/*0:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__A__DOT__o_bank_reg;
@@ -103,19 +104,15 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_0_0__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_0_1__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_0_2__right_out;
-        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_0_3__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_1_0__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_1_1__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_1_2__right_out;
-        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_1_3__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_2_0__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_2_1__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_2_2__right_out;
-        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_2_3__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_3_0__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_3_1__right_out;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_3_2__right_out;
-        CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_3_3__right_out;
         CData/*4:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__e_fsm_1__DOT__current_state;
         CData/*4:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__e_fsm_1__DOT__next_state;
         CData/*4:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__v_fsm_1__DOT__current_state;
@@ -147,11 +144,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_0__DOT__a_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_0__DOT__b_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_1__DOT__a_reg;
-    };
-    struct {
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_1__DOT__b_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_2__DOT__a_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_2__DOT__b_reg;
+    };
+    struct {
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__a_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__b_reg;
         CData/*7:0*/ tb_tpu_top__DOT__dut__DOT__dma__DOT__tile_idx;
@@ -162,8 +159,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         CData/*0:0*/ __VactContinue;
         SData/*9:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_A__DOT__curr_count;
         SData/*9:0*/ tb_tpu_top__DOT__dut__DOT__a_buff__DOT__BUFF_B__DOT__curr_count;
-        VlWide<16>/*511:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_down_out;
-        VlWide<16>/*511:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_right_out;
         SData/*15:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_0_0__DOT__product_reg;
         SData/*15:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_0_1__DOT__product_reg;
         SData/*15:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_0_2__DOT__product_reg;
@@ -182,6 +177,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         SData/*15:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__product_reg;
         IData/*31:0*/ tb_tpu_top__DOT__errors;
         IData/*31:0*/ tb_tpu_top__DOT__checks;
+        VlWide<4>/*127:0*/ tb_tpu_top__DOT__dut__DOT__product_out;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_0_0__down_out;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_0_1__down_out;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT____Vcellout__pe_0_2__down_out;
@@ -213,11 +209,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_tpu_top___024root final : public Verilate
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_0__DOT__accum_reg;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_1__DOT__accum_reg;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_2__DOT__accum_reg;
-    };
-    struct {
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__sys_array__DOT__pe_3_3__DOT__accum_reg;
         IData/*31:0*/ tb_tpu_top__DOT__dut__DOT__dma__DOT__capture_count;
-        VlWide<4>/*114:0*/ __VdfgTmp_hfccefdc9__0;
         IData/*31:0*/ __VactIterCount;
         VlUnpacked<IData/*31:0*/, 32> tb_tpu_top__DOT__dut__DOT__w_l__DOT__weight_fifo__DOT__Q;
     };
