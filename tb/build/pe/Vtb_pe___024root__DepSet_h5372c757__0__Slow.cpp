@@ -1,0 +1,108 @@
+// Verilated -*- C++ -*-
+// DESCRIPTION: Verilator output: Design implementation internals
+// See Vtb_pe.h for the primary calling header
+
+#include "Vtb_pe__pch.h"
+#include "Vtb_pe___024root.h"
+
+VL_ATTR_COLD void Vtb_pe___024root___eval_static__TOP(Vtb_pe___024root* vlSelf);
+
+VL_ATTR_COLD void Vtb_pe___024root___eval_static(Vtb_pe___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_pe___024root___eval_static\n"); );
+    // Body
+    Vtb_pe___024root___eval_static__TOP(vlSelf);
+}
+
+VL_ATTR_COLD void Vtb_pe___024root___eval_static__TOP(Vtb_pe___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_pe___024root___eval_static__TOP\n"); );
+    // Body
+    vlSelf->tb_pe__DOT__errors = 0U;
+    vlSelf->tb_pe__DOT__checks = 0U;
+    vlSelf->tb_pe__DOT__clk = 0U;
+}
+
+VL_ATTR_COLD void Vtb_pe___024root___eval_final(Vtb_pe___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_pe___024root___eval_final\n"); );
+}
+
+VL_ATTR_COLD void Vtb_pe___024root___eval_settle(Vtb_pe___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_pe___024root___eval_settle\n"); );
+}
+
+#ifdef VL_DEBUG
+VL_ATTR_COLD void Vtb_pe___024root___dump_triggers__act(Vtb_pe___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_pe___024root___dump_triggers__act\n"); );
+    // Body
+    if ((1U & (~ (IData)(vlSelf->__VactTriggered.any())))) {
+        VL_DBG_MSGF("         No triggers active\n");
+    }
+    if ((1ULL & vlSelf->__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge tb_pe.clk or negedge tb_pe.rst_n)\n");
+    }
+    if ((2ULL & vlSelf->__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge tb_pe.clk)\n");
+    }
+    if ((4ULL & vlSelf->__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
+    }
+}
+#endif  // VL_DEBUG
+
+#ifdef VL_DEBUG
+VL_ATTR_COLD void Vtb_pe___024root___dump_triggers__nba(Vtb_pe___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_pe___024root___dump_triggers__nba\n"); );
+    // Body
+    if ((1U & (~ (IData)(vlSelf->__VnbaTriggered.any())))) {
+        VL_DBG_MSGF("         No triggers active\n");
+    }
+    if ((1ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge tb_pe.clk or negedge tb_pe.rst_n)\n");
+    }
+    if ((2ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge tb_pe.clk)\n");
+    }
+    if ((4ULL & vlSelf->__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
+    }
+}
+#endif  // VL_DEBUG
+
+VL_ATTR_COLD void Vtb_pe___024root___ctor_var_reset(Vtb_pe___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_pe__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_pe___024root___ctor_var_reset\n"); );
+    // Body
+    vlSelf->tb_pe__DOT__errors = 0;
+    vlSelf->tb_pe__DOT__checks = 0;
+    vlSelf->tb_pe__DOT__clk = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__rst_n = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__preload = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__compute_en = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__drain = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__clr = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__tile_done = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__accum_in_valid = VL_RAND_RESET_I(1);
+    vlSelf->tb_pe__DOT__a = VL_RAND_RESET_I(8);
+    vlSelf->tb_pe__DOT__b = VL_RAND_RESET_I(8);
+    vlSelf->tb_pe__DOT__accum_in = VL_RAND_RESET_I(32);
+    vlSelf->tb_pe__DOT__down_out = VL_RAND_RESET_I(32);
+    vlSelf->tb_pe__DOT__right_out = VL_RAND_RESET_I(8);
+    vlSelf->tb_pe__DOT__dut__DOT__a_reg = VL_RAND_RESET_I(8);
+    vlSelf->tb_pe__DOT__dut__DOT__b_reg = VL_RAND_RESET_I(8);
+    vlSelf->tb_pe__DOT__dut__DOT__product_reg = VL_RAND_RESET_I(16);
+    vlSelf->tb_pe__DOT__dut__DOT__accum_reg = VL_RAND_RESET_I(32);
+    vlSelf->__Vtrigprevexpr___TOP__tb_pe__DOT__clk__0 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__tb_pe__DOT__rst_n__0 = VL_RAND_RESET_I(1);
+}

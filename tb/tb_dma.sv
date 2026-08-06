@@ -1,13 +1,19 @@
 `timescale 1ns/1ps
 //
-// Testbench for src/DMA.sv (DMA, j_buffer, DMA_FSM).
+// Testbench for src/DMA.sv (DMA, j_buffer, LOAD_WEIGHTS_FSM, LOAD_BIAS_FSM,
+// LOAD_ACTIVATIONS_FSM, DMA_READ_FSM).
 //
-// Drives DMA directly with dummy weight/bias/activation byte streams via
-// u_in + prefill_state - no dependency on tpu_top's control signals.
-// Verifies DMA_FSM sequences IDLE -> LOAD_WEIGHTS -> LOAD_BIAS ->
-// LOAD_ACTIVATIONS -> DONE -> IDLE, weights stream out 4 bytes/cycle in
-// FIFO order via weight_bank_out/weight_bank_out_valid, and bias/activation
-// each present their full 16-byte tile in one shot via bias_bank_out/
+// DMA used to be driven by a single prefill_state pulse + an internal
+// dma_fsm that walked LOAD_WEIGHTS -> LOAD_BIAS -> LOAD_ACTIVATIONS itself.
+// It's since been split into three independent per-bank FSMs, each with its
+// own start pulse (weight_fsm_start/bias_fsm_start/activation_fsm_start) and
+// `bank` is now an external input the caller must hold at the right value
+// for the whole load window, rather than something DMA derives internally.
+//
+// Verifies each FSM sequences IDLE -> LOAD_* -> DONE -> IDLE independently,
+// weights stream out 4 bytes/cycle in FIFO order via weight_bank_out/
+// weight_bank_out_valid once loading finishes, and bias/activation each
+// present their full 16-byte tile in one shot via bias_bank_out/
 // activation_bank_out once loaded.
 //
 // Also covers the other direction: computed results written in via
@@ -37,11 +43,15 @@ module tb_dma;
 
     logic rst_n;
     logic [7:0] u_in;
-    logic prefill_state;
+    logic bias_fsm_start;
+    logic activation_fsm_start;
+    logic weight_fsm_start;
+    logic tile_done;
     logic [3:0][7:0] computed_bank_in;
     logic computed_bank_in_valid;
-    logic result_we;
     logic start_read_fsm;
+    logic [3:0] bank;
+    logic result_we;
     logic [7:0] u_out;
     logic [3:0][7:0] weight_bank_out;
     logic weight_bank_out_valid;
@@ -54,11 +64,15 @@ module tb_dma;
         .clk(clk),
         .rst_n(rst_n),
         .u_in(u_in),
-        .prefill_state(prefill_state),
+        .bias_fsm_start(bias_fsm_start),
+        .activation_fsm_start(activation_fsm_start),
+        .weight_fsm_start(weight_fsm_start),
+        .tile_done(tile_done),
         .computed_bank_in(computed_bank_in),
         .computed_bank_in_valid(computed_bank_in_valid),
-        .result_we(result_we),
         .start_read_fsm(start_read_fsm),
+        .bank(bank),
+        .result_we(result_we),
         .u_out(u_out),
         .weight_bank_out(weight_bank_out),
         .weight_bank_out_valid(weight_bank_out_valid),
@@ -70,7 +84,11 @@ module tb_dma;
     task automatic reset_dut();
         rst_n = 0;
         u_in = '0;
-        prefill_state = 0;
+        bias_fsm_start = 0;
+        activation_fsm_start = 0;
+        weight_fsm_start = 0;
+        tile_done = 0;
+        bank = 4'd0;
         computed_bank_in = '0;
         computed_bank_in_valid = 0;
         result_we = 0;
@@ -86,9 +104,126 @@ module tb_dma;
         check("reset: weight_bank_out_valid low", weight_bank_out_valid == 1'b0);
         check("reset: activation_bank_out_valid low", activation_bank_out_valid == 1'b0);
         check("reset: bias_bank_out_valid low", bias_bank_out_valid == 1'b0);
-        check("reset: FSM in IDLE", dut.dma_fsm.current_state == dut.dma_fsm.IDLE);
+        check("reset: weight FSM in IDLE", dut.w_fsm.current_state == dut.w_fsm.IDLE);
+        check("reset: bias FSM in IDLE", dut.b_fsm.current_state == dut.b_fsm.IDLE);
+        check("reset: activation FSM in IDLE", dut.a_fsm.current_state == dut.a_fsm.IDLE);
+        check("reset: read FSM in IDLE", dut.r_fsm.current_state == dut.r_fsm.IDLE);
         check("reset: weight buffer empty", dut.weight_empty == 1'b1);
         $display("DMA reset: %0d/%0d checks passed\n", checks - errors, checks);
+    endtask
+
+    // Drives bank=1 + a one-cycle weight_fsm_start pulse, then holds bank at
+    // 1 while feeding all 256 bytes on u_in. The IDLE -> LOAD_WEIGHTS
+    // transition cycle consumes/drops whatever's on u_in that cycle (the FSM
+    // isn't in LOAD_WEIGHTS, so we_weights is still 0), so data[0] is
+    // presented twice: once on the dropped start cycle, once as the first
+    // real write. Captures weight_bank_out/_valid as the buffer streams back
+    // out afterward (starts as soon as loading finishes, since weight_re
+    // fires the moment we_weights drops and the buffer isn't empty).
+    task automatic load_and_drain_weights(ref byte data [256], ref byte captured [256], output int drained);
+        int idx, safety;
+
+        bank = 4'd1;
+        weight_fsm_start = 1'd1;
+        u_in = data[0];
+        @(posedge clk); #1;
+        weight_fsm_start = 1'd0;
+
+        drained = 0;
+        for (idx = 0; idx < 256; idx++) begin
+            u_in = data[idx];
+            if (weight_bank_out_valid && drained < 256) begin
+                captured[drained+0] = weight_bank_out[0];
+                captured[drained+1] = weight_bank_out[1];
+                captured[drained+2] = weight_bank_out[2];
+                captured[drained+3] = weight_bank_out[3];
+                drained += 4;
+            end
+            @(posedge clk); #1;
+        end
+        bank = 4'd0;
+
+        safety = 0;
+        while (drained < 256 && safety < 200) begin
+            if (weight_bank_out_valid) begin
+                captured[drained+0] = weight_bank_out[0];
+                captured[drained+1] = weight_bank_out[1];
+                captured[drained+2] = weight_bank_out[2];
+                captured[drained+3] = weight_bank_out[3];
+                drained += 4;
+            end
+            @(posedge clk); #1;
+            safety++;
+        end
+    endtask
+
+    // Same shape as load_and_drain_weights, but for bias/activation: these
+    // are snapshot buffers (present the whole tile at once via buff_out),
+    // so there's nothing to drain - just poll for the one-shot _valid pulse
+    // that fires once the tile finishes loading.
+    task automatic load_bias(ref byte data [16], output logic [3:0][31:0] captured, output bit seen);
+        int idx, safety;
+
+        bank = 4'd2;
+        bias_fsm_start = 1'd1;
+        u_in = data[0];
+        @(posedge clk); #1;
+        bias_fsm_start = 1'd0;
+
+        for (idx = 0; idx < 16; idx++) begin
+            u_in = data[idx];
+            @(posedge clk); #1;
+        end
+        bank = 4'd0;
+
+        seen = 0;
+        safety = 0;
+        while (!seen && safety < 20) begin
+            if (bias_bank_out_valid) begin
+                captured = bias_bank_out;
+                seen = 1;
+            end
+            @(posedge clk); #1;
+            safety++;
+        end
+        // The FSM still needs LOAD_BIAS -> DONE -> IDLE (2 more edges) after
+        // the valid pulse fires - give it a few cycles to settle before the
+        // caller checks current_state.
+        repeat (3) begin
+            @(posedge clk); #1;
+        end
+    endtask
+
+    task automatic load_activations(ref byte data [16], output logic [31:0][3:0] captured, output bit seen);
+        int idx, safety;
+
+        bank = 4'd3;
+        activation_fsm_start = 1'd1;
+        u_in = data[0];
+        @(posedge clk); #1;
+        activation_fsm_start = 1'd0;
+
+        for (idx = 0; idx < 16; idx++) begin
+            u_in = data[idx];
+            @(posedge clk); #1;
+        end
+        bank = 4'd0;
+
+        seen = 0;
+        safety = 0;
+        while (!seen && safety < 20) begin
+            if (activation_bank_out_valid) begin
+                captured = activation_bank_out;
+                seen = 1;
+            end
+            @(posedge clk); #1;
+            safety++;
+        end
+        // Same reasoning as load_bias(): give LOAD_ACTIVATIONS -> DONE ->
+        // IDLE a few cycles to settle before the caller checks current_state.
+        repeat (3) begin
+            @(posedge clk); #1;
+        end
     endtask
 
     byte weight_data [256];
@@ -97,8 +232,7 @@ module tb_dma;
     byte weight_captured [256];
 
     task automatic run_full_load_test();
-        int w_idx, b_idx, a_idx, wc_idx;
-        int safety;
+        int drained;
         bit bias_seen, act_seen, weight_order_ok;
         logic [3:0][31:0] bias_captured;
         logic [31:0][3:0] act_captured;
@@ -113,71 +247,30 @@ module tb_dma;
         for (int i = 0; i < 16; i++) bias_data[i] = 8'hA0 + i[7:0];
         for (int i = 0; i < 16; i++) act_data[i] = 8'hB0 + i[7:0];
 
-        w_idx = 0; b_idx = 0; a_idx = 0; wc_idx = 0;
-        bias_seen = 0; act_seen = 0;
-        safety = 0;
-
-        // Kick off the load - the cycle start is sampled is consumed by the
-        // IDLE -> LOAD_WEIGHTS transition, no byte is captured on it.
-        prefill_state = 1;
-        @(posedge clk); #1;
-        prefill_state = 0;
-
-        while ((wc_idx < 256 || !bias_seen || !act_seen) && safety < 600) begin
-            if (dut.bank == 4'd1 && w_idx < 256) begin
-                u_in = weight_data[w_idx];
-                w_idx++;
-            end else if (dut.bank == 4'd2 && b_idx < 16) begin
-                u_in = bias_data[b_idx];
-                b_idx++;
-            end else if (dut.bank == 4'd3 && a_idx < 16) begin
-                u_in = act_data[a_idx];
-                a_idx++;
-            end
-
-            if (weight_bank_out_valid && wc_idx < 256) begin
-                weight_captured[wc_idx+0] = weight_bank_out[0];
-                weight_captured[wc_idx+1] = weight_bank_out[1];
-                weight_captured[wc_idx+2] = weight_bank_out[2];
-                weight_captured[wc_idx+3] = weight_bank_out[3];
-                wc_idx += 4;
-            end
-            if (bias_bank_out_valid && !bias_seen) begin
-                bias_captured = bias_bank_out;
-                bias_seen = 1;
-            end
-            if (activation_bank_out_valid && !act_seen) begin
-                act_captured = activation_bank_out;
-                act_seen = 1;
-            end
-
-            @(posedge clk); #1;
-            safety++;
-        end
-
-        check("all 256 weight bytes were written into weight_buf", w_idx == 256);
-        check("all 16 bias bytes were written into bias_buf", b_idx == 16);
-        check("all 16 activation bytes were written into act_buf", a_idx == 16);
-        check("all 256 weight bytes streamed out via weight_bank_out before timing out", wc_idx == 256);
-        check("bias_bank_out_valid pulsed once with a full tile", bias_seen);
-        check("activation_bank_out_valid pulsed once with a full tile", act_seen);
+        load_and_drain_weights(weight_data, weight_captured, drained);
+        check("all 256 weight bytes streamed out via weight_bank_out before timing out", drained == 256);
 
         weight_order_ok = 1;
         for (int i = 0; i < 256; i++) begin
             if (weight_captured[i] !== weight_data[i]) weight_order_ok = 0;
         end
         check("weight_bank_out replayed all 256 bytes in FIFO order", weight_order_ok);
+        check("weight FSM returned to IDLE", dut.w_fsm.current_state == dut.w_fsm.IDLE);
+        check("weight buffer fully drained (empty)", dut.weight_empty == 1'b1);
 
+        load_bias(bias_data, bias_captured, bias_seen);
+        check("bias_bank_out_valid pulsed once with a full tile", bias_seen);
         for (int i = 0; i < 16; i++) bytes_expected[i] = bias_data[i];
         bias_words_expected = bytes_expected;
         check("bias_bank_out reflects the 16 loaded bytes", bias_captured === bias_words_expected);
+        check("bias FSM returned to IDLE", dut.b_fsm.current_state == dut.b_fsm.IDLE);
 
+        load_activations(act_data, act_captured, act_seen);
+        check("activation_bank_out_valid pulsed once with a full tile", act_seen);
         for (int i = 0; i < 16; i++) bytes_expected[i] = act_data[i];
         act_nibbles_expected = bytes_expected;
         check("activation_bank_out reflects the 16 loaded bytes", act_captured === act_nibbles_expected);
-
-        check("FSM returned to IDLE", dut.dma_fsm.current_state == dut.dma_fsm.IDLE);
-        check("weight buffer fully drained (empty)", dut.weight_empty == 1'b1);
+        check("activation FSM returned to IDLE", dut.a_fsm.current_state == dut.a_fsm.IDLE);
 
         $display("DMA full load/drain: %0d/%0d checks passed\n", checks - errors, checks);
     endtask

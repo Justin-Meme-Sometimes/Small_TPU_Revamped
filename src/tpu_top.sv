@@ -45,16 +45,16 @@ module tpu_top (
         end else if(opcode_reg == OP_READ_OUTPUTS) begin
             start_read_fsm = 1'd1;
         end else if(opcode_reg == OP_STATUS) begin
-            uio_out == current_state == IDLE;
+            uio_out = current_state == IDLE;
         end else if(opcode_reg == OP_LOAD_WEIGHTS) begin
             weight_fsm_start = 1'd1;
             bank = 4'd1;
         end else if(opcode_reg == OP_LOAD_ACTIVATIONS) begin
             activation_fsm_start = 1'd1;
-            bank = 4'd2;
+            bank = 4'd3;
         end else if(opcode_reg == OP_LOAD_BIAS) begin
             bias_fsm_start = 1'd1;
-            bank = 4'd3;
+            bank = 4'd2;
         end
     
     end

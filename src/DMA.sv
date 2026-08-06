@@ -194,6 +194,7 @@ module DMA (
             .rst_n(rst_n),
             .start(start_read_fsm),
             .computed_in_max(computed_in_max),
+            .result_clr(result_clr),
             .clr_counter(clr_counter),
             .result_re(result_re),
             .en_counter(en_counter));
@@ -429,6 +430,7 @@ module DMA_READ_FSM(
     input logic rst_n,
     input logic start,  
     input logic computed_in_max,
+    output logic result_clr,
     output logic clr_counter,
     output logic result_re,
     output logic en_counter);
@@ -449,6 +451,7 @@ module DMA_READ_FSM(
         clr_counter = 1'd0;
         result_re = 1'd0;
         en_counter = 1'd0;
+        result_clr = 1'd0;
         case(current_state)
             IDLE: begin
                 if(start) begin
@@ -462,8 +465,8 @@ module DMA_READ_FSM(
                 if(!computed_in_max) begin
                     next_state = READ_RESULTS;
                     result_re = 1'd1;
-                    result_clr = 1'd1;
                 end else begin
+                    result_clr = 1'd1;
                     clr_counter = 1'd1;
                     next_state = IDLE;
                 end

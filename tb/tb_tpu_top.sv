@@ -3,45 +3,54 @@
 // Testbench for src/tpu_top.sv - the whole chip wired together (DMA, weight
 // loader, activation double-buffer, 4x4 PE array, bias/relu/requant).
 //
-// src/DMA.sv used to be a "dummy DMA" that handed out canned weight/
-// activation data instantly, with no real backing memory. It's since been
-// replaced with a real DMA (src/DMA.sv's DMA_FSM + j_buffer) that loads a
-// tile byte-by-byte over u_in, gated by prefill_state - see tb/tb_dma.sv,
-// which validates that DMA in isolation (256 weight bytes, 16 bias bytes,
-// 16 activation bytes, correct FIFO ordering, correct bank_out shapes).
+// tpu_top's DMA loading used to be automatic: a dedicated LOAD_DMA top-FSM
+// state held prefill_state high for 257 cycles right after a start pulse,
+// bridging the gap between DMA needing ~257 cycles to write a 256-byte
+// weight tile in and the rest of the chip. DMA has since been split into
+// three independent per-bank FSMs (see src/DMA.sv), each with its own start
+// pulse and an external `bank` selector, and tpu_top now exposes that
+// directly as opcodes: OP_LOAD_WEIGHTS/OP_LOAD_BIAS/OP_LOAD_ACTIVATIONS
+// assert weight_fsm_start/bias_fsm_start/activation_fsm_start and set `bank`
+// combinationally off opcode_reg. As a result the LOAD_DMA state is now
+// dead/unreachable: the top FSM's case statement has no LOAD_DMA branch,
+// so IDLE goes straight to PREFILL on OP_COMPUTE. Loading is now the host's
+// job, done via the load opcodes before OP_COMPUTE is ever issued - see
+// load_weights_via_opcode()/load_bias_via_opcode()/load_activations_via_opcode()
+// below and tb/tb_dma.sv, which validates DMA's load/drain/read-back
+// correctness in isolation (byte-exact FIFO ordering, correct bank_out
+// shapes) against the same three-FSM interface.
 //
-// The top-level FSM now has a dedicated LOAD_DMA state ahead of PREFILL,
-// added specifically to close the timing gap between the real DMA (needs
-// ~257 cycles to WRITE a 256-byte weight tile in over u_in, one byte/cycle)
-// and the rest of the chip: LOAD_DMA holds prefill_state (DMA's start
-// trigger) high for exactly those 257 cycles, then hands off to PREFILL,
-// during which weight_bank_out_valid pulses (DMA streaming the tile back
-// out) and weight_loader's load_fifo_state window (also tied to PREFILL)
-// now actually overlap - see tb/tb_dma.sv for DMA validated in isolation
-// (256 weight bytes, 16 bias bytes, 16 activation bytes, FIFO ordering,
-// bank_out shapes).
+// NOTE: because weight_buf starts streaming out (weight_re) as soon as its
+// own load finishes - independent of tpu_top's state - and weight_loader
+// only accepts data while load_fifo_state (tied to PREFILL) is high, any
+// draining that happens before OP_COMPUTE is issued (while current_state is
+// still IDLE) is silently dropped by weight_loader. The "weight_fifo
+// received weight data" check below is a real, meaningful check of whether
+// that timing actually lines up under the new decoupled-opcode scheme, not
+// an assumption - if it fails, that's the load/PREFILL timing gap showing
+// up for real, not a testbench bug.
 //
 // This testbench covers tpu_top's own top-level control FSM end-to-end
-// (IDLE -> LOAD_DMA -> PREFILL -> PRELOAD -> COMPUTE -> DRAIN -> FUNCS ->
-// {PRELOAD loop | DONE -> IDLE}) plus whether weight data actually makes it
-// into weight_fifo in time now that LOAD_DMA/PREFILL's timing lines up with
-// DMA - and a no-X/Z smoke check on the datapath across several tile groups
-// with a free-running dummy byte stream on u_in.
+// (IDLE -> PREFILL -> PRELOAD -> COMPUTE -> DRAIN -> FUNCS ->
+// {PRELOAD loop | DONE -> IDLE}) plus the full opcode decode surface, and a
+// no-X/Z smoke check on the datapath across several tile groups with a
+// free-running dummy byte stream on u_in.
 //
 // State durations, from tpu_top.sv's counters (unchanged by this testbench):
-//   LOAD_DMA: 257 cycles (load_dma_max)   PREFILL: 16 cycles (prefill_max)
-//   PRELOAD:  8 cycles (preload_max)      COMPUTE: 7 cycles (compute_max)
-//   DRAIN:    4 cycles (drain_max)        FUNCS:   3 cycles (funcs_max)
-//   tiles per group: 8 (tiles_max)
+//   PREFILL:  16 cycles (prefill_max)      PRELOAD: 8 cycles (preload_max)
+//   COMPUTE:  7 cycles (compute_max)       DRAIN:   4 cycles (drain_max)
+//   FUNCS:    3 cycles (funcs_max)         tiles per group: 8 (tiles_max)
 //
-// tpu_top's interface has since changed from a direct `start` pin to an
-// opcode register: uio_in is latched into opcode_reg every cycle, which
-// combinationally derives start (OP_COMPUTE), requant_value (OP_LOAD_REQUANT,
-// captured off u_in), and start_read_fsm (OP_READ_OUTPUTS - forwarded
-// straight to DMA's own start_read_fsm/DMA_READ_FSM, see tb/tb_dma.sv for
-// that path's write-in/read-out coverage in isolation). pulse_opcode() below
-// drives uio_in for one cycle to replicate the old single-cycle start pulse,
-// accounting for opcode_reg's one-cycle registration latency.
+// tpu_top's interface uses an opcode register: uio_in is latched into
+// opcode_reg every cycle, which combinationally derives start (OP_COMPUTE),
+// requant_value (OP_LOAD_REQUANT, captured off u_in), start_read_fsm
+// (OP_READ_OUTPUTS - forwarded straight to DMA's own start_read_fsm/
+// DMA_READ_FSM, see tb/tb_dma.sv for that path's write-in/read-out coverage
+// in isolation), and bank + the three load-FSM start pulses (OP_LOAD_*).
+// pulse_opcode() drives uio_in for one cycle then lets it settle for one
+// more, accounting for opcode_reg's one-cycle registration latency; the
+// load_*_via_opcode() tasks instead hold the opcode for the whole load
+// window since `bank` must stay valid for every cycle data's being fed in.
 //
 module tb_tpu_top;
 
@@ -65,6 +74,10 @@ module tb_tpu_top;
     localparam byte OP_COMPUTE = 8'h1;
     localparam byte OP_LOAD_REQUANT = 8'h2;
     localparam byte OP_READ_OUTPUTS = 8'h3;
+    localparam byte OP_STATUS = 8'h4;
+    localparam byte OP_LOAD_WEIGHTS = 8'h5;
+    localparam byte OP_LOAD_ACTIVATIONS = 8'h6;
+    localparam byte OP_LOAD_BIAS = 8'h7;
 
     logic rst_n;
     logic [7:0] u_in;
@@ -108,13 +121,76 @@ module tb_tpu_top;
     // Presents `opcode` on uio_in for one cycle, then holds OP_NONE for one
     // more so opcode_reg's one-cycle registration latency has fully played
     // out - by the time this returns, current_state already reflects
-    // whatever the opcode triggered (e.g. IDLE -> LOAD_DMA for OP_COMPUTE),
-    // matching the old single-cycle direct `start` pin's call-site timing.
+    // whatever the opcode triggered (e.g. IDLE -> PREFILL for OP_COMPUTE).
     task automatic pulse_opcode(input byte opcode);
         uio_in = opcode;
         step();
         uio_in = OP_NONE;
         step();
+    endtask
+
+    // A single registered cycle of weight_fsm_start/bias_fsm_start/
+    // activation_fsm_start is enough to commit DMA's corresponding load FSM
+    // to a full load cycle - opcode_reg's own update and the load FSM's
+    // IDLE -> LOAD_* transition land on the same edge, so there's no way to
+    // assert the opcode just to "peek" at it without it taking effect.
+    // Because of that, these tasks pulse the opcode for exactly one cycle
+    // (matching pulse_opcode()) and then drop to OP_NONE for the rest of the
+    // load window - `bank` stays valid throughout since it's a latch with no
+    // OP_NONE branch to disturb it, but weight_fsm_start/etc. correctly drop
+    // back to 0, so the load FSM won't see `start` still asserted once it
+    // cycles back to IDLE and relaunch a second load (which is exactly what
+    // holding the opcode high for the whole window used to cause).
+    task automatic load_weights_via_opcode(input bit check_plumbing = 0);
+        uio_in = OP_LOAD_WEIGHTS;
+        step();
+        if (check_plumbing)
+            check("OP_LOAD_WEIGHTS asserts weight_fsm_start and routes bank=1",
+                  dut.weight_fsm_start == 1'b1 && dut.bank == 4'd1);
+        uio_in = OP_NONE;
+        repeat (280) step(); // 256 writes + transition/settle edges, padded
+        if (check_plumbing)
+            check("weight FSM (inside DMA) finished loading and returned to IDLE",
+                  dut.dma.w_fsm.current_state == dut.dma.w_fsm.IDLE);
+    endtask
+
+    // DMA.sv routes bank==2 into bias_we_in and bank==3 into act_we_in (see
+    // DMA.sv's top always_comb) - bank=2 is what OP_LOAD_BIAS is *supposed*
+    // to route.
+    task automatic load_bias_via_opcode(input bit check_plumbing = 0);
+        uio_in = OP_LOAD_BIAS;
+        step();
+        if (check_plumbing)
+            check("OP_LOAD_BIAS asserts bias_fsm_start and routes bank=2 (DMA.sv's bias bank)",
+                  dut.bias_fsm_start == 1'b1 && dut.bank == 4'd2);
+        uio_in = OP_NONE;
+        repeat (25) step(); // 16 writes + transition/settle edges, padded
+        if (check_plumbing)
+            check("bias FSM (inside DMA) finished loading and returned to IDLE",
+                  dut.dma.b_fsm.current_state == dut.dma.b_fsm.IDLE);
+    endtask
+
+    task automatic load_activations_via_opcode(input bit check_plumbing = 0);
+        uio_in = OP_LOAD_ACTIVATIONS;
+        step();
+        if (check_plumbing)
+            check("OP_LOAD_ACTIVATIONS asserts activation_fsm_start and routes bank=3 (DMA.sv's activation bank)",
+                  dut.activation_fsm_start == 1'b1 && dut.bank == 4'd3);
+        uio_in = OP_NONE;
+        repeat (25) step();
+        if (check_plumbing)
+            check("activation FSM (inside DMA) finished loading and returned to IDLE",
+                  dut.dma.a_fsm.current_state == dut.dma.a_fsm.IDLE);
+    endtask
+
+    // Runs all three loads back to back, then a fresh OP_COMPUTE pulse -
+    // the sequence every tile group needs now that loading is decoupled
+    // from the top FSM's own state sequencing.
+    task automatic load_all_and_start();
+        load_weights_via_opcode();
+        load_bias_via_opcode();
+        load_activations_via_opcode();
+        pulse_opcode(OP_COMPUTE);
     endtask
 
     // Polls dut.current_state until it equals `target` or `max_cycles`
@@ -130,18 +206,18 @@ module tb_tpu_top;
         end
     endtask
 
-    // Runs one full 8-tile group with a fresh `start` pulse and checks the
-    // control path holds up: state sequencing, tile_count progression, the
-    // DONE->IDLE clear, and no X/Z propagating into product_out/requant_out
-    // anywhere in the group.
+    // Runs one full 8-tile group with a fresh load + start pulse and checks
+    // the control path holds up: state sequencing, tile_count progression,
+    // the DONE->IDLE clear, and no X/Z propagating into product_out/
+    // requant_out anywhere in the group.
     task automatic run_group_test(input int trial_num, input int num_trials);
         int n;
 
-        pulse_opcode(OP_COMPUTE);
-        check($sformatf("group %0d/%0d: start pulse moves IDLE -> LOAD_DMA", trial_num, num_trials),
-              dut.current_state == dut.LOAD_DMA);
+        load_all_and_start();
+        check($sformatf("group %0d/%0d: start pulse moves IDLE -> PREFILL", trial_num, num_trials),
+              dut.current_state == dut.PREFILL);
 
-        wait_for_state(dut.PRELOAD, 300, n);
+        wait_for_state(dut.PRELOAD, 30, n);
         check($sformatf("group %0d/%0d: reached PRELOAD within budget (took %0d cycles)", trial_num, num_trials, n),
               dut.current_state == dut.PRELOAD);
 
@@ -181,10 +257,12 @@ module tb_tpu_top;
         check("reset: tile_count is 0", dut.tile_count == 8'd0);
 
         // -----------------------------------------------------------
-        // 0) Exercise the two non-start opcodes directly: OP_LOAD_REQUANT
-        //    latches whatever's on u_in into requant_value, and
+        // 0) Exercise the non-start/non-compute opcodes directly.
+        //    OP_LOAD_REQUANT latches whatever's on u_in into requant_value.
         //    OP_READ_OUTPUTS forwards straight into DMA's start_read_fsm ->
-        //    DMA_READ_FSM. Full write-in/read-out correctness for that path
+        //    DMA_READ_FSM. OP_LOAD_WEIGHTS/OP_LOAD_BIAS/OP_LOAD_ACTIVATIONS
+        //    each assert their DMA fsm_start pulse and route `bank` while
+        //    held. Full write-in/read-out/load correctness for these paths
         //    (real data, FIFO order, completion) is covered by tb/tb_dma.sv
         //    in isolation - this just checks tpu_top's opcode plumbing.
         // -----------------------------------------------------------
@@ -207,33 +285,45 @@ module tb_tpu_top;
         step();
         check("start_read_fsm forwarded into DMA's read FSM (left IDLE)",
               dut.dma.r_fsm.current_state == dut.dma.r_fsm.READ_RESULTS);
+        // computed_in_max is driven by a free-running cycle counter
+        // (read_count == result_full_count>>2, i.e. 64), not by result_buf's
+        // actual fill level - it takes 64 cycles regardless of whether
+        // there's anything in result_buf, so give it that long to fall back
+        // to IDLE before anything else in this test touches DMA.
+        repeat (70) step();
+        check("DMA's read FSM settled back to IDLE (result_buf was empty)",
+              dut.dma.r_fsm.current_state == dut.dma.r_fsm.IDLE);
+
+        // Asserting each load opcode for even one registered cycle commits
+        // DMA's corresponding load FSM to a real load (see load_weights_via_
+        // opcode()'s header comment), so plumbing checks (bank/fsm_start
+        // routing) and the full load-to-completion check happen together
+        // per bank via check_plumbing=1, rather than as a separate
+        // no-side-effects probe followed by a real load later.
+        $display("==== tpu_top: opcode decode + load (OP_LOAD_WEIGHTS / OP_LOAD_BIAS / OP_LOAD_ACTIVATIONS) ====");
+        load_weights_via_opcode(1);
+        load_bias_via_opcode(1);
+        load_activations_via_opcode(1);
+        check("FSM still IDLE after all three load opcodes", dut.current_state == dut.IDLE);
 
         // -----------------------------------------------------------
-        // 1) Kick off tile group 1 and follow the FSM through every state
-        //    once: IDLE -> PREFILL -> PRELOAD -> COMPUTE -> DRAIN -> FUNCS.
+        // 1) Kick off compute for the tile group just loaded above and
+        //    follow the FSM through every state once: IDLE -> PREFILL ->
+        //    PRELOAD -> COMPUTE -> DRAIN -> FUNCS.
         // -----------------------------------------------------------
-        $display("==== tpu_top: tile group 1 - LOAD_DMA ====");
-        pulse_opcode(OP_COMPUTE);
-        check("start pulse moves IDLE -> LOAD_DMA", dut.current_state == dut.LOAD_DMA);
-
-        wait_for_state(dut.PREFILL, 270, n);
-        check($sformatf("reached PREFILL within budget (took %0d cycles)", n), dut.current_state == dut.PREFILL);
-        check("LOAD_DMA ran the full 257 cycles (load_dma_count saturated)", dut.load_dma_count == 9'd257);
-
         $display("==== tpu_top: tile group 1 - PREFILL ====");
-        wait_for_state(dut.PRELOAD, 20, n);
+        pulse_opcode(OP_COMPUTE);
+        check("start pulse moves IDLE -> PREFILL", dut.current_state == dut.PREFILL);
+
+        wait_for_state(dut.PRELOAD, 30, n);
         check($sformatf("reached PRELOAD within budget (took %0d cycles)", n), dut.current_state == dut.PRELOAD);
         check("PREFILL ran the full 16 cycles (prefill_count saturated)", dut.prefill_count == 9'd16);
 
-        // LOAD_DMA holds prefill_state for exactly the 257 cycles DMA needs
-        // to WRITE the weight tile in; weight_bank_out_valid starts pulsing
-        // right as LOAD_DMA hands off to PREFILL, which is also exactly
-        // when weight_loader's load_fifo_state window (tied to PREFILL)
-        // opens, so weight_fifo should be non-empty right as PRELOAD begins.
-        // (weight_loader immediately starts draining it back out into
-        // PE_array during PRELOAD - that's its job - so checking
-        // weight_fifo_empty later, e.g. at COMPUTE, would check the wrong
-        // thing: empty-by-then is the correct, intended behavior.)
+        // Whether weight_fifo actually received data by here depends on
+        // whether weight_buf's drain (which starts as soon as its own load
+        // finishes, independent of tpu_top's state) happened to overlap
+        // with PREFILL's 16-cycle load_fifo_state window - see the header
+        // comment. This is a real check of that timing, not an assumption.
         check("weight_fifo received weight data during PREFILL (non-empty right as PRELOAD begins)",
               dut.weight_fifo_empty == 1'b0);
 
@@ -280,15 +370,15 @@ module tb_tpu_top;
         check("DONE's tile_clr reset tile_count back to 0 on the way to IDLE", dut.tile_count == 8'd0);
 
         // -----------------------------------------------------------
-        // 3) Start a second tile group and confirm it actually completes a
-        //    fresh 8 tiles instead of the group-1 leftover state getting in
-        //    the way (regression check for a previously-fixed tile_clr
-        //    latch bug - see git history).
+        // 3) Start a second tile group (fresh loads + start) and confirm it
+        //    actually completes a fresh 8 tiles instead of the group-1
+        //    leftover state getting in the way (regression check for a
+        //    previously-fixed tile_clr latch bug - see git history).
         // -----------------------------------------------------------
         $display("==== tpu_top: tile group 2 (does a fresh 8-tile group actually complete?) ====");
-        pulse_opcode(OP_COMPUTE);
-        check("group 2: start pulse moves IDLE -> LOAD_DMA", dut.current_state == dut.LOAD_DMA);
-        wait_for_state(dut.PRELOAD, 300, n);
+        load_all_and_start();
+        check("group 2: start pulse moves IDLE -> PREFILL", dut.current_state == dut.PREFILL);
+        wait_for_state(dut.PRELOAD, 30, n);
 
         for (int t = 1; t <= 8; t++) begin
             wait_for_state(dut.COMPUTE, 20, n);
@@ -304,10 +394,9 @@ module tb_tpu_top;
 
         // -----------------------------------------------------------
         // 4) A handful more full-chip tile groups back to back, purely to
-        //    stress the control path over many cycles with the DMA still
-        //    quietly loading/draining in the background - confirms nothing
-        //    hangs and no X/Z creeps into the datapath once DMA's load
-        //    eventually does catch up mid-stream.
+        //    stress the control path over many cycles with fresh loads each
+        //    time - confirms nothing hangs and no X/Z creeps into the
+        //    datapath.
         // -----------------------------------------------------------
         $display("==== tpu_top: 5 more back-to-back tile groups (control-path stress) ====");
         for (int trial = 1; trial <= 5; trial++) begin
