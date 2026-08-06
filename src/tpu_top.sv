@@ -40,24 +40,35 @@ module tpu_top (
         bias_fsm_start = 1'd0;
         if(opcode_reg == OP_COMPUTE) begin
             if(current_state == IDLE) start = 1'd1; 
-        end else if(opcode_reg == OP_LOAD_REQUANT) begin
-            requant_value = u_in;
         end else if(opcode_reg == OP_READ_OUTPUTS) begin
             start_read_fsm = 1'd1;
-        end else if(opcode_reg == OP_STATUS) begin
-            uio_out = current_state == IDLE;
         end else if(opcode_reg == OP_LOAD_WEIGHTS) begin
             weight_fsm_start = 1'd1;
-            bank = 4'd1;
         end else if(opcode_reg == OP_LOAD_ACTIVATIONS) begin
             activation_fsm_start = 1'd1;
-            bank = 4'd3;
         end else if(opcode_reg == OP_LOAD_BIAS) begin
             bias_fsm_start = 1'd1;
-            bank = 4'd2;
         end
-    
     end
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if (!rst_n) begin
+            requant_value <= 8'd0;
+            uio_out <= 8'd0;
+            bank <= 4'd0;
+        end else if (opcode_reg == OP_LOAD_REQUANT) begin
+            requant_value <= u_in;
+        end else if (opcode_reg == OP_STATUS) begin
+            uio_out <= (current_state == IDLE);
+        end else if (opcode_reg == OP_LOAD_WEIGHTS) begin
+            bank <= 4'd1;
+        end else if (opcode_reg == OP_LOAD_ACTIVATIONS) begin
+            bank <= 4'd3;
+        end else if (opcode_reg == OP_LOAD_BIAS) begin
+            bank <= 4'd2;
+        end
+    end
+
     
   
     logic start_fifo_load;
@@ -131,13 +142,13 @@ module tpu_top (
     logic [8:0] load_dma_count, prefill_count, preload_count, compute_count, drain_count, funcs_count, tile_count;
     logic load_dma_max, prefill_max, preload_max, compute_max, drain_max, funcs_max, tiles_max;
 
-    counter LOAD_DMA_COUNTER (.clk(clk), .rst_n(rst_n), .en(load_dma_en), .clr(load_dma_clr), .out(load_dma_count));
-    counter PREFILL_COUNTER (.clk(clk), .rst_n(rst_n), .en(prefill_en), .clr(prefill_clr), .out(prefill_count));
-    counter PRELOAD_COUNTER (.clk(clk), .rst_n(rst_n), .en(preload_en), .clr(preload_clr), .out(preload_count));
-    counter COMPUTE_COUNTER (.clk(clk), .rst_n(rst_n), .en(compute_en), .clr(compute_clr), .out(compute_count));
-    counter DRAIN_COUNTER   (.clk(clk), .rst_n(rst_n), .en(drain_en),   .clr(drain_clr),   .out(drain_count));
-    counter FUNCS_COUNTER   (.clk(clk), .rst_n(rst_n), .en(func_en),    .clr(func_clr),    .out(funcs_count));
-    counter TILES_COMPLETE_COUNTER   (.clk(clk), .rst_n(rst_n), .en(tile_done), .clr(tile_clr), .out(tile_count));
+    counter_top LOAD_DMA_COUNTER (.clk(clk), .rst_n(rst_n), .en(load_dma_en), .clr(load_dma_clr), .out(load_dma_count));
+    counter_top PREFILL_COUNTER (.clk(clk), .rst_n(rst_n), .en(prefill_en), .clr(prefill_clr), .out(prefill_count));
+    counter_top PRELOAD_COUNTER (.clk(clk), .rst_n(rst_n), .en(preload_en), .clr(preload_clr), .out(preload_count));
+    counter_top COMPUTE_COUNTER (.clk(clk), .rst_n(rst_n), .en(compute_en), .clr(compute_clr), .out(compute_count));
+    counter_top DRAIN_COUNTER   (.clk(clk), .rst_n(rst_n), .en(drain_en),   .clr(drain_clr),   .out(drain_count));
+    counter_top FUNCS_COUNTER   (.clk(clk), .rst_n(rst_n), .en(func_en),    .clr(func_clr),    .out(funcs_count));
+    counter_top TILES_COMPLETE_COUNTER   (.clk(clk), .rst_n(rst_n), .en(tile_done), .clr(tile_clr), .out(tile_count));
 
     assign load_dma_max = (load_dma_count == 9'd257);
     assign prefill_max = (prefill_count == 9'd16);
@@ -346,7 +357,7 @@ module tpu_top (
 
 endmodule
 
-module counter 
+module counter_top 
 (input logic clk,
  input logic rst_n,
  input logic en,

@@ -141,14 +141,20 @@ module tb_tpu_top;
     // back to 0, so the load FSM won't see `start` still asserted once it
     // cycles back to IDLE and relaunch a second load (which is exactly what
     // holding the opcode high for the whole window used to cause).
+    // `bank` is a registered signal (clocked off opcode_reg), so it lags one
+    // extra edge behind weight_fsm_start/etc. (which are still pure
+    // combinational off opcode_reg) - it's valid one step later than the
+    // pulse that triggers the load FSM, not the same step.
     task automatic load_weights_via_opcode(input bit check_plumbing = 0);
         uio_in = OP_LOAD_WEIGHTS;
         step();
         if (check_plumbing)
-            check("OP_LOAD_WEIGHTS asserts weight_fsm_start and routes bank=1",
-                  dut.weight_fsm_start == 1'b1 && dut.bank == 4'd1);
+            check("OP_LOAD_WEIGHTS asserts weight_fsm_start", dut.weight_fsm_start == 1'b1);
         uio_in = OP_NONE;
-        repeat (280) step(); // 256 writes + transition/settle edges, padded
+        step();
+        if (check_plumbing)
+            check("OP_LOAD_WEIGHTS routes bank=1 (registered, settles one cycle later)", dut.bank == 4'd1);
+        repeat (279) step(); // remaining writes + transition/settle edges, padded
         if (check_plumbing)
             check("weight FSM (inside DMA) finished loading and returned to IDLE",
                   dut.dma.w_fsm.current_state == dut.dma.w_fsm.IDLE);
@@ -161,10 +167,12 @@ module tb_tpu_top;
         uio_in = OP_LOAD_BIAS;
         step();
         if (check_plumbing)
-            check("OP_LOAD_BIAS asserts bias_fsm_start and routes bank=2 (DMA.sv's bias bank)",
-                  dut.bias_fsm_start == 1'b1 && dut.bank == 4'd2);
+            check("OP_LOAD_BIAS asserts bias_fsm_start", dut.bias_fsm_start == 1'b1);
         uio_in = OP_NONE;
-        repeat (25) step(); // 16 writes + transition/settle edges, padded
+        step();
+        if (check_plumbing)
+            check("OP_LOAD_BIAS routes bank=2 (DMA.sv's bias bank, registered)", dut.bank == 4'd2);
+        repeat (24) step(); // remaining writes + transition/settle edges, padded
         if (check_plumbing)
             check("bias FSM (inside DMA) finished loading and returned to IDLE",
                   dut.dma.b_fsm.current_state == dut.dma.b_fsm.IDLE);
@@ -174,10 +182,12 @@ module tb_tpu_top;
         uio_in = OP_LOAD_ACTIVATIONS;
         step();
         if (check_plumbing)
-            check("OP_LOAD_ACTIVATIONS asserts activation_fsm_start and routes bank=3 (DMA.sv's activation bank)",
-                  dut.activation_fsm_start == 1'b1 && dut.bank == 4'd3);
+            check("OP_LOAD_ACTIVATIONS asserts activation_fsm_start", dut.activation_fsm_start == 1'b1);
         uio_in = OP_NONE;
-        repeat (25) step();
+        step();
+        if (check_plumbing)
+            check("OP_LOAD_ACTIVATIONS routes bank=3 (DMA.sv's activation bank, registered)", dut.bank == 4'd3);
+        repeat (24) step();
         if (check_plumbing)
             check("activation FSM (inside DMA) finished loading and returned to IDLE",
                   dut.dma.a_fsm.current_state == dut.dma.a_fsm.IDLE);

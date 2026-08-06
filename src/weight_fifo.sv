@@ -89,6 +89,7 @@ module FIFO #(parameter WIDTH=8,
     assign full = (count == 4'd4);
 
     always_comb begin
+      data_out = '0;
       if(!(empty)) begin
         data_out = {Q[getPtr]};
       end
@@ -99,8 +100,9 @@ module FIFO #(parameter WIDTH=8,
       count <= '0;
       getPtr <= 0;
       putPtr <= 0;
+      for (int i = 0; i < DEPTH; i++) Q[i] <= '0;
     end
-    if(we && re && (!empty) && (!full)) begin   // We want to read and write @ the same time.
+    else if(we && re && (!empty) && (!full)) begin   // We want to read and write @ the same time.
       Q[putPtr] <= data_in;                     
       getPtr <= getPtr + 1;
       putPtr <= putPtr + 1;
