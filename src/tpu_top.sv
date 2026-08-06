@@ -11,11 +11,18 @@ module tpu_top (
     localparam OP_LOAD_REQUANT = 8'h2;
     localparam OP_READ_OUTPUTS = 8'h3;
     localparam OP_STATUS = 8'h4;
+    localparam OP_LOAD_WEIGHTS = 8'h5;
+    localparam OP_LOAD_ACTIVATIONS = 8'h6;
+    localparam OP_LOAD_BIAS = 8'h7;
 
     logic [7:0] opcode_reg;
     logic [7:0] requant_value;
     logic start;
     logic start_read_fsm;
+    logic weight_fsm_start;
+    logic activation_fsm_start;
+    logic bias_fsm_start;
+    logic [3:0] bank;
     
     always_ff @(posedge clk, negedge rst_n) begin
         if(!rst_n) begin
@@ -28,19 +35,28 @@ module tpu_top (
     always_comb begin
         start = 1'd0;
         start_read_fsm = 1'd0;
+        weight_fsm_start = 1'd0;
+        activation_fsm_start = 1'd0;
+        bias_fsm_start = 1'd0;
         if(opcode_reg == OP_COMPUTE) begin
-            if(current_state == IDLE) begin
-                start = 1'd1; 
-            end
-        end
-        else if(opcode_reg == OP_LOAD_REQUANT) begin
+            if(current_state == IDLE) start = 1'd1; 
+        end else if(opcode_reg == OP_LOAD_REQUANT) begin
             requant_value = u_in;
         end else if(opcode_reg == OP_READ_OUTPUTS) begin
             start_read_fsm = 1'd1;
-        end
-        else if(opcode_reg == OP_STATUS) begin
+        end else if(opcode_reg == OP_STATUS) begin
             uio_out == current_state == IDLE;
+        end else if(opcode_reg == OP_LOAD_WEIGHTS) begin
+            weight_fsm_start = 1'd1;
+            bank = 4'd1;
+        end else if(opcode_reg == OP_LOAD_ACTIVATIONS) begin
+            activation_fsm_start = 1'd1;
+            bank = 4'd2;
+        end else if(opcode_reg == OP_LOAD_BIAS) begin
+            bias_fsm_start = 1'd1;
+            bank = 4'd3;
         end
+    
     end
     
   
@@ -160,16 +176,7 @@ module tpu_top (
         case(current_state)
             IDLE: begin
                 if(!start) next_state = IDLE;
-                else next_state = LOAD_DMA;
-            end
-            LOAD_DMA: begin
-                if(load_dma_max) begin
-                    next_state = PREFILL;
-                end else begin
-                    load_dma_en = 1;
-                    next_state = LOAD_DMA;
-                end
-                load_dma_state = 1;
+                else next_state = PREFILL;
             end
             PREFILL: begin
                 if(prefill_max) begin
@@ -322,9 +329,12 @@ module tpu_top (
         .u_in(u_in),
         .u_out(u_out),
         .tile_done(tile_done),
+        .weight_fsm_start(weight_fsm_start),
+        .activation_fsm_start(activation_fsm_start),
+        .bias_fsm_start(bias_fsm_start),
         .start_read_fsm(start_read_fsm),
+        .bank(bank),
         .result_we(result_we),
-        .prefill_state(load_dma_state),
         .computed_bank_in(requant_out), //this also comes from relu
         .computed_bank_in_valid(requant_out_valid), //this comes from relu
         .weight_bank_out(weight_bank_out),  //this goes into weight fifo

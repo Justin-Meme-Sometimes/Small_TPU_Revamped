@@ -2,11 +2,14 @@ module DMA (
     input logic clk,
     input logic rst_n,
     input logic [7:0] u_in,
-    input logic prefill_state,
+    input logic bias_fsm_start,
+    input logic activation_fsm_start,
+    input logic weight_fsm_start,
     input logic tile_done,
     input logic [3:0][7:0] computed_bank_in,
     input logic computed_bank_in_valid,
     input logic start_read_fsm,
+    input logic [3:0] bank,
     input logic result_we,
     output logic [7:0] u_out,
     output logic [3:0][7:0] weight_bank_out,
@@ -17,24 +20,33 @@ module DMA (
     output logic bias_bank_out_valid);
 
 
+    logic activations_busy, weights_busy, bias_busy;
+    logic any_busy;
+
+    assign any_busy = activations_busy | weights_busy | bias_busy;
+
     always_comb begin
         weight_we_in[0] = 8'd0;
         bias_we_in[0] = 8'd0;
         act_we_in[0] = 8'd0;
-        if(bank == 4'd1) begin
-            weight_we_in[0] = u_in;
-        end else if(bank == 4'd2) begin
-            bias_we_in[0] = u_in;
-        end else if(bank == 4'd3) begin
-            act_we_in[0] =  u_in;
+        if(!any_busy) begin
+            if(bank == 4'd1) begin
+                weight_we_in[0] = u_in;
+            end else if(bank == 4'd2) begin
+                bias_we_in[0] = u_in;
+            end else if(bank == 4'd3) begin
+                act_we_in[0] =  u_in;
+            end
         end
     end
 
-    logic [3:0] bank;
+    
     logic weight_single, weight_we, weight_re, weight_a_or_b, weight_clr;
     logic [3:0][7:0] weight_we_in;
     logic weight_we_valid, weight_full, weight_empty;
     logic [15:0] weight_full_count;
+   
+
 
     assign weight_full_count = 16'd256;
     assign weight_we_valid = weight_we;
@@ -117,23 +129,30 @@ module DMA (
         .buff_out(bias_bank_out),
         .full_count(bias_full_count));
 
-    logic banks_clr;
-    assign weight_clr = tile_done; //weight_buf clears itself by draining via re, not by DONE - it can still be streaming out to weight_fifo after bias/activations finish loading
-    assign bias_clr = banks_clr;
-    assign act_clr = banks_clr;
-
-    DMA_FSM dma_fsm (
+    LOAD_WEIGHTS_FSM w_fsm (
         .clk(clk),
         .rst_n(rst_n),
-        .start(prefill_state),
+        .any_busy(any_busy),
+        .start(weight_fsm_start),
         .full_weights(weight_full),
-        .full_bias(bias_full),
-        .full_activations(act_full),
-        .bank(bank),
         .we_weights(weight_we),
+        .clr(weight_clr));
+
+    LOAD_BIAS_FSM b_fsm (
+        .clk(clk),
+        .rst_n(rst_n),
+        .start(bias_fsm_start),
+        .full_bias(bias_full),
         .we_bias(bias_we),
+        .clr(bias_clr));
+
+    LOAD_ACTIVATIONS_FSM a_fsm (
+        .clk(clk),
+        .rst_n(rst_n),
+        .start(activation_fsm_start),
+        .full_activations(act_full),
         .we_activations(act_we),
-        .clr(banks_clr));
+        .clr(act_clr));
 
     logic result_single, result_re, result_a_or_b, result_clr;
     logic [3:0][7:0] result_we_in, result_re_out;
@@ -248,20 +267,70 @@ module j_buffer #(
 
 endmodule
 
-module DMA_FSM(
+
+module LOAD_WEIGHTS_FSM(
     input logic clk,
     input logic rst_n,
     input logic start,   
+    input logic any_busy,
     input logic full_weights,
-    input logic full_bias,
-    input logic full_activations,
-    output logic [3:0] bank,
     output logic we_weights,
-    output logic we_bias,
-    output logic we_activations,
+    output logic busy,
     output logic clr);
 
-    typedef enum logic [5:0] {IDLE, LOAD_WEIGHTS, LOAD_BIAS, LOAD_ACTIVATIONS, DONE} state_t;
+    typedef enum logic [5:0] {IDLE, LOAD_WEIGHTS, DONE} state_t;
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if(!rst_n) begin
+            current_state <= IDLE;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+    
+    always_comb begin
+        next_state = current_state;
+        we_weights = 1'd0;
+        clr = 1'd0;
+        busy = 1'd0;
+        case(current_state)
+            IDLE: begin
+                if(start && !any_busy) begin
+                    next_state = LOAD_WEIGHTS;
+                    clr = 1'd1;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+            LOAD_WEIGHTS: begin
+                if(!full_weights) begin
+                    next_state = LOAD_WEIGHTS;
+                    we_weights = 1'd1;
+                    busy = 1'd1;
+                end else begin
+                    next_state = DONE;
+                end
+            end
+            DONE: begin
+                next_state = IDLE;
+            end
+        endcase
+    end
+endmodule
+
+
+module LOAD_BIAS_FSM(
+    input logic clk,
+    input logic rst_n,
+    input logic any_busy,
+    input logic start,   
+    input logic full_bias,
+    output logic we_bias,
+    output logic busy,
+    output logic clr);
+
+    typedef enum logic [5:0] {IDLE, LOAD_BIAS, DONE} state_t;
     state_t current_state, next_state;
 
     always_ff @(posedge clk, negedge rst_n) begin
@@ -274,41 +343,73 @@ module DMA_FSM(
     
     always_comb begin
         next_state = current_state;
-        bank = 4'd0;
-        we_weights = 1'd0;
         we_bias = 1'd0;
-        we_activations = 1'd0;
+        busy = 1'd1;
         clr = 1'd0;
         case(current_state)
             IDLE: begin
-                if(start) begin
-                    next_state = LOAD_WEIGHTS;
+                if(start && !any_busy) begin
+                    next_state = LOAD_BIAS;
                 end else begin
                     next_state = IDLE;
-                end
-            end
-            LOAD_WEIGHTS: begin
-                if(!full_weights) begin
-                    next_state = LOAD_WEIGHTS;
-                    bank = 4'd1;
-                    we_weights = 1'd1;
-                end else begin
-                    next_state = LOAD_BIAS;
                 end
             end
             LOAD_BIAS: begin
                 if(!full_bias) begin
                     next_state = LOAD_BIAS;
-                    bank = 4'd2;
                     we_bias = 1'd1;
+                    busy = 1'd1;
                 end else begin
+                    next_state = DONE;
+                end
+            end
+            DONE: begin
+                clr = 1'd1; //clear banks
+                next_state = IDLE;
+            end
+        endcase
+    end
+endmodule
+
+
+module LOAD_ACTIVATIONS_FSM(
+    input logic clk,
+    input logic rst_n,
+    input logic any_busy,
+    input logic start,   
+    input logic full_activations,
+    output logic busy,
+    output logic we_activations,
+    output logic clr);
+
+    typedef enum logic [5:0] {IDLE, LOAD_ACTIVATIONS, DONE} state_t;
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if(!rst_n) begin
+            current_state <= IDLE;
+        end else begin
+            current_state <=  next_state;
+        end
+    end
+    
+    always_comb begin
+        next_state = current_state;
+        busy = 1'd0;
+        we_activations = 1'd0;
+        clr = 1'd0;
+        case(current_state)
+            IDLE: begin
+                if(start && !any_busy) begin
                     next_state = LOAD_ACTIVATIONS;
+                end else begin
+                    next_state = IDLE;
                 end
             end
             LOAD_ACTIVATIONS: begin
                 if(!full_activations) begin
                     next_state = LOAD_ACTIVATIONS;
-                    bank = 4'd3;
+                    busy = 1'd1;
                     we_activations = 1'd1;
                 end else begin
                     next_state = DONE;
@@ -320,7 +421,6 @@ module DMA_FSM(
             end
         endcase
     end
-
 endmodule
 
 
@@ -362,6 +462,7 @@ module DMA_READ_FSM(
                 if(!computed_in_max) begin
                     next_state = READ_RESULTS;
                     result_re = 1'd1;
+                    result_clr = 1'd1;
                 end else begin
                     clr_counter = 1'd1;
                     next_state = IDLE;
