@@ -11,10 +11,10 @@
 // for the whole load window, rather than something DMA derives internally.
 //
 // Verifies each FSM sequences IDLE -> LOAD_* -> DONE -> IDLE independently,
-// weights stream out 4 bytes/cycle in FIFO order via weight_bank_out/
-// weight_bank_out_valid once loading finishes, and bias/activation each
-// present their full 16-byte tile in one shot via bias_bank_out/
-// activation_bank_out once loaded.
+// weights and activations each stream out 4 bytes/cycle in FIFO order via
+// weight_bank_out/weight_bank_out_valid and activation_bank_out/
+// activation_bank_out_valid once loading finishes, and bias presents its
+// full 16-byte tile in one shot via bias_bank_out once loaded.
 //
 // Also covers the other direction: computed results written in via
 // computed_bank_in/computed_bank_in_valid (gated by the external result_we
@@ -55,7 +55,7 @@ module tb_dma;
     logic [7:0] u_out;
     logic [3:0][7:0] weight_bank_out;
     logic weight_bank_out_valid;
-    logic [31:0][3:0] activation_bank_out;
+    logic [3:0][7:0] activation_bank_out;
     logic activation_bank_out_valid;
     logic [3:0][31:0] bias_bank_out;
     logic bias_bank_out_valid;
@@ -80,6 +80,14 @@ module tb_dma;
         .activation_bank_out_valid(activation_bank_out_valid),
         .bias_bank_out(bias_bank_out),
         .bias_bank_out_valid(bias_bank_out_valid));
+
+    // Waveform dump for viewing in GTKWave. A no-op unless this testbench
+    // is built with --trace-fst (or --trace for VCD) - run_all.sh doesn't
+    // pass that flag, so this has no effect/cost on the normal test suite.
+    initial begin
+        $dumpfile("tb_dma.vcd");
+        $dumpvars(0, tb_dma);
+    end
 
     task automatic reset_dut();
         rst_n = 0;
@@ -157,10 +165,9 @@ module tb_dma;
         end
     endtask
 
-    // Same shape as load_and_drain_weights, but for bias/activation: these
-    // are snapshot buffers (present the whole tile at once via buff_out),
-    // so there's nothing to drain - just poll for the one-shot _valid pulse
-    // that fires once the tile finishes loading.
+    // bias is a snapshot buffer (presents the whole tile at once via
+    // buff_out), so there's nothing to drain - just poll for the one-shot
+    // _valid pulse that fires once the tile finishes loading.
     task automatic load_bias(ref byte data [16], output logic [3:0][31:0] captured, output bit seen);
         int idx, safety;
 
@@ -194,7 +201,11 @@ module tb_dma;
         end
     endtask
 
-    task automatic load_activations(ref byte data [16], output logic [31:0][3:0] captured, output bit seen);
+    // Same shape as load_and_drain_weights, but for the 16-byte activation
+    // tile: activation_bank_out streams 4 bytes/cycle via re_out/re_valid
+    // just like weight_bank_out does, so this drains it the same way rather
+    // than polling for a single one-shot pulse.
+    task automatic load_and_drain_activations(ref byte data [16], ref byte captured [16], output int drained);
         int idx, safety;
 
         bank = 4'd3;
@@ -203,18 +214,28 @@ module tb_dma;
         @(posedge clk); #1;
         activation_fsm_start = 1'd0;
 
+        drained = 0;
         for (idx = 0; idx < 16; idx++) begin
             u_in = data[idx];
+            if (activation_bank_out_valid && drained < 16) begin
+                captured[drained+0] = activation_bank_out[0];
+                captured[drained+1] = activation_bank_out[1];
+                captured[drained+2] = activation_bank_out[2];
+                captured[drained+3] = activation_bank_out[3];
+                drained += 4;
+            end
             @(posedge clk); #1;
         end
         bank = 4'd0;
 
-        seen = 0;
         safety = 0;
-        while (!seen && safety < 20) begin
+        while (drained < 16 && safety < 20) begin
             if (activation_bank_out_valid) begin
-                captured = activation_bank_out;
-                seen = 1;
+                captured[drained+0] = activation_bank_out[0];
+                captured[drained+1] = activation_bank_out[1];
+                captured[drained+2] = activation_bank_out[2];
+                captured[drained+3] = activation_bank_out[3];
+                drained += 4;
             end
             @(posedge clk); #1;
             safety++;
@@ -230,15 +251,14 @@ module tb_dma;
     byte bias_data [16];
     byte act_data [16];
     byte weight_captured [256];
+    byte act_captured [16];
 
     task automatic run_full_load_test();
-        int drained;
-        bit bias_seen, act_seen, weight_order_ok;
+        int drained, act_drained;
+        bit bias_seen, weight_order_ok, act_order_ok;
         logic [3:0][31:0] bias_captured;
-        logic [31:0][3:0] act_captured;
         logic [15:0][7:0] bytes_expected;
         logic [3:0][31:0] bias_words_expected;
-        logic [31:0][3:0] act_nibbles_expected;
 
         reset_dut();
         $display("==== DMA: full load/drain with dummy data ====");
@@ -265,11 +285,14 @@ module tb_dma;
         check("bias_bank_out reflects the 16 loaded bytes", bias_captured === bias_words_expected);
         check("bias FSM returned to IDLE", dut.b_fsm.current_state == dut.b_fsm.IDLE);
 
-        load_activations(act_data, act_captured, act_seen);
-        check("activation_bank_out_valid pulsed once with a full tile", act_seen);
-        for (int i = 0; i < 16; i++) bytes_expected[i] = act_data[i];
-        act_nibbles_expected = bytes_expected;
-        check("activation_bank_out reflects the 16 loaded bytes", act_captured === act_nibbles_expected);
+        load_and_drain_activations(act_data, act_captured, act_drained);
+        check("activation_bank_out_valid pulsed once with a full tile", act_drained == 16);
+
+        act_order_ok = 1;
+        for (int i = 0; i < 16; i++) begin
+            if (act_captured[i] !== act_data[i]) act_order_ok = 0;
+        end
+        check("activation_bank_out reflects the 16 loaded bytes", act_order_ok);
         check("activation FSM returned to IDLE", dut.a_fsm.current_state == dut.a_fsm.IDLE);
 
         $display("DMA full load/drain: %0d/%0d checks passed\n", checks - errors, checks);
