@@ -7,7 +7,9 @@ module PE_array(
     input logic tile_done,
     input logic drain_state,
     input logic [3:0][7:0] weight_array,
+    input logic drain_state_start,
     input logic activation_valid,
+    input logic weight_data_valid,
     input logic [3:0][7:0] activation_array,
     output logic [3:0][31:0] product_array,
     output logic output_valid
@@ -32,7 +34,7 @@ module PE_array(
 
     vertical_en_fsm v_fsm_1 (   .clk(clk), 
                                 .rst_n(rst_n), 
-                                .compute_state_start(compute_state_start), 
+                                .drain_state_start(drain_state_start), 
                                 .tile_done(tile_done), 
                                 .en_0(v_en_0),
                                 .en_1(v_en_1),
@@ -169,7 +171,7 @@ endmodule
 module vertical_en_fsm(
     input logic clk,
     input logic rst_n,
-    input logic compute_state_start,
+    input logic drain_state_start,
     input logic tile_done,
     output logic en_0,
     output logic en_1,
@@ -197,7 +199,7 @@ module vertical_en_fsm(
         en_0 = 0;
         case(current_state)
             IDLE: begin
-                if(!compute_state_start) next_state = IDLE;
+                if(!drain_state_start) next_state = IDLE;
                 else next_state = S0;
             end
             S0: begin
@@ -212,16 +214,9 @@ module vertical_en_fsm(
                 en_2 = 1;
             end
             S3: begin
-                if(tile_done) begin
-                    next_state = IDLE;
-                end else begin
-                    next_state = S3;
-                end
+                next_state = IDLE;
                 en_3 = 1;
             end
         endcase
     end
-
-
-
 endmodule

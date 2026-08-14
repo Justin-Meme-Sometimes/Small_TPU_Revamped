@@ -40,34 +40,21 @@ always_comb begin
     write_in_b = 0;
     output_buf_valid = 0;
     output_buff = 0;
-    if(first_pass_a) begin
-        if(re_valid_a) begin
-            output_buff = 0;
-            output_buf_valid = 0;
-        end
-        if(DMA_in_valid) begin
-            write_in_a = DMA_in;
-            we_valid_a = 1;
-        end
+ 
+    if(we_b && DMA_in_valid) begin
+        write_in_b = DMA_in;
+        we_valid_b = 1;
     end
-    if(buff_a_active) begin
-        if(re_valid_a) begin
-            output_buff = re_out_a;
-            output_buf_valid = re_valid_a;
-        end
-        if(DMA_in_valid) begin
-            write_in_b = DMA_in;
-            we_valid_b = 1;
-        end
-    end else if (buff_b_active) begin
-        if(re_valid_b) begin
-            output_buff = re_out_b;
-            output_buf_valid = re_valid_b;
-        end
-        if(DMA_in_valid) begin
-            we_valid_a = 1;
-            write_in_a = DMA_in;
-        end
+    if(we_a && DMA_in_valid) begin
+        we_valid_a = 1;
+        write_in_a = DMA_in;
+    end
+    if(re_valid_a) begin
+        output_buff = re_out_a;
+        output_buf_valid = 1;
+    end else if(re_valid_b) begin
+        output_buff = re_out_b;
+        output_buf_valid = 1;
     end
 end
 endmodule
@@ -161,6 +148,7 @@ module bank_fsm(
                     active = 1; //only 1 bank should be active at a time
                 end else if (!tiles_complete && o_bank_reg && !active) begin
                     bank_switch = 1;
+                    clr = 1;
                     next_state = FILL_INACTIVE;
                 end else if(tiles_complete) begin
                     next_state = DONE;
@@ -169,6 +157,7 @@ module bank_fsm(
             WAIT_INACTIVE: begin
                 if(compute_state) begin
                     next_state = FILL_INACTIVE;
+                    clr = 1;
                 end else begin
                     next_state = WAIT_INACTIVE;
                 end
@@ -215,40 +204,50 @@ module i_buffer(
 
     logic [15:0][7:0] buff;
     logic [9:0] curr_count;
+    logic [9:0] wr_ptr, rd_ptr; //separate pointers so multi-group reads play back in FIFO (write) order instead of draining from the top down
 
-    assign full = curr_count == 10'd16;
-    assign empty = curr_count == 8'd0;
+
+    assign full = wr_ptr == 10'd16;
+    assign empty = rd_ptr == wr_ptr;
 
     always_ff @(posedge clk, negedge rst_n) begin
         if(!rst_n) begin
             buff <= '0; // or whatever it is to make everything is 0
-            curr_count <= '0;
+            wr_ptr <= '0;
+            rd_ptr <= '0;
         end else begin
             if(clr) begin
-                curr_count <='0;
-                re_valid <= 0;
+                wr_ptr <= '0;
+                rd_ptr <= '0;
+                re_valid <= '0;
             end
             else if(we) begin
                 if(we_valid && !full) begin
-                    buff[curr_count] <= we_in[0];
-                    buff[curr_count+1] <= we_in[1];
-                    buff[curr_count+2] <= we_in[2];
-                    buff[curr_count+3] <= we_in[3];
-                    curr_count <= curr_count + 4;
+                    buff[wr_ptr] <= we_in[0];
+                    buff[wr_ptr+1] <= we_in[1];
+                    buff[wr_ptr+2] <= we_in[2];
+                    buff[wr_ptr+3] <= we_in[3];
+                    wr_ptr <= wr_ptr + 4;
                     re_valid <= 0;
                 end
             end
             else if(re) begin //curr_count gets to 255 after filling activation buffer then empties
                 if(!empty) begin
-                    re_out[0] <= buff[curr_count-4];
-                    re_out[1] <= buff[curr_count-3];
-                    re_out[2] <= buff[curr_count-2];
-                    re_out[3] <= buff[curr_count-1];
+                    re_out[0] <= buff[rd_ptr];
+                    re_out[1] <= buff[rd_ptr+1];
+                    re_out[2] <= buff[rd_ptr+2];
+                    re_out[3] <= buff[rd_ptr+3];
                     re_valid <= 1;
-                    curr_count <= curr_count - 4;
+                    rd_ptr <= rd_ptr + 4;
                 end else begin
                     re_valid <= 0;
                 end
+            end else begin
+                re_valid <= 0;
+                re_out[0] <= '0; 
+                re_out[1] <= '0; 
+                re_out[2] <= '0; 
+                re_out[3] <= '0;
             end
         end
     end

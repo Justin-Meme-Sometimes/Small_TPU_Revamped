@@ -59,6 +59,8 @@ module weight_loader
                     data_valid = 1;
                     fifo_re = 1;
                     next_state = PRELOAD;
+                end else if(!fifo_empty) begin
+                    next_state = PRELOAD; // wait here for preload_state, don't give up the loaded data
                 end else begin
                     next_state = IDLE;
                 end

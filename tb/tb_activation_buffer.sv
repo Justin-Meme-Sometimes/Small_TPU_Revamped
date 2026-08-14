@@ -2,11 +2,18 @@
 //
 // Testbench for src/activation_buffer.sv (i_buffer, bank_fsm, activation_buffer)
 //
-// i_buffer's off-by-one read and unreachable full flag (curr_count was 8
-// bits, comparing to 255 while incrementing by 4 from 0) have both been
-// fixed: curr_count is now 10 bits, full compares against 10'd256, and
-// reads return buff[curr_count-4..curr_count-1] in forward (FIFO) order -
-// re_out[0] is the first byte written, re_out[3] the last.
+// i_buffer now uses separate wr_ptr/rd_ptr (like DMA.sv's j_buffer) instead
+// of a single curr_count that both writes and reads adjusted - the old
+// shared-counter design meant multi-row loads played back in reverse (last
+// row written was the first read out), and "full" would spuriously clear
+// again once anything had been read. Now full = wr_ptr==16 stays true until
+// an explicit clr, and reads replay in true FIFO order across multiple rows.
+// bank_fsm was updated to match: clr now pulses once on every transition
+// into FILL_INACTIVE (both the WAIT_INACTIVE->FILL_INACTIVE path used once
+// at start, and the COMPUTE->FILL_INACTIVE path used on every subsequent
+// bank switch - the second one is what most refills actually go through),
+// so each bank's buffer is reset before every fresh fill rather than only
+// the first one.
 //
 module tb_activation_buffer;
 
@@ -185,7 +192,7 @@ module tb_activation_buffer;
     //    the new active/draining bank while A starts refilling) actually
     //    happens - the full "fill A -> compute+fill B -> switch -> compute
     //    B+fill A" cycle described in this file's own top-of-module
-    //    comment. Uses hierarchical signal access (act_dut.BUFF_A.curr_count
+    //    comment. Uses hierarchical signal access (act_dut.BUFF_A.wr_ptr
     //    etc.) since activation_buffer doesn't expose per-bank status
     //    externally.
     // -----------------------------------------------------------------
@@ -213,7 +220,7 @@ module tb_activation_buffer;
         end
         act_DMA_in_valid = 0;
         check("A fills to exactly 16 bytes via DMA during first_pass",
-              act_dut.BUFF_A.curr_count == 10'd16);
+              act_dut.BUFF_A.wr_ptr == 10'd16);
         check("buff_a_full asserted once A is full", act_dut.buff_a_full == 1'b1);
 
         // PREFILL -> PRELOAD (full) -> COMPUTE. preload_state needs to be
@@ -241,7 +248,7 @@ module tb_activation_buffer;
         repeat (3) @(posedge clk);
         #1;
         check("B fills to exactly 16 bytes right as A finishes draining (no data loss, no halving)",
-              act_dut.BUFF_B.curr_count == 10'd16);
+              act_dut.BUFF_B.wr_ptr == 10'd16);
 
         // Watch the banks swap back and forth for 12 total handoffs,
         // checking mutual exclusion the entire way. Count real
@@ -284,11 +291,106 @@ module tb_activation_buffer;
         $display("activation_buffer double-buffer cycle: %0d/%0d checks passed\n", checks - errors, checks);
     endtask
 
+    // -----------------------------------------------------------------
+    // 5) Realistic DMA supply: DMA.sv's act_buf now holds act_full_count=
+    //    16'd128 bytes (a full 8-tile group), filled via up to 8 separate
+    //    OP_LOAD_ACTIVATIONS calls (16 bytes/tile) issued back-to-back
+    //    before OP_COMPUTE ever pulses - see KNOWN_ISSUES.md's "Fixed:
+    //    activation double-buffer starves after tile 1" entry. Once compute
+    //    starts, DMA_ACT_READ_FSM autonomously drains 16 bytes into
+    //    activation_buffer per prefill_start/tile_done pulse, with no
+    //    further host action needed. Unlike run_double_buffer_cycle_test()
+    //    above (which keeps DMA_in_valid flowing indefinitely - useful for
+    //    exercising the bank-swap logic itself, but not representative of
+    //    DMA's real burst-per-tile cadence), this test drives DMA_in_valid
+    //    in two separate 16-byte bursts - tile 1's during PREFILL, tile 2's
+    //    right as tile_done pulses - matching that autonomous per-tile
+    //    drain instead of a continuous stream.
+    // -----------------------------------------------------------------
+    task automatic run_realistic_dma_supply_test();
+        int safety_cycles;
+        int reads_seen;
+
+        $display("==== activation_buffer: realistic (capacity-limited) DMA supply ====");
+        act_rst_n = 0; act_start = 0; act_compute_state = 0; act_preload_state = 0;
+        act_drain_state = 0; act_tile_done = 0; act_tiles_complete = 0;
+        act_DMA_in_valid = 0; act_DMA_in = '0;
+        @(posedge clk); @(posedge clk);
+        act_rst_n = 1;
+        @(posedge clk); #1;
+
+        act_start = 1;
+        @(posedge clk); #1;
+        act_start = 0;
+
+        // Tile 1's burst: exactly one tile's worth (16 bytes = 4 writes of
+        // 4 bytes) during PREFILL, matching act_buf's first drain (triggered
+        // by prefill_start in the real chip).
+        act_DMA_in_valid = 1;
+        act_DMA_in[0] = 4'h5;
+        for (int i = 0; i < 4; i++) @(posedge clk);
+        #1;
+        act_DMA_in_valid = 0;
+        check("tile 1 fully supplied: A reaches full on exactly one tile's worth of DMA data",
+              act_dut.buff_a_full == 1'b1);
+
+        act_preload_state = 1;
+        act_compute_state = 1;
+
+        // Drain tile 1 (4 reads) and confirm it comes out correctly - this
+        // part should already work (see run_double_buffer_cycle_test()).
+        reads_seen = 0;
+        safety_cycles = 0;
+        while (reads_seen < 4 && safety_cycles < 100) begin
+            @(posedge clk); #1;
+            safety_cycles++;
+            if (act_output_buf_valid) reads_seen++;
+        end
+        check("tile 1: activation_buffer produced 4 valid reads with no further DMA data needed",
+              reads_seen == 4);
+
+        // Now simulate tile 2 of the same group starting: tile_done pulses,
+        // compute_state stays asserted for the next tile, and DMA_ACT_READ_FSM
+        // autonomously drains tile 2's already-preloaded 16 bytes right on
+        // that same pulse (act_buf held all 8 tiles from the pre-compute
+        // OP_LOAD_ACTIVATIONS calls, so there's nothing left for the host to
+        // do here) - use a distinguishable byte (0x9) to confirm this is
+        // genuinely fresh tile-2 data, not stale tile-1 data (0x5) re-read.
+        act_tile_done = 1;
+        act_DMA_in_valid = 1;
+        act_DMA_in[0] = 4'h9;
+        @(posedge clk); #1;
+        act_tile_done = 0;
+        for (int i = 0; i < 3; i++) @(posedge clk);
+        #1;
+        act_DMA_in_valid = 0;
+
+        reads_seen = 0;
+        safety_cycles = 0;
+        while (reads_seen < 4 && safety_cycles < 200) begin
+            @(posedge clk); #1;
+            safety_cycles++;
+            if (act_output_buf_valid) begin
+                if (reads_seen == 0) check("tile 2: fresh data (0x9), not stale tile 1 data (0x5)",
+                                           act_output_buff[0] == 4'h9);
+                reads_seen++;
+            end
+        end
+        check("tile 2: activation_buffer produces 4 fresh valid reads once its data is supplied",
+              reads_seen == 4);
+
+        act_compute_state = 0;
+        act_preload_state = 0;
+
+        $display("activation_buffer realistic DMA supply: %0d/%0d checks passed\n", checks - errors, checks);
+    endtask
+
     initial begin
         run_i_buffer_test();
         run_bank_fsm_test();
         run_activation_buffer_test();
         run_double_buffer_cycle_test();
+        run_realistic_dma_supply_test();
 
         $display("==== SUMMARY ====");
         $display("total: %0d/%0d checks passed", checks - errors, checks);

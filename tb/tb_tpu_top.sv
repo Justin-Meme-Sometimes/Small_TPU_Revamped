@@ -37,8 +37,8 @@
 // free-running dummy byte stream on u_in.
 //
 // State durations, from tpu_top.sv's counters (unchanged by this testbench):
-//   PREFILL:  16 cycles (prefill_max)      PRELOAD: 8 cycles (preload_max)
-//   COMPUTE:  7 cycles (compute_max)       DRAIN:   4 cycles (drain_max)
+//   PREFILL:  16 cycles (prefill_max)      PRELOAD: 4 cycles (preload_max)
+//   COMPUTE:  8 cycles (compute_max)       DRAIN:   7 cycles (drain_max)
 //   FUNCS:    3 cycles (funcs_max)         tiles per group: 8 (tiles_max)
 //
 // tpu_top's interface uses an opcode register: uio_in is latched into
@@ -350,7 +350,7 @@ module tb_tpu_top;
         $display("==== tpu_top: tile group 1 - DRAIN -> FUNCS ====");
         wait_for_state(dut.FUNCS, 20, n);
         check($sformatf("reached FUNCS within budget (took %0d cycles)", n), dut.current_state == dut.FUNCS);
-        check("DRAIN ran the full 4 cycles (drain_count saturated)", dut.drain_count == 8'd4);
+        check("DRAIN ran the full 7 cycles (drain_count saturated)", dut.drain_count == 8'd6);
         check("no X/Z in requant_out during drain/funcs window", !$isunknown(dut.requant_out));
 
         $display("==== tpu_top: tile group 1 - FUNCS -> back to PRELOAD (tile 1 of 8, not yet tile_complete) ====");

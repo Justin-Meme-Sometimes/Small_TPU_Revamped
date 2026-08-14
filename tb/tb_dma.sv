@@ -46,7 +46,10 @@ module tb_dma;
     logic bias_fsm_start;
     logic activation_fsm_start;
     logic weight_fsm_start;
+    logic in_prefill;
+    logic prefill_start;
     logic tile_done;
+    logic group_done;
     logic [3:0][7:0] computed_bank_in;
     logic computed_bank_in_valid;
     logic start_read_fsm;
@@ -67,7 +70,10 @@ module tb_dma;
         .bias_fsm_start(bias_fsm_start),
         .activation_fsm_start(activation_fsm_start),
         .weight_fsm_start(weight_fsm_start),
+        .in_prefill(in_prefill),
+        .prefill_start(prefill_start),
         .tile_done(tile_done),
+        .group_done(group_done),
         .computed_bank_in(computed_bank_in),
         .computed_bank_in_valid(computed_bank_in_valid),
         .start_read_fsm(start_read_fsm),
@@ -95,7 +101,21 @@ module tb_dma;
         bias_fsm_start = 0;
         activation_fsm_start = 0;
         weight_fsm_start = 0;
+        // weight_re/act_re are gated by in_prefill at the top level (so the
+        // source buffers only drain during tpu_top's PREFILL window instead
+        // of racing ahead in the background) - this isolated DMA test has no
+        // such top-level FSM, so hold it high throughout to match this
+        // test's original intent: DMA streams loaded data out as soon as
+        // it's not being written, unconditionally.
+        in_prefill = 1;
+        // activation reads are now paced by DMA_ACT_READ_FSM, triggered by a
+        // prefill_start or tile_done pulse rather than free-running like
+        // weight_re - load_and_drain_activations() below pulses prefill_start
+        // itself once loading finishes, mirroring tpu_top's real "loads land,
+        // then OP_COMPUTE's start pulse kicks off the first drain" ordering.
+        prefill_start = 0;
         tile_done = 0;
+        group_done = 0;
         bank = 4'd0;
         computed_bank_in = '0;
         computed_bank_in_valid = 0;
@@ -227,6 +247,12 @@ module tb_dma;
             @(posedge clk); #1;
         end
         bank = 4'd0;
+
+        // Now that the tile's loaded, kick off DMA_ACT_READ_FSM the same way
+        // tpu_top's OP_COMPUTE start pulse would.
+        prefill_start = 1;
+        @(posedge clk); #1;
+        prefill_start = 0;
 
         safety = 0;
         while (drained < 16 && safety < 20) begin

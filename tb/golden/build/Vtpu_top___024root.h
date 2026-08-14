@@ -1,0 +1,314 @@
+// Verilated -*- C++ -*-
+// DESCRIPTION: Verilator output: Design internal header
+// See Vtpu_top.h for the primary calling header
+
+#ifndef VERILATED_VTPU_TOP___024ROOT_H_
+#define VERILATED_VTPU_TOP___024ROOT_H_  // guard
+
+#include "verilated.h"
+
+
+class Vtpu_top__Syms;
+
+class alignas(VL_CACHE_LINE_BYTES) Vtpu_top___024root final : public VerilatedModule {
+  public:
+
+    // DESIGN SPECIFIC STATE
+    // Anonymous structures to workaround compiler member-count bugs
+    struct {
+        VL_IN8(clk,0,0);
+        VL_IN8(rst_n,0,0);
+        VL_IN8(u_in,7,0);
+        VL_IN8(uio_in,7,0);
+        VL_OUT8(uio_out,7,0);
+        VL_OUT8(u_out,7,0);
+        CData/*7:0*/ tpu_top__DOT__opcode_reg;
+        CData/*7:0*/ tpu_top__DOT__requant_value;
+        CData/*3:0*/ tpu_top__DOT__bank;
+        CData/*0:0*/ tpu_top__DOT__preload_state;
+        CData/*0:0*/ tpu_top__DOT__weight_fifo_full;
+        CData/*0:0*/ tpu_top__DOT__weight_fifo_empty;
+        IData/*31:0*/ tpu_top__DOT__weight_data_out;
+        IData/*31:0*/ tpu_top__DOT__weight_bank_out;
+        CData/*0:0*/ tpu_top__DOT__weight_bank_out_valid;
+        CData/*0:0*/ tpu_top__DOT__drain_state;
+        CData/*0:0*/ tpu_top__DOT__tile_done;
+        IData/*31:0*/ tpu_top__DOT__activation_bank_out;
+        CData/*0:0*/ tpu_top__DOT__activation_bank_out_valid;
+        IData/*31:0*/ tpu_top__DOT__systolic_act_in;
+        CData/*0:0*/ tpu_top__DOT__systolic_act_in_valid;
+        CData/*0:0*/ tpu_top__DOT__product_biased_valid;
+        CData/*0:0*/ tpu_top__DOT__relu_out_valid;
+        CData/*0:0*/ tpu_top__DOT__accum_state;
+        CData/*0:0*/ tpu_top__DOT__requant_out_valid;
+        CData/*0:0*/ tpu_top__DOT__result_we;
+        CData/*0:0*/ tpu_top__DOT__pe_preload_en;
+        CData/*4:0*/ tpu_top__DOT__current_state;
+        CData/*4:0*/ tpu_top__DOT__next_state;
+        CData/*0:0*/ tpu_top__DOT__prefill_en;
+        CData/*0:0*/ tpu_top__DOT__prefill_clr;
+        CData/*0:0*/ tpu_top__DOT__preload_en;
+        CData/*0:0*/ tpu_top__DOT__preload_clr;
+        CData/*0:0*/ tpu_top__DOT__compute_en;
+        CData/*0:0*/ tpu_top__DOT__compute_clr;
+        CData/*0:0*/ tpu_top__DOT__drain_en;
+        CData/*0:0*/ tpu_top__DOT__drain_clr;
+        CData/*0:0*/ tpu_top__DOT__func_en;
+        CData/*0:0*/ tpu_top__DOT__func_clr;
+        CData/*0:0*/ tpu_top__DOT__tile_clr;
+        IData/*31:0*/ tpu_top__DOT____Vcellout__req__out;
+        CData/*0:0*/ tpu_top__DOT__w_l__DOT__fifo_re;
+        CData/*0:0*/ tpu_top__DOT__w_l__DOT__fifo_we;
+        CData/*4:0*/ tpu_top__DOT__w_l__DOT__current_state;
+        CData/*4:0*/ tpu_top__DOT__w_l__DOT__next_state;
+        CData/*1:0*/ tpu_top__DOT__w_l__DOT__weight_fifo__DOT__putPtr;
+        CData/*1:0*/ tpu_top__DOT__w_l__DOT__weight_fifo__DOT__getPtr;
+        CData/*3:0*/ tpu_top__DOT__w_l__DOT__weight_fifo__DOT__count;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__we_a;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__re_a;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__clr_a;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__re_valid_a;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__we_valid_a;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__buff_a_empty;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__buff_a_full;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__buff_a_active;
+        IData/*31:0*/ tpu_top__DOT__a_buff__DOT__write_in_a;
+        IData/*31:0*/ tpu_top__DOT__a_buff__DOT__re_out_a;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__we_b;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__re_b;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__clr_b;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__re_valid_b;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__we_valid_b;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__buff_b_empty;
+    };
+    struct {
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__buff_b_full;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__buff_b_active;
+        IData/*31:0*/ tpu_top__DOT__a_buff__DOT__write_in_b;
+        IData/*31:0*/ tpu_top__DOT__a_buff__DOT__re_out_b;
+        CData/*5:0*/ tpu_top__DOT__a_buff__DOT__A__DOT__current_state;
+        CData/*5:0*/ tpu_top__DOT__a_buff__DOT__A__DOT__next_state;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__A__DOT__o_bank_reg;
+        CData/*5:0*/ tpu_top__DOT__a_buff__DOT__B__DOT__current_state;
+        CData/*5:0*/ tpu_top__DOT__a_buff__DOT__B__DOT__next_state;
+        CData/*0:0*/ tpu_top__DOT__a_buff__DOT__B__DOT__o_bank_reg;
+        VlWide<4>/*127:0*/ tpu_top__DOT__a_buff__DOT__BUFF_A__DOT__buff;
+        VlWide<4>/*127:0*/ tpu_top__DOT__a_buff__DOT__BUFF_B__DOT__buff;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__h_en_0;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__h_en_1;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__h_en_2;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__h_en_3;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__v_en_0;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__v_en_1;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__v_en_2;
+        CData/*0:0*/ tpu_top__DOT__sys_array__DOT__v_en_3;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__val_act_in;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_0_0__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_0_1__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_0_2__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_1_0__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_1_1__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_1_2__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_2_0__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_2_1__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_2_2__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_3_0__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_3_1__right_out;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT____Vcellout__pe_3_2__right_out;
+        CData/*4:0*/ tpu_top__DOT__sys_array__DOT__e_fsm_1__DOT__current_state;
+        CData/*4:0*/ tpu_top__DOT__sys_array__DOT__e_fsm_1__DOT__next_state;
+        CData/*4:0*/ tpu_top__DOT__sys_array__DOT__v_fsm_1__DOT__current_state;
+        CData/*4:0*/ tpu_top__DOT__sys_array__DOT__v_fsm_1__DOT__next_state;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_0__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_0__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_1__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_1__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_2__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_2__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_3__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_0_3__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_0__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_0__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_1__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_1__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_2__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_2__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_3__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_1_3__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_0__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_0__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_1__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_1__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_2__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_2__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_3__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_2_3__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_0__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_0__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_1__DOT__a_reg;
+    };
+    struct {
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_1__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_2__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_2__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_3__DOT__a_reg;
+        CData/*7:0*/ tpu_top__DOT__sys_array__DOT__pe_3_3__DOT__b_reg;
+        CData/*7:0*/ tpu_top__DOT__dma__DOT__weight_we_in_single;
+        CData/*7:0*/ tpu_top__DOT__dma__DOT__bias_we_in_single;
+        CData/*7:0*/ tpu_top__DOT__dma__DOT__act_we_in_single;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__en_counter;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__clr_counter;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__a_ready;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__b_ready;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__w_ready;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_we_en_counter;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_we_clr_counter;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_we;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_re;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_clr;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_full;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_empty;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_we;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_re;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_full;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_empty;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_en_counter;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__act_clr_counter;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_we;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_clr;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_full;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__result_re;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__result_clr;
+        IData/*31:0*/ tpu_top__DOT__dma__DOT__result_re_out;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__result_full;
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__result_empty;
+        VlWide<64>/*2047:0*/ tpu_top__DOT__dma__DOT__weight_buf__DOT__buff;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__act_read_fsm__DOT__current_state;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__act_read_fsm__DOT__next_state;
+        VlWide<32>/*1023:0*/ tpu_top__DOT__dma__DOT__act_buf__DOT__buff;
+        VlWide<4>/*127:0*/ tpu_top__DOT__dma__DOT__bias_buf__DOT__buff;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__w_fsm__DOT__current_state;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__w_fsm__DOT__next_state;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__b_fsm__DOT__current_state;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__b_fsm__DOT__next_state;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__a_fsm__DOT__current_state;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__a_fsm__DOT__next_state;
+        VlWide<64>/*2047:0*/ tpu_top__DOT__dma__DOT__result_buf__DOT__buff;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__r_fsm__DOT__current_state;
+        CData/*5:0*/ tpu_top__DOT__dma__DOT__r_fsm__DOT__next_state;
+        CData/*0:0*/ __VstlFirstIteration;
+        CData/*0:0*/ __VicoFirstIteration;
+        CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
+        CData/*0:0*/ __Vtrigprevexpr___TOP__rst_n__0;
+        CData/*0:0*/ __VactContinue;
+        SData/*8:0*/ tpu_top__DOT__prefill_count;
+        SData/*8:0*/ tpu_top__DOT__preload_count;
+        SData/*8:0*/ tpu_top__DOT__compute_count;
+        SData/*8:0*/ tpu_top__DOT__drain_count;
+        SData/*8:0*/ tpu_top__DOT__funcs_count;
+        SData/*8:0*/ tpu_top__DOT__tile_count;
+        SData/*9:0*/ tpu_top__DOT__a_buff__DOT__BUFF_A__DOT__wr_ptr;
+        SData/*9:0*/ tpu_top__DOT__a_buff__DOT__BUFF_A__DOT__rd_ptr;
+        SData/*9:0*/ tpu_top__DOT__a_buff__DOT__BUFF_B__DOT__wr_ptr;
+        SData/*9:0*/ tpu_top__DOT__a_buff__DOT__BUFF_B__DOT__rd_ptr;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_0_0__DOT__product_reg;
+    };
+    struct {
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_0_1__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_0_2__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_0_3__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_1_0__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_1_1__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_1_2__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_1_3__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_2_0__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_2_1__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_2_2__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_2_3__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_3_0__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_3_1__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_3_2__DOT__product_reg;
+        SData/*15:0*/ tpu_top__DOT__sys_array__DOT__pe_3_3__DOT__product_reg;
+        SData/*8:0*/ tpu_top__DOT__dma__DOT__act_we_count;
+        SData/*8:0*/ tpu_top__DOT__dma__DOT__act_re_count;
+        SData/*8:0*/ tpu_top__DOT__dma__DOT__read_count;
+        SData/*9:0*/ tpu_top__DOT__dma__DOT__weight_buf__DOT__wr_ptr;
+        SData/*9:0*/ tpu_top__DOT__dma__DOT__weight_buf__DOT__rd_ptr;
+        SData/*9:0*/ tpu_top__DOT__dma__DOT__act_buf__DOT__wr_ptr;
+        SData/*9:0*/ tpu_top__DOT__dma__DOT__act_buf__DOT__rd_ptr;
+        SData/*9:0*/ tpu_top__DOT__dma__DOT__bias_buf__DOT__wr_ptr;
+        SData/*9:0*/ tpu_top__DOT__dma__DOT__result_buf__DOT__wr_ptr;
+        SData/*9:0*/ tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr;
+        VlWide<4>/*127:0*/ tpu_top__DOT__product_out;
+        VlWide<4>/*127:0*/ tpu_top__DOT__product_biased;
+        VlWide<4>/*127:0*/ tpu_top__DOT__relu_out;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_1_0__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_1_1__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_1_2__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_1_3__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_2_0__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_2_1__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_2_2__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_2_3__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_3_0__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_3_1__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_3_2__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT____Vcellinp__pe_3_3__accum_in;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_0__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_0__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_1__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_1__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_2__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_2__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_3__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_0_3__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_0__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_0__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_1__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_1__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_2__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_2__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_3__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_1_3__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_0__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_0__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_1__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_1__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_2__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_2__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_3__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_2_3__DOT__down_out_drain;
+    };
+    struct {
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_0__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_0__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_1__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_1__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_2__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_2__DOT__down_out_drain;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_3__DOT__accum_reg;
+        IData/*31:0*/ tpu_top__DOT__sys_array__DOT__pe_3_3__DOT__down_out_drain;
+        VlWide<4>/*127:0*/ tpu_top__DOT__b_add__DOT__bias_reg;
+        VlWide<4>/*127:0*/ tpu_top__DOT__req__DOT__shift_buffer;
+        IData/*31:0*/ __VactIterCount;
+        VlUnpacked<IData/*31:0*/, 32> tpu_top__DOT__w_l__DOT__weight_fifo__DOT__Q;
+    };
+    VlTriggerVec<1> __VstlTriggered;
+    VlTriggerVec<1> __VicoTriggered;
+    VlTriggerVec<1> __VactTriggered;
+    VlTriggerVec<1> __VnbaTriggered;
+
+    // INTERNAL VARIABLES
+    Vtpu_top__Syms* const vlSymsp;
+
+    // CONSTRUCTORS
+    Vtpu_top___024root(Vtpu_top__Syms* symsp, const char* v__name);
+    ~Vtpu_top___024root();
+    VL_UNCOPYABLE(Vtpu_top___024root);
+
+    // INTERNAL METHODS
+    void __Vconfigure(bool first);
+};
+
+
+#endif  // guard

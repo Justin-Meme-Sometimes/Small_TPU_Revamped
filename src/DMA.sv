@@ -5,7 +5,10 @@ module DMA (
     input logic bias_fsm_start,
     input logic activation_fsm_start,
     input logic weight_fsm_start,
+    input logic in_prefill,
+    input logic prefill_start,
     input logic tile_done,
+    input logic group_done,
     input logic [3:0][7:0] computed_bank_in,
     input logic computed_bank_in_valid,
     input logic start_read_fsm,
@@ -27,6 +30,13 @@ module DMA (
     logic clr_counter;
     logic a_ready, b_ready, w_ready;
 
+    logic act_we_max, act_we_en_counter, act_we_clr_counter;
+    logic [8:0] act_we_count;
+
+    assign act_we_max = (act_we_count == 9'd16);  // one tile's worth: 16 single-byte writes
+
+
+    assign act_clr = group_done;
     assign a_ready = weights_busy | bias_busy;
     assign w_ready = activations_busy | bias_busy;
     assign b_ready = activations_busy | weights_busy;
@@ -60,7 +70,7 @@ module DMA (
 
     assign weight_full_count = 16'd256;
     assign weight_we_valid = weight_we;
-    assign weight_re = !weight_we && !weight_empty; //stream weights out as soon as they're not being loaded
+    assign weight_re = !weight_we && !weight_empty && in_prefill; //stream weights out as soon as they're not being loaded
 
     j_buffer #(.DEPTH(256)) weight_buf (
         .clk(clk),
@@ -82,10 +92,31 @@ module DMA (
     logic [3:0][7:0] act_we_in;
     logic act_we_valid, act_full, act_empty, act_full_prev;
     logic [15:0] act_full_count;
+    logic act_re_max, act_en_counter, act_clr_counter;
+    logic [8:0] act_re_count;
 
-    assign act_full_count = 16'd16;
+    assign act_full_count = 16'd128;
     assign act_we_valid = act_we;
-    assign act_re = !act_we && !act_empty; //stream activations out as soon as they're not being loaded
+    assign act_re_max = (act_re_count == 8'd4); //one bank's worth: 4 re pulses x 4 bytes = 16 bytes
+
+    counter act_re_counter (
+        .clk(clk),
+        .rst_n(rst_n),
+        .en(act_en_counter),
+        .clr(act_clr_counter),
+        .out(act_re_count)
+    );
+
+    DMA_ACT_READ_FSM act_read_fsm (
+        .clk(clk),
+        .rst_n(rst_n),
+        .prefill_start(prefill_start),
+        .tile_done(tile_done),
+        .act_re_max(act_re_max),
+        .clr(),
+        .clr_counter(act_clr_counter),
+        .act_re(act_re),
+        .en_counter(act_en_counter));
 
     always_ff @(posedge clk, negedge rst_n) begin
         if(!rst_n) begin
@@ -95,7 +126,7 @@ module DMA (
         end
     end
 
-    j_buffer act_buf (
+    j_buffer #(.DEPTH(128)) act_buf (
         .clk(clk),
         .rst_n(rst_n),
         .single(1'd1),
@@ -168,10 +199,11 @@ module DMA (
         .rst_n(rst_n),
         .start(activation_fsm_start),
         .any_busy(a_ready),
-        .full_activations(act_full),
+        .act_we_max(act_we_max),
+        .en_counter(act_we_en_counter),
+        .clr_counter(act_we_clr_counter),
         .busy(activations_busy),
-        .we_activations(act_we),
-        .clr(act_clr));
+        .we_activations(act_we));
 
     logic result_single, result_re, result_a_or_b, result_clr;
     logic [3:0][7:0] result_we_in, result_re_out;
@@ -217,6 +249,16 @@ module DMA (
             .clr_counter(clr_counter),
             .result_re(result_re),
             .en_counter(en_counter));
+
+
+
+    counter act_we_counter (
+        .clk(clk),
+        .rst_n(rst_n),
+        .en(act_we_en_counter),
+        .clr(act_we_clr_counter),
+        .out(act_we_count)
+    );
 
 endmodule
 
@@ -282,6 +324,12 @@ module j_buffer #(
                 end else begin
                     re_valid <= 0;
                 end
+            end else begin
+                re_valid <= 0;
+                re_out[0] <= '0; 
+                re_out[1] <= '0; 
+                re_out[2] <= '0; 
+                re_out[3] <= '0;
             end
         end
     end
@@ -393,15 +441,18 @@ module LOAD_BIAS_FSM(
 endmodule
 
 
+
+
 module LOAD_ACTIVATIONS_FSM(
     input logic clk,
     input logic rst_n,
     input logic any_busy,
     input logic start,   
-    input logic full_activations,
+    input logic act_we_max,
     output logic busy,
     output logic we_activations,
-    output logic clr);
+    output logic en_counter,
+    output logic clr_counter);
 
     typedef enum logic [5:0] {IDLE, LOAD_ACTIVATIONS, DONE} state_t;
     state_t current_state, next_state;
@@ -418,22 +469,24 @@ module LOAD_ACTIVATIONS_FSM(
         next_state = current_state;
         busy = 1'd0;
         we_activations = 1'd0;
-        clr = 1'd0;
+        en_counter = 1'd0;
+        clr_counter = 1'd0;
         case(current_state)
             IDLE: begin
                 if(start && !any_busy) begin
-                    clr = 1'd1; //clear banks
                     next_state = LOAD_ACTIVATIONS;
                 end else begin
                     next_state = IDLE;
                 end
             end
             LOAD_ACTIVATIONS: begin
-                if(!full_activations) begin
+                en_counter = 1'd1;
+                if(!act_we_max) begin
                     next_state = LOAD_ACTIVATIONS;
                     busy = 1'd1;
                     we_activations = 1'd1;
                 end else begin
+                    clr_counter = 1'd1;
                     next_state = DONE;
                 end
             end
@@ -496,6 +549,62 @@ module DMA_READ_FSM(
     end
     
 endmodule
+
+
+module DMA_ACT_READ_FSM(
+    input logic clk,
+    input logic rst_n,
+    input logic prefill_start,
+    input logic tile_done,
+    input logic act_re_max,
+    output logic clr,
+    output logic clr_counter,
+    output logic act_re,
+    output logic en_counter);
+
+    typedef enum logic [5:0] {IDLE, READ_ACTIVATIONS} state_t;
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if(!rst_n) begin
+            current_state <= IDLE;
+        end else begin
+            current_state <=  next_state;
+        end
+    end
+    
+    always_comb begin
+        next_state = current_state;
+        clr_counter = 1'd0;
+        act_re = 1'd0;
+        en_counter = 1'd0;
+        clr = 1'd0;
+        case(current_state)
+            IDLE: begin
+                if(prefill_start || tile_done) begin
+                    next_state = READ_ACTIVATIONS;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+            READ_ACTIVATIONS: begin
+                en_counter = 1'd1;
+                if(!act_re_max) begin
+                    next_state = READ_ACTIVATIONS;
+                    act_re = 1'd1;
+                end else begin
+                    clr = 1'd1;
+                    clr_counter = 1'd1;
+                    next_state = IDLE;
+                end
+            end
+           
+        endcase
+    end
+    
+endmodule
+
+
 
 module counter 
 (input logic clk,

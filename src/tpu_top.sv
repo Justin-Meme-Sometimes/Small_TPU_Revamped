@@ -22,6 +22,10 @@ module tpu_top (
     logic weight_fsm_start;
     logic activation_fsm_start;
     logic bias_fsm_start;
+    logic in_prefill;
+    logic drain_state_start;
+    logic prefill_start;
+
     logic [3:0] bank;
     
     always_ff @(posedge clk, negedge rst_n) begin
@@ -113,9 +117,11 @@ module tpu_top (
     logic [3:0][7:0] requant_out;
     logic requant_out_valid;
     logic [2:0] dma_bank;
-    logic result_we;
+    logic result_we, pe_preload_en;
 
     assign dma_bank = 3'd0;
+    
+    assign pe_preload_en = preload_state && weight_data_valid;
 
     typedef enum logic [4:0] {IDLE, LOAD_DMA, PREFILL, PRELOAD, COMPUTE, DRAIN, FUNCS, DONE} state_t;
     state_t current_state, next_state;
@@ -151,11 +157,14 @@ module tpu_top (
 
     assign load_dma_max = (load_dma_count == 9'd257);
     assign prefill_max = (prefill_count == 9'd16);
-    assign preload_max = (preload_count == 9'd8);
+    assign preload_max = (preload_count == 9'd3);
     assign compute_max = (compute_count == 9'd7);
-    assign drain_max = (drain_count == 9'd4);
+    assign drain_max = (drain_count == 9'd6);
     assign funcs_max = (funcs_count == 9'd3);
     assign tiles_max = (tile_count == 9'd8);
+
+
+    assign in_prefill = (current_state == PREFILL);
 
 
     assign tile_complete = tiles_max;
@@ -173,6 +182,7 @@ module tpu_top (
         tile_clr = 0;
         load_dma_en = 0;
         prefill_en = 0;
+        drain_state_start = 0;
         preload_en = 0;
         compute_en = 0;
         drain_en = 0;
@@ -183,10 +193,14 @@ module tpu_top (
         drain_state = 0;
         accum_state = 0;
         tile_done = 0;
+        prefill_start = 0;
         case(current_state)
             IDLE: begin
                 if(!start) next_state = IDLE;
-                else next_state = PREFILL;
+                else begin 
+                    next_state = PREFILL;
+                    prefill_start = 1;
+                end
             end
             PREFILL: begin
                 if(prefill_max) begin
@@ -210,6 +224,7 @@ module tpu_top (
             end
             COMPUTE: begin
                 if(compute_max) begin
+                    drain_state_start = 1;
                     next_state = DRAIN;
                     tile_done = 1;
                 end else begin
@@ -288,14 +303,16 @@ module tpu_top (
     PE_array sys_array (
         .clk(clk),
         .rst_n(rst_n),
-        .preload_state_start(preload_state),
+        .preload_state_start(pe_preload_en),
         .compute_state_start(compute_state),
+        .drain_state_start(drain_state_start),
         .clr_state(1'd0),
         .tile_done(tile_done),
         .drain_state(drain_state),
         .weight_array(weight_data_out),
         .activation_valid(systolic_act_in_valid),
         .activation_array(systolic_act_in),
+        .weight_data_valid(weight_data_valid),
         .product_array(product_out),
         .output_valid(product_out_valid));
 
@@ -340,7 +357,10 @@ module tpu_top (
         .u_out(u_out),
         .tile_done(tile_done),
         .weight_fsm_start(weight_fsm_start),
+        .group_done(tile_clr),
         .activation_fsm_start(activation_fsm_start),
+        .in_prefill(in_prefill),
+        .prefill_start(start),
         .bias_fsm_start(bias_fsm_start),
         .start_read_fsm(start_read_fsm),
         .bank(bank),

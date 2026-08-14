@@ -18,6 +18,9 @@ module PE(
     logic [15:0] product_reg;
     logic [31:0] accum_reg;
 
+    logic [31:0] down_out_drain;
+    assign down_out = preload ? b_reg : (drain ? accum_reg : down_out_drain);
+
     always_ff @(posedge clk, negedge rst_n) begin
         if(!rst_n) begin
             a_reg <= 0;
@@ -27,32 +30,29 @@ module PE(
         end else begin
             if(clr || tile_done) begin
                 a_reg <= 0;
-                if(tile_done) begin
-                    b_reg <= 0;
-                end
                 product_reg <= 0;
                 if(!compute_en && !drain) begin
+                    product_reg <= 0;
                     accum_reg <= 0;
                 end
-                down_out <= 0;
+                down_out_drain <= 0;
             end
             else if(preload) begin
                 b_reg <= b;
-                down_out <= b_reg;
             end
             else if(drain) begin
                 if(accum_in_valid) begin
-                    accum_reg <= accum_in;
+                    accum_reg <= accum_in + accum_reg;
                 end else begin
-                    down_out <= accum_reg;
+                    down_out_drain <= accum_reg;
                 end
             end
             else if(compute_en) begin
                 a_reg <= a;
                 right_out <= a_reg;
-                product_reg <= (a_reg * b_reg) + product_reg;
+                product_reg <= (a_reg * b_reg);
                 accum_reg <= accum_reg + product_reg;
-                down_out  <= '0;
+                down_out_drain <= 0;
             end
         end
     end

@@ -126,20 +126,41 @@ module tb_array;
     endtask
 
     // -----------------------------------------------------------------
-    // 2) vertical_en_fsm: en_j is a ONE-CYCLE PULSE on state Sj (j>=1);
-    //    en_0 never asserts.
+    // 2) vertical_en_fsm: en_j is a ONE-CYCLE PULSE on state Sj (j=1,2,3);
+    //    en_0 never asserts. Entirely pulse-triggered now: a single-cycle
+    //    drain_state_start kicks off one full IDLE->S0->S1->S2->S3->IDLE
+    //    pass, with no dependency on drain_state staying high or on
+    //    tile_done - S3 unconditionally returns to IDLE the next cycle and
+    //    just waits for the next drain_state_start pulse.
+    //
+    //    Bug F fix history (see KNOWN_ISSUES.md): this FSM used to run
+    //    during COMPUTE (compute_state_start) and exit on tile_done - which
+    //    always fires right as COMPUTE ends, i.e. before DRAIN (where its
+    //    enables are actually consumed by pe.sv's accum_in_valid) even
+    //    begins. An interim fix drove it from a held drain_state level
+    //    (entry on rise, exit on fall), which worked for phase alignment
+    //    but left en_3 (and thus accum_in_valid for row 3) stuck high for
+    //    the rest of DRAIN once triggered - since pe.sv's drain branch only
+    //    updates down_out_drain when accum_in_valid is LOW, that froze
+    //    product_array at a stale value for the rest of the window. Now
+    //    fixed by making drain_state_start a genuine one-cycle pulse (fired
+    //    once, at the COMPUTE->DRAIN edge in tpu_top.sv) so en_3 pulses
+    //    exactly once too, letting down_out_drain catch up immediately
+    //    afterward. tile_done is still a port (for interface symmetry with
+    //    horizontal_en_fsm) but is no longer read anywhere in this module -
+    //    tied off below.
     // -----------------------------------------------------------------
-    logic v_rst_n, v_start, v_tile_done;
+    logic v_rst_n, v_drain_start, v_tile_done_unused;
     logic v_en_0, v_en_1, v_en_2, v_en_3;
 
     vertical_en_fsm v_dut (
         .clk(clk), .rst_n(v_rst_n),
-        .compute_state_start(v_start), .tile_done(v_tile_done),
+        .drain_state_start(v_drain_start), .tile_done(v_tile_done_unused),
         .en_0(v_en_0), .en_1(v_en_1), .en_2(v_en_2), .en_3(v_en_3)
     );
 
     task automatic v_reset();
-        v_rst_n = 0; v_start = 0; v_tile_done = 0;
+        v_rst_n = 0; v_drain_start = 0; v_tile_done_unused = 0;
         @(posedge clk); @(posedge clk);
         v_rst_n = 1;
         @(posedge clk);
@@ -151,8 +172,8 @@ module tb_array;
         $display("==== vertical_en_fsm ====");
         check("idle: all en low", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0000);
 
-        v_start = 1;
-        @(posedge clk); #1; v_start = 0;
+        v_drain_start = 1;
+        @(posedge clk); #1; v_drain_start = 0;
         check("S0: all en low (en_0 never asserts)", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0000);
 
         @(posedge clk); #1;
@@ -162,17 +183,11 @@ module tb_array;
         check("S2: en_2 only (en_1 already deasserted)", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0100);
 
         @(posedge clk); #1;
-        check("S3: en_3 only, tile_done low so holds", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b1000);
+        check("S3: en_3 only (single-cycle pulse, no drain_state dependency)",
+              {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b1000);
 
         @(posedge clk); #1;
-        check("S3 still holds en_3 (tile_done low)", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b1000);
-
-        // tile_done is sampled while current_state==S3 (this same cycle's en
-        // output is still S3's pattern - already covered by the previous
-        // check); the transition to IDLE takes effect at the next edge.
-        v_tile_done = 1;
-        @(posedge clk); #1; v_tile_done = 0;
-        check("tile_done took effect: back in IDLE, all en low",
+        check("S3 unconditionally returns to IDLE the next cycle: all en low",
               {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0000);
 
         $display("vertical_en_fsm done\n");
@@ -181,18 +196,17 @@ module tb_array;
     task automatic run_vertical_fsm_edge_test();
         $display("==== vertical_en_fsm edge cases ====");
 
-        // tile_done is only examined in the S3 case branch; asserting it
-        // early (e.g. mid-cascade in S1) must not cut the sequence short.
+        // A drain_state_start pulse that's already dropped by the time S1
+        // is reached must not cut the sequence short - only the initial
+        // IDLE->S0 transition looks at it.
         v_reset();
         #1;
-        v_start = 1;
-        @(posedge clk); #1; v_start = 0;               // now in S0
+        v_drain_start = 1;
+        @(posedge clk); #1; v_drain_start = 0;          // now in S0
         @(posedge clk); #1;                             // now in S1
         check("pre-check: S1 pattern", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0010);
-        v_tile_done = 1;
-        @(posedge clk); #1;                             // S1 -> S2 (tile_done ignored outside S3)
-        v_tile_done = 0;
-        check("tile_done asserted during S1 has no effect: still advances to S2",
+        @(posedge clk); #1;                             // S1 -> S2, unaffected by drain_state_start being low
+        check("drain_state_start already low has no effect: still advances to S2",
               {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0100);
 
         // Async reset: dropping rst_n mid-sequence (in S3) must return the
@@ -206,27 +220,25 @@ module tb_array;
         v_rst_n = 1;
         @(posedge clk);
 
-        // Back-to-back tiles: after tile_done returns the FSM to IDLE, a
-        // fresh compute_state_start pulse must be able to drive a second
-        // full S0..S3 cascade with no special handling required.
+        // Back-to-back tiles: after S3 unconditionally returns to IDLE, a
+        // fresh drain_state_start pulse must be able to drive a second full
+        // S0..S3 cascade with no special handling required.
         v_reset();
         #1;
-        v_start = 1;
-        @(posedge clk); #1; v_start = 0;
+        v_drain_start = 1;
+        @(posedge clk); #1; v_drain_start = 0;
         @(posedge clk); #1; @(posedge clk); #1; @(posedge clk); #1; // S0->S1->S2->S3
-        v_tile_done = 1;
-        @(posedge clk); #1; v_tile_done = 0;
-        check("tile 1: back in IDLE after tile_done", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0000);
+        @(posedge clk); #1;
+        check("tile 1: back in IDLE after S3", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0000);
 
-        v_start = 1;
-        @(posedge clk); #1; v_start = 0;
+        v_drain_start = 1;
+        @(posedge clk); #1; v_drain_start = 0;
         @(posedge clk); #1;
         check("tile 2: reaches S1 pattern same as tile 1", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0010);
         @(posedge clk); #1; @(posedge clk); #1; // S2->S3
         check("tile 2: reaches S3 pattern same as tile 1", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b1000);
-        v_tile_done = 1;
-        @(posedge clk); #1; v_tile_done = 0;
-        check("tile 2: back in IDLE after tile_done", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0000);
+        @(posedge clk); #1;
+        check("tile 2: back in IDLE after S3", {v_en_3,v_en_2,v_en_1,v_en_0} == 4'b0000);
 
         $display("vertical_en_fsm edge cases done\n");
     endtask
@@ -250,17 +262,24 @@ module tb_array;
     // it still clears accum_reg the same cycle - sequence the drain window
     // before tile_done if you need to read out a real result.
     // -----------------------------------------------------------------
-    logic arr_rst_n, arr_preload, arr_compute_start, arr_clr, arr_tile_done, arr_drain;
+    logic arr_rst_n, arr_preload, arr_compute_start, arr_clr, arr_tile_done, arr_drain, arr_drain_start;
     logic [3:0][7:0] arr_weight, arr_activation;
     logic arr_activation_valid;
     logic [3:0][31:0] arr_product;
     logic [3:0][31:0] arr_drain_snapshot;
     logic arr_output_valid;
 
+    // drain_state_start is a genuine one-cycle pulse in the real chip (see
+    // tpu_top.sv: it fires on the COMPUTE->DRAIN transition edge, one cycle
+    // *before* drain_state itself first goes high, giving vertical_en_fsm a
+    // head start so its 4-state S0..S3 cascade fits within DRAIN's 5-cycle
+    // window). Mirrored here: pulse arr_drain_start for one cycle, then
+    // bring arr_drain up the following cycle.
     PE_array arr_dut (
         .clk(clk), .rst_n(arr_rst_n),
         .preload_state_start(arr_preload), .compute_state_start(arr_compute_start),
         .clr_state(arr_clr), .tile_done(arr_tile_done), .drain_state(arr_drain),
+        .drain_state_start(arr_drain_start),
         .weight_array(arr_weight), .activation_valid(arr_activation_valid),
         .activation_array(arr_activation), .product_array(arr_product),
         .output_valid(arr_output_valid)
@@ -268,7 +287,7 @@ module tb_array;
 
     task automatic arr_reset();
         arr_rst_n = 0;
-        arr_preload = 0; arr_compute_start = 0; arr_clr = 0; arr_tile_done = 0; arr_drain = 0;
+        arr_preload = 0; arr_compute_start = 0; arr_clr = 0; arr_tile_done = 0; arr_drain = 0; arr_drain_start = 0;
         arr_weight = 0; arr_activation = 0; arr_activation_valid = 0;
         @(posedge clk); @(posedge clk);
         arr_rst_n = 1;
@@ -323,8 +342,9 @@ module tb_array;
         // use case and isn't exercised here.
         //
         // tile_done fires while h_en_3 is still high this same cycle, so
-        // pe.sv's "if(!compute_en) accum_reg<=0" guard spares accum_reg -
-        // the real accumulated value survives the tile_done edge.
+        // pe.sv's "if(!compute_en && !drain) accum_reg<=0" guard spares
+        // accum_reg - the real accumulated value survives the tile_done
+        // edge.
         arr_tile_done = 1;
         arr_step("");
         arr_tile_done = 0;
@@ -332,12 +352,15 @@ module tb_array;
         // (h_en/v_en drop the cycle after tile_done, not the same cycle).
         arr_step("");
 
-        // Now drain, with h_en and v_en both low: PE.sv's drain branch
-        // takes the "down_out <= accum_reg" path (accum_in_valid=v_en_3=0),
-        // surfacing the real MAC result instead of the stale preload value.
+        // Pulse drain_state_start one cycle before bringing drain_state up
+        // (see the PE_array arr_dut comment above for why) so
+        // vertical_en_fsm actually runs its S0..S3 cascade during this
+        // drain window instead of sitting in IDLE the whole time.
+        arr_drain_start = 1;
+        arr_step("");
+        arr_drain_start = 0;
         arr_drain = 1;
-        arr_step("");
-        arr_step("");
+        for (int i = 0; i < 4; i++) arr_step("");
         check("drain-after-tile_done surfaces a real (non-frozen, non-zero) MAC result",
               arr_product != {32'd2, 32'd2, 32'd2, 32'd2} && arr_product != '0);
         arr_drain_snapshot = arr_product;
@@ -382,9 +405,11 @@ module tb_array;
         arr_tile_done = 0;
         arr_step("");
 
+        arr_drain_start = 1;
+        arr_step("");
+        arr_drain_start = 0;
         arr_drain = 1;
-        arr_step("");
-        arr_step("");
+        for (int i = 0; i < 4; i++) arr_step("");
         arr_drain = 0;
 
         result = arr_product;
@@ -467,36 +492,39 @@ module tb_array;
     endtask
 
     // -----------------------------------------------------------------
-    // 7) PE_array: down_out (and therefore product_array) is only cleared
-    //    by preload/drain activity - PE.sv's reset branch resets a_reg,
-    //    b_reg, product_reg and accum_reg but never assigns down_out. This
-    //    checks what an async reset actually does to product_array once
-    //    it holds a real (non-zero) value, since "reset: product_array all
-    //    zero" in the first PE_array test only holds because it runs
-    //    before anything is ever preloaded.
+    // 7) PE_array: down_out is now `preload ? b_reg : down_out_drain` (a
+    //    continuous assign - see pe.sv), so it's only b_reg's value while
+    //    preload is actually asserted; the moment preload drops, down_out
+    //    switches to down_out_drain (registered, untouched by b_reg's
+    //    reset). This checks the case that's actually well-defined and
+    //    interesting: an async reset landing WHILE preload is still held
+    //    clears b_reg, which is immediately visible on down_out/
+    //    product_array with no clock edge needed, since the mux is
+    //    combinational.
     // -----------------------------------------------------------------
     task automatic run_pe_array_reset_mid_preload_test();
         logic [3:0][31:0] pre_reset_value;
-        $display("==== PE_array: reset after a real value is loaded ====");
+        $display("==== PE_array: reset while preload is still held ====");
         arr_reset();
 
         arr_preload = 1;
         arr_weight = {8'd9, 8'd9, 8'd9, 8'd9};
         for (int i = 0; i < 8; i++) arr_step("");
-        arr_preload = 0;
         pre_reset_value = arr_product;
-        check("pre-check: product_array holds the preloaded value", pre_reset_value == {32'd9, 32'd9, 32'd9, 32'd9});
+        check("pre-check: product_array holds the preloaded value (preload still asserted)",
+              pre_reset_value == {32'd9, 32'd9, 32'd9, 32'd9});
 
         arr_rst_n = 0;
-        arr_step("");
-        $display("[INFO] product_array after async reset (with a prior real value loaded): %h (pre-reset value was %h)",
+        #1;
+        $display("[INFO] product_array immediately after async reset (preload still held): %h (pre-reset value was %h)",
                   arr_product, pre_reset_value);
-        check("NOTE: down_out is not in PE.sv's reset branch, so product_array is NOT forced to zero by rst_n once a real value has been preloaded",
-              arr_product == pre_reset_value);
+        check("async reset with preload still held: product_array goes to zero immediately (combinational down_out=b_reg, b_reg reset)",
+              arr_product == '0);
         arr_rst_n = 1;
+        arr_preload = 0;
         @(posedge clk);
 
-        $display("PE_array reset-after-real-value check done\n");
+        $display("PE_array reset-while-preload-held check done\n");
     endtask
 
     initial begin
