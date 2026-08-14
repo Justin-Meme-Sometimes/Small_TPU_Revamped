@@ -8,40 +8,33 @@ module PE_array(
     input logic drain_state,
     input logic [3:0][7:0] weight_array,
     input logic drain_state_start,
-    input logic activation_valid,
+    input logic [3:0] activation_valid,
     input logic weight_data_valid,
     input logic [3:0][7:0] activation_array,
     output logic [3:0][31:0] product_array,
     output logic output_valid
 );
-    assign output_valid = drain_state;
-    logic h_en_0, h_en_1, h_en_2, h_en_3;
-    logic v_en_0, v_en_1, v_en_2, v_en_3;
+
     logic [15:0][31:0] pe_down_out;
     logic [15:0][7:0] pe_right_out;
+    logic [15:0] accum_out_valid;
+    logic [15:0] right_out_valid;
     logic clr;
-    
+
     assign clr = clr_state ? 1 : 0;
 
-    horizontal_en_fsm e_fsm_1 (.clk(clk), 
-                                .rst_n(rst_n), 
-                                .compute_state_start(compute_state_start), 
-                                .tile_done(tile_done), 
-                                .en_0(h_en_0),
-                                .en_1(h_en_1),
-                                .en_2(h_en_2),
-                                .en_3(h_en_3));
+    logic [3:0][7:0] activations_skewed_out;
+    logic [3:0] activations_skewed_valid_out;
 
-    vertical_en_fsm v_fsm_1 (   .clk(clk), 
-                                .rst_n(rst_n), 
-                                .drain_state_start(drain_state_start), 
-                                .tile_done(tile_done), 
-                                .en_0(v_en_0),
-                                .en_1(v_en_1),
-                                .en_2(v_en_2),
-                                .en_3(v_en_3));
-
-    
+    skew_buffer skew_buff_1 (
+        .clk(clk),
+        .rst_n(rst_n),
+        .clr(clr_state),
+        .activations_in(activation_array),
+        .activations_in_valid(activation_valid),
+        .activations_skewed_out(activations_skewed_out),
+        .activations_skewed_valid_out(activations_skewed_valid_out)
+    );
 
     //Row Math:      w1   w2   w3   w4
     //               |    |    |    |
@@ -49,174 +42,224 @@ module PE_array(
     //               |    |    |    |
     //     act-1 ->  x -> x -> x -> x
     //               |    |    |    |
-    //     act-1 ->  x -> x -> x -> x 
+    //     act-1 ->  x -> x -> x -> x
     //               |    |    |    |
-    //     act-3 ->  x -> x -> x -> x 
+    //     act-3 ->  x -> x -> x -> x
     //
 
-    logic [3:0][7:0] val_act_in;
-    always_ff @(posedge clk, negedge rst_n) begin
-        if(!rst_n) begin
-            val_act_in[0] <= 0;
-            val_act_in[1] <= 0;
-            val_act_in[2] <= 0;
-            val_act_in[3] <= 0;
-        end else begin
-            if(activation_valid) begin
-                val_act_in[0] <= activation_array[0];
-                val_act_in[1] <= activation_array[1];
-                val_act_in[2] <= activation_array[2];
-                val_act_in[3] <= activation_array[3];
-            end
-        end
-    end
-    
     //Row 0
-    PE pe_0_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[0]), .b(weight_array[0]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[0]), .right_out(pe_right_out[0]));
-    PE pe_0_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[0]), .b(weight_array[1]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[1]), .right_out(pe_right_out[1]));
-    PE pe_0_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[1]), .b(weight_array[2]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[2]), .right_out(pe_right_out[2]));
-    PE pe_0_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[2]), .b(weight_array[3]), .clr(clr_state), .tile_done(tile_done), .accum_in('0), .accum_in_valid(v_en_0), .down_out(pe_down_out[3]), .right_out(pe_right_out[3]));
+    PE pe_0_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start), .a(activations_skewed_out[0]),     .a_valid(activations_skewed_valid_out[0]), .b(weight_array[0]), .clr(clr_state), .tile_done(tile_done), .accum_in('0),   .accum_in_valid(1'd1),  .accum_out_valid(accum_out_valid[0]), .down_out(pe_down_out[0]), .right_out(pe_right_out[0]),  .right_out_valid(right_out_valid[0]));
+    PE pe_0_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start), .a(pe_right_out[0]),   .a_valid(right_out_valid[0]),.b(weight_array[1]), .clr(clr_state), .tile_done(tile_done), .accum_in('0),   .accum_in_valid(1'd1),   .accum_out_valid(accum_out_valid[1]), .down_out(pe_down_out[1]), .right_out(pe_right_out[1]),   .right_out_valid(right_out_valid[1]));
+    PE pe_0_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start), .a(pe_right_out[1]),   .a_valid(right_out_valid[1]),.b(weight_array[2]), .clr(clr_state), .tile_done(tile_done), .accum_in('0),   .accum_in_valid(1'd1),   .accum_out_valid(accum_out_valid[2]), .down_out(pe_down_out[2]), .right_out(pe_right_out[2]),   .right_out_valid(right_out_valid[2]));
+    PE pe_0_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start), .a(pe_right_out[2]),   .a_valid(right_out_valid[2]), .b(weight_array[3]), .clr(clr_state), .tile_done(tile_done), .accum_in('0),  .accum_in_valid(1'd1),  .accum_out_valid(accum_out_valid[3]), .down_out(pe_down_out[3]), .right_out(pe_right_out[3]),  .right_out_valid(right_out_valid[3]));
 
     //Row 1
-    PE pe_1_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[1]), .b(pe_down_out[0]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[0]), .accum_in_valid(v_en_1), .down_out(pe_down_out[4]), .right_out(pe_right_out[4]));
-    PE pe_1_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[4]), .b(pe_down_out[1]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[1]), .accum_in_valid(v_en_1), .down_out(pe_down_out[5]), .right_out(pe_right_out[5]));
-    PE pe_1_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[5]), .b(pe_down_out[2]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[2]), .accum_in_valid(v_en_1), .down_out(pe_down_out[6]), .right_out(pe_right_out[6]));
-    PE pe_1_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[6]), .b(pe_down_out[3]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[3]), .accum_in_valid(v_en_1), .down_out(pe_down_out[7]), .right_out(pe_right_out[7]));
+    PE pe_1_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(activations_skewed_out[1]),    .a_valid(activations_skewed_valid_out[1]), .b(pe_down_out[0]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[0]), .accum_in_valid(accum_out_valid[0]), .accum_out_valid(accum_out_valid[4]), .down_out(pe_down_out[4]), .right_out(pe_right_out[4]), .right_out_valid(right_out_valid[4]));
+    PE pe_1_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[4]),  .a_valid(right_out_valid[4]),.b(pe_down_out[1]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[1]), .accum_in_valid(accum_out_valid[1]), .accum_out_valid(accum_out_valid[5]), .down_out(pe_down_out[5]), .right_out(pe_right_out[5]),  .right_out_valid(right_out_valid[5]));
+    PE pe_1_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[5]),  .a_valid(right_out_valid[5]),.b(pe_down_out[2]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[2]), .accum_in_valid(accum_out_valid[2]), .accum_out_valid(accum_out_valid[6]), .down_out(pe_down_out[6]), .right_out(pe_right_out[6]),  .right_out_valid(right_out_valid[6]));
+    PE pe_1_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[6]),  .a_valid(right_out_valid[6]),.b(pe_down_out[3]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[3]), .accum_in_valid(accum_out_valid[3]), .accum_out_valid(accum_out_valid[7]), .down_out(pe_down_out[7]), .right_out(pe_right_out[7]),  .right_out_valid(right_out_valid[7]));
 
     //Row 2
-    PE pe_2_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[2]), .b(pe_down_out[4]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[4]), .accum_in_valid(v_en_2), .down_out(pe_down_out[8]), .right_out(pe_right_out[8]));
-    PE pe_2_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[8]), .b(pe_down_out[5]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[5]), .accum_in_valid(v_en_2), .down_out(pe_down_out[9]), .right_out(pe_right_out[9]));
-    PE pe_2_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[9]), .b(pe_down_out[6]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[6]), .accum_in_valid(v_en_2), .down_out(pe_down_out[10]), .right_out(pe_right_out[10]));
-    PE pe_2_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[10]), .b(pe_down_out[7]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[7]), .accum_in_valid(v_en_2), .down_out(pe_down_out[11]), .right_out(pe_right_out[11]));
+    PE pe_2_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(activations_skewed_out[2]),    .a_valid(activations_skewed_valid_out[2]),.b(pe_down_out[4]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[4]), .accum_in_valid(accum_out_valid[4]), .accum_out_valid(accum_out_valid[8]), .down_out(pe_down_out[8]), .right_out(pe_right_out[8]),   .right_out_valid(right_out_valid[8]));
+    PE pe_2_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[8]),  .a_valid(right_out_valid[8]),.b(pe_down_out[5]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[5]), .accum_in_valid(accum_out_valid[5]), .accum_out_valid(accum_out_valid[9]), .down_out(pe_down_out[9]), .right_out(pe_right_out[9]),   .right_out_valid(right_out_valid[9]));
+    PE pe_2_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[9]),  .a_valid(right_out_valid[9]),.b(pe_down_out[6]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[6]), .accum_in_valid(accum_out_valid[6]), .accum_out_valid(accum_out_valid[10]), .down_out(pe_down_out[10]), .right_out(pe_right_out[10]), .right_out_valid(right_out_valid[10]));
+    PE pe_2_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[10]), .a_valid(right_out_valid[10]),.b(pe_down_out[7]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[7]), .accum_in_valid(accum_out_valid[7]), .accum_out_valid(accum_out_valid[11]), .down_out(pe_down_out[11]), .right_out(pe_right_out[11]), .right_out_valid(right_out_valid[11]));
 
     //Row 3
-    PE pe_3_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_0), .drain(drain_state), .a(val_act_in[3]), .b(pe_down_out[8]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[8]), .accum_in_valid(v_en_3), .down_out(pe_down_out[12]), .right_out(pe_right_out[12]));
-    PE pe_3_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_1), .drain(drain_state), .a(pe_right_out[12]), .b(pe_down_out[9]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[9]), .accum_in_valid(v_en_3), .down_out(pe_down_out[13]), .right_out(pe_right_out[13]));
-    PE pe_3_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_2), .drain(drain_state), .a(pe_right_out[13]), .b(pe_down_out[10]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[10]), .accum_in_valid(v_en_3), .down_out(pe_down_out[14]), .right_out(pe_right_out[14]));
-    PE pe_3_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(h_en_3), .drain(drain_state), .a(pe_right_out[14]), .b(pe_down_out[11]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[11]), .accum_in_valid(v_en_3), .down_out(pe_down_out[15]), .right_out(pe_right_out[15]));
+    PE pe_3_0 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(activations_skewed_out[3]),    .a_valid(activations_skewed_valid_out[3]), .b(pe_down_out[8]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[8]), .accum_in_valid(accum_out_valid[8]), .accum_out_valid(accum_out_valid[12]), .down_out(pe_down_out[12]), .right_out(pe_right_out[12]),   .right_out_valid(right_out_valid[12]));
+    PE pe_3_1 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[12]), .a_valid(right_out_valid[12]), .b(pe_down_out[9]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[9]), .accum_in_valid(accum_out_valid[9]), .accum_out_valid(accum_out_valid[13]), .down_out(pe_down_out[13]), .right_out(pe_right_out[13]),   .right_out_valid(right_out_valid[13]));
+    PE pe_3_2 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[13]), .a_valid(right_out_valid[13]), .b(pe_down_out[10]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[10]), .accum_in_valid(accum_out_valid[10]), .accum_out_valid(accum_out_valid[14]), .down_out(pe_down_out[14]), .right_out(pe_right_out[14]), .right_out_valid(right_out_valid[14]));
+    PE pe_3_3 (.clk(clk), .rst_n(rst_n), .preload(preload_state_start), .compute_en(compute_state_start),  .a(pe_right_out[14]), .a_valid(right_out_valid[14]), .b(pe_down_out[11]), .clr(clr_state), .tile_done(tile_done), .accum_in(pe_down_out[11]), .accum_in_valid(accum_out_valid[11]), .accum_out_valid(accum_out_valid[15]), .down_out(pe_down_out[15]), .right_out(pe_right_out[15]), .right_out_valid(right_out_valid[15]));
+
+    logic [3:0][31:0] product_array_raw;
+    logic [3:0] product_array_valid;
+
+    assign product_array_raw[0] = pe_down_out[12];
+    assign product_array_raw[1] = pe_down_out[13];
+    assign product_array_raw[2] = pe_down_out[14];
+    assign product_array_raw[3] = pe_down_out[15];
+
+    assign product_array_valid[0] = accum_out_valid[12];
+    assign product_array_valid[1] = accum_out_valid[13];
+    assign product_array_valid[2] = accum_out_valid[14];
+    assign product_array_valid[3] = accum_out_valid[15];
+
+    deskew_buffer deskew_buff_1 (
+        .clk(clk),
+        .rst_n(rst_n),
+        .clr(clr_state),
+        .prod_in(product_array_raw),
+        .prod_in_valid(product_array_valid),
+        .output_row(product_array),
+        .output_valid(output_valid)
+    );
+
+endmodule
+
+module skew_buffer(
+    input logic clk,
+    input logic rst_n,
+    input logic clr,
+    input logic [3:0][7:0] activations_in,
+    input logic [3:0] activations_in_valid,
+    output logic [3:0][7:0] activations_skewed_out,
+    output logic [3:0] activations_skewed_valid_out
+);
+
+    logic row_1_valid;
+    logic [1:0] row_2_valid;
+    logic [2:0] row_3_valid;
+    logic [7:0] row_1;
+    logic [1:0][7:0] row_2;
+    logic [2:0][7:0] row_3;
    
-   
-    assign product_array[0] = pe_down_out[12];
-    assign product_array[1] = pe_down_out[13];
-    assign product_array[2] = pe_down_out[14];
-    assign product_array[3] = pe_down_out[15];
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if (!rst_n) begin
+            row_1 <= 0; row_1_valid <= 0;
+        end else if (clr) begin
+            row_1 <= 0; row_1_valid <= 0;
+        end else begin
+            row_1 <= activations_in[1];
+            row_1_valid <= activations_in_valid[1];
+        end
+    end
+
     
-endmodule
-
-module horizontal_en_fsm(
-    input logic clk,
-    input logic rst_n,
-    input logic compute_state_start,
-    input logic tile_done,
-    output logic en_0,
-    output logic en_1,
-    output logic en_2,
-    output logic en_3
-);
-
-    typedef enum logic [4:0] {IDLE, S0, S1, S2, S3} state_t;
-    state_t current_state, next_state;
-
     always_ff @(posedge clk, negedge rst_n) begin
-        if(!rst_n) begin
-            current_state <= IDLE;
+        if (!rst_n) begin
+            row_2 <= '0; row_2_valid <= '0;
+        end else if (clr) begin
+            row_2 <= '0; row_2_valid <= '0;
         end else begin
-            current_state <=  next_state;
+            row_2[1] <= row_2[0];             
+            row_2_valid[1] <= row_2_valid[0];
+
+            row_2[0] <= activations_in[2];    
+            row_2_valid[0] <= activations_in_valid[2];
         end
     end
 
-    //on S0 enables first col, S1 enables 2nd col, S2 enables 3rd col, etc
-    always_comb begin
-        next_state = current_state;
-        en_3 = 0;
-        en_2 = 0;
-        en_1 = 0;
-        en_0 = 0;
-        case(current_state)
-            IDLE: begin
-                if(!compute_state_start) next_state = IDLE;
-                else next_state = S0;
-            end
-            S0: begin
-                next_state = S1;
-                en_0 = 1;
-            end
-            S1: begin
-                next_state = S2;
-                en_1 = 1;
-                en_0 = 1;
-            end
-            S2: begin
-                next_state = S3;
-                en_2 = 1;
-                en_1 = 1;
-                en_0 = 1;
-            end
-            S3: begin
-                if(tile_done) begin
-                    next_state = IDLE;
-                end else begin
-                    next_state = S3;
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if (!rst_n) begin
+            row_3 <= '0; row_3_valid <= '0;
+        end else if (clr) begin
+            row_3 <= '0; row_3_valid <= '0;
+        end else begin
+            row_3[2] <= row_3[1];             
+            row_3_valid[2] <= row_3_valid[1];
+
+            row_3[1] <= row_3[0];             
+            row_3_valid[1] <= row_3_valid[0];
+
+            row_3[0] <= activations_in[3];    
+            row_3_valid[0] <= activations_in_valid[3];
+        end
+    end
+
+    assign activations_skewed_out[0] = activations_in[0];
+    assign activations_skewed_out[1] = row_1;
+    assign activations_skewed_out[2] = row_2[1];
+    assign activations_skewed_out[3] = row_3[2];
+
+    assign activations_skewed_valid_out[0] = activations_in_valid[0];
+    assign activations_skewed_valid_out[1] = row_1_valid;
+    assign activations_skewed_valid_out[2] = row_2_valid[1];
+    assign activations_skewed_valid_out[3] = row_3_valid[2];
+endmodule
+
+module deskew_buffer(
+    input logic clk,
+    input logic rst_n,
+    input logic clr,
+    input logic [3:0][31:0] prod_in,
+    input logic [3:0] prod_in_valid,
+    output logic [3:0][31:0] output_row,
+    output logic output_valid
+);
+    logic [3:0][3:0][31:0] buffer;
+    logic [3:0][3:0] buffer_valid;
+
+    logic [3:0] col0_cnt, col1_cnt, col2_cnt, col3_cnt;
+
+    counter_pe cnt_0 (.clk(clk), .rst_n(rst_n), .en(prod_in_valid[0]), .clr(clr), .out(col0_cnt)); 
+    counter_pe cnt_1 (.clk(clk), .rst_n(rst_n), .en(prod_in_valid[1]), .clr(clr), .out(col1_cnt));
+    counter_pe cnt_2 (.clk(clk), .rst_n(rst_n), .en(prod_in_valid[2]), .clr(clr), .out(col2_cnt));
+    counter_pe cnt_3 (.clk(clk), .rst_n(rst_n), .en(prod_in_valid[3]), .clr(clr), .out(col3_cnt));
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if(!rst_n)begin
+            for(int i = 0; i < 4; i++) begin
+                for(int j = 0; j < 4; j++) begin
+                buffer[i][j] <= '0;
                 end
-                en_3 = 1;
-                en_2 = 1;
-                en_1 = 1;
-                en_0 = 1;
-            end
-        endcase
-    end
-endmodule
-
-
-module vertical_en_fsm(
-    input logic clk,
-    input logic rst_n,
-    input logic drain_state_start,
-    input logic tile_done,
-    output logic en_0,
-    output logic en_1,
-    output logic en_2,
-    output logic en_3
-);
-
-    typedef enum logic [4:0] {IDLE, S0, S1, S2, S3} state_t;
-    state_t current_state, next_state;
-
-    always_ff @(posedge clk, negedge rst_n) begin
-        if(!rst_n) begin
-            current_state <= IDLE;
+            end 
         end else begin
-            current_state <=  next_state;
+            if(clr) begin
+                for(int i = 0; i < 4; i++) begin
+                    for(int j = 0; j < 4; j++) begin
+                        buffer[i][j] <= '0;
+                    end
+                end 
+            end else begin
+                if(prod_in_valid[0]) begin
+                    buffer[0][col0_cnt] <= prod_in[0];
+                    buffer_valid[0][col0_cnt] <= prod_in_valid[0];
+                end
+                if(prod_in_valid[1]) begin
+                    buffer[1][col1_cnt] <= prod_in[1];
+                    buffer_valid[1][col1_cnt] <= prod_in_valid[1];
+                end
+                if(prod_in_valid[2]) begin
+                    buffer[2][col2_cnt] <= prod_in[2];
+                    buffer_valid[2][col2_cnt] <= prod_in_valid[2];
+                end
+                if(prod_in_valid[3]) begin
+                    buffer[3][col3_cnt] <= prod_in[3];
+                    buffer_valid[3][col3_cnt] <= prod_in_valid[3];
+                end
+            end
         end
     end
 
-    //S0 isn't enabled first row, S1 enabled 2nd row, S2 enabled 3rd row
-    always_comb begin
-        next_state = current_state;
-        en_3 = 0;
-        en_2 = 0;
-        en_1 = 0;
-        en_0 = 0;
-        case(current_state)
-            IDLE: begin
-                if(!drain_state_start) next_state = IDLE;
-                else next_state = S0;
-            end
-            S0: begin
-                next_state = S1;
-            end
-            S1: begin
-                next_state = S2;
-                en_1 = 1;
-            end
-            S2: begin
-                next_state = S3;
-                en_2 = 1;
-            end
-            S3: begin
-                next_state = IDLE;
-                en_3 = 1;
-            end
-        endcase
+    always_ff @(posedge clk, negedge rst_n) begin
+        if (!rst_n) begin
+            output_valid <= 0;
+        end else if (clr) begin
+            output_valid <= 0;
+        end else if (prod_in_valid[3]) begin
+            output_row[0] <= buffer[0][col3_cnt];
+            output_row[1] <= buffer[1][col3_cnt];
+            output_row[2] <= buffer[2][col3_cnt];
+            output_row[3] <= prod_in[3];  
+            output_valid <= 1;
+        end else begin
+            output_valid <= 0;
+        end
     end
+
 endmodule
+
+
+module counter_pe
+(input logic clk,
+ input logic rst_n,
+ input logic en,
+ input logic clr,
+ output logic [3:0] out);
+
+ always_ff @(posedge clk, negedge rst_n) begin
+    if(!rst_n)begin
+        out <= '0;
+    end else begin
+        if(clr)begin
+            out <= '0;
+        end else if (en) begin
+            out <= out + 1'd1;
+        end
+    end
+ end
+
+endmodule
+
