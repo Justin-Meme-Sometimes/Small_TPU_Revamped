@@ -10,7 +10,7 @@ module activation_buffer (
     input logic DMA_in_valid,
     input logic  [3:0][7:0] DMA_in,
     output logic [3:0][7:0] output_buff,
-    output logic output_buf_valid
+    output logic [3:0] output_buf_valid
 );
 
 //Two buffers A and B
@@ -38,7 +38,7 @@ always_comb begin
     we_valid_a = 0;
     write_in_a = 0;
     write_in_b = 0;
-    output_buf_valid = 0;
+    output_buf_valid = '0;
     output_buff = 0;
  
     if(we_b && DMA_in_valid) begin
@@ -51,10 +51,10 @@ always_comb begin
     end
     if(re_valid_a) begin
         output_buff = re_out_a;
-        output_buf_valid = 1;
+        output_buf_valid = '1;
     end else if(re_valid_b) begin
         output_buff = re_out_b;
-        output_buf_valid = 1;
+        output_buf_valid = '1;
     end
 end
 endmodule

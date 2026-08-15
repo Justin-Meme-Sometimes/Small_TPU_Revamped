@@ -29,7 +29,7 @@ module PE_array(
     skew_buffer skew_buff_1 (
         .clk(clk),
         .rst_n(rst_n),
-        .clr(clr_state),
+        .clr(clr_state || tile_done),
         .activations_in(activation_array),
         .activations_in_valid(activation_valid),
         .activations_skewed_out(activations_skewed_out),
@@ -87,7 +87,7 @@ module PE_array(
     deskew_buffer deskew_buff_1 (
         .clk(clk),
         .rst_n(rst_n),
-        .clr(clr_state),
+        .clr(clr_state || tile_done),
         .prod_in(product_array_raw),
         .prod_in_valid(product_array_valid),
         .output_row(product_array),
