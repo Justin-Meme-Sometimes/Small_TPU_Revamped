@@ -113,7 +113,6 @@ module DMA (
         .prefill_start(prefill_start),
         .tile_done(tile_done),
         .act_re_max(act_re_max),
-        .clr(),
         .clr_counter(act_clr_counter),
         .act_re(act_re),
         .en_counter(act_en_counter));
@@ -557,7 +556,6 @@ module DMA_ACT_READ_FSM(
     input logic prefill_start,
     input logic tile_done,
     input logic act_re_max,
-    output logic clr,
     output logic clr_counter,
     output logic act_re,
     output logic en_counter);
@@ -578,7 +576,6 @@ module DMA_ACT_READ_FSM(
         clr_counter = 1'd0;
         act_re = 1'd0;
         en_counter = 1'd0;
-        clr = 1'd0;
         case(current_state)
             IDLE: begin
                 if(prefill_start || tile_done) begin
@@ -593,15 +590,14 @@ module DMA_ACT_READ_FSM(
                     next_state = READ_ACTIVATIONS;
                     act_re = 1'd1;
                 end else begin
-                    clr = 1'd1;
                     clr_counter = 1'd1;
                     next_state = IDLE;
                 end
             end
-           
+
         endcase
     end
-    
+
 endmodule
 
 

@@ -2,9 +2,8 @@ module activation_buffer (
     input logic clk,
     input logic rst_n,
     input logic start,
-    input logic compute_state,
+    input logic stream_state,
     input logic preload_state,
-    input logic drain_state,
     input logic tile_done,
     input logic tiles_complete,
     input logic DMA_in_valid,
@@ -27,8 +26,8 @@ logic [3:0][7:0] write_in_a, re_out_a;
 logic we_b, re_b, clr_b, re_valid_b, we_valid_b, buff_b_empty, buff_b_full, buff_b_active, first_pass_b, buff_b_bs;
 logic [3:0][7:0] write_in_b, re_out_b;
 
-bank_fsm A (.clk(clk), .rst_n(rst_n), .we(we_a), .re(re_a), .a_or_b(1), .start(start), .compute_state(compute_state), .preload_state(preload_state), .drain_state(drain_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_a_full), .empty(buff_a_empty), .bank_switch(buff_a_bs), .active(buff_a_active), .other_bank_active(buff_b_active),  .first_pass(first_pass_a), .clr(clr_a));
-bank_fsm B (.clk(clk), .rst_n(rst_n), .we(we_b), .re(re_b), .a_or_b(0), .start(start), .compute_state(compute_state), .preload_state(preload_state), .drain_state(drain_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_b_full), .empty(buff_b_empty), .bank_switch(buff_b_bs), .active(buff_b_active), .other_bank_active(buff_a_active),  .first_pass(first_pass_b), .clr(clr_b));
+bank_fsm A (.clk(clk), .rst_n(rst_n), .we(we_a), .re(re_a), .a_or_b(1), .start(start), .stream_state(stream_state), .preload_state(preload_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_a_full), .empty(buff_a_empty), .bank_switch(buff_a_bs), .active(buff_a_active), .other_bank_active(buff_b_active),  .first_pass(first_pass_a), .clr(clr_a));
+bank_fsm B (.clk(clk), .rst_n(rst_n), .we(we_b), .re(re_b), .a_or_b(0), .start(start), .stream_state(stream_state), .preload_state(preload_state), .tile_done(tile_done), .tiles_complete(tiles_complete), .full(buff_b_full), .empty(buff_b_empty), .bank_switch(buff_b_bs), .active(buff_b_active), .other_bank_active(buff_a_active),  .first_pass(first_pass_b), .clr(clr_b));
 
 i_buffer BUFF_A (.clk(clk), .rst_n(rst_n), .we(we_a), .re(re_a), .a_or_b(1), .clr(clr_a), .re_out(re_out_a), .re_valid(re_valid_a), .we_in(write_in_a), .we_valid(we_valid_a), .empty(buff_a_empty), .full(buff_a_full));
 i_buffer BUFF_B (.clk(clk), .rst_n(rst_n), .we(we_b), .re(re_b), .a_or_b(0), .clr(clr_b), .re_out(re_out_b), .re_valid(re_valid_b), .we_in(write_in_b), .we_valid(we_valid_b), .empty(buff_b_empty), .full(buff_b_full));
@@ -65,9 +64,8 @@ module bank_fsm(
     input logic rst_n,
     input logic a_or_b,
     input logic start,
-    input logic compute_state,
+    input logic stream_state,
     input logic preload_state,
-    input logic drain_state,
     input logic tile_done,
     input logic tiles_complete,
     input logic full,
@@ -142,7 +140,7 @@ module bank_fsm(
                 end
             end
             COMPUTE : begin
-                if(!empty && (compute_state || drain_state) && !o_bank_reg) begin
+                if(!empty && (stream_state) && !o_bank_reg) begin
                     next_state = COMPUTE;
                     re = 1;
                     active = 1; //only 1 bank should be active at a time
@@ -155,7 +153,7 @@ module bank_fsm(
                 end
             end
             WAIT_INACTIVE: begin
-                if(compute_state) begin
+                if(stream_state) begin
                     next_state = FILL_INACTIVE;
                     clr = 1;
                 end else begin
@@ -163,7 +161,7 @@ module bank_fsm(
                 end
             end
             FILL_INACTIVE: begin
-                if((compute_state || drain_state) && full) begin
+                if((stream_state) && full) begin
                     next_state = BUBBLE;
                     bank_switch = 1;
                     active = 1;

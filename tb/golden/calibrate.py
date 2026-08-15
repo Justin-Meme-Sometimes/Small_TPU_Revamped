@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from driver import Stimulus, run, OP_READ_OUTPUTS  # noqa: E402
+from driver import Stimulus, run, measure_compute_cycles, OP_READ_OUTPUTS  # noqa: E402
 
 weight_tile = bytes([
     1, 0, 0, 0,
@@ -33,7 +33,7 @@ s.load_weights(weight256)
 s.load_bias(bias16)
 s.load_activations(activation_tile)
 s.load_requant(0)
-s.compute()
+s.compute(settle_cycles=measure_compute_cycles(s))
 read_start, read_end = s.read_outputs()
 
 out = run(s)
