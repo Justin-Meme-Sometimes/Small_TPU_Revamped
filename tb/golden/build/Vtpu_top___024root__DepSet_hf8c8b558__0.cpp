@@ -101,6 +101,8 @@ VL_INLINE_OPT void Vtpu_top___024root___nba_sequent__TOP__0(Vtpu_top___024root* 
     tpu_top__DOT__dma__DOT__weights_busy = 0;
     CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_busy;
     tpu_top__DOT__dma__DOT__bias_busy = 0;
+    IData/*31:0*/ tpu_top__DOT__dma__DOT__result_re_out;
+    tpu_top__DOT__dma__DOT__result_re_out = 0;
     SData/*8:0*/ __Vdly__tpu_top__DOT__prefill_count;
     __Vdly__tpu_top__DOT__prefill_count = 0;
     SData/*8:0*/ __Vdly__tpu_top__DOT__preload_count;
@@ -1013,136 +1015,174 @@ VL_INLINE_OPT void Vtpu_top___024root___nba_sequent__TOP__0(Vtpu_top___024root* 
         } else {
             if ((1U & (~ (IData)(vlSelf->tpu_top__DOT__requant_out_valid)))) {
                 if (vlSelf->tpu_top__DOT__dma__DOT__result_re) {
-                    if ((1U & (~ (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_empty)))) {
-                        vlSelf->tpu_top__DOT__dma__DOT__result_re_out 
-                            = ((0xffffff00U & vlSelf->tpu_top__DOT__dma__DOT__result_re_out) 
-                               | (0xffU & (((0U == 
-                                             (0x1fU 
-                                              & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U)))
-                                             ? 0U : 
-                                            (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
-                                             (((IData)(7U) 
-                                               + (0x7ffU 
-                                                  & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))) 
-                                              >> 5U)] 
-                                             << ((IData)(0x20U) 
-                                                 - 
+                    if (vlSelf->tpu_top__DOT__dma__DOT__result_empty) {
+                        if ((1U & (~ (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_empty)))) {
+                            tpu_top__DOT__dma__DOT__result_re_out 
+                                = ((0xffffff00U & tpu_top__DOT__dma__DOT__result_re_out) 
+                                   | (0xffU & (((0U 
+                                                 == 
                                                  (0x1fU 
-                                                  & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))))) 
-                                           | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
-                                              (0x3fU 
-                                               & (VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U) 
-                                                  >> 5U))] 
-                                              >> (0x1fU 
-                                                  & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))))));
-                        vlSelf->tpu_top__DOT__dma__DOT__result_re_out 
-                            = ((0xffff00ffU & vlSelf->tpu_top__DOT__dma__DOT__result_re_out) 
-                               | (0xff00U & ((((0U 
-                                                == 
-                                                (0x1fU 
-                                                 & VL_SHIFTL_III(11,32,32, 
-                                                                 ((IData)(1U) 
-                                                                  + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))
-                                                ? 0U
-                                                : (
-                                                   vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
-                                                   (((IData)(7U) 
-                                                     + 
-                                                     (0x7ffU 
-                                                      & VL_SHIFTL_III(11,32,32, 
-                                                                      ((IData)(1U) 
-                                                                       + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))) 
-                                                    >> 5U)] 
-                                                   << 
-                                                   ((IData)(0x20U) 
-                                                    - 
+                                                  & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U)))
+                                                 ? 0U
+                                                 : 
+                                                (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                 (((IData)(7U) 
+                                                   + 
+                                                   (0x7ffU 
+                                                    & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))) 
+                                                  >> 5U)] 
+                                                 << 
+                                                 ((IData)(0x20U) 
+                                                  - 
+                                                  (0x1fU 
+                                                   & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))))) 
+                                               | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                  (0x3fU 
+                                                   & (VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U) 
+                                                      >> 5U))] 
+                                                  >> 
+                                                  (0x1fU 
+                                                   & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))))));
+                            tpu_top__DOT__dma__DOT__result_re_out 
+                                = ((0xffff00ffU & tpu_top__DOT__dma__DOT__result_re_out) 
+                                   | (0xff00U & (((
+                                                   (0U 
+                                                    == 
                                                     (0x1fU 
                                                      & VL_SHIFTL_III(11,32,32, 
                                                                      ((IData)(1U) 
-                                                                      + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))))) 
-                                              | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
-                                                 (0x3fU 
-                                                  & (VL_SHIFTL_III(11,32,32, 
-                                                                   ((IData)(1U) 
-                                                                    + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U) 
-                                                     >> 5U))] 
-                                                 >> 
-                                                 (0x1fU 
-                                                  & VL_SHIFTL_III(11,32,32, 
-                                                                  ((IData)(1U) 
-                                                                   + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))) 
-                                             << 8U)));
-                        vlSelf->tpu_top__DOT__dma__DOT__result_re_out 
-                            = ((0xff00ffffU & vlSelf->tpu_top__DOT__dma__DOT__result_re_out) 
-                               | (0xff0000U & ((((0U 
-                                                  == 
+                                                                      + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))
+                                                    ? 0U
+                                                    : 
+                                                   (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                    (((IData)(7U) 
+                                                      + 
+                                                      (0x7ffU 
+                                                       & VL_SHIFTL_III(11,32,32, 
+                                                                       ((IData)(1U) 
+                                                                        + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))) 
+                                                     >> 5U)] 
+                                                    << 
+                                                    ((IData)(0x20U) 
+                                                     - 
+                                                     (0x1fU 
+                                                      & VL_SHIFTL_III(11,32,32, 
+                                                                      ((IData)(1U) 
+                                                                       + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))))) 
+                                                  | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                     (0x3fU 
+                                                      & (VL_SHIFTL_III(11,32,32, 
+                                                                       ((IData)(1U) 
+                                                                        + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U) 
+                                                         >> 5U))] 
+                                                     >> 
+                                                     (0x1fU 
+                                                      & VL_SHIFTL_III(11,32,32, 
+                                                                      ((IData)(1U) 
+                                                                       + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))) 
+                                                 << 8U)));
+                            tpu_top__DOT__dma__DOT__result_re_out 
+                                = ((0xff00ffffU & tpu_top__DOT__dma__DOT__result_re_out) 
+                                   | (0xff0000U & (
+                                                   (((0U 
+                                                      == 
+                                                      (0x1fU 
+                                                       & VL_SHIFTL_III(11,32,32, 
+                                                                       ((IData)(2U) 
+                                                                        + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))
+                                                      ? 0U
+                                                      : 
+                                                     (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                      (((IData)(7U) 
+                                                        + 
+                                                        (0x7ffU 
+                                                         & VL_SHIFTL_III(11,32,32, 
+                                                                         ((IData)(2U) 
+                                                                          + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))) 
+                                                       >> 5U)] 
+                                                      << 
+                                                      ((IData)(0x20U) 
+                                                       - 
+                                                       (0x1fU 
+                                                        & VL_SHIFTL_III(11,32,32, 
+                                                                        ((IData)(2U) 
+                                                                         + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))))) 
+                                                    | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                       (0x3fU 
+                                                        & (VL_SHIFTL_III(11,32,32, 
+                                                                         ((IData)(2U) 
+                                                                          + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U) 
+                                                           >> 5U))] 
+                                                       >> 
+                                                       (0x1fU 
+                                                        & VL_SHIFTL_III(11,32,32, 
+                                                                        ((IData)(2U) 
+                                                                         + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))) 
+                                                   << 0x10U)));
+                            tpu_top__DOT__dma__DOT__result_re_out 
+                                = ((0xffffffU & tpu_top__DOT__dma__DOT__result_re_out) 
+                                   | ((((0U == (0x1fU 
+                                                & VL_SHIFTL_III(11,32,32, 
+                                                                ((IData)(3U) 
+                                                                 + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))
+                                         ? 0U : (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                 (((IData)(7U) 
+                                                   + 
+                                                   (0x7ffU 
+                                                    & VL_SHIFTL_III(11,32,32, 
+                                                                    ((IData)(3U) 
+                                                                     + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))) 
+                                                  >> 5U)] 
+                                                 << 
+                                                 ((IData)(0x20U) 
+                                                  - 
                                                   (0x1fU 
                                                    & VL_SHIFTL_III(11,32,32, 
-                                                                   ((IData)(2U) 
-                                                                    + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))
-                                                  ? 0U
-                                                  : 
-                                                 (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                                                   ((IData)(3U) 
+                                                                    + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))))) 
+                                       | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                          (0x3fU & 
+                                           (VL_SHIFTL_III(11,32,32, 
+                                                          ((IData)(3U) 
+                                                           + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U) 
+                                            >> 5U))] 
+                                          >> (0x1fU 
+                                              & VL_SHIFTL_III(11,32,32, 
+                                                              ((IData)(3U) 
+                                                               + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))) 
+                                      << 0x18U));
+                            __Vdly__tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr 
+                                = (0x3ffU & ((IData)(4U) 
+                                             + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)));
+                        }
+                    } else {
+                        vlSelf->tpu_top__DOT__dma__DOT__re_out_single_result 
+                            = (0xffU & (((0U == (0x1fU 
+                                                 & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U)))
+                                          ? 0U : (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
                                                   (((IData)(7U) 
                                                     + 
                                                     (0x7ffU 
-                                                     & VL_SHIFTL_III(11,32,32, 
-                                                                     ((IData)(2U) 
-                                                                      + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))) 
+                                                     & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))) 
                                                    >> 5U)] 
                                                   << 
                                                   ((IData)(0x20U) 
                                                    - 
                                                    (0x1fU 
-                                                    & VL_SHIFTL_III(11,32,32, 
-                                                                    ((IData)(2U) 
-                                                                     + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))))) 
-                                                | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
-                                                   (0x3fU 
-                                                    & (VL_SHIFTL_III(11,32,32, 
-                                                                     ((IData)(2U) 
-                                                                      + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U) 
-                                                       >> 5U))] 
-                                                   >> 
-                                                   (0x1fU 
-                                                    & VL_SHIFTL_III(11,32,32, 
-                                                                    ((IData)(2U) 
-                                                                     + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))) 
-                                               << 0x10U)));
-                        vlSelf->tpu_top__DOT__dma__DOT__result_re_out 
-                            = ((0xffffffU & vlSelf->tpu_top__DOT__dma__DOT__result_re_out) 
-                               | ((((0U == (0x1fU & 
-                                            VL_SHIFTL_III(11,32,32, 
-                                                          ((IData)(3U) 
-                                                           + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))
-                                     ? 0U : (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
-                                             (((IData)(7U) 
-                                               + (0x7ffU 
-                                                  & VL_SHIFTL_III(11,32,32, 
-                                                                  ((IData)(3U) 
-                                                                   + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))) 
-                                              >> 5U)] 
-                                             << ((IData)(0x20U) 
-                                                 - 
-                                                 (0x1fU 
-                                                  & VL_SHIFTL_III(11,32,32, 
-                                                                  ((IData)(3U) 
-                                                                   + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U))))) 
-                                   | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
-                                      (0x3fU & (VL_SHIFTL_III(11,32,32, 
-                                                              ((IData)(3U) 
-                                                               + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U) 
-                                                >> 5U))] 
-                                      >> (0x1fU & VL_SHIFTL_III(11,32,32, 
-                                                                ((IData)(3U) 
-                                                                 + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)), 3U)))) 
-                                  << 0x18U));
+                                                    & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U))))) 
+                                        | (vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__buff[
+                                           (0x3fU & 
+                                            (VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U) 
+                                             >> 5U))] 
+                                           >> (0x1fU 
+                                               & VL_SHIFTL_III(11,32,32, (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr), 3U)))));
                         __Vdly__tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr 
-                            = (0x3ffU & ((IData)(4U) 
+                            = (0x3ffU & ((IData)(1U) 
                                          + (IData)(vlSelf->tpu_top__DOT__dma__DOT__result_buf__DOT__rd_ptr)));
                     }
                 } else {
-                    vlSelf->tpu_top__DOT__dma__DOT__result_re_out = 0U;
+                    vlSelf->tpu_top__DOT__dma__DOT__re_out_single_result = 0U;
+                    tpu_top__DOT__dma__DOT__result_re_out = 0U;
                 }
             }
             if (vlSelf->tpu_top__DOT__requant_out_valid) {
@@ -2278,7 +2318,7 @@ VL_INLINE_OPT void Vtpu_top___024root___nba_sequent__TOP__0(Vtpu_top___024root* 
     vlSelf->tpu_top__DOT__dma__DOT__act_we_en_counter = 0U;
     vlSelf->tpu_top__DOT__dma__DOT__act_we_clr_counter = 0U;
     tpu_top__DOT__dma__DOT__activations_busy = 0U;
-    vlSelf->u_out = (0xffU & vlSelf->tpu_top__DOT__dma__DOT__result_re_out);
+    vlSelf->u_out = vlSelf->tpu_top__DOT__dma__DOT__re_out_single_result;
     vlSelf->tpu_top__DOT__dma__DOT__weight_buf__DOT__rd_ptr 
         = __Vdly__tpu_top__DOT__dma__DOT__weight_buf__DOT__rd_ptr;
     vlSelf->tpu_top__DOT__dma__DOT__act_we = 0U;
@@ -2310,11 +2350,11 @@ VL_INLINE_OPT void Vtpu_top___024root___nba_sequent__TOP__0(Vtpu_top___024root* 
     if ((0U != (IData)(vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__current_state))) {
         if ((1U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__current_state))) {
             vlSelf->tpu_top__DOT__dma__DOT__en_counter = 1U;
-            if ((0x40U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
+            if ((0x100U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
                 vlSelf->tpu_top__DOT__dma__DOT__clr_counter = 1U;
                 vlSelf->tpu_top__DOT__dma__DOT__result_clr = 1U;
             }
-            if ((0x40U != (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
+            if ((0x100U != (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
                 vlSelf->tpu_top__DOT__dma__DOT__result_re = 1U;
             }
         }
@@ -2464,7 +2504,7 @@ VL_INLINE_OPT void Vtpu_top___024root___nba_sequent__TOP__0(Vtpu_top___024root* 
                 ? 1U : 0U);
     } else if ((1U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__current_state))) {
         vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__next_state 
-            = ((0x40U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))
+            = ((0x100U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))
                 ? 0U : 1U);
     }
     vlSelf->tpu_top__DOT__next_state = vlSelf->tpu_top__DOT__current_state;
@@ -2669,15 +2709,23 @@ VL_INLINE_OPT void Vtpu_top___024root___nba_sequent__TOP__0(Vtpu_top___024root* 
     vlSelf->tpu_top__DOT__dma__DOT__bias_clr = 0U;
     vlSelf->tpu_top__DOT__dma__DOT__bias_buf__DOT__wr_ptr 
         = __Vdly__tpu_top__DOT__dma__DOT__bias_buf__DOT__wr_ptr;
+    vlSelf->tpu_top__DOT__req__DOT__shift_buffer[0U] = 0U;
     if (vlSelf->tpu_top__DOT__relu_out_valid) {
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[0U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[0U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[1U] = 0U;
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[1U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[1U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[2U] = 0U;
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[2U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[2U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[3U] = 0U;
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[3U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[3U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+    } else {
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[1U] = 0U;
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[2U] = 0U;
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[3U] = 0U;
     }
     vlSelf->tpu_top__DOT__product_biased_valid = ((IData)(vlSelf->rst_n) 
                                                   && (IData)(vlSelf->tpu_top__DOT__product_out_valid));

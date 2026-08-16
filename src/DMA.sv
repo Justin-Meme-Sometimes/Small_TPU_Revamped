@@ -32,6 +32,7 @@ module DMA (
 
     logic act_we_max, act_we_en_counter, act_we_clr_counter;
     logic [8:0] act_we_count;
+    logic [7:0] re_out_single_result;
 
     assign act_we_max = (act_we_count == 9'd16);  // one tile's worth: 16 single-byte writes
 
@@ -40,7 +41,7 @@ module DMA (
     assign a_ready = weights_busy | bias_busy;
     assign w_ready = activations_busy | bias_busy;
     assign b_ready = activations_busy | weights_busy;
-    assign u_out = result_re_out[0];
+    assign u_out = re_out_single_result;
 
     always_comb begin
         weight_we_in = '0;
@@ -65,6 +66,7 @@ module DMA (
     logic [3:0][7:0] weight_we_in;
     logic weight_we_valid, weight_full, weight_empty;
     logic [15:0] weight_full_count;
+    logic [7:0] re_out_single_weight;
    
 
 
@@ -75,13 +77,15 @@ module DMA (
     j_buffer #(.DEPTH(256)) weight_buf (
         .clk(clk),
         .rst_n(rst_n),
-        .single(1'd1),
+        .single_write(1'd1),
         .we(weight_we),
         .re(weight_re),
+        .single_read(1'd0),
         .clr(weight_clr),
         .we_in(weight_we_in),
         .we_valid(weight_we_valid),
         .we_in_single(weight_we_in_single),
+        .re_out_single(re_out_single_weight),
         .full(weight_full),
         .empty(weight_empty),
         .re_out(weight_bank_out),
@@ -94,6 +98,7 @@ module DMA (
     logic [15:0] act_full_count;
     logic act_re_max, act_en_counter, act_clr_counter;
     logic [8:0] act_re_count;
+    logic [7:0] re_out_single_act;
 
     assign act_full_count = 16'd128;
     assign act_we_valid = act_we;
@@ -128,7 +133,9 @@ module DMA (
     j_buffer #(.DEPTH(128)) act_buf (
         .clk(clk),
         .rst_n(rst_n),
-        .single(1'd1),
+        .single_write(1'd1),
+        .single_read(1'd0),
+        .re_out_single(re_out_single_act),
         .we(act_we),
         .re(act_re),
         .clr(act_clr),
@@ -145,6 +152,7 @@ module DMA (
     logic [3:0][7:0] bias_we_in;
     logic bias_we_valid, bias_full, bias_empty, bias_full_prev;
     logic [15:0] bias_full_count;
+    logic [7:0] re_out_single_bias;
 
     assign bias_full_count = 16'd16;
     assign bias_we_valid = bias_we;
@@ -161,7 +169,9 @@ module DMA (
     j_buffer bias_buf (
         .clk(clk),
         .rst_n(rst_n),
-        .single(1'd1),
+        .single_write(1'd1),
+        .single_read(1'd0),
+        .re_out_single(re_out_single_bias),
         .we(bias_we),
         .re(1'd0),
         .clr(bias_clr),
@@ -213,12 +223,14 @@ module DMA (
 
     assign result_full_count = 16'd256;
     assign result_we_valid = computed_bank_in_valid;
-    assign computed_in_max = read_count == (result_full_count >> 2); //4 bytes drained per result_re pulse
+    assign computed_in_max = read_count == result_full_count;
 
     j_buffer #(.DEPTH(256)) result_buf (
         .clk(clk),
         .rst_n(rst_n),
-        .single(1'd0),
+        .single_write(1'd0),
+        .single_read(1'd1),
+        .re_out_single(re_out_single_result),
         .we(result_we),
         .re(result_re),
         .clr(result_clr),
@@ -266,10 +278,11 @@ module j_buffer #(
     (
     input logic clk,
     input logic rst_n,
-    input logic single,
+    input logic single_write,
     input logic we,
     input logic re,
     input logic clr,
+    input logic single_read,
     input logic [7:0] we_in_single,
     input logic [3:0][7:0] we_in,
     input logic [15:0] full_count,
@@ -277,6 +290,7 @@ module j_buffer #(
     output logic full,
     output logic empty,
     output logic [3:0][7:0] re_out,
+    output logic [7:0] re_out_single,
     output logic re_valid,
     output logic [15:0][7:0] buff_out);
 
@@ -299,11 +313,11 @@ module j_buffer #(
                 re_valid <= 0;
             end
             else if(we) begin
-                if(single && !full && we_valid) begin
+                if(single_write && !full && we_valid) begin
                     buff[wr_ptr] <= we_in_single;
                     wr_ptr <= wr_ptr + 1;
                     re_valid <= 0;
-                end else if(we_valid && !full && !single) begin
+                end else if(we_valid && !full && !single_write) begin
                     buff[wr_ptr] <= we_in[0];
                     buff[wr_ptr+1] <= we_in[1];
                     buff[wr_ptr+2] <= we_in[2];
@@ -313,7 +327,11 @@ module j_buffer #(
                 end
 
             end else if(re) begin
-                if(!empty) begin
+                if(single_read && !empty) begin
+                    re_out_single <= buff[rd_ptr];
+                    rd_ptr <= rd_ptr + 1;
+                    re_valid <= 1;
+                end else if(!empty) begin
                     re_out[0] <= buff[rd_ptr];
                     re_out[1] <= buff[rd_ptr+1];
                     re_out[2] <= buff[rd_ptr+2];
@@ -324,6 +342,7 @@ module j_buffer #(
                     re_valid <= 0;
                 end
             end else begin
+                re_out_single <= 0;
                 re_valid <= 0;
                 re_out[0] <= '0; 
                 re_out[1] <= '0; 

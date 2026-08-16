@@ -198,6 +198,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtpu_top___024root final : public VerilatedMo
         CData/*0:0*/ tpu_top__DOT__dma__DOT__w_ready;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__act_we_en_counter;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__act_we_clr_counter;
+        CData/*7:0*/ tpu_top__DOT__dma__DOT__re_out_single_result;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_we;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_re;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__weight_clr;
@@ -211,12 +212,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtpu_top___024root final : public VerilatedMo
         CData/*0:0*/ tpu_top__DOT__dma__DOT__act_clr_counter;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_we;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_clr;
-        CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_full;
     };
     struct {
+        CData/*0:0*/ tpu_top__DOT__dma__DOT__bias_full;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__result_re;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__result_clr;
-        IData/*31:0*/ tpu_top__DOT__dma__DOT__result_re_out;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__result_full;
         CData/*0:0*/ tpu_top__DOT__dma__DOT__result_empty;
         VlWide<64>/*2047:0*/ tpu_top__DOT__dma__DOT__weight_buf__DOT__buff;

@@ -1,27 +1,13 @@
 #!/usr/bin/env python3
 """Golden-model comparison test: drives real weight/activation/bias/shift
-test vectors through tpu_top.sv's actual pin interface and reports the
-observed output against two references:
+test vectors through tpu_top.sv's actual pin interface and checks the
+observed output against `golden_model.compute_tile(...)`, the textbook-
+correct result.
 
-  1. `expected_legacy_bugs(...)` - what tile 1 was expected to produce under
-     the *original* known-bug set documented in KNOWN_ISSUES.md (activation
-     starvation/drop, only PE row 3 of each column reaching product_array,
-     only column 0 ever reaching u_out) - i.e. the formula this file used to
-     call expected_today(). That name stopped being accurate once the
-     COMPUTE/DRAIN/FUNCS split got collapsed into the event-driven STREAM
-     state and several of the bugs it encodes started getting fixed
-     mid-session (see git history around this file's rewrite). Kept as a
-     historical checkpoint, not a current spec: a mismatch here is not a
-     failure signal by itself anymore, since it may just mean a bug this
-     formula assumes still open has been fixed. Once KNOWN_ISSUES.md is
-     updated to match the current RTL, this should be re-derived (or
-     retired) against whatever bugs are actually still open then.
-  2. `golden_model.compute_tile(...)` - the textbook-correct result. This is
-     the real target, but Bug #8 (`u_out = result_re_out[0]` in DMA.sv,
-     still open) limits what's observable through the pins to column 0 of
-     the tile, so full agreement isn't reachable until that's fixed too.
-
-Neither comparison drives main()'s exit code right now - see main().
+DMA.sv's result_buf now reads back one byte per result_re pulse
+(single-byte read on the j_buffer) instead of exposing only column 0 of
+each row (the old Bug #8), so the full 4x4 tile is observable through
+u_out and this is a real pass/fail check now, not just a gap-size report.
 
 Scoped to tile 1 of a group only: accum_reg does not appear to reset
 between tiles (worth its own follow-up - noted as a candidate further bug),
@@ -36,7 +22,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).parent))
 from driver import Stimulus, run, measure_compute_cycles  # noqa: E402
-from golden_model import compute_tile, arithmetic_shift_right, saturate_int8  # noqa: E402
+from golden_model import compute_tile  # noqa: E402
 
 
 def pack_weight256(weight4x4: np.ndarray) -> bytes:
@@ -53,22 +39,6 @@ def pack_activation16(activation4x4: np.ndarray) -> bytes:
 
 def pack_bias16(bias4: np.ndarray) -> bytes:
     return b"".join(struct.pack("<i", int(b)) for b in bias4)  # little-endian int32 x4
-
-
-def expected_legacy_bugs(weight4x4: np.ndarray, activation4x4: np.ndarray, bias4: np.ndarray, shift: int) -> int:
-    """Tile-1 prediction under the *original* KNOWN_ISSUES.md bug set (see
-    module docstring - this is a historical checkpoint, not a current spec):
-      - only 3 of 4 activation rows arrive (Bug D drops the last)
-      - only PE spatial row 3 (== loaded weight row 0) ever reaches product_array (Bug F)
-      - only column 0 is observable (Bug #8)
-    -> raw = weight[0][0] * sum(activation[0..2][3]), bias[0] added, relu'd, requantized.
-    """
-    w00 = int(weight4x4[0][0])
-    act_col3_sum = int(activation4x4[0][3]) + int(activation4x4[1][3]) + int(activation4x4[2][3])
-    raw = w00 * act_col3_sum + int(bias4[0])
-    relu = max(raw, 0)
-    shifted = arithmetic_shift_right(np.array([relu]), shift)[0]
-    return int(saturate_int8(np.array([shifted]))[0])
 
 
 def run_one_tile(weight4x4, activation4x4, bias4, shift, label):
@@ -95,33 +65,23 @@ def run_one_tile(weight4x4, activation4x4, bias4, shift, label):
     # u_out is registered 1 cycle behind each result_re pulse; skip index 0.
     samples = u_out_stream[1:]
 
-    legacy = expected_legacy_bugs(weight4x4, activation4x4, bias4, shift)
     golden = compute_tile(weight4x4, activation4x4, bias4, shift)
 
     def to_signed(b):
         return b - 256 if b >= 128 else b
 
-    # samples[i] is row i's column-0 byte (0-indexed): rows 0-3 land at
-    # samples[0..3]. The old check compared a single hardcoded samples[2]
-    # against golden[3][0] under the label "row3" - i.e. it was actually
-    # reading row 2, not row 3, the whole time. That only became visible
-    # once the upstream weight-order and requant-latch bugs (which happened
-    # to make rows 2 and 3 coincide, via saturation or all-zero columns, on
-    # every existing test vector) got fixed - vec2 below is the first vector
-    # where row 2 and row 3 actually differ. Compare the whole column
-    # instead of one magic index, so this can't happen silently again.
-    actual_col0 = [to_signed(b) for b in samples[:4]]
-    golden_col0 = [int(v) for v in golden[:, 0]]
+    # result_buf now reads back one byte per result_re pulse, so tile 1's
+    # full 4x4 result streams out row-major: samples[0:4]=row0's 4 columns,
+    # samples[4:8]=row1, ... samples[12:16]=row3. Bug #8 (u_out only ever
+    # exposing column 0) is fixed, so check the whole tile, not one column.
+    actual = [[to_signed(b) for b in samples[r * 4:r * 4 + 4]] for r in range(4)]
+    golden_rows = [[int(v) for v in row] for row in golden]
 
-    legacy_sample = to_signed(samples[2]) if len(samples) > 2 else None
-    matches_legacy = (legacy_sample == legacy)
-    matches_golden = (actual_col0 == golden_col0)
-    print(f"[{label}] actual_col0(rows 0-3)={actual_col0}  vs golden_col0={golden_col0} "
-          f"({'match' if matches_golden else 'diff'})")
-    print(f"    vs legacy_bugs_formula={legacy} (samples[2]={legacy_sample}, "
-          f"{'match' if matches_legacy else 'diff'} - historical checkpoint only)")
-    print(f"    raw samples (first 10): {samples[:10]}")
-    return matches_legacy, matches_golden
+    matches = (actual == golden_rows)
+    print(f"[{label}] actual={actual}")
+    print(f"    golden={golden_rows}  ({'match' if matches else 'diff'})")
+    print(f"    raw samples (first 16): {samples[:16]}")
+    return matches
 
 
 def main():
@@ -252,12 +212,10 @@ def main():
         shift_r = int(rng.integers(0, 5))
         results.append(run_one_tile(weight_r, activation_r, bias_r, shift_r, f"vec{n}: random, shift={shift_r}"))
 
-    legacy_matches = sum(m for m, _ in results)
-    golden_matches = sum(m for _, m in results)
+    matches = sum(results)
     print()
-    print(f"{legacy_matches}/{len(results)} vectors match expected_legacy_bugs() (historical checkpoint, not a pass bar)")
-    print(f"{golden_matches}/{len(results)} vectors match golden_model (the real target; blocked on Bug #8 until u_out exposes all 4 columns)")
-    return 0
+    print(f"{matches}/{len(results)} vectors match golden_model (full 4x4 tile, all 4 columns)")
+    return 0 if matches == len(results) else 1
 
 
 if __name__ == "__main__":

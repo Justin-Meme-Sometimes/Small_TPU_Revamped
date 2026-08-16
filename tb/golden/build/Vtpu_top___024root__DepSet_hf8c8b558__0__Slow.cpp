@@ -106,7 +106,7 @@ VL_ATTR_COLD void Vtpu_top___024root___stl_sequent__TOP__0(Vtpu_top___024root* v
     vlSelf->tpu_top__DOT__dma__DOT__bias_clr = 0U;
     vlSelf->tpu_top__DOT__dma__DOT__act_we_en_counter = 0U;
     vlSelf->tpu_top__DOT__dma__DOT__en_counter = 0U;
-    vlSelf->u_out = (0xffU & vlSelf->tpu_top__DOT__dma__DOT__result_re_out);
+    vlSelf->u_out = vlSelf->tpu_top__DOT__dma__DOT__re_out_single_result;
     vlSelf->tpu_top__DOT__dma__DOT__weight_full = (0x100U 
                                                    == (IData)(vlSelf->tpu_top__DOT__dma__DOT__weight_buf__DOT__wr_ptr));
     vlSelf->tpu_top__DOT__weight_fifo_full = (4U == (IData)(vlSelf->tpu_top__DOT__w_l__DOT__weight_fifo__DOT__count));
@@ -153,11 +153,11 @@ VL_ATTR_COLD void Vtpu_top___024root___stl_sequent__TOP__0(Vtpu_top___024root* v
     if ((0U != (IData)(vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__current_state))) {
         if ((1U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__current_state))) {
             vlSelf->tpu_top__DOT__dma__DOT__en_counter = 1U;
-            if ((0x40U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
+            if ((0x100U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
                 vlSelf->tpu_top__DOT__dma__DOT__clr_counter = 1U;
                 vlSelf->tpu_top__DOT__dma__DOT__result_clr = 1U;
             }
-            if ((0x40U != (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
+            if ((0x100U != (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))) {
                 vlSelf->tpu_top__DOT__dma__DOT__result_re = 1U;
             }
         }
@@ -182,15 +182,23 @@ VL_ATTR_COLD void Vtpu_top___024root___stl_sequent__TOP__0(Vtpu_top___024root* v
                        << 2U) | (((IData)(vlSelf->tpu_top__DOT__sys_array__DOT____Vcellout__pe_3_1__accum_out_valid) 
                                   << 1U) | (IData)(vlSelf->tpu_top__DOT__sys_array__DOT____Vcellout__pe_3_0__accum_out_valid))));
     tpu_top__DOT__start_read_fsm = 0U;
+    vlSelf->tpu_top__DOT__req__DOT__shift_buffer[0U] = 0U;
     if (vlSelf->tpu_top__DOT__relu_out_valid) {
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[0U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[0U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[1U] = 0U;
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[1U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[1U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[2U] = 0U;
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[2U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[2U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[3U] = 0U;
         vlSelf->tpu_top__DOT__req__DOT__shift_buffer[3U] 
             = VL_SHIFTRS_III(32,32,32, vlSelf->tpu_top__DOT__relu_out[3U], (IData)(vlSelf->tpu_top__DOT__requant_value));
+    } else {
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[1U] = 0U;
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[2U] = 0U;
+        vlSelf->tpu_top__DOT__req__DOT__shift_buffer[3U] = 0U;
     }
     tpu_top__DOT__activation_fsm_start = 0U;
     tpu_top__DOT__bias_fsm_start = 0U;
@@ -285,7 +293,7 @@ VL_ATTR_COLD void Vtpu_top___024root___stl_sequent__TOP__0(Vtpu_top___024root* v
                 ? 1U : 0U);
     } else if ((1U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__current_state))) {
         vlSelf->tpu_top__DOT__dma__DOT__r_fsm__DOT__next_state 
-            = ((0x40U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))
+            = ((0x100U == (IData)(vlSelf->tpu_top__DOT__dma__DOT__read_count))
                 ? 0U : 1U);
     }
     vlSelf->tpu_top__DOT__dma__DOT__weight_re = ((~ (IData)(vlSelf->tpu_top__DOT__dma__DOT__weight_we)) 
@@ -1063,6 +1071,7 @@ VL_ATTR_COLD void Vtpu_top___024root___ctor_var_reset(Vtpu_top___024root* vlSelf
     vlSelf->tpu_top__DOT__dma__DOT__act_we_en_counter = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__act_we_clr_counter = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__act_we_count = VL_RAND_RESET_I(9);
+    vlSelf->tpu_top__DOT__dma__DOT__re_out_single_result = VL_RAND_RESET_I(8);
     vlSelf->tpu_top__DOT__dma__DOT__weight_we = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__weight_re = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__weight_clr = VL_RAND_RESET_I(1);
@@ -1080,7 +1089,6 @@ VL_ATTR_COLD void Vtpu_top___024root___ctor_var_reset(Vtpu_top___024root* vlSelf
     vlSelf->tpu_top__DOT__dma__DOT__bias_full = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__result_re = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__result_clr = VL_RAND_RESET_I(1);
-    vlSelf->tpu_top__DOT__dma__DOT__result_re_out = VL_RAND_RESET_I(32);
     vlSelf->tpu_top__DOT__dma__DOT__result_full = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__result_empty = VL_RAND_RESET_I(1);
     vlSelf->tpu_top__DOT__dma__DOT__read_count = VL_RAND_RESET_I(9);

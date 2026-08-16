@@ -35,6 +35,7 @@ generate
             end
         end
         always_comb begin
+            shift_buffer[i] = 0;
             if(valid) begin
                 shift_buffer[i] = ins[i] >>> con;
             end
