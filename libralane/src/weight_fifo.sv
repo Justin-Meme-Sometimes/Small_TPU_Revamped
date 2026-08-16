@@ -59,6 +59,8 @@ module weight_loader
                     data_valid = 1;
                     fifo_re = 1;
                     next_state = PRELOAD;
+                end else if(!fifo_empty) begin
+                    next_state = PRELOAD; // wait here for preload_state, don't give up the loaded data
                 end else begin
                     next_state = IDLE;
                 end
@@ -84,14 +86,13 @@ module FIFO #(parameter WIDTH=8,
     logic[WIDTH-1:0][ROW_SIZE-1:0] Q[DEPTH];
     logic [1:0] putPtr, getPtr; // pointers wrap automatically
     logic [3:0] count;
-    logic [7:0] first_packet;
     assign empty = (count == 0);
     assign full = (count == 4'd4);
 
     always_comb begin
       data_out = '0;
       if(!(empty)) begin
-        data_out = {Q[getPtr]};
+        data_out = {Q[count-1]};
       end
     end
 
@@ -104,11 +105,11 @@ module FIFO #(parameter WIDTH=8,
     end
     else if(we && re && (!empty) && (!full)) begin   // We want to read and write @ the same time.
       Q[putPtr] <= data_in;                     
-      getPtr <= getPtr + 1;
+      getPtr <= getPtr - 1;
       putPtr <= putPtr + 1;
     end
     else if(re && !(empty)) begin              // We just want to read and update counters.
-      getPtr <= getPtr + 1;                
+      getPtr <= getPtr - 1;                
       count <= count - 1;
     end
     else if (we && !(full)) begin             // We just want to read only here.
