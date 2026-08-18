@@ -1,4 +1,5 @@
-module weight_loader    
+(* keep_hierarchy *)
+module weight_loader
     #(parameter ROW_SIZE=4,
     parameter BITWIDTH = 8,
     parameter ADDR_WIDTH = 1,

@@ -1,3 +1,4 @@
+(* keep_hierarchy *)
 module bias_add(
     input logic clk,
     input logic rst_n,

@@ -1,3 +1,4 @@
+(* keep_hierarchy *)
 module PE_array(
     input logic clk,
     input logic rst_n,
