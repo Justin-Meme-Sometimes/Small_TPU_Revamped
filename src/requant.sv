@@ -1,3 +1,4 @@
+(* keep_hierarchy *)
 module requant(
     input logic clk,
     input logic rst_n,

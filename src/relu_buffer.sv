@@ -1,3 +1,4 @@
+(* keep_hierarchy *)
 module relu_buffer(
     input logic clk,
     input logic rst_n,
