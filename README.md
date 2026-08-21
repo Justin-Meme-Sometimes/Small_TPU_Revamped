@@ -1,7 +1,6 @@
-# Tiny TPU Project
+# Micro TPU Project
 
-SystemVerilog implementation of a Tiny TPU
-a 4x4 Systolic Array with scratchpad memory with Certain (Undecided post processing units)
+A SystemVerilog implementation of a TPU-like 4x4 Systolic Array with scratchpad memory with Certain (Undecided post processing units)
 
 
 ## Block Design
